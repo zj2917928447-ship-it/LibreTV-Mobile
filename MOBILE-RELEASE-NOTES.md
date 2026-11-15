@@ -58,7 +58,7 @@
 - Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 48 test files / 675 tests and production build passed after the 2.23.2 merge, mobile first-run onboarding, open-media adapter and search-quality hardening changes.
 - npm audit --omit=dev and full npm audit both passed with 521 dependencies audited and zero vulnerabilities.
 - Chrome/Playwright Pixel 7 emulation covers portrait/landscape routes, touch navigation, download manager drawer, PWA registration and offline fallback.
-- The Render Blueprint preconfigures the first-party open-media subscription (Internet Archive / NASA / PeerTube / Wikimedia Commons). The Blueprint sync for commit `9e823c5` was approved and the deployed `/api/status` now reports one default subscription. No commercial-film scraper or unverified third-party source list is bundled. Phone-side auto-import and physical Android/iPhone playback remain unverified.
+- The Render Blueprint preconfigures the first-party open-media subscription (Internet Archive / NASA / PeerTube / Wikimedia Commons). The Blueprint sync for commit `9e823c5` was approved; the search-quality hardening commit `519f5ed` is now deployed, and `/api/status` reports one default subscription. Live search/detail and byte-range checks passed for all four providers. No commercial-film scraper or unverified third-party source list is bundled. Phone-side auto-import and physical Android/iPhone playback remain unverified.
 
 ## Android packaging decision
 - Selected: Google Bubblewrap CLI 1.27.0 + Trusted Web Activity (TWA).

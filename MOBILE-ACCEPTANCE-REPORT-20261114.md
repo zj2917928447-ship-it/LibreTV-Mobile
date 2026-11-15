@@ -90,7 +90,7 @@ Verified on the production build in Chrome:
 - The only dangerouslySetInnerHTML use is a constant pre-hydration theme bootstrap string; no untrusted data is interpolated.
 - Baseline response headers are configured and verified. CSP/HSTS are not guessed or forced; see SECURITY-AUDIT-20261114.md for rationale and remaining edge configuration notes.
 
-## Open-media source adapter (2026-11-15; local build and Render deployment verified; search-quality refinement pending)
+## Open-media source adapter (2026-11-15; local build and Render deployment verified)
 
 - Added an Apple CMS-compatible read-only API adapter for Internet Archive, NASA Image and Video Library, PeerTube / SepiaSearch and Wikimedia Commons.
 - Internet Archive: accepts explicit Public Domain / Public Domain Mark / CC0 / CC BY / CC BY-SA metadata and requires a movie record plus an MP4 file.
@@ -100,8 +100,8 @@ Verified on the production build in Chrome:
 - Added `public/open-media-sources.json` and `OPEN-MEDIA-SOURCES.md`; the subscription parser test confirms the JSON imports as one LibreTV point-of-view source.
 - Added `DEFAULT_SUBSCRIPTIONS` to `render.yaml`. Render Blueprint sync for commit `9e823c5` was approved; the deployed `/api/status` response reports `defaultSubscriptions=1`, and the public subscription JSON returns HTTP 200.
 - Live provider checks passed for all four providers: Internet Archive detail returned MP4, NASA detail returned mobile MP4, PeerTube detail returned Public Domain Dedication plus HLS, and Wikimedia Commons detail returned Public Domain WebM. Byte-range tests against all four media endpoints returned HTTP 206 with the expected media types. These are server/provider checks, not proof of playback on every physical device.
-- A further local refinement now rejects unrelated title matches, obvious adult material and contradictory Archive copyright claims; it passes 675 unit tests and a production build but is not yet included in the live Render deployment.
-- Physical-device playback and phone-side source auto-import remain unverified. The current Render deployment has the default subscription configured; the pending local search-quality refinement still needs deployment.
+- Search-quality hardening is included in commit `519f5ed` and the live Render deployment: it rejects unrelated title matches, obvious adult material and contradictory Archive copyright claims. Live search checks confirmed that `The General` no longer returns `The General Index` or unrelated NASA items, and the public-domain cartoon query excludes obvious adult results.
+- Physical-device playback and phone-side source auto-import remain unverified. The current Render deployment has the default subscription configured and the search-quality filters deployed.
 
 ## Android packaging and public deployment (2026-11-15)
 
