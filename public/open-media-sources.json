@@ -1,0 +1,12 @@
+{
+  "name": "LibreTV 开放影视资料库（Internet Archive / NASA / PeerTube / Wikimedia Commons）",
+  "version": 2,
+  "sources": [
+    {
+      "name": "开放影视资料库（Internet Archive / NASA / PeerTube / Wikimedia Commons）",
+      "url": "https://libretv-mobile-zj2917928447.onrender.com/api/open-media",
+      "detail": "https://libretv-mobile-zj2917928447.onrender.com"
+    }
+  ],
+  "liveSources": []
+}

@@ -37,8 +37,8 @@ Worktree: E:\\Github\\电影\\LibreTV-Mobile
 | --- | --- |
 | TypeScript typecheck | Passed |
 | ESLint | Passed |
-| Vitest | 46 test files passed |
-| Unit tests | 659 passed, 0 failed |
+| Vitest | 48 test files passed |
+| Unit tests | 670 passed, 0 failed |
 | Next.js production build | Passed |
 | Next.js build version | 15.5.29 |
 | Production npm audit | 0 vulnerabilities |
@@ -78,7 +78,7 @@ Verified on the production build in Chrome:
 
 - The first recommendation request before test login returned HTTP 401. After login, the app loaded normally.
 - Direct Douban image hosts returned HTTP 418 in this test environment. The existing image candidate/mirror fallback loaded all 10 recommendation posters. These are upstream/environment responses, not uncaught JavaScript errors.
-- No VOD or M3U source was configured in the isolated test profile. The phone session also has no selected VOD source yet; no third-party source list was silently installed.
+- No VOD or M3U source was configured in the isolated browser test profile. A first-party open-media subscription has now been added to the Render Blueprint; it will appear automatically after the Blueprint environment change is applied and the service is redeployed. No unverified third-party scraper list was silently installed.
 
 ## Security / regression checks
 
@@ -89,6 +89,18 @@ Verified on the production build in Chrome:
 - Static source scan found no eval(), new Function, string-based timers or NEXT_PUBLIC secret-like variable usage.
 - The only dangerouslySetInnerHTML use is a constant pre-hydration theme bootstrap string; no untrusted data is interpolated.
 - Baseline response headers are configured and verified. CSP/HSTS are not guessed or forced; see SECURITY-AUDIT-20261114.md for rationale and remaining edge configuration notes.
+
+## Open-media source adapter (2026-11-15; local build, deployment pending)
+
+- Added an Apple CMS-compatible read-only API adapter for Internet Archive, NASA Image and Video Library, PeerTube / SepiaSearch and Wikimedia Commons.
+- Internet Archive: accepts explicit Public Domain / Public Domain Mark / CC0 / CC BY / CC BY-SA metadata and requires a movie record plus an MP4 file.
+- NASA: reads the actual `collection.items[].href` asset manifest shape, selects mobile MP4 derivatives and excludes records with an explicit copyright field; original item rights must still be checked.
+- PeerTube: accepts explicit licence IDs 1, 2, 3, 7 and 8; excludes unknown, non-commercial and All Rights Reserved items; prefers HLS and falls back to MP4.
+- Wikimedia Commons: accepts explicit Public Domain, CC0, CC BY, CC BY-SA and CC BY-ND; excludes non-commercial, explicitly copyrighted and non-HTTPS/non-upload-CDN files; supports MP4, WebM and OGV.
+- Added `public/open-media-sources.json` and `OPEN-MEDIA-SOURCES.md`; the subscription parser test confirms the JSON imports as one LibreTV point-of-view source.
+- Added `DEFAULT_SUBSCRIPTIONS` to `render.yaml` so the first-party subscription is preconfigured for the Render deployment. The live Render environment has not yet been confirmed to have applied this Blueprint change.
+- Public provider API samples were checked: Internet Archive returned a Public Domain MP4 record; NASA asset API returned an MP4 manifest; PeerTube detail returned Public Domain Dedication plus HLS/MP4; Wikimedia Commons returned The General (1926) as Public Domain WebM. These are provider-level checks, not proof that every search result plays on every device.
+- Physical-device playback, all-provider end-to-end app playback and deployed source auto-import remain unverified until Render redeployment and phone acceptance.
 
 ## Android packaging and public deployment (2026-11-15)
 
@@ -122,4 +134,4 @@ Stored in `artifacts/mobile-acceptance/`:
 
 ## Conclusion
 
-The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 659 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.
+The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 670 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, open-media adapter tests, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.

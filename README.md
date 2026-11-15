@@ -25,6 +25,16 @@ LibreTV Next.js 迁移版：免费在线视频聚合搜索与观看平台。基�
 - **首页推荐**：豆瓣（电影/剧集分类浏览）、Bangumi 新番放送表或影视榜单（豆瓣周榜 + 百度热播，经 60s API），设置中切换；均服务端直连 + 缓存，Bangumi/榜单免 key 免配置（`60S_API_BASE` 可指向自部署 60s 实例）
 - **PWA**：可安装到桌面 / 主屏幕，亮暗双主题无首屏闪烁
 
+## 开放影视资料库（公共领域 / Creative Commons）
+
+本部署额外提供一份 LibreTV 原生兼容订阅，聚合 Internet Archive、NASA Image and Video Library、PeerTube / SepiaSearch 与 Wikimedia Commons。只收录带有明确公共领域或开放许可声明、并且能取得受支持视频文件/播放清单的条目；未知许可、非商业许可及明确保留版权的条目会被过滤。平台元数据来自上传者或托管平台，不构成法律权利保证，使用前仍应核对原始条目和具体许可条件。
+
+- **订阅 JSON**：`https://libretv-mobile-zj2917928447.onrender.com/open-media-sources.json`
+- **兼容 Apple CMS API**：`https://libretv-mobile-zj2917928447.onrender.com/api/open-media`
+- **适配器说明**：[OPEN-MEDIA-SOURCES.md](./OPEN-MEDIA-SOURCES.md)
+
+这套资料库适合公共领域电影、历史影像、航天纪录视频和开放许可创作者视频，不保证覆盖最新院线电影或商业平台的会员剧集。
+
 ## 手机安装
 
 ### Android
