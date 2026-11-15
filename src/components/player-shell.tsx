@@ -238,7 +238,7 @@ export function PlayerShell({
   // 当前集预取（episodeKey 缺省 = 关闭，见 ensure 内部 settings.enabled 判断）
   const ensurePrefetch = (mediaUrl: string, currentTime: number, horizonSeconds?: number) => {
     const p = propsRef.current;
-    // 分片预取器只理解 HLS 清单；MP4/WebM/OGV 直链走浏览器原生媒体管线。
+    // The segment prefetcher only understands HLS playlists; direct files use the native media pipeline.
     if (isDirectMediaUrl(mediaUrl) || !p.episodeKey) return;
     getVideoPrefetcher().ensure({
       m3u8Url: mediaUrl,
@@ -481,8 +481,10 @@ export function PlayerShell({
   };
 
   /**
-   * 原生直链（MP4/WebM/OGV）：销毁上一集 HLS 实例，交给 HTMLVideoElement 解码。
-   * 进度恢复与 HLS 使用同一套回调，避免直链影片刷新后从头播放。
+   * Native MP4/WebM/OGV playback: destroy the previous HLS instance and let
+   * HTMLVideoElement decode the direct file. Restore progress only after the
+   * new media metadata is available, so a rapid episode switch cannot reuse
+   * the previous episode's duration.
    */
   const setupNativeMedia = (video: HTMLVideoElement, mediaUrl: string, checkExistingMetadata = false) => {
     restoreCleanupRef.current?.();
@@ -494,7 +496,7 @@ export function PlayerShell({
     let restoreInFlight = false;
     const restoreAndStart = async () => {
       if (restoredRef.current || restoreInFlight) return;
-      const duration = video.duration || artRef.current?.duration || 0;
+      const duration = video.duration || 0;
       if (!Number.isFinite(duration) || duration <= 0) return;
       restoreInFlight = true;
       try {
@@ -502,13 +504,13 @@ export function PlayerShell({
         const currentDuration = video.duration || duration;
         if (saved > 10 && Number.isFinite(currentDuration) && saved < currentDuration - 2) {
           video.currentTime = saved;
-          showHint(`已从 ${formatTime(saved)} 继续播放`);
+          showHint('已从 ' + formatTime(saved) + ' 继续播放');
         }
         restoredRef.current = true;
         restoreCleanupRef.current?.();
         restoreCleanupRef.current = null;
       } catch {
-        // IndexedDB 读取失败不阻塞原生视频播放。
+        // IndexedDB read failures must not block native playback.
       } finally {
         restoreInFlight = false;
       }
@@ -520,11 +522,10 @@ export function PlayerShell({
     restoreCleanupRef.current = () => {
       restoreEvents.forEach((event) => video.removeEventListener(event, onRestoreEvent));
     };
-    // 快速切集时，元数据可能在监听器安装前已经就绪。
     if (checkExistingMetadata && video.readyState >= 1) void restoreAndStart();
   };
 
-  /** 换集：HLS 保留 hls.js，MP4/WebM/OGV 直链走原生 video，不重建 ArtPlayer。 */
+  /** Switch episodes while retaining the existing ArtPlayer instance. */
   const loadEpisode = (targetUrl: string) => {
     if (!targetUrl) return;
     mediaHealthyRef.current = true;
@@ -549,8 +550,7 @@ export function PlayerShell({
     art.type = getArtPlayerMediaType(targetUrl);
     if (isDirectMediaUrl(targetUrl)) {
       setupNativeMedia(art.video, targetUrl);
-      // switchUrl 保留当前播放/暂停状态、倍速与画面比例；原生格式不经过 hls.js。
-      void art.switchUrl(targetUrl).catch(() => {});
+      art.switchUrl(targetUrl);
     } else {
       setupHls(art.video, targetUrl, true);
     }
@@ -761,7 +761,7 @@ export function PlayerShell({
         if (isDirectMediaUrl(failedUrl)) {
           mediaHealthyRef.current = true;
           art.type = '';
-          setupNativeMedia(art.video, failedUrl);
+          setupNativeMedia(art.video, failedUrl, true);
           art.video.load();
           void art.video.play().catch(() => {});
         } else {
@@ -1143,5 +1143,66 @@ export function PlayerShell({
           style={{
             backgroundImage: 'url(/player-poster.png)',
             backgroundSize: 'contain',
-
-[Showing lines 1-1145 of 1209 (50.0KB limit). Use offset=1146 to continue.]
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+      )}
+      {!error && skipPrompt && (
+        <button
+          type="button"
+          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 rounded-full bg-black/70 px-4 py-2 text-sm text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          onClick={() => {
+            if (skipPrompt.type === 'ending') {
+              finishBySkip(skipPrompt);
+              return;
+            }
+            const from = artRef.current?.currentTime ?? 0;
+            if (skipTo(skipPrompt.end)) {
+              handledSegmentsRef.current.add(segmentKey(skipPrompt));
+              rememberSkip(from, skipPrompt);
+              updateSkipPrompt(null);
+              showHint(skipPrompt.type === 'opening' ? '已跳过片头' : '已跳过中段');
+            }
+          }}
+        >
+          {skipPrompt.type === 'ending'
+            ? '跳过片尾'
+            : skipPrompt.type === 'opening'
+              ? '跳过片头'
+              : '跳过中段'}
+        </button>
+      )}
+      {error && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/80">
+          <p className="text-danger text-sm">{error}</p>
+          <button className="btn-ghost text-xs" onClick={() => location.reload()}>
+            重新加载
+          </button>
+        </div>
+      )}
+      {(hint || undoSkip) && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 rounded-full bg-black/70 px-3 py-1.5 text-sm text-white animate-fade-in">
+          {/* 撤销窗口比普通提示长：hint 已淡出时仍要让用户知道刚才跳过了什么 */}
+          <span className="pointer-events-none">
+            {hint || (undoSkip ? `已跳过${SEGMENT_LABELS[undoSkip.segment.type]}` : '')}
+          </span>
+          {undoSkip && (
+            <button
+              type="button"
+              className="pointer-events-auto shrink-0 rounded-full bg-white/20 px-2 py-0.5 text-xs font-medium transition-colors hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              onClick={undoLastSkip}
+            >
+              撤销
+            </button>
+          )}
+        </div>
+      )}
+      {autoplayNext && !error && (
+        <div className="absolute bottom-16 right-3 text-[10px] text-muted bg-black/50 px-2 py-0.5 rounded pointer-events-none">
+          自动连播已开启
+        </div>
+      )}
+    </div>
+  );
+}
