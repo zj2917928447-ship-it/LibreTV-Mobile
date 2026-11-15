@@ -41,6 +41,10 @@ LibreTV Next.js 迁移版：免费在线视频聚合搜索与观看平台。基�
 
 ## 部署
 
+### Render 免费公网部署（本项目已提供 Blueprint）
+
+仓库根目录包含 `render.yaml`，可用 Render Blueprint 创建带稳定 HTTPS 域名的 Next.js Web Service。部署步骤、环境变量、登录密码获取方式与 Free 方案限制见 [RENDER-DEPLOYMENT.md](./RENDER-DEPLOYMENT.md)。注意：Free 实例空闲 15 分钟会休眠、唤醒约需 1 分钟，且有月度实例小时和出站带宽额度；适合个人试用，不是无限流量或 24×7 生产托管。
+
 ### Docker（推荐）
 
 ```bash

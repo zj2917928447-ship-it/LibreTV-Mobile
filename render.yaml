@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: libretv-mobile-zj2917928447
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    buildCommand: npm ci --no-audit --no-fund && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/status
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 24.18.0
+      - key: PASSWORD
+        generateValue: true
+      - key: PROXY_SECRET
+        generateValue: true
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: LIVE_ALLOW_PRIVATE
+        value: "0"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"

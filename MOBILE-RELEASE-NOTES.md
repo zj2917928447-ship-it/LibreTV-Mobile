@@ -20,6 +20,8 @@
 - Merged official LibreTV 2.23.2 changes.
 - Updated hls.js to 1.7.4 and made ArtPlayer 5.4.0 the declared minimum; mpegts.js remains 1.8.2.
 - Patched dependencies: Undici 6.29.1, PostCSS 8.5.33, Sharp 0.35.5 and source-map-js 1.2.2.
+- Added a cross-platform production start launcher that respects Render/host-provided `PORT` while defaulting to port 8080 locally.
+- Added `.node-version` and a Render Blueprint for a free Node.js web service with generated secrets, HTTPS cookies, `/api/status` health checks and private-IP live access disabled by default.
 - Updated the test/build toolchain to Vite 6.4.6 and Vitest 4.1.12; pinned the patched nested minimatch and postcss-selector-parser dependencies.
 - Applied official #980 connection-layer SSRF fix: the live-request flag selects live URL validation, while connection-time private-network access additionally requires LIVE_ALLOW_PRIVATE=1.
 - Added the upstream DNS-rebinding regression suite using two independently mocked DNS resolvers and a local loopback HTTP server.

@@ -14,6 +14,8 @@ The older repository https://github.com/pwa-builder/pwabuilder-android-twa is ar
 
 ## Required before generating an installable TWA
 
+Use the stable HTTPS origin from `RENDER-DEPLOYMENT.md` for the final APK. Do not build a release APK against a `trycloudflare.com` Quick Tunnel URL: it changes when the tunnel is recreated and the APK would lose its origin.
+
 1. A stable public HTTPS origin for this LibreTV deployment. TWA cannot be finalized from localhost or a ZIP-only static build.
 2. The deployed site's manifest must be reachable at /manifest.webmanifest and expose a standalone display mode, valid start URL/scope, and working 192px/512px icons.
 3. The Android application ID/package name must be chosen and kept stable once distributed.
@@ -24,7 +26,7 @@ The older repository https://github.com/pwa-builder/pwabuilder-android-twa is ar
 
 ## Build procedure once the domain and package ID are supplied
 
-Use Node.js 18+ (the current machine has Node 24.18.0). On first run Bubblewrap offers to download and install its Android build dependencies; this is the recommended path. If setting up manually, Bubblewrap CLI 1.27.0 requires JDK 17 and Android command-line tools. The machine's existing JDK 21 is not the manually supported JDK for this CLI, so use Bubblewrap's managed JDK 17 or install a separate JDK 17 rather than changing the system-wide Java installation.
+Use Node.js 18+ (the current machine has Node 24.18.0). Bubblewrap CLI 1.27.0 requires JDK 17 and Android command-line tools. On this machine, keep all Android tooling under `E:\\Android` (not on C:). Set `USERPROFILE=E:\\Android\\BubblewrapHome` for the Bubblewrap process before its first run so its managed `.bubblewrap` directory is created on E:. Bubblewrap's first-run wizard can download JDK 17 and Android SDK automatically. If setting up manually, use JDK 17; the system-wide JDK 21 is not accepted by Bubblewrap 1.27.0, so do not change the system-wide Java installation.
 
 ~~~bash
 npx --yes @bubblewrap/cli@1.27.0 init --manifest=https://YOUR_DOMAIN/manifest.webmanifest --directory=android-twa
@@ -48,6 +50,7 @@ TWA keeps the existing production server boundary intact. It requires the site t
 - Android SDK: not found in the checked standard locations.
 - ADB: not found on PATH or in the checked SDK locations.
 - Gradle: not found on PATH.
-- Public LibreTV deployment domain: not yet supplied in this task.
+- Public temporary test URL: verified, but not suitable for final APK because Quick Tunnel URLs are temporary.
+- Stable Render HTTPS deployment: Blueprint prepared; requires connecting the Render account and creating the Free Web Service.
 
-Therefore no APK/AAB is claimed or attached in this release. The next build gate is the public HTTPS domain and Android toolchain setup. Do not generate a placeholder package or fake Digital Asset Links file.
+The next build gate is the stable Render HTTPS origin, JDK 17/Android SDK installation under E:, and Digital Asset Links verification. Do not generate a placeholder package or fake Digital Asset Links file.

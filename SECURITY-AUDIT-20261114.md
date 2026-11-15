@@ -72,6 +72,13 @@ Production response headers were verified in Chrome:
 - The external GitHub link using `target="_blank"` includes `rel="noopener noreferrer"`.
 - The `allowPrivate: true` call sites are limited to the IPTV routes/stream proxy; the shared connection layer still gates private-network access on `LIVE_ALLOW_PRIVATE=1`.
 
+## Public hosting configuration
+
+- `render.yaml` keeps `PASSWORD` and `PROXY_SECRET` out of source control by using Render-generated random values.
+- `COOKIE_SECURE=true` is set for the HTTPS host; the login cookie remains Secure, HttpOnly and SameSite=Lax.
+- `LIVE_ALLOW_PRIVATE=0` is explicitly set so the public service does not allow private-network IPTV targets by default.
+- The Free Render filesystem is ephemeral; this application stores viewing history/settings in the browser and does not rely on server-local persistent user data. Do not add server-side local file persistence without a database/object-store design.
+
 ## Deliberate non-changes
 
 - Next.js 16.4.6 was reviewed but not adopted. The official LibreTV 2.23.2 base is on Next.js 15; a major framework migration needs its own playback, deployment and runtime regression pass.

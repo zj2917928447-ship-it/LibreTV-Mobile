@@ -62,6 +62,31 @@ mpegts.js 1.8.2 remains the latest stable release reviewed. It is already the in
 
 - https://github.com/xqq/mpegts.js/releases/tag/v1.8.2
 
+## Public hosting review
+
+### Selected: Render Node.js Web Service (free tier for initial personal deployment)
+
+- Render officially supports full Next.js applications as Web Services, including server-side logic and API routes; this project is not suitable for GitHub Pages static hosting.
+- The repository now includes `render.yaml`, `.node-version` and a cross-platform `scripts/start.mjs` launcher that reads the platform-injected `PORT` (local default 8080).
+- The Blueprint uses Node 24.18.0, `npm ci && npm run build`, `npm start`, `/api/status` health checks, generated `PASSWORD` / `PROXY_SECRET`, `COOKIE_SECURE=true`, and `LIVE_ALLOW_PRIVATE=0`.
+- Render Free is only a personal/test tier: idle services sleep after 15 minutes and need roughly one minute to wake; the workspace has 750 Free instance hours/month, local filesystem is ephemeral, and outbound bandwidth is limited. LibreTV stores history/settings client-side, so server-side persistent disk is not required. Streaming bandwidth can still exceed free allowances; no claim of unlimited free streaming is made.
+
+Official references:
+- https://render.com/docs/deploy-nextjs-app
+- https://render.com/docs/free
+- https://render.com/docs/blueprint-spec
+
+### Why Cloudflare Workers was not selected for this stable release
+
+- Cloudflare currently recommends vinext for new Next.js deployments; vinext is in beta and the official docs advise checking compatibility before migrating an existing production app.
+- OpenNext supports App Router, Route Handlers, SSR and response streaming, but the current app's protected fetch path uses Node DNS resolution and an Undici Agent for DNS-rebinding protection. This runtime-specific security path must be adapted and tested before a Workers migration; do not simply deploy and silently weaken it.
+- The existing quick-tunnel 404 was caused by loading the machine's default cloudflared config (which has a different hostname ingress and a final 404 rule). A separate no-credentials quick-tunnel config fixed routing and passed external HTTP 200 checks. Quick Tunnels remain temporary development URLs, not production hosting.
+
+Official references:
+- https://developers.cloudflare.com/workers/framework-guides/web-apps/nextjs/
+- https://developers.cloudflare.com/workers/framework-guides/web-apps/opennext/
+- https://developers.cloudflare.com/tunnel/get-started/quick-tunnels/
+
 ## Android packaging review
 
 ### Selected: Bubblewrap + Trusted Web Activity
