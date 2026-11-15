@@ -21,6 +21,7 @@ import {
   type SaveTarget,
 } from '@/lib/download-saver';
 import { Switch } from './settings-shared';
+import { getDownloadUrl } from '@/lib/media-type';
 
 /**
  * 全局下载管理器（UI 采用本站 Drawer 模式）：
@@ -201,11 +202,11 @@ export function DownloadManager({ isOpen, onClose }: { isOpen: boolean; onClose:
       if (!detail) return;
       // 无 Cache Storage（HTTP 访问 / 老浏览器）时下载必然失败——分片无处暂存。
       // 在入队这一步就讲清楚，别让用户等到任务跑到一半才看到报错。
-      if (!supportsChunkCache()) {
-        toast('当前环境不支持下载缓存（需通过 HTTPS 访问），无法下载', 'error');
-        return;
-      }
       if ('items' in detail) {
+        if (!supportsChunkCache()) {
+          toast('当前环境不支持下载缓存（需通过 HTTPS 访问），无法下载', 'error');
+          return;
+        }
         const items = detail.items.filter((item) => item.url && item.title).slice(0, 100);
         if (items.length === 0) return;
         void (async () => {
@@ -230,6 +231,24 @@ export function DownloadManager({ isOpen, onClose }: { isOpen: boolean; onClose:
         return;
       }
       if (!detail.url || !detail.title) return;
+      const downloadUrl = getDownloadUrl(detail.url, detail.title);
+      if (downloadUrl !== detail.url) {
+        // Let the browser own the large-file download. The same-origin endpoint streams
+        // the upstream response directly; Android must not aggregate a feature-length film
+        // into a JavaScript Blob or the WebView can be killed by memory pressure.
+        const anchor = document.createElement('a');
+        anchor.href = downloadUrl;
+        anchor.rel = 'noopener';
+        document.body.appendChild(anchor);
+        anchor.click();
+        setTimeout(() => anchor.remove(), 0);
+        toast(`已将《${detail.title}》交给浏览器下载，请在下载列表确认`, 'info');
+        return;
+      }
+      if (!supportsChunkCache()) {
+        toast('当前环境不支持下载缓存（需通过 HTTPS 访问），无法下载', 'error');
+        return;
+      }
       void (async () => {
         const format = detail.format ?? 'MP4';
         const id = `dl_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;

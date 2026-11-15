@@ -38,6 +38,8 @@
 - First-run searches now keep the search term when no VOD source is selected, show a persistent setup guide, and open the source settings directly from its action button.
 - Added a first-party open-media API adapter for Internet Archive, NASA, PeerTube / SepiaSearch and Wikimedia Commons. It filters to explicit Public Domain / Creative Commons declarations, preserves source/attribution details and emits Apple CMS-compatible search/detail responses.
 - Added query-relevance, adult-content and contradictory-rights filters so unrelated search hits, obvious adult material and Archive entries with conflicting copyright statements are excluded.
+- Added native MP4/M4V/WebM/OGV/OGG playback detection. Direct files use the browser's native video pipeline; HLS continues to use hls.js. The HLS segment prefetcher no longer attempts to parse direct-file URLs.
+- Added authenticated `/api/download` streaming relay for direct media. It forwards Range requests and relevant response headers, streams large files directly to the browser download manager, and rejects private destinations, HLS playlists and HTML/JSON error pages.
 - Added a public LibreTV SourceList JSON at `public/open-media-sources.json` and configured it as a daily-refresh `DEFAULT_SUBSCRIPTIONS` entry in `render.yaml`; it becomes the default phone source after the Render Blueprint environment update is applied.
 - Added per-download save-target tracking and batch episode queueing.
 - Cancelling a paused download wakes waiting workers and aborts the partial save target.
@@ -55,10 +57,10 @@
 
 ## Verification
 - See MOBILE-ACCEPTANCE-REPORT-20261114.md for the latest exact test counts and browser acceptance scope; see SECURITY-AUDIT-20261114.md for the dependency and application security review.
-- Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 48 test files / 675 tests and production build passed after the 2.23.2 merge, mobile first-run onboarding, open-media adapter and search-quality hardening changes.
+- Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 51 test files / 692 tests and production build passed after the 2.23.2 merge, mobile first-run onboarding, open-media adapter, search-quality hardening, native media and streaming-download changes.
 - npm audit --omit=dev and full npm audit both passed with 521 dependencies audited and zero vulnerabilities.
 - Chrome/Playwright Pixel 7 emulation covers portrait/landscape routes, touch navigation, download manager drawer, PWA registration and offline fallback.
-- The Render Blueprint preconfigures the first-party open-media subscription (Internet Archive / NASA / PeerTube / Wikimedia Commons). The Blueprint sync for commit `9e823c5` was approved; the search-quality hardening commit `519f5ed` is now deployed, and `/api/status` reports one default subscription. Live search/detail and byte-range checks passed for all four providers. No commercial-film scraper or unverified third-party source list is bundled. Phone-side auto-import and physical Android/iPhone playback remain unverified.
+- The Render Blueprint preconfigures the first-party open-media subscription (Internet Archive / NASA / PeerTube / Wikimedia Commons). The Blueprint sync for commit `9e823c5` was approved; the search-quality hardening commit `519f5ed` is deployed, and `/api/status` reports one default subscription. Live search/detail and byte-range checks passed for all four providers. The new native-media and `/api/download` changes have passed local production build and route tests; they still require deployment and physical Android download/playback acceptance. No commercial-film scraper or unverified third-party source list is bundled.
 
 ## Android packaging decision
 - Selected: Google Bubblewrap CLI 1.27.0 + Trusted Web Activity (TWA).

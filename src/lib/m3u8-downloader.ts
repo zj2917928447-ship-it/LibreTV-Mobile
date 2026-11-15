@@ -285,6 +285,11 @@ async function runDownloadJobInternal(opts: DownloadJobOptions): Promise<boolean
     });
   };
 
+  // 非 HLS 下载仅允许直链分支处理；不能把 WebM/OGV 错送进 TS/MP4 转封装。
+  if (format !== 'TS' && format !== 'MP4') {
+    throw new Error('下载格式与视频地址不匹配，请重新从播放页发起下载');
+  }
+
   // —— 解析（重试 2 次） ——
   // 代理模式：m3u8 经 /api/proxy 拉取，代理会把内容里的分片/key 一并重写为代理
   // 地址，因此后续分片请求自动同源——这是直连被 CORS / 混合内容拦下时的兜底

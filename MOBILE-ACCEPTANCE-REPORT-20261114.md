@@ -1,7 +1,7 @@
 # LibreTV Mobile 2.23.2 — Final Acceptance Report
 
 Test date: 2026-11-15 (latest local regression run; original browser emulation date 2026-11-14)
-Worktree: E:\\Github\\电影\\LibreTV-Mobile
+Worktree: E:\\Github\\LibreTV-Mobile-Publish
 
 ## Build and dependency target
 
@@ -37,8 +37,8 @@ Worktree: E:\\Github\\电影\\LibreTV-Mobile
 | --- | --- |
 | TypeScript typecheck | Passed |
 | ESLint | Passed |
-| Vitest | 48 test files passed |
-| Unit tests | 675 passed, 0 failed |
+| Vitest | 51 test files passed |
+| Unit tests | 692 passed, 0 failed |
 | Next.js production build | Passed |
 | Next.js build version | 15.5.29 |
 | Production npm audit | 0 vulnerabilities |
@@ -103,6 +103,17 @@ Verified on the production build in Chrome:
 - Search-quality hardening is included in commit `519f5ed` and the live Render deployment: it rejects unrelated title matches, obvious adult material and contradictory Archive copyright claims. Live search checks confirmed that `The General` no longer returns `The General Index` or unrelated NASA items, and the public-domain cartoon query excludes obvious adult results.
 - Physical-device playback and phone-side source auto-import remain unverified. The current Render deployment has the default subscription configured and the search-quality filters deployed.
 
+## Native media playback and direct-file streaming download (2026-11-15)
+
+- MP4, M4V, WebM, OGV and OGG URLs are classified as native HTMLVideoElement media; HLS playlists remain on hls.js / the existing segmented downloader.
+- The player no longer sends direct-file URLs through the HLS prefetcher. Native progress restoration waits for the new episode's metadata instead of accidentally consuming the previous episode's duration during a rapid switch.
+- Added authenticated `/api/download` streaming relay for direct media. The upstream body is piped to the browser download manager without first aggregating a feature-length video into a JavaScript Blob.
+- The relay forwards Range requests and preserves HTTP 206, Content-Range, Accept-Ranges, ETag, Last-Modified and media type headers. It omits upstream Content-Length when content-encoding indicates fetch decoding may have changed the body size.
+- The relay uses the existing request authentication guard, public-URL validation, DNS rebinding protection and safe per-hop redirect checks; private/reserved destinations, playlists and HTML/JSON login/error pages are rejected.
+- Added seven route tests for byte-range streaming, embedded-credential rejection, SSRF rejection, playlist rejection, HTML/error response filtering, upstream HTTP errors and compressed-response length handling.
+- Local production checks: TypeScript and ESLint pass; 51 test files / 692 tests pass; Next.js production build passes. An unauthenticated local request to `/api/download` returns HTTP 401 as expected.
+- Browser-managed Android downloads, real upstream download through the deployed route, and physical-device playback remain unverified until a phone-side acceptance run.
+
 ## Android packaging and public deployment (2026-11-15)
 
 - Bubblewrap CLI 1.27.0, Temurin JDK 17.0.21, Gradle 8.11.1, Android API 36, Build Tools 36.1.0 and Platform Tools / ADB 37.0.1 are installed under `E:\\Android`; the system JDK 21 was not changed.
@@ -135,4 +146,4 @@ Stored in `artifacts/mobile-acceptance/`:
 
 ## Conclusion
 
-The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 675 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, open-media adapter tests, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.
+The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 692 unit tests across 51 files, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, open-media adapter tests, native-media routing tests, streaming-download route tests, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.
