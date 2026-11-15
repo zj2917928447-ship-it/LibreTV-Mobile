@@ -96,7 +96,8 @@ Verified on the production build in Chrome:
 - Render Free Web Service is live at `https://libretv-mobile-zj2917928447.onrender.com`.
 - Public endpoint checks: homepage, manifest, 192/512 icons, `/api/status` and `/.well-known/assetlinks.json` all return HTTP 200.
 - Google's Digital Asset Links API returns one matching statement for the stable site, package `com.zj2917928447.libretv` and release certificate fingerprint.
-- Final signed APK (1,422,787 bytes) and AAB (1,503,504 bytes) were built against the stable Render origin.
+- Final signed APK (1,422,787 bytes) and AAB (1,503,504 bytes) were built against the stable Render origin and published in [GitHub Release mobile-v1.0.0](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/tag/mobile-v1.0.0).
+- [Direct APK download](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/download/mobile-v1.0.0/LibreTV-Mobile-Android-v1.0.0.apk) and [direct AAB download](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/download/mobile-v1.0.0/LibreTV-Mobile-Android-v1.0.0.aab) both return HTTP 200.
 - APK SHA-256: `33458ABFA3B5A2AA230BA28F8854564231E17FBBD1EA97B2A0E363B68EDCD531`.
 - AAB SHA-256: `9AE3D115E9EF05F90EADE2A8824E552B2ACEAED032BFD1879803116A310D46E8`.
 - APK v2/v3 signature verification and ZIP alignment verification pass.

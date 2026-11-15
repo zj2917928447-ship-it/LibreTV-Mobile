@@ -71,7 +71,10 @@ Public checks passed:
 - `/.well-known/assetlinks.json` — HTTP 200
 - Google's Digital Asset Links API — one matching statement for this HTTPS origin, package and signing certificate
 
-The final signed Android artifacts were rebuilt against this stable origin:
+The final signed Android artifacts were rebuilt against this stable origin and published as [GitHub Release mobile-v1.0.0](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/tag/mobile-v1.0.0):
+
+- [Direct APK download](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/download/mobile-v1.0.0/LibreTV-Mobile-Android-v1.0.0.apk)
+- [Direct AAB download](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/download/mobile-v1.0.0/LibreTV-Mobile-Android-v1.0.0.aab)
 
 | Artifact | Value |
 | --- | --- |

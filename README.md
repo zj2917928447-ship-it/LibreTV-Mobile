@@ -31,7 +31,9 @@ LibreTV Next.js 迁移版：免费在线视频聚合搜索与观看平台。基�
 
 在已经部署到公网 HTTPS 域名的 LibreTV 站点上，用 Chrome 打开网址，选择菜单中的「安装应用」或「添加到主屏幕」。浏览器会以 PWA 形式安装，保留现有 Next.js 服务端、登录鉴权与播放代理；离线时只提供离线提示页，视频/API 不会被缓存。
 
-如需独立签名 APK/AAB，请先完成稳定 HTTPS 部署，再按 [ANDROID-TWA-SETUP.md](./ANDROID-TWA-SETUP.md) 使用 Google Bubblewrap 生成并签名 TWA。本仓库已包含与发布签名证书匹配的 `public/.well-known/assetlinks.json`；部署后可运行 `scripts/build-twa-release.ps1 -SiteUrl https://YOUR_DOMAIN`，脚本会先验证线上 PWA、图标和 Digital Asset Links，再构建并校验 APK/AAB。当前测试 APK 绑定临时隧道地址，不作为正式下载发布。
+**Android APK v1.0.0：** [直接下载 APK](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/download/mobile-v1.0.0/LibreTV-Mobile-Android-v1.0.0.apk) · [下载 AAB（应用商店包）](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/download/mobile-v1.0.0/LibreTV-Mobile-Android-v1.0.0.aab) · [Release 说明](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/tag/mobile-v1.0.0)。
+
+如需自行重建 APK/AAB，请按 [ANDROID-TWA-SETUP.md](./ANDROID-TWA-SETUP.md) 使用 Google Bubblewrap。本仓库已包含与发布签名证书匹配的 `public/.well-known/assetlinks.json`；`scripts/build-twa-release.ps1 -SiteUrl https://YOUR_DOMAIN` 会先验证线上 PWA、图标和 Digital Asset Links，再构建并校验 APK/AAB。
 
 ### iPhone / iPad
 
