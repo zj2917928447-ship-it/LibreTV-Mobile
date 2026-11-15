@@ -37,8 +37,8 @@ Worktree: E:\\Github\\电影\\LibreTV-Mobile
 | --- | --- |
 | TypeScript typecheck | Passed |
 | ESLint | Passed |
-| Vitest | 45 test files passed |
-| Unit tests | 655 passed, 0 failed |
+| Vitest | 46 test files passed |
+| Unit tests | 659 passed, 0 failed |
 | Next.js production build | Passed |
 | Next.js build version | 15.5.29 |
 | Production npm audit | 0 vulnerabilities |
@@ -56,6 +56,7 @@ Worktree: E:\\Github\\电影\\LibreTV-Mobile
 | Main visible touch buttons | 40–46 CSS px in tested contexts |
 | Mobile menu | Opened; navigation links/actions visible |
 | Download manager | Opened; empty-state UI rendered |
+| No-source onboarding | Search query retained; persistent guide shown; CTA opens settings and Add API form |
 | Authentication | Test-only local password accepted; /api/status returned verified=true and version=2.23.2 |
 | PWA manifest | display=standalone; scope=/ |
 | Service worker | Registered and controlling the page |
@@ -77,7 +78,7 @@ Verified on the production build in Chrome:
 
 - The first recommendation request before test login returned HTTP 401. After login, the app loaded normally.
 - Direct Douban image hosts returned HTTP 418 in this test environment. The existing image candidate/mirror fallback loaded all 10 recommendation posters. These are upstream/environment responses, not uncaught JavaScript errors.
-- No VOD or M3U source was configured in the isolated test profile.
+- No VOD or M3U source was configured in the isolated test profile. The phone session also has no selected VOD source yet; no third-party source list was silently installed.
 
 ## Security / regression checks
 
@@ -106,7 +107,7 @@ Verified on the production build in Chrome:
 ## What remains unverified
 
 - This is browser emulation, not a physical Android phone.
-- Actual MP4/HLS VOD playback, HTTP-FLV playback, M3U live playback, real episode downloads, hardware decoding, background audio, device orientation/fullscreen and physical-device wake lock were not verified because no user-configured VOD/M3U source or physical test device was available.
+- Actual MP4/HLS VOD playback, HTTP-FLV playback, M3U live playback, real episode downloads, hardware decoding, background audio, device orientation/fullscreen and physical-device wake lock were not verified because no user-authorized VOD/M3U source or physical test device was available. A source must be added in Settings before search and VOD playback can be accepted.
 - iOS Safari/WebKit was not available; iPhone behavior is statically reviewed, not device-tested.
 - Final stable-domain APK/AAB are built and cryptographically verified; physical Android/iOS playback and download acceptance remain pending.
 
@@ -121,4 +122,4 @@ Stored in `artifacts/mobile-acceptance/`:
 
 ## Conclusion
 
-The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 655 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.
+The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 659 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.

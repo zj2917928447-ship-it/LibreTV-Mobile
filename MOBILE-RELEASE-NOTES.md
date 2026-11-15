@@ -35,6 +35,7 @@
 - Added X-Content-Type-Options, X-Frame-Options, Referrer-Policy and Permissions-Policy headers; removed X-Powered-By.
 - Screen Wake Lock is requested during active VOD/live playback and released on pause/end/error/unmount; unsupported browsers safely no-op.
 - Fixed same-page pause/resume handling and stale download task recovery.
+- First-run searches now keep the search term when no VOD source is selected, show a persistent setup guide, and open the source settings directly from its action button.
 - Added per-download save-target tracking and batch episode queueing.
 - Cancelling a paused download wakes waiting workers and aborts the partial save target.
 - Cancellation rejects with AbortError instead of resolving as success, preventing false completion states.
@@ -51,10 +52,10 @@
 
 ## Verification
 - See MOBILE-ACCEPTANCE-REPORT-20261114.md for the latest exact test counts and browser acceptance scope; see SECURITY-AUDIT-20261114.md for the dependency and application security review.
-- Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 44 test files / 654 tests and production build passed after the 2.23.2 merge and security/media dependency updates.
+- Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 46 test files / 659 tests and production build passed after the 2.23.2 merge and mobile first-run onboarding fix.
 - npm audit --omit=dev and full npm audit both passed with 521 dependencies audited and zero vulnerabilities.
 - Chrome/Playwright Pixel 7 emulation covers portrait/landscape routes, touch navigation, download manager drawer, PWA registration and offline fallback.
-- Physical Android/iPhone playback and real-device download remain unverified.
+- No VOD source is bundled by default. Add an Apple CMS JSON API or import a trusted, authorized LibreTV / TVBox source list in Settings before search and VOD playback. Physical Android/iPhone playback and real-device download remain unverified.
 
 ## Android packaging decision
 - Selected: Google Bubblewrap CLI 1.27.0 + Trusted Web Activity (TWA).

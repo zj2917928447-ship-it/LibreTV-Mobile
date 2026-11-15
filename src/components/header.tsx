@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { ThemeToggle } from './theme';
 import { SourceManagerDrawer } from './source-manager';
@@ -10,6 +10,7 @@ import { requestShowDownloadManager } from './download-manager';
 import { Icon, type IconName } from './icon';
 import { SearchHistoryDropdown, useSearchHistory } from './search-history';
 import { cn } from '@/lib/utils';
+import { OPEN_SETTINGS_EVENT } from '@/lib/ui-events';
 
 /** 顶部导航：Logo、搜索框（首页外）、历史、设置 */
 export function Header({ showSearch = false }: { showSearch?: boolean }) {
@@ -24,6 +25,15 @@ export function Header({ showSearch = false }: { showSearch?: boolean }) {
   const searchHistory = useSearchHistory(query);
 
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    const openSettings = () => {
+      setMenuOpen(false);
+      setSettingsOpen(true);
+    };
+    window.addEventListener(OPEN_SETTINGS_EVENT, openSettings);
+    return () => window.removeEventListener(OPEN_SETTINGS_EVENT, openSettings);
+  }, []);
 
   const submitSearch = (text: string) => {
     const q = text.trim().slice(0, 100);

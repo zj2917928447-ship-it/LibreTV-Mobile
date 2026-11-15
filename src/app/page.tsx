@@ -16,6 +16,8 @@ import { useToast } from '@/components/toast';
 import { EmptyState } from '@/components/states';
 import { Icon } from '@/components/icon';
 import { SiteFooter } from '@/components/site-footer';
+import { createSearchIntent } from '@/lib/search-intent';
+import { OPEN_SETTINGS_EVENT } from '@/lib/ui-events';
 
 /**
  * 首页：搜索（URL ?s= 驱动，可后退/分享）+ 豆瓣推荐。
@@ -120,18 +122,16 @@ function HomeContent() {
   const searchHistory = useSearchHistory(input);
 
   const runSearch = (q: string) => {
-    const query = q.trim().slice(0, 100);
-    if (!query) {
+    const intent = createSearchIntent(q, selectedSources.length);
+    if (intent.kind === 'empty') {
       toast('请输入搜索内容', 'info');
       inputRef.current?.focus();
       return;
     }
-    if (selectedSources.length === 0) {
-      toast('请先在设置中添加并勾选点播源', 'warning');
-      return;
-    }
-    router.push(`/?s=${encodeURIComponent(query)}`, { scroll: false });
-    searchHistory.record(query);
+    // 即使尚未配置点播源也保留搜索词并进入结果页，让用户看到持久的设置引导；
+    // 不能只弹一个短暂 toast 后留在推荐页，否则用户不知道下一步该做什么。
+    router.push(intent.href, { scroll: false });
+    searchHistory.record(intent.query);
   };
 
   const pickHistory = (text: string) => {
@@ -327,7 +327,10 @@ function HomeContent() {
             )}
 
             {selectedSources.length === 0 ? (
-              <NoSourceGuide hasSources={customAPIs.length > 0 || envSources.length > 0} />
+              <NoSourceGuide
+                hasSources={customAPIs.length > 0 || envSources.length > 0}
+                hasSelectedKeys={selectedKeys.length > 0}
+              />
             ) : list.length > 0 ? (
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-start">
@@ -401,21 +404,43 @@ function ResultsSkeleton() {
 }
 
 /** 无点播源 / 未勾选点播源时的引导（替代旧版首屏静默空白） */
-function NoSourceGuide({ hasSources = false }: { hasSources?: boolean }) {
+function NoSourceGuide({
+  hasSources = false,
+  hasSelectedKeys = false,
+}: {
+  hasSources?: boolean;
+  hasSelectedKeys?: boolean;
+}) {
+  const title = !hasSources
+    ? '还没有添加点播源'
+    : hasSelectedKeys
+      ? '当前没有可参与搜索的点播源'
+      : '还没有启用点播源';
+
   return (
-    <div className="border border-dashed border-line rounded-xl p-10 text-center max-w-lg mx-auto">
-      <h3 className="text-content font-medium mb-2">{hasSources ? '尚未勾选点播源' : '先添加一个点播源'}</h3>
+    <div className="border border-dashed border-line rounded-xl p-6 sm:p-10 text-center max-w-lg mx-auto">
+      <h3 className="text-content font-medium mb-2">{title}</h3>
       <p className="text-sm text-muted leading-relaxed">
-        {hasSources ? (
-          <>点击右上角「设置」，勾选要参与搜索的点播源后重新搜索。</>
-        ) : (
+        {!hasSources ? (
           <>
-            LibreTV 不内置任何采集站。点击右上角「设置 → 添加 API」，填入一个
-            Apple CMS 采集站地址（如 <code className="text-accent text-xs">https://example.com/api.php/provide/vod</code>），
-            勾选后即可开始搜索。
+            LibreTV 不内置影视采集站。请添加你有权使用的 Apple CMS JSON API，或导入你信任的
+            LibreTV / TVBox JSON 源列表。添加示例：
+            <code className="block mt-2 text-accent text-xs break-all">https://example.com/api.php/provide/vod</code>
           </>
+        ) : hasSelectedKeys ? (
+          <>已选来源可能被自动暂停，或所属订阅已停用。请在设置中恢复或重新启用来源，再进行测活。</>
+        ) : (
+          <>打开设置，在「源管理 → 点播源」中勾选要参与搜索的来源。</>
         )}
       </p>
+      <button
+        type="button"
+        className="btn-primary btn-sm mt-4 w-full sm:w-auto"
+        onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
+      >
+        {!hasSources ? '打开设置添加点播源' : '打开设置管理点播源'}
+      </button>
+      <p className="mt-3 text-xs text-faint">请只添加你拥有或获授权使用的来源。</p>
     </div>
   );
 }
