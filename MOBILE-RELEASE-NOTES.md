@@ -37,6 +37,7 @@
 - Fixed same-page pause/resume handling and stale download task recovery.
 - First-run searches now keep the search term when no VOD source is selected, show a persistent setup guide, and open the source settings directly from its action button.
 - Added a first-party open-media API adapter for Internet Archive, NASA, PeerTube / SepiaSearch and Wikimedia Commons. It filters to explicit Public Domain / Creative Commons declarations, preserves source/attribution details and emits Apple CMS-compatible search/detail responses.
+- Added query-relevance, adult-content and contradictory-rights filters so unrelated search hits, obvious adult material and Archive entries with conflicting copyright statements are excluded.
 - Added a public LibreTV SourceList JSON at `public/open-media-sources.json` and configured it as a daily-refresh `DEFAULT_SUBSCRIPTIONS` entry in `render.yaml`; it becomes the default phone source after the Render Blueprint environment update is applied.
 - Added per-download save-target tracking and batch episode queueing.
 - Cancelling a paused download wakes waiting workers and aborts the partial save target.
@@ -54,10 +55,10 @@
 
 ## Verification
 - See MOBILE-ACCEPTANCE-REPORT-20261114.md for the latest exact test counts and browser acceptance scope; see SECURITY-AUDIT-20261114.md for the dependency and application security review.
-- Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 48 test files / 670 tests and production build passed after the 2.23.2 merge, mobile first-run onboarding and open-media adapter changes.
+- Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 48 test files / 675 tests and production build passed after the 2.23.2 merge, mobile first-run onboarding, open-media adapter and search-quality hardening changes.
 - npm audit --omit=dev and full npm audit both passed with 521 dependencies audited and zero vulnerabilities.
 - Chrome/Playwright Pixel 7 emulation covers portrait/landscape routes, touch navigation, download manager drawer, PWA registration and offline fallback.
-- The Render Blueprint now preconfigures the first-party open-media subscription (Internet Archive / NASA / PeerTube / Wikimedia Commons). The live Render environment still needs the Blueprint change applied and redeployed before the subscription auto-import is active. No commercial-film scraper or unverified third-party source list is bundled. Physical Android/iPhone playback and real-device download remain unverified.
+- The Render Blueprint preconfigures the first-party open-media subscription (Internet Archive / NASA / PeerTube / Wikimedia Commons). The Blueprint sync for commit `9e823c5` was approved and the deployed `/api/status` now reports one default subscription. No commercial-film scraper or unverified third-party source list is bundled. Phone-side auto-import and physical Android/iPhone playback remain unverified.
 
 ## Android packaging decision
 - Selected: Google Bubblewrap CLI 1.27.0 + Trusted Web Activity (TWA).

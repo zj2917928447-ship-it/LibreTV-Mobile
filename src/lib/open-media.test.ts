@@ -5,6 +5,9 @@ import {
   encodeOpenMediaId,
   extractNasaAssetUrls,
   hasExplicitCopyright,
+  hasContradictoryCopyrightClaim,
+  isOpenMediaAdult,
+  isOpenMediaTitleRelevant,
   isAllowedCommonsLicence,
   isAllowedPeerTubeLicence,
   isArchiveRightsAllowed,
@@ -13,6 +16,28 @@ import {
   selectNasaVideoUrl,
   selectPeerTubeStreamUrl,
 } from './open-media';
+
+describe('open-media search quality filters', () => {
+  it('matches exact film phrases and meaningful multi-word titles without generic-word false positives', () => {
+    expect(isOpenMediaTitleRelevant('The General (1926)', 'The General')).toBe(true);
+    expect(isOpenMediaTitleRelevant('The General Index', 'The General')).toBe(false);
+    expect(isOpenMediaTitleRelevant('The General Data Protection Regulation', 'The General')).toBe(false);
+    expect(isOpenMediaTitleRelevant('Apollo Digest Series: Mission Control', 'Apollo Mission')).toBe(true);
+    expect(isOpenMediaTitleRelevant('Spider-Man: No Way Home', 'Spider-Man')).toBe(true);
+    expect(isOpenMediaTitleRelevant('流浪地球2', '流浪地球')).toBe(true);
+  });
+
+  it('filters obvious adult material even if it claims a public-domain licence', () => {
+    expect(isOpenMediaAdult('Public Domain erotic/porn films')).toBe(true);
+    expect(isOpenMediaAdult('普通纪录片', '包含成人视频')).toBe(true);
+    expect(isOpenMediaAdult('Apollo Mission Control')).toBe(false);
+  });
+
+  it('detects contradictory copyright text in the description', () => {
+    expect(hasContradictoryCopyrightClaim('Copyright (c) 1974 Paramount Pictures. All Rights Reserved.')).toBe(true);
+    expect(hasContradictoryCopyrightClaim('A silent film in the public domain.')).toBe(false);
+  });
+});
 
 describe('open media identifiers', () => {
   it('round-trips provider IDs without characters rejected by LibreTV detail routing', () => {

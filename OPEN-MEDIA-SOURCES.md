@@ -19,7 +19,9 @@
 | PeerTube / SepiaSearch | 联邦视频平台中的开放许可视频 | 只接受许可 ID 1、2、3、7、8；排除未知许可、非商业许可和 All Rights Reserved |
 | Wikimedia Commons | 公共领域与 CC 视频文件 | 只接受 Public Domain、CC0、CC BY、CC BY-SA、CC BY-ND；排除非商业、明确版权所有及非 HTTPS/非官方上传 CDN 文件 |
 
-许可元数据由上传者/平台提供，适配器不构成法律权利保证。对 Internet Archive 与 PeerTube，详情页会保留原始来源和许可标签；使用者仍需遵守署名、相同方式共享、禁止演绎等具体许可条件。
+许可元数据由上传者/平台提供，适配器不构成法律权利保证。对 Internet Archive、PeerTube 与 Wikimedia Commons，详情页会保留原始来源和许可标签；使用者仍需遵守署名、相同方式共享、禁止演绎等具体许可条件。
+
+搜索阶段会进行标题相关性过滤，排除明显成人内容；Internet Archive 条目若描述文本与许可元数据出现明显版权冲突（例如 All Rights Reserved）也会被排除。过滤规则是保守启发式，不代替逐条权利核验。
 
 ## 限制
 
@@ -37,4 +39,4 @@
 
 `/api/open-media?ac=videolist&ids=om-...` 返回详情和播放地址。
 
-本适配器只请求固定的 Internet Archive、NASA 与 SepiaSearch API；PeerTube 实例域名仍经过 LibreTV 的公网地址与 DNS rebinding SSRF 防护。
+本适配器只请求固定的 Internet Archive、NASA、SepiaSearch 与 Wikimedia Commons API；PeerTube 实例域名仍经过 LibreTV 的公网地址与 DNS rebinding SSRF 防护。

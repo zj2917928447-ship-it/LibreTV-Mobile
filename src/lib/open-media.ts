@@ -2,6 +2,47 @@ import { Buffer } from 'node:buffer';
 
 export type OpenMediaProvider = 'archive' | 'nasa' | 'peertube' | 'commons';
 
+const SEARCH_STOP_WORDS = new Set(['the', 'a', 'an', 'of', 'and', 'for', 'to', 'in', 'on', 'at']);
+const ADULT_MEDIA_PATTERN = /\b(?:porn(?:ography)?|erotic|xxx|hentai|adult\s+(?:film|video|content)|sexually\s+explicit|nudity|nude\s+(?:film|video)|striptease|onlyfans)\b|色情|情色|成人视频|成人影片|裸露|裸体|福利片|伦理片/i;
+const CONTRADICTORY_RIGHTS_PATTERN = /all rights reserved|copyright\s*(?:©|\(c\)|:|by\b)|©\s*\d{4}/i;
+
+/** Reject obviously adult material even when an uploader labels it public domain. */
+export function isOpenMediaAdult(title: string, description = ''): boolean {
+  return ADULT_MEDIA_PATTERN.test(`${title} ${description}`);
+}
+
+/** Reject contradictory copyright claims in descriptive metadata even if licence fields disagree. */
+export function hasContradictoryCopyrightClaim(description: string): boolean {
+  return CONTRADICTORY_RIGHTS_PATTERN.test(description);
+}
+
+/**
+ * Keep search results relevant to the requested title. For queries containing common
+ * stop-words (e.g. "The General"), require a contiguous title phrase and reject a
+ * following unrelated word such as "Index". Year suffixes and subtitle separators pass.
+ */
+export function isOpenMediaTitleRelevant(title: string, query: string): boolean {
+  const rawQuery = query.trim();
+  if (!rawQuery || !title.trim()) return false;
+  if (/[\u3400-\u9fff]/u.test(rawQuery)) {
+    const normalize = (value: string) => value.toLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
+    return normalize(title).includes(normalize(rawQuery));
+  }
+  const words = (value: string): string[] => value.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [];
+  const queryWords = words(rawQuery);
+  const titleWords = words(title);
+  if (queryWords.length === 0 || titleWords.length === 0) return false;
+  if (queryWords.some((word) => SEARCH_STOP_WORDS.has(word))) {
+    for (let i = 0; i <= titleWords.length - queryWords.length; i++) {
+      if (!queryWords.every((word, offset) => titleWords[i + offset] === word)) continue;
+      const next = titleWords[i + queryWords.length];
+      if (!next || /^\d{4}$/.test(next) || next === 'the' || next === 'a' || next === 'an') return true;
+    }
+    return false;
+  }
+  return queryWords.every((word) => titleWords.includes(word));
+}
+
 export interface ArchiveVideoFile {
   name?: string;
   format?: string;

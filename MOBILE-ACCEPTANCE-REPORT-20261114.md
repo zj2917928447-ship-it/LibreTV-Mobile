@@ -38,7 +38,7 @@ Worktree: E:\\Github\\电影\\LibreTV-Mobile
 | TypeScript typecheck | Passed |
 | ESLint | Passed |
 | Vitest | 48 test files passed |
-| Unit tests | 670 passed, 0 failed |
+| Unit tests | 675 passed, 0 failed |
 | Next.js production build | Passed |
 | Next.js build version | 15.5.29 |
 | Production npm audit | 0 vulnerabilities |
@@ -78,7 +78,7 @@ Verified on the production build in Chrome:
 
 - The first recommendation request before test login returned HTTP 401. After login, the app loaded normally.
 - Direct Douban image hosts returned HTTP 418 in this test environment. The existing image candidate/mirror fallback loaded all 10 recommendation posters. These are upstream/environment responses, not uncaught JavaScript errors.
-- No VOD or M3U source was configured in the isolated browser test profile. A first-party open-media subscription has now been added to the Render Blueprint; it will appear automatically after the Blueprint environment change is applied and the service is redeployed. No unverified third-party scraper list was silently installed.
+- No third-party VOD or M3U source was configured in the isolated browser test profile. The Render Blueprint was manually synced for commit `9e823c5`; `/api/status` now reports exactly one `defaultSubscriptions` entry and the public SourceList JSON returns HTTP 200. The app's existing `applyEnvPresets` flow imports deployment-provided subscriptions after authentication. Phone-side auto-import remains unverified on a physical device.
 
 ## Security / regression checks
 
@@ -90,7 +90,7 @@ Verified on the production build in Chrome:
 - The only dangerouslySetInnerHTML use is a constant pre-hydration theme bootstrap string; no untrusted data is interpolated.
 - Baseline response headers are configured and verified. CSP/HSTS are not guessed or forced; see SECURITY-AUDIT-20261114.md for rationale and remaining edge configuration notes.
 
-## Open-media source adapter (2026-11-15; local build, deployment pending)
+## Open-media source adapter (2026-11-15; local build and Render deployment verified; search-quality refinement pending)
 
 - Added an Apple CMS-compatible read-only API adapter for Internet Archive, NASA Image and Video Library, PeerTube / SepiaSearch and Wikimedia Commons.
 - Internet Archive: accepts explicit Public Domain / Public Domain Mark / CC0 / CC BY / CC BY-SA metadata and requires a movie record plus an MP4 file.
@@ -98,9 +98,10 @@ Verified on the production build in Chrome:
 - PeerTube: accepts explicit licence IDs 1, 2, 3, 7 and 8; excludes unknown, non-commercial and All Rights Reserved items; prefers HLS and falls back to MP4.
 - Wikimedia Commons: accepts explicit Public Domain, CC0, CC BY, CC BY-SA and CC BY-ND; excludes non-commercial, explicitly copyrighted and non-HTTPS/non-upload-CDN files; supports MP4, WebM and OGV.
 - Added `public/open-media-sources.json` and `OPEN-MEDIA-SOURCES.md`; the subscription parser test confirms the JSON imports as one LibreTV point-of-view source.
-- Added `DEFAULT_SUBSCRIPTIONS` to `render.yaml` so the first-party subscription is preconfigured for the Render deployment. The live Render environment has not yet been confirmed to have applied this Blueprint change.
-- Public provider API samples were checked: Internet Archive returned a Public Domain MP4 record; NASA asset API returned an MP4 manifest; PeerTube detail returned Public Domain Dedication plus HLS/MP4; Wikimedia Commons returned The General (1926) as Public Domain WebM. These are provider-level checks, not proof that every search result plays on every device.
-- Physical-device playback, all-provider end-to-end app playback and deployed source auto-import remain unverified until Render redeployment and phone acceptance.
+- Added `DEFAULT_SUBSCRIPTIONS` to `render.yaml`. Render Blueprint sync for commit `9e823c5` was approved; the deployed `/api/status` response reports `defaultSubscriptions=1`, and the public subscription JSON returns HTTP 200.
+- Live provider checks passed for all four providers: Internet Archive detail returned MP4, NASA detail returned mobile MP4, PeerTube detail returned Public Domain Dedication plus HLS, and Wikimedia Commons detail returned Public Domain WebM. Byte-range tests against all four media endpoints returned HTTP 206 with the expected media types. These are server/provider checks, not proof of playback on every physical device.
+- A further local refinement now rejects unrelated title matches, obvious adult material and contradictory Archive copyright claims; it passes 675 unit tests and a production build but is not yet included in the live Render deployment.
+- Physical-device playback and phone-side source auto-import remain unverified. The current Render deployment has the default subscription configured; the pending local search-quality refinement still needs deployment.
 
 ## Android packaging and public deployment (2026-11-15)
 
@@ -134,4 +135,4 @@ Stored in `artifacts/mobile-acceptance/`:
 
 ## Conclusion
 
-The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 670 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, open-media adapter tests, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.
+The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 675 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, open-media adapter tests, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.
