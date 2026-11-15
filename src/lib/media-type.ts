@@ -49,11 +49,26 @@ export function getDownloadFormat(url: string): DownloadFormat {
   return 'MP4';
 }
 
+/** Unwrap LibreTV's same-origin proxy wrapper before asking the server to download the upstream file. */
+export function unwrapProxyMediaUrl(rawUrl: string, depth = 0): string {
+  if (!rawUrl || depth > 3) return rawUrl;
+  try {
+    const parsed = new URL(rawUrl, 'https://libretv.invalid');
+    const isProxyPath = parsed.pathname === '/api/proxy' || parsed.pathname.startsWith('/api/proxy/');
+    const isDownloadPath = parsed.pathname === '/api/download';
+    const nestedUrl = isProxyPath || isDownloadPath ? parsed.searchParams.get('url') : null;
+    return nestedUrl ? unwrapProxyMediaUrl(nestedUrl, depth + 1) : rawUrl;
+  } catch {
+    return rawUrl;
+  }
+}
+
 /** Direct files download through a same-origin streaming route, not fetch -> Blob. */
 export function getDownloadUrl(url: string, title: string): string {
   if (!isDirectMediaUrl(url)) return url;
-  const extension = getMediaExtension(url);
-  return `/api/download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(`${title}.${extension}`)}`;
+  const targetUrl = unwrapProxyMediaUrl(url);
+  const extension = getMediaExtension(targetUrl);
+  return `/api/download?url=${encodeURIComponent(targetUrl)}&filename=${encodeURIComponent(`${title}.${extension}`)}`;
 }
 
 export function formatByteSize(bytes: number): string {

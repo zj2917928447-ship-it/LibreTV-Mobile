@@ -550,7 +550,7 @@ export function PlayerShell({
     art.type = getArtPlayerMediaType(targetUrl);
     if (isDirectMediaUrl(targetUrl)) {
       setupNativeMedia(art.video, targetUrl);
-      art.switchUrl(targetUrl);
+      void art.switchUrl(targetUrl).catch(() => {});
     } else {
       setupHls(art.video, targetUrl, true);
     }

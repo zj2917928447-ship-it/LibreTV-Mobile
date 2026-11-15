@@ -41,6 +41,15 @@ describe('media URL type detection', () => {
     expect(parsed.pathname).toBe('/api/download');
     expect(parsed.searchParams.get('url')).toBe(url);
     expect(parsed.searchParams.get('filename')).toBe('流浪地球 2.mp4');
+
+    const proxiedUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
+    const proxiedDownload = new URL(getDownloadUrl(proxiedUrl, '流浪地球 2'), 'https://libretv.example');
+    expect(proxiedDownload.pathname).toBe('/api/download');
+    expect(proxiedDownload.searchParams.get('url')).toBe(url);
+    expect(proxiedDownload.searchParams.get('filename')).toBe('流浪地球 2.mp4');
+
+    const absoluteProxy = `https://libretv.example/api/proxy?url=${encodeURIComponent(url)}`;
+    expect(new URL(getDownloadUrl(absoluteProxy, '流浪地球 2'), 'https://libretv.example').searchParams.get('url')).toBe(url);
     expect(getDownloadUrl('https://video.example/master.m3u8', '电影')).toBe('https://video.example/master.m3u8');
     expect(new URL(getDownloadUrl('https://cdn.example/movie.ogg', '音轨'), 'https://libretv.example').searchParams.get('filename')).toBe('音轨.ogg');
     expect(new URL(getDownloadUrl('https://cdn.example/movie.m4v', '影片'), 'https://libretv.example').searchParams.get('filename')).toBe('影片.m4v');
