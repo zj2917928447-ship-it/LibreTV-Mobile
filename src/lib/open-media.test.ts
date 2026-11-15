@@ -74,6 +74,8 @@ describe('Wikimedia Commons licence and file filtering', () => {
   it('accepts only HTTPS video files from Wikimedia upload CDN', () => {
     expect(selectCommonsVideoFile({ url: 'https://upload.wikimedia.org/a.webm', mime: 'video/webm' })?.url)
       .toBe('https://upload.wikimedia.org/a.webm');
+    expect(selectCommonsVideoFile({ url: 'https://upload.wikimedia.org/a.webm', mime: 'video/webm', thumburl: 'https://thumb.wikimedia.org/a.jpg' })?.thumbnail)
+      .toBe('https://thumb.wikimedia.org/a.jpg');
     expect(selectCommonsVideoFile({ url: 'http://upload.wikimedia.org/a.webm', mime: 'video/webm' })).toBeNull();
     expect(selectCommonsVideoFile({ url: 'https://evil.example/a.mp4', mime: 'video/mp4' })).toBeNull();
     expect(selectCommonsVideoFile({ url: 'https://upload.wikimedia.org/a.jpg', mime: 'image/jpeg' })).toBeNull();

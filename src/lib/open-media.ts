@@ -75,9 +75,10 @@ export function selectCommonsVideoFile(info?: CommonsVideoInfo): { url: string; 
     const url = new URL(info.url);
     if (url.protocol !== 'https:' || url.hostname !== 'upload.wikimedia.org') return null;
     const thumbnail = typeof info.thumburl === 'string' ? new URL(info.thumburl) : null;
+    const allowedThumbnailHost = thumbnail?.hostname === 'upload.wikimedia.org' || thumbnail?.hostname === 'thumb.wikimedia.org';
     return {
       url: url.href,
-      thumbnail: thumbnail?.protocol === 'https:' && thumbnail.hostname === 'upload.wikimedia.org' ? thumbnail.href : undefined,
+      thumbnail: thumbnail?.protocol === 'https:' && allowedThumbnailHost ? thumbnail.href : undefined,
       mime: info.mime.toLowerCase(),
     };
   } catch {

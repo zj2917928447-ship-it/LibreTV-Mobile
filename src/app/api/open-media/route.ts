@@ -23,6 +23,8 @@ const SEARCH_CACHE_TTL = 5 * 60 * 1000;
 const DETAIL_CACHE_TTL = 10 * 60 * 1000;
 const PROVIDER_TIMEOUT_MS = 6500;
 const MAX_RESULTS_PER_PROVIDER = 6;
+const MAX_ARCHIVE_CANDIDATES = 12;
+const MAX_FEDERATED_CANDIDATES = 24;
 
 interface CmsVod {
   vod_id: string;
@@ -159,7 +161,7 @@ async function searchArchive(query: string): Promise<CmsVod[]> {
   ].join(' OR ');
   const params = new URLSearchParams({
     q: `mediatype:movies AND (${rights}) AND title:${terms}`,
-    rows: String(MAX_RESULTS_PER_PROVIDER),
+    rows: String(MAX_ARCHIVE_CANDIDATES),
     page: '1',
     output: 'json',
     sort: 'downloads desc',
@@ -172,7 +174,7 @@ async function searchArchive(query: string): Promise<CmsVod[]> {
     { timeoutMs: PROVIDER_TIMEOUT_MS }
   );
   const docs = result.response?.docs ?? [];
-  const resolved = await Promise.allSettled(docs.slice(0, MAX_RESULTS_PER_PROVIDER).map(async (doc) => {
+  const resolved = await Promise.allSettled(docs.slice(0, MAX_ARCHIVE_CANDIDATES).map(async (doc) => {
     const identifier = String(doc.identifier ?? '');
     if (!/^[\w.-]+$/.test(identifier)) return null;
     const metadata = await fetchUpstreamJson<ArchiveMetadataResponse>(
@@ -201,7 +203,8 @@ async function searchArchive(query: string): Promise<CmsVod[]> {
   return resolved
     .filter((entry): entry is PromiseFulfilledResult<CmsVod | null> => entry.status === 'fulfilled')
     .map((entry) => entry.value)
-    .filter((entry): entry is CmsVod => entry !== null);
+    .filter((entry): entry is CmsVod => entry !== null)
+    .slice(0, MAX_RESULTS_PER_PROVIDER);
 }
 
 async function searchNasa(query: string): Promise<CmsVod[]> {
@@ -239,9 +242,9 @@ async function searchCommons(query: string): Promise<CmsVod[]> {
     generator: 'search',
     gsrsearch: `filetype:video ${query}`,
     gsrnamespace: '6',
-    gsrlimit: String(MAX_RESULTS_PER_PROVIDER),
+    gsrlimit: String(MAX_FEDERATED_CANDIDATES),
     prop: 'imageinfo',
-    iiprop: 'url|extmetadata',
+    iiprop: 'url|mime|extmetadata',
     iiurlwidth: '480',
     format: 'json',
     formatversion: '2',
@@ -275,11 +278,11 @@ async function searchCommons(query: string): Promise<CmsVod[]> {
         info?.descriptionurl ? `原始条目：${info.descriptionurl}` : '',
       ].filter(Boolean).join('\n'),
     })];
-  });
+  }).slice(0, MAX_RESULTS_PER_PROVIDER);
 }
 
 async function searchPeerTube(query: string): Promise<CmsVod[]> {
-  const params = new URLSearchParams({ search: query, count: String(MAX_RESULTS_PER_PROVIDER), nsfw: 'false' });
+  const params = new URLSearchParams({ search: query, count: String(MAX_FEDERATED_CANDIDATES), nsfw: 'false' });
   const result = await fetchUpstreamJson<PeerTubeSearchResponse>(
     `https://sepiasearch.org/api/v1/search/videos?${params.toString()}`,
     { timeoutMs: PROVIDER_TIMEOUT_MS }
@@ -304,7 +307,7 @@ async function searchPeerTube(query: string): Promise<CmsVod[]> {
         '请遵守该视频页面列出的署名、相同方式共享及其他许可要求。',
       ].filter(Boolean).join('\n'),
     })];
-  });
+  }).slice(0, MAX_RESULTS_PER_PROVIDER);
 }
 
 async function searchAll(query: string): Promise<CmsVod[]> {
@@ -389,7 +392,7 @@ async function getCommonsDetail(externalId: string): Promise<CmsVod | null> {
     action: 'query',
     pageids: externalId,
     prop: 'imageinfo',
-    iiprop: 'url|extmetadata',
+    iiprop: 'url|mime|extmetadata',
     iiurlwidth: '480',
     format: 'json',
     formatversion: '2',
