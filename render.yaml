@@ -8,7 +8,6 @@ services:
     buildCommand: npm ci --no-audit --no-fund && npm run build
     startCommand: npm start
     healthCheckPath: /api/status
-    autoDeployTrigger: commit
     maxShutdownDelaySeconds: 120
     envVars:
       - key: NODE_VERSION

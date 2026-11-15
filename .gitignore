@@ -17,6 +17,6 @@ generated-images/
 .public-mobile-*
 public-mobile-*.log
 public-mobile-quick.yml
-.restart-*.ps1
-.inspect-*.ps1
-.test-public-*.ps1
+public/downloads/*.apk
+# Temporary local-operation diagnostics and deployment helpers
+.*.ps1

@@ -62,7 +62,10 @@
 - Rejected as direct base: the old archived PWABuilder Android TWA package.
 - Not adopted: the researched Capacitor fork that embeds server handlers and disables auth/SSRF shims.
 - TWA requires a stable public HTTPS deployment and a matching Digital Asset Links file for the signing certificate. See ANDROID-TWA-SETUP.md.
-- This machine currently has Node 24.18.0 and JDK 21, but no Android SDK, ADB or Gradle was found. No APK/AAB is produced or claimed in this source release.
+- Android build tooling is now installed under `E:\\Android`: Temurin JDK 17.0.21, Bubblewrap 1.27.0, Gradle 8.11.1, Android API 36, Build Tools 36.1.0 and Platform Tools/ADB 37.0.1. The existing system JDK 21 was not changed; `bubblewrap doctor` passes.
+- A signed test APK (1,422,787 bytes) and AAB (1,503,479 bytes) were built. APK v2/v3 signature and ZIP alignment checks pass. This test build points at the temporary Cloudflare Quick Tunnel and must not be distributed as the final app; no physical Android device is currently attached for install/playback testing.
+- `public/.well-known/assetlinks.json` is prepared with the signing certificate fingerprint. `scripts/build-twa-release.ps1` validates the final HTTPS origin, PWA manifest, icons and Digital Asset Links before producing the release APK/AAB.
+- Final public APK/AAB and the direct download URL remain blocked only on the stable Render HTTPS deployment and the final-domain rebuild / Digital Asset Links verification. The public repository can be deployed without installing Render's GitHub App; manual redeploys are required after later commits.
 
 ## Run locally
 ~~~bash

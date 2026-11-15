@@ -19,13 +19,14 @@
 
 ## 首次部署
 
-1. 在 Render 登录后，选择 **New → Blueprint**。
-2. 连接 GitHub 仓库 `zj2917928447-ship-it/LibreTV-Mobile`，分支 `main`。
-3. Render 读取仓库根目录的 `render.yaml`，确认创建 `libretv-mobile-zj2917928447`，计算方案选择 **Free**。
-4. 首次同步时 Render 自动生成 `PASSWORD` 与 `PROXY_SECRET`。
-5. 等待部署成功，打开 Render 分配的 `https://<service>.onrender.com`。
-6. 在 Render 服务的 **Environment** 页面查看自动生成的 `PASSWORD`，用于 LibreTV 登录；不要把它提交到 Git 或公开分享。
-7. 验证：
+1. 使用 [LibreTV-Mobile Render Blueprint 链接](https://dashboard.render.com/blueprint/new?repo=https%3A%2F%2Fgithub.com%2Fzj2917928447-ship-it%2FLibreTV-Mobile) 打开创建页面。该仓库是公开仓库，Render 支持直接导入公开 Git 仓库；不需要安装 Render GitHub App，也不需要授予其访问你的全部仓库。
+2. Render 读取仓库根目录的 `render.yaml`，确认创建 `libretv-mobile-zj2917928447`，计算方案选择 **Free**。
+3. 审阅待创建的服务和环境变量，再点击 Apply / Deploy。
+4. 公开仓库 URL 部署不支持自动部署；后续代码更新后，在 Render 手动执行 Manual Deploy。若将来希望自动部署，需单独安装 Render GitHub App 并仅授权此仓库。
+5. 首次同步时 Render 自动生成 `PASSWORD` 与 `PROXY_SECRET`。
+6. 等待部署成功，打开 Render 分配的 `https://<service>.onrender.com`。
+7. 在 Render 服务的 **Environment** 页面查看自动生成的 `PASSWORD`，用于 LibreTV 登录；不要把它提交到 Git 或公开分享。
+8. 验证：
    - `/` 返回 200
    - `/manifest.webmanifest` 返回 200
    - `/api/status` 返回 200 且 `passwordRequired=true`
@@ -44,12 +45,6 @@ Render 官方明确说明 Free 实例**不应承载生产应用**，只适合测
 
 ## Android APK / TWA 的后续步骤
 
-稳定 Render HTTPS 域名部署成功后，再用 Google Bubblewrap 1.27.0 构建 TWA：
-
-1. 以稳定 Render URL 的 `/manifest.webmanifest` 初始化 TWA。
-2. 生成签名密钥并构建 APK/AAB。
-3. 读取签名证书 SHA-256 指纹。
-4. 把 `/.well-known/assetlinks.json` 加入本项目并重新部署。
-5. 用 Chrome 验证 Digital Asset Links，再安装 APK 真机测试。
+稳定 Render HTTPS 域名部署成功后，运行 `scripts/build-twa-release.ps1 -SiteUrl https://<service>.onrender.com`。脚本会先检查首页、PWA manifest、192/512 图标，以及由 `/assetlinks` 路由提供的 `/.well-known/assetlinks.json` 是否匹配本地签名证书，再生成并校验正式 APK/AAB。随后用 Chrome 验证 Digital Asset Links，并在 Android 真机安装测试。
 
 不能用临时 `trycloudflare.com` 隧道地址作为正式 APK 的默认站点：隧道停止或重建后 URL 会变化，APK 将失去可用的服务端入口。

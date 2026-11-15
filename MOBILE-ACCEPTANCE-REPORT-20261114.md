@@ -1,6 +1,6 @@
 # LibreTV Mobile 2.23.2 — Final Acceptance Report
 
-Test date: 2026-11-14
+Test date: 2026-11-15 (latest local regression run; original browser emulation date 2026-11-14)
 Worktree: E:\\Github\\电影\\LibreTV-Mobile
 
 ## Build and dependency target
@@ -37,8 +37,8 @@ Worktree: E:\\Github\\电影\\LibreTV-Mobile
 | --- | --- |
 | TypeScript typecheck | Passed |
 | ESLint | Passed |
-| Vitest | 44 test files passed |
-| Unit tests | 654 passed, 0 failed |
+| Vitest | 45 test files passed |
+| Unit tests | 655 passed, 0 failed |
 | Next.js production build | Passed |
 | Next.js build version | 15.5.29 |
 | Production npm audit | 0 vulnerabilities |
@@ -89,12 +89,20 @@ Verified on the production build in Chrome:
 - The only dangerouslySetInnerHTML use is a constant pre-hydration theme bootstrap string; no untrusted data is interpolated.
 - Baseline response headers are configured and verified. CSP/HSTS are not guessed or forced; see SECURITY-AUDIT-20261114.md for rationale and remaining edge configuration notes.
 
+## Android packaging (2026-11-15)
+
+- Bubblewrap CLI 1.27.0, Temurin JDK 17.0.21, Gradle 8.11.1, Android API 36, Build Tools 36.1.0 and Platform Tools / ADB 37.0.1 are installed under `E:\\Android`; the system JDK 21 was not changed.
+- `bubblewrap doctor` passes.
+- A signed test APK (1,422,787 bytes) and AAB (1,503,479 bytes) were built for `com.zj2917928447.libretv`.
+- APK v2/v3 signature verification and ZIP alignment verification pass.
+- The test build uses a temporary Cloudflare Quick Tunnel origin and must not be distributed as the final APK. A release builder now validates a stable HTTPS origin, PWA manifest, icons and Digital Asset Links before producing the final package.
+
 ## What remains unverified
 
 - This is browser emulation, not a physical Android phone.
 - Actual MP4/HLS VOD playback, HTTP-FLV playback, M3U live playback, real episode downloads, hardware decoding, background audio, device orientation/fullscreen and physical-device wake lock were not verified because no user-configured VOD/M3U source or physical test device was available.
 - iOS Safari/WebKit was not available; iPhone behavior is statically reviewed, not device-tested.
-- No Android APK/AAB was built. The machine has Node 24.18.0 and JDK 21, but no Android SDK/ADB/Gradle was found during the earlier environment check; Bubblewrap's manual setup requires JDK 17 or its managed JDK. A public HTTPS deployment domain and matching Digital Asset Links are also required.
+- A test APK/AAB has been built, but the final stable-domain APK and physical-device playback/download acceptance remain pending.
 
 ## Browser screenshots
 
@@ -107,4 +115,4 @@ Stored in `artifacts/mobile-acceptance/`:
 
 ## Conclusion
 
-The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 654 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. This is a verified source/PWA release, not a signed native APK and not physical-device playback acceptance. The next release gate for APK is a stable public HTTPS origin plus Bubblewrap/Android toolchain and Digital Asset Links setup.
+The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 655 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. A signed test APK/AAB also builds and passes signature/alignment verification. The remaining release gate is the stable Render HTTPS origin, then a final rebuild against that origin and physical-device playback/download acceptance.

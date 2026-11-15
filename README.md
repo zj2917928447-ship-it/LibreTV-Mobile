@@ -31,7 +31,7 @@ LibreTV Next.js 迁移版：免费在线视频聚合搜索与观看平台。基�
 
 在已经部署到公网 HTTPS 域名的 LibreTV 站点上，用 Chrome 打开网址，选择菜单中的「安装应用」或「添加到主屏幕」。浏览器会以 PWA 形式安装，保留现有 Next.js 服务端、登录鉴权与播放代理；离线时只提供离线提示页，视频/API 不会被缓存。
 
-如需独立签名 APK/AAB，请先准备稳定 HTTPS 域名，再按 [ANDROID-TWA-SETUP.md](./ANDROID-TWA-SETUP.md) 使用 Google Bubblewrap 生成并签名 TWA。需要发布与签名证书匹配的 `/.well-known/assetlinks.json`。当前源码包不包含占位 APK，也不会伪造数字资产链接。
+如需独立签名 APK/AAB，请先完成稳定 HTTPS 部署，再按 [ANDROID-TWA-SETUP.md](./ANDROID-TWA-SETUP.md) 使用 Google Bubblewrap 生成并签名 TWA。本仓库已包含与发布签名证书匹配的 `public/.well-known/assetlinks.json`；部署后可运行 `scripts/build-twa-release.ps1 -SiteUrl https://YOUR_DOMAIN`，脚本会先验证线上 PWA、图标和 Digital Asset Links，再构建并校验 APK/AAB。当前测试 APK 绑定临时隧道地址，不作为正式下载发布。
 
 ### iPhone / iPad
 
@@ -43,7 +43,9 @@ LibreTV Next.js 迁移版：免费在线视频聚合搜索与观看平台。基�
 
 ### Render 免费公网部署（本项目已提供 Blueprint）
 
-仓库根目录包含 `render.yaml`，可用 Render Blueprint 创建带稳定 HTTPS 域名的 Next.js Web Service。部署步骤、环境变量、登录密码获取方式与 Free 方案限制见 [RENDER-DEPLOYMENT.md](./RENDER-DEPLOYMENT.md)。注意：Free 实例空闲 15 分钟会休眠、唤醒约需 1 分钟，且有月度实例小时和出站带宽额度；适合个人试用，不是无限流量或 24×7 生产托管。
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/blueprint/new?repo=https%3A%2F%2Fgithub.com%2Fzj2917928447-ship-it%2FLibreTV-Mobile)
+
+仓库根目录包含 `render.yaml`，可用 Render Blueprint 创建带稳定 HTTPS 域名的 Next.js Web Service。无需授予 Render 访问全部 GitHub 仓库的权限：这是公开仓库，可通过上方 Blueprint 链接直接导入。部署步骤、环境变量、登录密码获取方式与 Free 方案限制见 [RENDER-DEPLOYMENT.md](./RENDER-DEPLOYMENT.md)。注意：Free 实例空闲 15 分钟会休眠、唤醒约需 1 分钟，且有月度实例小时和出站带宽额度；适合个人试用，不是无限流量或 24×7 生产托管。
 
 ### Docker（推荐）
 

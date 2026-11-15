@@ -21,6 +21,15 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // 不向公网暴露 Next.js 版本标识；为所有页面/API 统一设置基础安全响应头。
   poweredByHeader: false,
+  // Next.js static serving excludes dotfiles; map the Android Digital Asset Links URL
+  // to a normal App Router endpoint so Chrome can verify the TWA origin.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/.well-known/assetlinks.json', destination: '/assetlinks' },
+      ],
+    };
+  },
   async headers() {
     return [
       {
