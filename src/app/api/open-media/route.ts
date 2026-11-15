@@ -16,7 +16,8 @@ import {
   selectCommonsVideoFile,
   selectNasaVideoUrl,
   selectPeerTubeStreamUrl,
-  type CommonsLicenseMetadata,
+  type CommonsVideoInfo,
+  type CommonsVideoDerivative,
   type OpenMediaProvider,
 } from '@/lib/open-media';
 
@@ -70,13 +71,8 @@ interface CommonsSearchResponse {
     pages?: Array<{
       pageid?: number;
       title?: string;
-      imageinfo?: Array<{
-        url?: string;
-        thumburl?: string;
-        mime?: string;
-        descriptionurl?: string;
-        extmetadata?: CommonsLicenseMetadata;
-      }>;
+      imageinfo?: CommonsVideoInfo[];
+      videoinfo?: Array<{ derivatives?: CommonsVideoDerivative[] }>;
     }>;
   };
 }
@@ -410,8 +406,9 @@ async function getCommonsDetail(externalId: string): Promise<CmsVod | null> {
   const params = new URLSearchParams({
     action: 'query',
     pageids: externalId,
-    prop: 'imageinfo',
+    prop: 'imageinfo|videoinfo',
     iiprop: 'url|mime|extmetadata',
+    viprop: 'derivatives',
     iiurlwidth: '480',
     format: 'json',
     formatversion: '2',
@@ -425,7 +422,10 @@ async function getCommonsDetail(externalId: string): Promise<CmsVod | null> {
   );
   const page = result.query?.pages?.[0];
   const info = page?.imageinfo?.[0];
-  const media = selectCommonsVideoFile(info);
+  const media = selectCommonsVideoFile(info ? {
+    ...info,
+    derivatives: page?.videoinfo?.[0]?.derivatives,
+  } : undefined);
   const licence = info?.extmetadata;
   if (!page || !media || !isAllowedCommonsLicence(licence)) return null;
   const title = cleanText(page.title?.replace(/^File:/i, ''), 200);
@@ -439,7 +439,13 @@ async function getCommonsDetail(externalId: string): Promise<CmsVod | null> {
       picture: media.thumbnail,
       year: getYear(title),
       remarks: licenceName || '开放许可',
-      description: [description, artist ? `作者/来源：${artist}` : '', `许可：${licenceName || '开放许可'}`, info?.descriptionurl ? `原始条目：${info.descriptionurl}` : ''].filter(Boolean).join('\n'),
+      description: [
+        description,
+        artist ? `作者/来源：${artist}` : '',
+        `许可：${licenceName || '开放许可'}`,
+        media.isTranscode ? `手机优先转码：${media.height}p${media.bandwidth ? ` · ${(media.bandwidth / 1000).toFixed(0)} kbps` : ''}` : '未提供可用转码，使用原始媒体文件',
+        info?.descriptionurl ? `原始条目：${info.descriptionurl}` : '',
+      ].filter(Boolean).join('\n'),
     }),
     vod_play_from: 'Wikimedia Commons',
     vod_play_url: `在线播放$${media.url}`,

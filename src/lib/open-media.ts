@@ -87,12 +87,22 @@ export function commonsMetaText(value: unknown): string {
   return typeof inner === 'string' ? inner : '';
 }
 
+export interface CommonsVideoDerivative {
+  src?: unknown;
+  type?: unknown;
+  transcodekey?: unknown;
+  width?: unknown;
+  height?: unknown;
+  bandwidth?: unknown;
+}
+
 export interface CommonsVideoInfo {
   url?: unknown;
   thumburl?: unknown;
   mime?: unknown;
   descriptionurl?: unknown;
   extmetadata?: CommonsLicenseMetadata;
+  derivatives?: CommonsVideoDerivative[];
 }
 
 /** Accept explicit public-domain, CC0, CC BY, CC BY-SA and CC BY-ND declarations only. */
@@ -108,23 +118,94 @@ export function isAllowedCommonsLicence(metadata?: CommonsLicenseMetadata): bool
   return /creativecommons\.org\/licenses\/(by|by-sa|by-nd)\//.test(licenseUrl);
 }
 
-/** Return only HTTPS files hosted by Wikimedia's official upload CDN and encoded as video. */
-export function selectCommonsVideoFile(info?: CommonsVideoInfo): { url: string; thumbnail?: string; mime: string } | null {
+/**
+ * Return a browser-supported HTTPS video from Wikimedia's official upload CDN.
+ * Prefer an available transcode at or below 720p and roughly 900 kbps. If no
+ * derivative meets that mobile budget, use the smallest available one instead
+ * of sending a phone the multi-gigabyte original. DASH-only
+ * derivatives are skipped because this app currently uses hls.js/native HTML5.
+ */
+export function selectCommonsVideoFile(info?: CommonsVideoInfo): {
+  url: string;
+  thumbnail?: string;
+  mime: string;
+  width?: number;
+  height?: number;
+  bandwidth?: number;
+  isTranscode: boolean;
+} | null {
   if (!info || typeof info.url !== 'string' || typeof info.mime !== 'string') return null;
-  if (!['video/mp4', 'video/webm', 'video/ogg'].includes(info.mime.toLowerCase())) return null;
-  try {
-    const url = new URL(info.url);
-    if (url.protocol !== 'https:' || url.hostname !== 'upload.wikimedia.org') return null;
-    const thumbnail = typeof info.thumburl === 'string' ? new URL(info.thumburl) : null;
-    const allowedThumbnailHost = thumbnail?.hostname === 'upload.wikimedia.org' || thumbnail?.hostname === 'thumb.wikimedia.org';
-    return {
-      url: url.href,
-      thumbnail: thumbnail?.protocol === 'https:' && allowedThumbnailHost ? thumbnail.href : undefined,
-      mime: info.mime.toLowerCase(),
-    };
-  } catch {
-    return null;
+  const allowedMime = new Set(['video/mp4', 'video/webm', 'video/ogg']);
+  const originalMime = info.mime.split(';', 1)[0].trim().toLowerCase();
+  if (!allowedMime.has(originalMime)) return null;
+
+  const trustedMediaUrl = (value: unknown): URL | null => {
+    if (typeof value !== 'string') return null;
+    try {
+      const parsed = new URL(value);
+      return parsed.protocol === 'https:' && parsed.hostname === 'upload.wikimedia.org' ? parsed : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const original = trustedMediaUrl(info.url);
+  if (!original) return null;
+  let thumbnailUrl: string | undefined;
+  if (typeof info.thumburl === 'string') {
+    try {
+      const thumbnail = new URL(info.thumburl);
+      const allowedThumbnailHost = thumbnail.hostname === 'upload.wikimedia.org' || thumbnail.hostname === 'thumb.wikimedia.org';
+      if (thumbnail.protocol === 'https:' && allowedThumbnailHost) thumbnailUrl = thumbnail.href;
+    } catch {
+      // A malformed optional thumbnail must not hide an otherwise valid video.
+    }
   }
+
+  const derivatives = (Array.isArray(info.derivatives) ? info.derivatives : []).flatMap((derivative) => {
+    if (!derivative || typeof derivative !== 'object') return [];
+    const url = trustedMediaUrl(derivative.src);
+    const mime = typeof derivative.type === 'string' ? derivative.type.split(';', 1)[0].trim().toLowerCase() : '';
+    const height = Number(derivative.height);
+    const width = Number(derivative.width);
+    const bandwidth = Number(derivative.bandwidth);
+    if (!url || !allowedMime.has(mime) || !Number.isFinite(height) || height <= 0) return [];
+    return [{
+      url: url.href,
+      mime,
+      height,
+      width: Number.isFinite(width) && width > 0 ? width : undefined,
+      bandwidth: Number.isFinite(bandwidth) && bandwidth > 0 ? bandwidth : undefined,
+    }];
+  });
+
+  if (derivatives.length > 0) {
+    const mobileCandidates = derivatives.filter((item) => item.height <= 720);
+    const underBandwidthBudget = mobileCandidates.filter((item) => item.bandwidth !== undefined && item.bandwidth <= 900_000);
+    const pool = underBandwidthBudget.length > 0
+      ? underBandwidthBudget
+      : mobileCandidates.length > 0
+        ? mobileCandidates
+        : derivatives;
+    pool.sort((a, b) => {
+      if (underBandwidthBudget.length > 0) {
+        return b.height - a.height || (a.bandwidth ?? Number.MAX_SAFE_INTEGER) - (b.bandwidth ?? Number.MAX_SAFE_INTEGER);
+      }
+      return a.height - b.height || (a.bandwidth ?? Number.MAX_SAFE_INTEGER) - (b.bandwidth ?? Number.MAX_SAFE_INTEGER);
+    });
+    const selected = pool[0];
+    return {
+      url: selected.url,
+      thumbnail: thumbnailUrl,
+      mime: selected.mime,
+      width: selected.width,
+      height: selected.height,
+      bandwidth: selected.bandwidth,
+      isTranscode: true,
+    };
+  }
+
+  return { url: original.href, thumbnail: thumbnailUrl, mime: originalMime, isTranscode: false };
 }
 
 const ARCHIVE_ALLOWED_LICENSES = new Set([

@@ -23,6 +23,7 @@
 - Added a cross-platform production start launcher that respects Render/host-provided `PORT` while defaulting to port 8080 locally.
 - Added `.node-version` and a Render Blueprint for a free Node.js web service with generated secrets, HTTPS cookies, `/api/status` health checks and private-IP live access disabled by default.
 - Updated the test/build toolchain to Vite 6.4.6 and Vitest 4.1.12; pinned the patched nested minimatch and postcss-selector-parser dependencies.
+- Refreshed in-range patch/minor dependencies without taking untested major upgrades: React/React DOM 19.3.1, TanStack Query 5.107.1, TanStack Virtual 3.14.26, Dexie 4.4.7, Zustand 5.1.0, Autoprefixer 10.6.2 and @types/node 22.20.5. Next.js 15, Tailwind 3, TypeScript 5, Undici 6, ESLint 9 and Vitest 4 remain on their tested major lines.
 - Applied official #980 connection-layer SSRF fix: the live-request flag selects live URL validation, while connection-time private-network access additionally requires LIVE_ALLOW_PRIVATE=1.
 - Added the upstream DNS-rebinding regression suite using two independently mocked DNS resolvers and a local loopback HTTP server.
 - Retained the existing same-undici fetch/Agent pairing from #984 to avoid Node runtime undici cross-version dispatcher incompatibility.
@@ -37,6 +38,7 @@
 - Fixed same-page pause/resume handling and stale download task recovery.
 - First-run searches now keep the search term when no VOD source is selected, show a persistent setup guide, and open the source settings directly from its action button.
 - Added a first-party open-media API adapter for Internet Archive, NASA, PeerTube / SepiaSearch and Wikimedia Commons. It filters to explicit Public Domain / Creative Commons declarations, preserves source/attribution details and emits Apple CMS-compatible search/detail responses.
+- Wikimedia Commons detail now requests MediaWiki `videoinfo` derivatives and selects a mobile-friendly HTTPS transcode (prefer the highest resolution at or below 720p and 900 kbps; otherwise choose the smallest available derivative). DASH-only derivatives are skipped until a DASH playback engine is added. For the tested 1926 film, the chosen 240p WebM is 163,929,190 bytes versus the 1,089,704,550-byte original.
 - Added query-relevance, adult-content and contradictory-rights filters so unrelated search hits, obvious adult material and Archive entries with conflicting copyright statements are excluded.
 - Added native MP4/M4V/WebM/OGV/OGG playback detection. Direct files use the browser's native video pipeline; HLS continues to use hls.js. The HLS segment prefetcher no longer attempts to parse direct-file URLs.
 - Added authenticated `/api/download` streaming relay for direct media. It forwards Range requests and relevant response headers, streams large files directly to the browser download manager, and rejects private destinations, HLS playlists and HTML/JSON error pages.
@@ -57,10 +59,10 @@
 
 ## Verification
 - See MOBILE-ACCEPTANCE-REPORT-20261114.md for the latest exact test counts and browser acceptance scope; see SECURITY-AUDIT-20261114.md for the dependency and application security review.
-- Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 51 test files / 692 tests and production build passed after the 2.23.2 merge, mobile first-run onboarding, open-media adapter, search-quality hardening, native media and streaming-download changes.
-- npm audit --omit=dev and full npm audit both passed with 521 dependencies audited and zero vulnerabilities.
+- Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 52 test files / 697 tests and production build passed after the 2.23.2 merge, mobile first-run onboarding, open-media adapter, Commons transcode selection, search-quality hardening, native media and streaming-download changes.
+- After refreshing in-range dependencies, `npm update` audited 413 packages and reported zero vulnerabilities; the subsequent full `npm audit` also passed with zero vulnerabilities.
 - Chrome/Playwright Pixel 7 emulation covers portrait/landscape routes, touch navigation, download manager drawer, PWA registration and offline fallback.
-- The Render Blueprint preconfigures the first-party open-media subscription (Internet Archive / NASA / PeerTube / Wikimedia Commons). The Blueprint sync for commit `9e823c5` was approved; the search-quality hardening commit `519f5ed` is deployed, and `/api/status` reports one default subscription. Live search/detail and byte-range checks passed for all four providers. The new native-media and `/api/download` changes have passed local production build and route tests; they still require deployment and physical Android download/playback acceptance. No commercial-film scraper or unverified third-party source list is bundled.
+- The Render Blueprint preconfigures the first-party open-media subscription (Internet Archive / NASA / PeerTube / Wikimedia Commons). The current source code includes Commons mobile transcode selection, native media handling and authenticated `/api/download` streaming. Local production build and 695 tests pass; physical Android playback and authenticated full-file download still require a device-side acceptance run. No commercial-film scraper or unverified third-party source list is bundled.
 
 ## Android packaging decision
 - Selected: Google Bubblewrap CLI 1.27.0 + Trusted Web Activity (TWA).

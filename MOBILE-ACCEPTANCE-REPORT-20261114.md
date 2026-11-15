@@ -7,7 +7,7 @@ Worktree: E:\\Github\\LibreTV-Mobile-Publish
 
 - LibreTV package version: 2.23.2
 - Next.js: 15.5.29
-- React / React DOM: 19.3.0
+- React / React DOM: 19.3.1
 - ArtPlayer: 5.4.0
 - hls.js: 1.7.4
 - mpegts.js: 1.8.2
@@ -17,6 +17,11 @@ Worktree: E:\\Github\\LibreTV-Mobile-Publish
 - source-map-js: 1.2.2
 - Vite: 6.4.6
 - Vitest: 4.1.12
+- TanStack Query: 5.107.1
+- TanStack Virtual: 3.14.26
+- Dexie: 4.4.7
+- Zustand: 5.1.0
+- Autoprefixer: 10.6.2
 - Node.js: 24.18.0
 - Browser: installed Google Chrome controlled with Playwright
 - Device profile: Pixel 7 emulation
@@ -27,8 +32,8 @@ Worktree: E:\\Github\\LibreTV-Mobile-Publish
 
 - Clean `npm ci` completed using the committed package manifest and lockfile.
 - The two required lifecycle scripts were reviewed and explicitly approved at exact versions: `esbuild@0.25.12` and `unrs-resolver@1.12.2`.
-- `npm audit --omit=dev`: 521 dependencies audited, 0 vulnerabilities.
-- Full `npm audit`: 521 dependencies audited, 0 vulnerabilities.
+- After the in-range dependency refresh, `npm update` audited 413 packages and reported 0 vulnerabilities.
+- Full `npm audit` subsequently passed with 0 vulnerabilities.
 - `npm ls` confirms the expected Next.js, Undici, PostCSS, Sharp, source-map-js, Vite and Vitest versions without invalid or extraneous packages.
 
 ## Automated project checks
@@ -37,8 +42,8 @@ Worktree: E:\\Github\\LibreTV-Mobile-Publish
 | --- | --- |
 | TypeScript typecheck | Passed |
 | ESLint | Passed |
-| Vitest | 51 test files passed |
-| Unit tests | 692 passed, 0 failed |
+| Vitest | 52 test files passed |
+| Unit tests | 697 passed, 0 failed |
 | Next.js production build | Passed |
 | Next.js build version | 15.5.29 |
 | Production npm audit | 0 vulnerabilities |
@@ -96,10 +101,11 @@ Verified on the production build in Chrome:
 - Internet Archive: accepts explicit Public Domain / Public Domain Mark / CC0 / CC BY / CC BY-SA metadata and requires a movie record plus an MP4 file.
 - NASA: reads the actual `collection.items[].href` asset manifest shape, selects mobile MP4 derivatives and excludes records with an explicit copyright field; original item rights must still be checked.
 - PeerTube: accepts explicit licence IDs 1, 2, 3, 7 and 8; excludes unknown, non-commercial and All Rights Reserved items; prefers HLS and falls back to MP4.
-- Wikimedia Commons: accepts explicit Public Domain, CC0, CC BY, CC BY-SA and CC BY-ND; excludes non-commercial, explicitly copyrighted and non-HTTPS/non-upload-CDN files; supports MP4, WebM and OGV.
+- Wikimedia Commons: accepts explicit Public Domain, CC0, CC BY, CC BY-SA and CC BY-ND; excludes non-commercial, explicitly copyrighted and non-HTTPS/non-upload-CDN files. Detail now requests MediaWiki `videoinfo` derivatives and selects a browser-supported mobile transcode at or below 720p / 900 kbps when available; DASH-only variants are skipped.
 - Added `public/open-media-sources.json` and `OPEN-MEDIA-SOURCES.md`; the subscription parser test confirms the JSON imports as one LibreTV point-of-view source.
 - Added `DEFAULT_SUBSCRIPTIONS` to `render.yaml`. Render Blueprint sync for commit `9e823c5` was approved; the deployed `/api/status` response reports `defaultSubscriptions=1`, and the public subscription JSON returns HTTP 200.
-- Live provider checks passed for all four providers: Internet Archive detail returned MP4, NASA detail returned mobile MP4, PeerTube detail returned Public Domain Dedication plus HLS, and Wikimedia Commons detail returned Public Domain WebM. Byte-range tests against all four media endpoints returned HTTP 206 with the expected media types. These are server/provider checks, not proof of playback on every physical device.
+- Live provider checks passed for all four providers: Internet Archive detail returned MP4, NASA detail returned mobile MP4, PeerTube detail returned Public Domain Dedication plus HLS, and Wikimedia Commons detail returned Public Domain WebM. The Wikimedia Commons `videoinfo` API returned 240p / 480p / 1080p derivatives for the tested film. The selected 240p WebM is 163,929,190 bytes versus the 1,089,704,550-byte original; its Range endpoint returned HTTP 206 and `video/webm`. These are server/provider checks, not proof of playback on every physical device.
+- Added a route-level regression test for Commons transcode selection, asserting the MediaWiki `videoinfo` query and mobile-friendly playback URL.
 - Search-quality hardening is included in commit `519f5ed` and the live Render deployment: it rejects unrelated title matches, obvious adult material and contradictory Archive copyright claims. Live search checks confirmed that `The General` no longer returns `The General Index` or unrelated NASA items, and the public-domain cartoon query excludes obvious adult results.
 - Physical-device playback and phone-side source auto-import remain unverified. The current Render deployment has the default subscription configured and the search-quality filters deployed.
 
@@ -111,7 +117,7 @@ Verified on the production build in Chrome:
 - The relay forwards Range requests and preserves HTTP 206, Content-Range, Accept-Ranges, ETag, Last-Modified and media type headers. It omits upstream Content-Length when content-encoding indicates fetch decoding may have changed the body size.
 - The relay uses the existing request authentication guard, public-URL validation, DNS rebinding protection and safe per-hop redirect checks; private/reserved destinations, playlists and HTML/JSON login/error pages are rejected.
 - Added seven route tests for byte-range streaming, embedded-credential rejection, SSRF rejection, playlist rejection, HTML/error response filtering, upstream HTTP errors and compressed-response length handling.
-- Local production checks: TypeScript and ESLint pass; 51 test files / 692 tests pass; Next.js production build passes. An unauthenticated local request to `/api/download` returns HTTP 401 as expected.
+- Local production checks: TypeScript and ESLint pass; 52 test files / 697 tests pass; Next.js production build passes. An unauthenticated local request to `/api/download` returns HTTP 401 as expected.
 - Browser-managed Android downloads, real upstream download through the deployed route, and physical-device playback remain unverified until a phone-side acceptance run.
 
 ## Android packaging and public deployment (2026-11-15)
@@ -126,6 +132,7 @@ Verified on the production build in Chrome:
 - APK SHA-256: `33458ABFA3B5A2AA230BA28F8854564231E17FBBD1EA97B2A0E363B68EDCD531`.
 - AAB SHA-256: `9AE3D115E9EF05F90EADE2A8824E552B2ACEAED032BFD1879803116A310D46E8`.
 - APK v2/v3 signature verification and ZIP alignment verification pass.
+- The public Gofile share page `https://gofile.is/d/EifUx0` was re-downloaded through its public POST download flow; the 1,422,787-byte APK SHA-256 exactly matches the local release artifact.
 - The earlier temporary-tunnel test APK has been superseded and must not be distributed. The final stable-domain APK is ready for release; physical-device installation, playback and download acceptance remain unverified because no ADB device is attached.
 
 ## What remains unverified
@@ -146,4 +153,4 @@ Stored in `artifacts/mobile-acceptance/`:
 
 ## Conclusion
 
-The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 692 unit tests across 51 files, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, open-media adapter tests, native-media routing tests, streaming-download route tests, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.
+The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 697 unit tests across 52 files, Next.js production build, responsive PWA shell, mobile touch navigation, no-source onboarding, open-media adapter tests, native-media routing tests, streaming-download route tests, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.

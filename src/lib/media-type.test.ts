@@ -13,6 +13,8 @@ describe('media URL type detection', () => {
   it('recognizes direct MP4, WebM and Ogg files despite query strings', () => {
     expect(getMediaExtension('https://archive.org/download/film.mp4?token=abc')).toBe('mp4');
     expect(getMediaExtension('https://upload.wikimedia.org/film.webm?utm_source=commons')).toBe('webm');
+    expect(getMediaExtension('https://upload.wikimedia.org/transcoded/film.webm/film.webm.240p.vp9.webm')).toBe('webm');
+    expect(isDirectMediaUrl('https://upload.wikimedia.org/transcoded/film.webm/film.webm.240p.vp9.webm')).toBe(true);
     expect(getMediaExtension('https://upload.wikimedia.org/film.ogv')).toBe('ogv');
     expect(isDirectMediaUrl('https://archive.org/download/film.mp4?token=abc')).toBe(true);
     expect(isDirectMediaUrl('https://upload.wikimedia.org/film.webm')).toBe(true);

@@ -105,6 +105,56 @@ describe('Wikimedia Commons licence and file filtering', () => {
     expect(selectCommonsVideoFile({ url: 'https://evil.example/a.mp4', mime: 'video/mp4' })).toBeNull();
     expect(selectCommonsVideoFile({ url: 'https://upload.wikimedia.org/a.jpg', mime: 'image/jpeg' })).toBeNull();
   });
+
+  it('prefers the highest available Wikimedia transcode within the mobile bitrate budget', () => {
+    const media = selectCommonsVideoFile({
+      url: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/original.webm',
+      mime: 'video/webm',
+      derivatives: [
+        { src: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/original.webm/original.webm.240p.vp9.webm', type: 'video/webm; codecs="vp9, opus"', width: 320, height: 240, bandwidth: 288112 },
+        { src: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/original.webm/original.webm.480p.vp9.webm', type: 'video/webm; codecs="vp9, opus"', width: 640, height: 480, bandwidth: 1010328 },
+        { src: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/original.webm/original.webm.1080p.vp9.webm', type: 'video/webm; codecs="vp9, opus"', width: 1440, height: 1080, bandwidth: 2869032 },
+        { src: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/original.webm/original.webm.3x1080p.vp9.mpd', type: 'application/dash+xml', width: 1440, height: 1080, bandwidth: -1 },
+      ],
+    });
+    expect(media).toMatchObject({
+      url: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/original.webm/original.webm.240p.vp9.webm',
+      mime: 'video/webm',
+      width: 320,
+      height: 240,
+      bandwidth: 288112,
+      isTranscode: true,
+    });
+  });
+
+  it('ignores a malformed optional thumbnail without rejecting a valid video', () => {
+    expect(selectCommonsVideoFile({
+      url: 'https://upload.wikimedia.org/a.webm',
+      mime: 'video/webm',
+      thumburl: 'not a URL',
+    })).toMatchObject({ url: 'https://upload.wikimedia.org/a.webm', isTranscode: false });
+  });
+
+  it('keeps a higher mobile resolution when its bitrate fits the budget', () => {
+    const media = selectCommonsVideoFile({
+      url: 'https://upload.wikimedia.org/a.webm',
+      mime: 'video/webm',
+      derivatives: [
+        { src: 'https://upload.wikimedia.org/a.240p.vp9.webm', type: 'video/webm', width: 320, height: 240, bandwidth: 288112 },
+        { src: 'https://upload.wikimedia.org/a.480p.vp9.webm', type: 'video/webm', width: 640, height: 480, bandwidth: 850000 },
+      ],
+    });
+    expect(media).toMatchObject({ height: 480, bandwidth: 850000, isTranscode: true });
+  });
+
+  it('does not trust non-Wikimedia transcode URLs and falls back to the trusted original', () => {
+    const media = selectCommonsVideoFile({
+      url: 'https://upload.wikimedia.org/a.webm',
+      mime: 'video/webm',
+      derivatives: [{ src: 'https://evil.example/a.480p.webm', type: 'video/webm', width: 640, height: 480 }],
+    });
+    expect(media).toMatchObject({ url: 'https://upload.wikimedia.org/a.webm', isTranscode: false });
+  });
 });
 
 describe('NASA rights metadata', () => {

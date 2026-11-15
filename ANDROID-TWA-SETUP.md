@@ -75,6 +75,7 @@ The final signed Android artifacts were rebuilt against this stable origin and p
 
 - [Direct APK download](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/download/mobile-v1.0.0/LibreTV-Mobile-Android-v1.0.0.apk)
 - [Direct AAB download](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/download/mobile-v1.0.0/LibreTV-Mobile-Android-v1.0.0.aab)
+- Current public phone-download page: https://gofile.is/d/EifUx0 (downloaded and SHA-256 verified against the local signed APK)
 
 | Artifact | Value |
 | --- | --- |
