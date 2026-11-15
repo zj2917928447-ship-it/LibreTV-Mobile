@@ -38,9 +38,9 @@ All build tooling is installed on E:; the existing system JDK 21 was not changed
 
 **Important Bubblewrap 1.27.0 path detail:** its configuration expects the Android SDK path to contain `bin\\sdkmanager.bat`, `build-tools`, `platforms`, and `platform-tools` together. This machine therefore uses `E:\\Android\\Sdk\\cmdline-tools\\latest` as Bubblewrap's configured SDK root. Do not move those folders independently or point Bubblewrap at the parent `E:\\Android\\Sdk`.
 
-## Test build (not the final public release)
+## Initial test build (temporary tunnel; historical only)
 
-A signed test TWA was successfully generated at:
+A first signed test TWA was generated against a temporary Cloudflare Quick Tunnel. It is retained only as a build-history record and must not be distributed:
 
 - APK: `E:\\Android\\LibreTV-TWA\\app-release-signed.apk` (1,422,787 bytes)
 - AAB: `E:\\Android\\LibreTV-TWA\\app-release-bundle.aab` (1,503,479 bytes)
@@ -55,26 +55,45 @@ Checks passed:
 - Package name, launcher activity, and SDK metadata inspected.
 - Signing certificate SHA-256: `556798663CB95922C5C39F7213416AD4183D363CC54464FE7ECB8403D4BC40AB`.
 
-**This test APK points at the temporary Cloudflare Quick Tunnel and must not be distributed as the final app.** The current ADB device list is empty, so physical-device install/playback validation has not yet been performed.
+**The initial test APK points at the temporary Cloudflare Quick Tunnel and must not be distributed.**
 
-The repository is public, so Render can import it directly using the Blueprint URL in `README.md` / `RENDER-DEPLOYMENT.md`. This avoids installing Render's GitHub App or granting it access to the user's repositories. Render does not support automatic deploys for a public-repository URL, so use Manual Deploy in Render after later commits.
+## Final release build (2026-11-15)
 
-## Final build gate
+The Render Free Web Service is live at:
 
-The final release builder is prepared at `scripts/build-twa-release.ps1`. After the Render Blueprint creates a stable HTTPS service and the latest GitHub commit is deployed, run:
+- `https://libretv-mobile-zj2917928447.onrender.com`
+
+Public checks passed:
+- `/` — HTTP 200
+- `/manifest.webmanifest` — HTTP 200, `display=standalone`
+- `/icons/icon-192.png` and `/icons/icon-512.png` — HTTP 200
+- `/api/status` — HTTP 200, app version 2.23.2 and password protection enabled
+- `/.well-known/assetlinks.json` — HTTP 200
+- Google's Digital Asset Links API — one matching statement for this HTTPS origin, package and signing certificate
+
+The final signed Android artifacts were rebuilt against this stable origin:
+
+| Artifact | Value |
+| --- | --- |
+| APK | `E:\\Android\\LibreTV-TWA\\app-release-signed.apk` |
+| APK size | 1,422,787 bytes |
+| APK SHA-256 | `33458ABFA3B5A2AA230BA28F8854564231E17FBBD1EA97B2A0E363B68EDCD531` |
+| AAB | `E:\\Android\\LibreTV-TWA\\app-release-bundle.aab` |
+| AAB size | 1,503,504 bytes |
+| AAB SHA-256 | `9AE3D115E9EF05F90EADE2A8824E552B2ACEAED032BFD1879803116A310D46E8` |
+| Signing certificate SHA-256 | `556798663CB95922C5C39F7213416AD4183D363CC54464FE7ECB8403D4BC40AB` |
+
+The APK signature (v2/v3) and ZIP alignment checks pass. The APK is bound to the stable Render hostname, not the temporary tunnel. The local ADB device list is empty, so physical-device install, playback and download testing remain outstanding.
+
+The repeatable release builder is `scripts/build-twa-release.ps1`. To rebuild after a site or signing change:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\\build-twa-release.ps1 -SiteUrl https://YOUR_RENDER_SERVICE.onrender.com
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\\build-twa-release.ps1 -SiteUrl https://libretv-mobile-zj2917928447.onrender.com
 ```
 
-The script refuses temporary/local origins, verifies the live site, PWA manifest, 192px/512px icons, and Digital Asset Links fingerprint before it updates the TWA manifest and builds the signed APK/AAB. It then verifies the signature and ZIP alignment.
+It rejects temporary/local origins, validates the live site, PWA manifest, icons and Digital Asset Links fingerprint, updates the TWA manifest, builds APK/AAB, then verifies APK signature and alignment.
 
-After the builder succeeds, complete the remaining release checks:
-
-1. Confirm the root page, `/manifest.webmanifest`, required icons, `/api/status`, and `/.well-known/assetlinks.json` return expected responses over HTTPS.
-2. Verify signature, alignment, package metadata, and Digital Asset Links.
-3. Install and test playback/download behavior on a real Android device.
-4. Publish the final APK as a GitHub Release asset and provide the direct public download URL.
+The repository is public, so Render was deployed from the public Blueprint URL without installing Render's GitHub App. Public-repository URL deploys require manual redeploys after future commits.
 
 ## Why TWA is preferred over the researched Capacitor fork
 

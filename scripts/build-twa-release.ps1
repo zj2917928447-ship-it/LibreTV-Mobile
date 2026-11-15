@@ -25,7 +25,8 @@ $rootResponse=Invoke-WebRequest -Uri ($origin+'/') -UseBasicParsing -TimeoutSec 
 if($rootResponse.StatusCode -ne 200){throw "Site root returned HTTP $($rootResponse.StatusCode)"}
 $manifestResponse=Invoke-WebRequest -Uri $manifestUrl -UseBasicParsing -TimeoutSec 180
 if($manifestResponse.StatusCode -ne 200){throw "Web manifest returned HTTP $($manifestResponse.StatusCode)"}
-$webManifest=$manifestResponse.Content | ConvertFrom-Json
+$manifestText=if($manifestResponse.Content -is [byte[]]){[System.Text.Encoding]::UTF8.GetString($manifestResponse.Content)}else{[string]$manifestResponse.Content}
+$webManifest=ConvertFrom-Json -InputObject $manifestText
 if($webManifest.display -ne 'standalone'){throw "PWA display mode must be standalone; found '$($webManifest.display)'."}
 if(-not $webManifest.start_url){throw 'PWA manifest is missing start_url.'}
 $startUriCheck=[Uri]::new([Uri]$manifestUrl,[string]$webManifest.start_url)
@@ -41,14 +42,16 @@ foreach($icon in @($icon192,$icon512)){
 Write-Output '--- Verify Digital Asset Links'
 $assetResponse=Invoke-WebRequest -Uri $assetlinksUrl -UseBasicParsing -TimeoutSec 45
 if($assetResponse.StatusCode -ne 200){throw "assetlinks.json returned HTTP $($assetResponse.StatusCode)"}
-$assetlinks=$assetResponse.Content | ConvertFrom-Json
+$assetlinksText=if($assetResponse.Content -is [byte[]]){[System.Text.Encoding]::UTF8.GetString($assetResponse.Content)}else{[string]$assetResponse.Content}
+$assetlinks=ConvertFrom-Json -InputObject $assetlinksText
 $assetTarget=$assetlinks | Where-Object { $_.target.package_name -eq $packageName } | Select-Object -First 1
 if(-not $assetTarget){throw 'assetlinks.json does not contain the LibreTV Android package.'}
 if($assetTarget.relation -notcontains 'delegate_permission/common.handle_all_urls'){throw 'assetlinks.json is missing the TWA handle_all_urls relation.'}
 if($assetTarget.target.sha256_cert_fingerprints -notcontains $fingerprint){throw 'assetlinks.json certificate fingerprint does not match the release keystore.'}
 Write-Output '--- Update TWA origin'
 $twaManifestPath=Join-Path $twa 'twa-manifest.json'
-$twaManifest=Get-Content $twaManifestPath -Raw | ConvertFrom-Json
+$twaManifestText=[System.IO.File]::ReadAllText($twaManifestPath,[System.Text.Encoding]::UTF8)
+$twaManifest=ConvertFrom-Json -InputObject $twaManifestText
 $twaManifest.host=$site.Host
 $startUri=[Uri]::new([Uri]$manifestUrl,[string]$webManifest.start_url)
 $twaManifest.startUrl=$startUri.PathAndQuery

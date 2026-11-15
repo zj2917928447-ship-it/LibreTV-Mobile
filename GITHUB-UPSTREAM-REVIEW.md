@@ -139,4 +139,4 @@ Reference: https://github.com/vercel/next.js/releases/tag/v16.4.6
 - TypeScript typecheck, ESLint, 45 Vitest files / 655 tests and Next.js production build passed on 2026-11-15.
 - Pixel 7 portrait/landscape emulation, security response headers, PWA installability metadata, service-worker/offline shell behavior, poster fallback, mobile menu and download-manager flows passed.
 
-A signed test APK/AAB is now built and signature/alignment-verified, but it points to a temporary test tunnel and is not the release package. Physical Android/iOS playback, a real M3U source, a real VOD source and hardware decoding remain unverified. See SECURITY-AUDIT-20261114.md, MOBILE-ACCEPTANCE-REPORT-20261114.md and ANDROID-TWA-SETUP.md.
+The stable Render HTTPS deployment is live. A final signed APK/AAB is built against that origin, APK signature/alignment checks pass, and Google's Digital Asset Links API confirms the origin/package/certificate association. Physical Android/iOS playback, a real M3U source, a real VOD source and hardware decoding remain unverified. See SECURITY-AUDIT-20261114.md, MOBILE-ACCEPTANCE-REPORT-20261114.md and ANDROID-TWA-SETUP.md.

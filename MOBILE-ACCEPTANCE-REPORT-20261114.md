@@ -89,20 +89,25 @@ Verified on the production build in Chrome:
 - The only dangerouslySetInnerHTML use is a constant pre-hydration theme bootstrap string; no untrusted data is interpolated.
 - Baseline response headers are configured and verified. CSP/HSTS are not guessed or forced; see SECURITY-AUDIT-20261114.md for rationale and remaining edge configuration notes.
 
-## Android packaging (2026-11-15)
+## Android packaging and public deployment (2026-11-15)
 
 - Bubblewrap CLI 1.27.0, Temurin JDK 17.0.21, Gradle 8.11.1, Android API 36, Build Tools 36.1.0 and Platform Tools / ADB 37.0.1 are installed under `E:\\Android`; the system JDK 21 was not changed.
 - `bubblewrap doctor` passes.
-- A signed test APK (1,422,787 bytes) and AAB (1,503,479 bytes) were built for `com.zj2917928447.libretv`.
+- Render Free Web Service is live at `https://libretv-mobile-zj2917928447.onrender.com`.
+- Public endpoint checks: homepage, manifest, 192/512 icons, `/api/status` and `/.well-known/assetlinks.json` all return HTTP 200.
+- Google's Digital Asset Links API returns one matching statement for the stable site, package `com.zj2917928447.libretv` and release certificate fingerprint.
+- Final signed APK (1,422,787 bytes) and AAB (1,503,504 bytes) were built against the stable Render origin.
+- APK SHA-256: `33458ABFA3B5A2AA230BA28F8854564231E17FBBD1EA97B2A0E363B68EDCD531`.
+- AAB SHA-256: `9AE3D115E9EF05F90EADE2A8824E552B2ACEAED032BFD1879803116A310D46E8`.
 - APK v2/v3 signature verification and ZIP alignment verification pass.
-- The test build uses a temporary Cloudflare Quick Tunnel origin and must not be distributed as the final APK. A release builder now validates a stable HTTPS origin, PWA manifest, icons and Digital Asset Links before producing the final package.
+- The earlier temporary-tunnel test APK has been superseded and must not be distributed. The final stable-domain APK is ready for release; physical-device installation, playback and download acceptance remain unverified because no ADB device is attached.
 
 ## What remains unverified
 
 - This is browser emulation, not a physical Android phone.
 - Actual MP4/HLS VOD playback, HTTP-FLV playback, M3U live playback, real episode downloads, hardware decoding, background audio, device orientation/fullscreen and physical-device wake lock were not verified because no user-configured VOD/M3U source or physical test device was available.
 - iOS Safari/WebKit was not available; iPhone behavior is statically reviewed, not device-tested.
-- A test APK/AAB has been built, but the final stable-domain APK and physical-device playback/download acceptance remain pending.
+- Final stable-domain APK/AAB are built and cryptographically verified; physical Android/iOS playback and download acceptance remain pending.
 
 ## Browser screenshots
 
@@ -115,4 +120,4 @@ Stored in `artifacts/mobile-acceptance/`:
 
 ## Conclusion
 
-The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 655 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. A signed test APK/AAB also builds and passes signature/alignment verification. The remaining release gate is the stable Render HTTPS origin, then a final rebuild against that origin and physical-device playback/download acceptance.
+The clean dependency install, zero-vulnerability audit, TypeScript check, ESLint, 655 unit tests, Next.js production build, responsive PWA shell, mobile touch navigation, download-manager drawer, security headers, service-worker registration and offline shell passed the tested local checks. The stable Render HTTPS site is live, and the final APK/AAB are built against it with verified signature, alignment and Digital Asset Links. Physical-device playback/download acceptance remains outstanding.
