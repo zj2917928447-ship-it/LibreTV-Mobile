@@ -1141,5 +1141,73 @@ export function PlayerShell({
 
   return (
     <div className="relative w-full h-full">
-
-[Showing lines 1-1143 of 1214 (50.0KB limit). Use offset=1144 to continue.]
+      <div ref={containerRef} className="w-full h-full" style={{ WebkitTouchCallout: 'none' }} />
+      {showPoster && !error && (
+        <div
+          className="absolute inset-0 bg-black pointer-events-none"
+          style={{
+            backgroundImage: 'url(/player-poster.png)',
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+      )}
+      {!error && skipPrompt && (
+        <button
+          type="button"
+          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 rounded-full bg-black/70 px-4 py-2 text-sm text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          onClick={() => {
+            if (skipPrompt.type === 'ending') {
+              finishBySkip(skipPrompt);
+              return;
+            }
+            const from = artRef.current?.currentTime ?? 0;
+            if (skipTo(skipPrompt.end)) {
+              handledSegmentsRef.current.add(segmentKey(skipPrompt));
+              rememberSkip(from, skipPrompt);
+              updateSkipPrompt(null);
+              showHint(skipPrompt.type === 'opening' ? '已跳过片头' : '已跳过中段');
+            }
+          }}
+        >
+          {skipPrompt.type === 'ending'
+            ? '跳过片尾'
+            : skipPrompt.type === 'opening'
+              ? '跳过片头'
+              : '跳过中段'}
+        </button>
+      )}
+      {error && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/80">
+          <p className="text-danger text-sm">{error}</p>
+          <button className="btn-ghost text-xs" onClick={() => location.reload()}>
+            重新加载
+          </button>
+        </div>
+      )}
+      {(hint || undoSkip) && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 rounded-full bg-black/70 px-3 py-1.5 text-sm text-white animate-fade-in">
+          {/* 撤销窗口比普通提示长：hint 已淡出时仍要让用户知道刚才跳过了什么 */}
+          <span className="pointer-events-none">
+            {hint || (undoSkip ? `已跳过${SEGMENT_LABELS[undoSkip.segment.type]}` : '')}
+          </span>
+          {undoSkip && (
+            <button
+              type="button"
+              className="pointer-events-auto shrink-0 rounded-full bg-white/20 px-2 py-0.5 text-xs font-medium transition-colors hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              onClick={undoLastSkip}
+            >
+              撤销
+            </button>
+          )}
+        </div>
+      )}
+      {autoplayNext && !error && (
+        <div className="absolute bottom-16 right-3 text-[10px] text-muted bg-black/50 px-2 py-0.5 rounded pointer-events-none">
+          自动连播已开启
+        </div>
+      )}
+    </div>
+  );
+}
