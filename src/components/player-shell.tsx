@@ -28,10 +28,10 @@ import {
   type SkipSegment,
 } from '@/lib/skip-marks';
 import {
-  ART_DEFAULT_CONTROL_HIDE_MS,
   DESKTOP_CONTROL_HIDE_MS,
   TOUCH_CONTROL_HIDE_MS,
 } from '@/lib/control-hide';
+import { configureArtPlayerGlobals, restoreArtPlayerGlobals } from '@/lib/artplayer-globals';
 
 /** 片段时间统一保留 1 位小数：与面板展示保持一致，避免浮点尾巴 */
 const round1 = (v: number) => Math.round(v * 10) / 10;
@@ -564,7 +564,10 @@ export function PlayerShell({
     // 触屏没有 hover，自动隐藏会让按钮来不及点（issue #937）：改为常驻，
     // 由「点按视频 toggle」收起。CONTROL_HIDE_TIME 是 static，创建后修改立即生效。
     const touchPointer = prefersTouchPointer();
-    Artplayer.CONTROL_HIDE_TIME = touchPointer ? TOUCH_CONTROL_HIDE_MS : DESKTOP_CONTROL_HIDE_MS;
+    // ArtPlayer 5.4.0 issue #1073: moving the player to <body> breaks the
+    // web-fullscreen -> native-fullscreen transition. Keep it in its container.
+    // Both static settings are restored on unmount to avoid leaking into LivePlayer.
+    configureArtPlayerGlobals(Artplayer, touchPointer ? TOUCH_CONTROL_HIDE_MS : DESKTOP_CONTROL_HIDE_MS);
 
     // 初始化每集状态
     mediaHealthyRef.current = true;
@@ -594,6 +597,8 @@ export function PlayerShell({
       aspectRatio: true,
       fullscreen: true,
       fullscreenWeb: true,
+      // Rotation stays under the browser/OS; the optional ArtPlayer auto-orientation plugin is not used.
+      autoOrientation: false,
       // 恒传 true，不跟设置项走：库的 miniProgressBar 插件只在构造时注册、运行时不可换，
       // 而它正是「控制栏显示时摘掉 art-mini-progress-bar」的唯一维护者。设置项只负责
       // 「关掉时不保留类名」（见下方 control 监听 + 开关变化的 useEffect）。
@@ -1041,7 +1046,7 @@ export function PlayerShell({
       if (controlHideTimer) clearTimeout(controlHideTimer);
       restoreCleanupRef.current?.();
       restoreCleanupRef.current = null;
-      Artplayer.CONTROL_HIDE_TIME = ART_DEFAULT_CONTROL_HIDE_MS;
+      restoreArtPlayerGlobals(Artplayer);
       hlsRef.current?.destroy();
       hlsRef.current = null;
       recoveryRef.current?.dispose();
@@ -1136,73 +1141,5 @@ export function PlayerShell({
 
   return (
     <div className="relative w-full h-full">
-      <div ref={containerRef} className="w-full h-full" style={{ WebkitTouchCallout: 'none' }} />
-      {showPoster && !error && (
-        <div
-          className="absolute inset-0 bg-black pointer-events-none"
-          style={{
-            backgroundImage: 'url(/player-poster.png)',
-            backgroundSize: 'contain',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      )}
-      {!error && skipPrompt && (
-        <button
-          type="button"
-          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 rounded-full bg-black/70 px-4 py-2 text-sm text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          onClick={() => {
-            if (skipPrompt.type === 'ending') {
-              finishBySkip(skipPrompt);
-              return;
-            }
-            const from = artRef.current?.currentTime ?? 0;
-            if (skipTo(skipPrompt.end)) {
-              handledSegmentsRef.current.add(segmentKey(skipPrompt));
-              rememberSkip(from, skipPrompt);
-              updateSkipPrompt(null);
-              showHint(skipPrompt.type === 'opening' ? '已跳过片头' : '已跳过中段');
-            }
-          }}
-        >
-          {skipPrompt.type === 'ending'
-            ? '跳过片尾'
-            : skipPrompt.type === 'opening'
-              ? '跳过片头'
-              : '跳过中段'}
-        </button>
-      )}
-      {error && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/80">
-          <p className="text-danger text-sm">{error}</p>
-          <button className="btn-ghost text-xs" onClick={() => location.reload()}>
-            重新加载
-          </button>
-        </div>
-      )}
-      {(hint || undoSkip) && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 rounded-full bg-black/70 px-3 py-1.5 text-sm text-white animate-fade-in">
-          {/* 撤销窗口比普通提示长：hint 已淡出时仍要让用户知道刚才跳过了什么 */}
-          <span className="pointer-events-none">
-            {hint || (undoSkip ? `已跳过${SEGMENT_LABELS[undoSkip.segment.type]}` : '')}
-          </span>
-          {undoSkip && (
-            <button
-              type="button"
-              className="pointer-events-auto shrink-0 rounded-full bg-white/20 px-2 py-0.5 text-xs font-medium transition-colors hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              onClick={undoLastSkip}
-            >
-              撤销
-            </button>
-          )}
-        </div>
-      )}
-      {autoplayNext && !error && (
-        <div className="absolute bottom-16 right-3 text-[10px] text-muted bg-black/50 px-2 py-0.5 rounded pointer-events-none">
-          自动连播已开启
-        </div>
-      )}
-    </div>
-  );
-}
+
+[Showing lines 1-1143 of 1214 (50.0KB limit). Use offset=1144 to continue.]

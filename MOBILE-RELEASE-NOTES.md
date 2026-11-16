@@ -1,11 +1,22 @@
 # LibreTV Mobile Edition - Release Notes
 
+## Follow-up patch 2.23.4 (2026-11-16)
+
+- Fixed an ArtPlayer 5.4.0 fullscreen regression: upstream issue [#1073](https://github.com/zhw2590582/ArtPlayer/issues/1073) confirms that web fullscreen followed by native fullscreen exits web fullscreen instead of entering native fullscreen. Both VOD and Live now keep the player inside its original container by setting `FULLSCREEN_WEB_IN_BODY=false`.
+- Centralized ArtPlayer static settings and restore both `FULLSCREEN_WEB_IN_BODY` and `CONTROL_HIDE_TIME` to the installed library defaults when the player unmounts, preventing route-to-route setting leakage.
+- Explicitly keep ArtPlayer `autoOrientation` disabled in both VOD and Live. The upstream safe-area fix exists in GitHub development code but is not in the current npm 5.4.0 package; the app does not activate that optional rotation plugin.
+- Added regression tests for the shared ArtPlayer settings and repeated trailing-dot local hostnames (`localhost..`, `localhost...`, and `api.localhost...`) in PeerTube media URL validation.
+- Version bumped to 2.23.4. Android TWA package remains unchanged; the server/PWA patch is backward-compatible with the existing signed APK.
+
 ## Follow-up patch 2.23.3 (2026-11-16)
 
 - Added `ipaddr.js` 2.5.0 as a direct dependency and replaced partial hand-written IP checks with the library's non-unicast range classification, covering reserved, benchmarking, documentation, transition, multicast and IPv4-mapped IPv6 addresses.
 - PeerTube media URL validation now rejects trailing-dot localhost hosts as well as private, loopback, link-local, `.local`, `.internal`, `.test` and `.invalid` hosts before exposing direct playback URLs.
 - NASA asset IDs may contain spaces and punctuation; the adapter validates IDs safely and encodes them as one path segment for both search and detail requests.
 - Internet Archive and NASA metadata lookups now use explicit concurrency ceilings (8 and 4 respectively) to reduce request bursts while preserving provider result order.
+- Every NASA search hit now verifies the official asset manifest, a playable MP4 and item-level copyright/rights metadata; records without an actual media file or with an explicit third-party copyright declaration are excluded.
+- NASA copyright parsing recognizes explicit negative/public-domain declarations, while Archive conflict detection now catches common `Copyright 1974` text even without a © symbol.
+- PeerTube detail performs a DNS public-address preflight on the selected media URL before returning it. Same-title items from different providers remain separate; only identical provider IDs are deduplicated.
 - Fixed-provider outbound proxy dispatchers are reused per configured proxy URI; the proxy path remains restricted to the fixed official provider allowlist, while user-defined sources keep connection-pinned SSRF checks.
 - Added regression coverage for reserved IP ranges, trailing-dot local hosts, NASA IDs with spaces, and provider-proxy dispatcher reuse.
 - Version bumped to 2.23.3. The Android TWA package is unchanged because this patch updates the web service, not the native shell.
@@ -68,7 +79,7 @@
 - Original API routes, authentication and server-side protections.
 
 ## Verification
-- See MOBILE-ACCEPTANCE-REPORT-20261114.md for the latest exact test counts and browser acceptance scope; see SECURITY-AUDIT-20261114.md for the dependency and application security review.
+- See MOBILE-ACCEPTANCE-REPORT-20261116-PATCH-2.23.4.md for the current 2.23.4 regression and build checks; see MOBILE-ACCEPTANCE-REPORT-20261116.md for the 2.23.3 live-provider acceptance scope, MOBILE-ACCEPTANCE-REPORT-20261114.md for the 2.23.2 browser-emulation baseline and SECURITY-AUDIT-20261114.md for the original dependency/application security review.
 - Clean dependency installation completed. Local Node 24.18.0: typecheck, lint, 52 test files / 697 tests and production build passed after the 2.23.2 merge, mobile first-run onboarding, open-media adapter, Commons transcode selection, search-quality hardening, native media and streaming-download changes.
 - After refreshing in-range dependencies, `npm update` audited 413 packages and reported zero vulnerabilities; the subsequent full `npm audit` also passed with zero vulnerabilities.
 - Chrome/Playwright Pixel 7 emulation covers portrait/landscape routes, touch navigation, download manager drawer, PWA registration and offline fallback.

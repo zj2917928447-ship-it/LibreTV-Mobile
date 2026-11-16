@@ -1,4 +1,4 @@
-# LibreTV Mobile 2.23.3 — GitHub 开源项目优化评估
+# LibreTV Mobile 2.23.4 — GitHub 开源项目优化评估
 
 评估日期：2026-11-16  
 目标：在保留现有 LibreTV 功能与 Android TWA 发布链的前提下，筛选真正值得吸收的上游项目和修复。
@@ -22,7 +22,7 @@
 | [Serwist](https://github.com/serwist/serwist) | 9.5.12 于 2026-07-22 发布；Workbox 系 PWA / Service Worker 工具链 | 当前 Service Worker 只缓存静态资源与离线提示页，API 和媒体保持网络请求，现有离线验收通过；暂不迁移 |
 | [mpegts.js](https://github.com/xqq/mpegts.js) | 当前依赖 1.8.2；上游 PR #310 于 2026-11-10 合并，修复 Worker teardown 时读取 SourceBuffer.buffered 的 InvalidStateError | 本项目 FLV 播放明确使用 `enableWorker: false`，该 Worker 专属修复不影响当前路径；等待包含修复的正式版本，不直接依赖未发布分支 |
 | [hls.js](https://github.com/video-dev/hls.js) | 当前依赖 1.7.4 | 保留；当前已有直播缓冲、网络重试和媒体错误恢复策略 |
-| [ArtPlayer](https://github.com/zhw2590582/ArtPlayer) | 当前依赖 5.4.0 | 保留；已集成项目自有进度、跳过片段、倍速、触控和下载行为 |
+| [ArtPlayer](https://github.com/zhw2590582/ArtPlayer) | 当前 npm 最新稳定版 5.4.0；GitHub 开发代码已包含 5.4.1 safe-area 修复 | 保留；本项目已针对 5.4.0 的网页全屏→系统全屏回归设置 `FULLSCREEN_WEB_IN_BODY=false`，并显式关闭未使用的 autoOrientation 插件；继续等待正式 npm 发布后再评估升级 |
 | [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) | 当前 TWA 工具链 1.27.0，`bubblewrap doctor` 已通过 | 保留；APK/AAB 已绑定稳定 HTTPS 域名与 Digital Asset Links，不需要重做原生壳 |
 | [ipaddr.js](https://github.com/whitequark/ipaddr.js) | npm 稳定版 2.5.0，MIT | 已采用；非 unicast 地址分类覆盖私网、环回、链路本地、组播、保留、文档、基准测试、转换地址和 IPv4-mapped IPv6 |
 
@@ -61,6 +61,14 @@
 - [mpegts.js PR #310](https://github.com/xqq/mpegts.js/pull/310)
 - [Serwist Releases](https://github.com/serwist/serwist/releases)
 - [ipaddr.js](https://github.com/whitequark/ipaddr.js)
+
+## 2.23.4 播放器兼容性修复
+
+- ArtPlayer 上游 issue [#1073](https://github.com/zhw2590582/ArtPlayer/issues/1073) 明确报告 5.4.0 在网页全屏切换系统全屏时会退出网页全屏；上游反馈的可用规避方案是 `Artplayer.FULLSCREEN_WEB_IN_BODY = false`。
+- VOD 与 Live 两个播放器都在实例创建前应用该设置，避免只有点播修复、直播仍保留同一故障。
+- 新增 `src/lib/artplayer-globals.ts` 统一管理全局 static 设置；播放器卸载时同时恢复 `CONTROL_HIDE_TIME=3000` 与 `FULLSCREEN_WEB_IN_BODY=true`，防止跨路由污染。
+- ArtPlayer 5.4.1 的 safe-area 修复已出现在 GitHub 开发代码/未发布变更中，但 npm registry 当前仍为 5.4.0。该修复针对可选 `autoOrientation` 旋转插件；本应用 VOD/Live 均显式设置 `autoOrientation: false`，因此不把未发布代码直接 vendoring 进生产依赖。
+- PeerTube 媒体地址的尾随点规范化改为移除全部尾点，并覆盖 `localhost..`、`localhost...`、`api.localhost...` 回归案例。
 
 ## 剩余验收限制
 

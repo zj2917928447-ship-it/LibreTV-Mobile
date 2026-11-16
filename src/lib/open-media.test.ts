@@ -329,6 +329,9 @@ describe('open media playback file selection', () => {
       'http://video.example/stream.m3u8',
       'https://localhost/stream.m3u8',
       'https://localhost./stream.m3u8',
+      'https://localhost../stream.m3u8',
+      'https://localhost.../stream.m3u8',
+      'https://api.localhost.../stream.m3u8',
       'https://127.0.0.1/stream.m3u8',
       'https://[::1]/stream.m3u8',
       'https://192.168.1.10/stream.m3u8',
@@ -351,4 +354,3 @@ describe('open media playback file selection', () => {
     })).toBe('https://video.example/720.mp4');
   });
 });
-

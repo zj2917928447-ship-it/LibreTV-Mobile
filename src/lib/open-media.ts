@@ -516,7 +516,7 @@ export function normalizePeerTubeMediaUrl(value: unknown): string | null {
   try {
     const url = new URL(value);
     const rawHostname = url.hostname.replace(/^\[|\]$/g, '').toLowerCase();
-    const hostname = rawHostname.endsWith('.') ? rawHostname.slice(0, -1) : rawHostname;
+    const hostname = rawHostname.replace(/\.+$/, '');
     if (url.protocol !== 'https:' || url.username || url.password
       || hostname === 'localhost' || hostname.endsWith('.localhost')
       || hostname.endsWith('.local') || hostname.endsWith('.internal')
