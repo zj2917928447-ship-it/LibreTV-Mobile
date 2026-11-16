@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
   commonsMetaText,
+  mapWithConcurrency,
   decodeOpenMediaId,
   encodeOpenMediaId,
   extractNasaAssetUrls,
+  normalizeNasaAssetUrl,
   hasExplicitCopyright,
   hasContradictoryCopyrightClaim,
   isOpenMediaAdult,
@@ -22,7 +24,28 @@ import {
   resolveOpenMediaQuery,
   selectNasaVideoUrl,
   selectPeerTubeStreamUrl,
+  normalizePeerTubeMediaUrl,
 } from './open-media';
+
+describe('bounded provider concurrency', () => {
+  it('preserves result order while never exceeding the configured worker count', async () => {
+    let active = 0;
+    let maximum = 0;
+    const results = await mapWithConcurrency([1, 2, 3, 4, 5, 6, 7], 3, async (value) => {
+      active += 1;
+      maximum = Math.max(maximum, active);
+      await Promise.resolve();
+      active -= 1;
+      return value * 2;
+    });
+    expect(maximum).toBe(3);
+    expect(results).toEqual([2, 4, 6, 8, 10, 12, 14]);
+  });
+
+  it('rejects an invalid concurrency limit', async () => {
+    await expect(mapWithConcurrency([1], 0, async (value) => value)).rejects.toThrow('positive finite number');
+  });
+});
 
 describe('open-media search aliases', () => {
   it('maps common Chinese Spider-Man titles to the English provider index terms', () => {
@@ -101,6 +124,7 @@ describe('open-media search quality filters', () => {
 
   it('detects contradictory copyright text in the description', () => {
     expect(hasContradictoryCopyrightClaim('Copyright (c) 1974 Paramount Pictures. All Rights Reserved.')).toBe(true);
+    expect(hasContradictoryCopyrightClaim('Copyright 1974 Paramount Pictures.')).toBe(true);
     expect(hasContradictoryCopyrightClaim('A silent film in the public domain.')).toBe(false);
   });
 });
@@ -136,6 +160,9 @@ describe('open media rights filters', () => {
     expect(isArchiveRightsAllowed({ licenseurl: 'http://creativecommons.org/licenses/by/4.0/' })).toBe(true);
     expect(isArchiveRightsAllowed({ licenseurl: 'https://creativecommons.org/licenses/by/4.0/' })).toBe(true);
     expect(isArchiveRightsAllowed({ rights: 'All Rights Reserved' })).toBe(false);
+    expect(isArchiveRightsAllowed({ rights: 'Copyright 1974 Paramount Pictures' })).toBe(false);
+    expect(isArchiveRightsAllowed({ rights: 'Not copyrighted' })).toBe(true);
+    expect(isArchiveRightsAllowed({ rights: 'Not copyrighted.' })).toBe(true);
     expect(isArchiveRightsAllowed({ rights: 'Public domain in the USA.' })).toBe(true);
     expect(isArchiveRightsAllowed({ rights: 'Copyright status unknown.' })).toBe(false);
     expect(isArchiveRightsAllowed({ rights: 'Public Domain', licenseurl: 'https://creativecommons.org/licenses/by-nc/4.0/' })).toBe(false);
@@ -228,7 +255,7 @@ describe('Wikimedia Commons licence and file filtering', () => {
 
 describe('NASA rights metadata', () => {
   it('does not mistake false-like copyright flags for an actual copyright notice', () => {
-    for (const value of [false, 0, 'False', 'no', 'none', 'not copyrighted', null, undefined]) {
+    for (const value of [false, 0, 'False', 'no', 'none', 'not copyrighted', 'Not copyrighted.', 'Public Domain', 'Public domain in the USA.', 'No known copyright restrictions', null, undefined]) {
       expect(hasExplicitCopyright(value)).toBe(false);
     }
     for (const value of [true, 1, 'Copyright NASA', 'Third-party copyright']) {
@@ -238,12 +265,21 @@ describe('NASA rights metadata', () => {
 });
 
 describe('NASA asset manifest parsing', () => {
+  it('accepts only official NASA asset hosts and upgrades legacy HTTP URLs', () => {
+    expect(normalizeNasaAssetUrl('http://images-assets.nasa.gov/video/id/mobile.mp4'))
+      .toBe('https://images-assets.nasa.gov/video/id/mobile.mp4');
+    expect(normalizeNasaAssetUrl('https://evil.example/video/mobile.mp4')).toBeNull();
+    expect(normalizeNasaAssetUrl('https://images-assets.nasa.gov.evil.example/video/mobile.mp4')).toBeNull();
+  });
+
   it('extracts href values from collection.items and upgrades legacy HTTP URLs', () => {
     expect(extractNasaAssetUrls({
       collection: {
         items: [
           { href: 'http://images-assets.nasa.gov/video/id/mobile.mp4' },
           { href: 'https://images-assets.nasa.gov/video/id/metadata.json' },
+          { href: 'https://evil.example/video/attacker.mp4' },
+          { href: 'http://127.0.0.1/video/attacker.mp4' },
           { href: 'javascript:alert(1)' },
           { href: null },
         ],
@@ -282,6 +318,26 @@ describe('open media playback file selection', () => {
       'http://images-assets.nasa.gov/video/id/id~mobile.mp4',
       'http://images-assets.nasa.gov/video/id/id.srt',
     ])).toBe('https://images-assets.nasa.gov/video/id/id~mobile.mp4');
+    expect(selectNasaVideoUrl([
+      'https://evil.example/video/id~mobile.mp4',
+      'https://images-assets.nasa.gov.evil.example/video/id~mobile.mp4',
+    ])).toBeNull();
+  });
+
+  it('rejects private, local and non-HTTPS PeerTube media URLs', () => {
+    for (const url of [
+      'http://video.example/stream.m3u8',
+      'https://localhost/stream.m3u8',
+      'https://localhost./stream.m3u8',
+      'https://127.0.0.1/stream.m3u8',
+      'https://[::1]/stream.m3u8',
+      'https://192.168.1.10/stream.m3u8',
+      'https://media.local/stream.m3u8',
+      'https://media.internal/stream.m3u8',
+      'https://user:pass@video.example/stream.m3u8',
+    ]) expect(normalizePeerTubeMediaUrl(url)).toBeNull();
+    expect(normalizePeerTubeMediaUrl('https://cdn.video.example/stream.m3u8')).toBe('https://cdn.video.example/stream.m3u8');
+    expect(selectPeerTubeStreamUrl({ streamingPlaylists: [{ playlistUrl: 'https://127.0.0.1/evil.m3u8' }] })).toBeNull();
   });
 
   it('prefers PeerTube HLS master playlist and falls back to a direct MP4', () => {
@@ -295,3 +351,4 @@ describe('open media playback file selection', () => {
     })).toBe('https://video.example/720.mp4');
   });
 });
+

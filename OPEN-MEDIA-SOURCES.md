@@ -26,7 +26,7 @@
 ## 时长来源与验证
 
 - Internet Archive：对选中的视频文件，`files[].length` 是媒体时长（秒），`files[].size` 是文件字节数；适配器优先读取实际播放文件的 `length`，再回退到条目级 `metadata.runtime`。不会把 `size` 当成时长。部分老文件没有 `length`，若也没有可验证的条目级时长，则不进入长片结果。
-- NASA：搜索接口不保证返回 `duration`。缺失时会继续读取 `/asset/{nasa_id}` 的 `metadata.json`，优先识别 `QuickTime:Duration`、`QuickTime:MediaDuration`、`QuickTime:TrackDuration`、`AVAIL:Duration` 与 `XMP:Duration`（按 `Value × Scale` 转为秒）；最后才使用明确标注的 TRT / Runtime 文本。仍无法验证时不把条目当成长片。
+- NASA：搜索接口不保证返回 `duration`。每个候选条目都会先读取 `/asset/{nasa_id}` 的真实媒体清单，确认存在可播放的官方 MP4，再读取 `metadata.json`；优先识别 `QuickTime:Duration`、`QuickTime:MediaDuration`、`QuickTime:TrackDuration`、`AVAIL:Duration` 与 `XMP:Duration`（按 `Value × Scale` 转为秒）；最后才使用明确标注的 TRT / Runtime 文本。仍无法验证时不把条目当成长片。NASA 的 `nasa_id` 可能含空格和标点，适配器会拒绝路径分隔符/控制字符并对安全 ID 做单段 URL 编码。
 - Wikimedia Commons：请求 MediaWiki `videoinfo` 的 `size` 属性以取得视频信息；`videoinfo.duration` 是播放时长（秒），`videoinfo.size` 是文件字节数，`derivatives` 提供可用转码。搜索和详情均保留真实时长，不从文件大小推算。
 - PeerTube：使用其视频 API 返回的 `duration` 秒数；不使用文件大小推算时长。
 - 所有提供方统一要求时长至少 20 分钟、最多 24 小时；缺少可靠时长的条目不会进入长片搜索结果。若同一 Archive 条目同时包含短预览和长片，优先选择已验证为长片的 MP4 文件，再按移动端友好程度选择转码。
@@ -48,4 +48,15 @@
 
 `/api/open-media?ac=videolist&ids=om-...` 返回详情和播放地址。
 
-本适配器只请求固定的 Internet Archive、NASA、SepiaSearch 与 Wikimedia Commons API；PeerTube 实例域名仍经过 LibreTV 的公网地址与 DNS rebinding SSRF 防护。
+本适配器只请求固定的 Internet Archive、NASA、SepiaSearch 与 Wikimedia Commons API；PeerTube 实例域名及其详情返回的播放地址均经过公网地址与 DNS rebinding SSRF 检查。NASA 搜索结果必须先通过 `/asset/{nasa_id}` 验证实际存在可播放 MP4，不能只凭搜索元数据展示结果。
+
+## 2026-11-16 稳定性与安全更新
+
+- Archive 元数据请求并发限制为 8，NASA 资产元数据请求并发限制为 4；单条记录失败不会中断同一提供方的其他结果。
+- NASA 搜索命中必须有官方 `images-assets.nasa.gov` MP4 资产，并检查资产元数据中的版权/权利字段。无可播放 MP4 或明确标记第三方版权的项目不会展示。
+- NASA 的 `nasa_id` 允许合法空格和标点，但拒绝路径分隔符、控制字符和管道符；请求时按单一路径段编码。
+- PeerTube 返回的播放 URL 必须是 HTTPS、公网地址且不含 URL 账号密码；详情阶段还会对实际播放地址做 DNS 预检。
+- 同名同年的不同来源不再合并成一条，用户可以比较不同剪辑版本、编码格式、来源和许可。仅相同提供方的相同资源 ID 才会去重。
+- IP 范围判定统一使用 `ipaddr.js`，覆盖 IPv4、IPv6、映射 IPv6、文档网段、基准测试网段、组播及保留地址。
+
+适配器仍然只做只读搜索与详情解析，不接受用户提交的上游 URL，不下载或托管视频文件。

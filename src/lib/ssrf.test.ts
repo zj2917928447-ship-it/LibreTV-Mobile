@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import http from 'node:http';
-import { allowLivePrivate, checkLiveUrlAllowed, isPrivateIP, isTrustedProviderProxyHost, isValidProxyUrl, runWithSSRFProtection } from './ssrf';
+import { allowLivePrivate, checkLiveUrlAllowed, getProviderProxyAgent, isPrivateIP, isTrustedProviderProxyHost, isValidProxyUrl, runWithSSRFProtection } from './ssrf';
 
 describe('live private-network policy', () => {
   it('private IPTV access is opt-in and disabled by default', async () => {
@@ -33,9 +33,30 @@ describe('isPrivateIP', () => {
     ['172.32.0.1', false],
     ['169.254.169.254', true],
     ['100.64.0.1', true],
+    ['100.127.255.254', true],
+    ['192.0.2.1', true],
+    ['198.18.0.1', true],
+    ['198.51.100.1', true],
+    ['203.0.113.1', true],
+    ['192.88.99.1', true],
+    ['192.175.48.1', true],
+    ['192.52.193.1', true],
+    ['224.0.0.1', true],
+    ['240.0.0.1', true],
+    ['255.255.255.255', true],
     ['::1', true],
     ['fe80::1', true],
+    ['febf::1', true],
     ['fd00::1', true],
+    ['ff02::1', true],
+    ['2001:db8::1', true],
+    ['100::1', true],
+    ['2001:2::1', true],
+    ['2001:10::1', true],
+    ['2001:20::1', true],
+    ['2002:0808:0808::1', true],
+    ['3fff::1', true],
+    ['2001:4860:4860::8888', false],
     ['8.8.8.8', false],
     ['1.2.3.4', false],
     // URL.hostname 对 IPv6 会带方括号
@@ -68,6 +89,17 @@ describe('trusted provider outbound proxy allowlist', () => {
     expect(isTrustedProviderProxyHost('evil.example')).toBe(false);
     expect(isTrustedProviderProxyHost('spectra.video')).toBe(false);
     expect(isTrustedProviderProxyHost('archive.org.evil.example')).toBe(false);
+  });
+});
+
+describe('trusted provider proxy connection reuse', () => {
+  it('reuses one Undici dispatcher for the same proxy and replaces it when the URI changes', async () => {
+    const first = getProviderProxyAgent('http://127.0.0.1:18080');
+    expect(getProviderProxyAgent('http://127.0.0.1:18080')).toBe(first);
+
+    const second = getProviderProxyAgent('http://127.0.0.1:18081');
+    expect(second).not.toBe(first);
+    await second.close();
   });
 });
 
@@ -258,3 +290,4 @@ describe('DNS Rebinding & Connection SSRF Protection (#941)', () => {
     }
   });
 });
+

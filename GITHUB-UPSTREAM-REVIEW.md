@@ -13,7 +13,7 @@ Keep the official LibreTV 2.23.2 server/application architecture, preserve the m
 
 - Repository: https://github.com/LibreSpark/LibreTV
 - Release: v2.23.2 (2026-11-14)
-- This worktree now reports package version 2.23.2.
+- The upstream base is LibreTV 2.23.2; this mobile/server patch set now reports package version 2.23.3.
 - The v2.23.1 → v2.23.2 comparison contains 6 commits and changes five files: package version/lock, CI workflow, fetch-utils.ts, and the new live-private-ssrf.test.ts.
 - Merged the official v2.23.2 versions of:
   - src/lib/fetch-utils.ts
@@ -140,3 +140,90 @@ Reference: https://github.com/vercel/next.js/releases/tag/v16.4.6
 - Pixel 7 portrait/landscape emulation, security response headers, PWA installability metadata, service-worker/offline shell behavior, poster fallback, mobile menu and download-manager flows passed.
 
 The stable Render HTTPS deployment is live. A final signed APK/AAB is built against that origin and published in [GitHub Release mobile-v1.0.0](https://github.com/zj2917928447-ship-it/LibreTV-Mobile/releases/tag/mobile-v1.0.0); APK signature/alignment checks pass, and Google's Digital Asset Links API confirms the origin/package/certificate association. Physical Android/iOS playback, a real M3U source, a real VOD source and hardware decoding remain unverified. See SECURITY-AUDIT-20261114.md, MOBILE-ACCEPTANCE-REPORT-20261114.md and ANDROID-TWA-SETUP.md.
+
+## Incremental upstream review — 2026-11-16
+
+### Decisions after checking current GitHub activity
+
+- **LibreTV:** the official `LibreSpark/LibreTV` repository remains on v2.23.2 (released 2026-11-14); no newer tagged release was found in this review. Keep the official server/API architecture and re-check upstream before each release.
+- **hls.js:** v1.7.4 remains the latest stable release reviewed. Keep the current version; do not replace the HLS engine without a concrete compatibility failure.
+- **mpegts.js:** v1.8.2 remains the latest tagged release reviewed. Upstream main has a merged fix (#310, 2026-11-10) for `SourceBuffer.buffered` throwing `InvalidStateError` during Worker-backed MediaSource teardown. The current LibreTV live FLV configuration uses `enableWorker: false`, so that exact code path is not active in this integration. Do not cherry-pick unrelated upstream code; re-evaluate if Worker mode is enabled later.
+- **ArtPlayer vs Video.js 10:** Video.js 10.4.0 is stable (2026-11-13) and its upstream project now recommends Video.js for new projects after combining work from Video.js, Plyr, Vidstack and Media Chrome. It is a strong future replacement candidate, but not a safe drop-in replacement for the current ArtPlayer integration: the current app depends on its existing fullscreen, skip-mark, subtitle and recovery wiring. Keep ArtPlayer 5.4.0 for this release and build a separate migration spike before changing production.
+- **Shaka Player:** actively maintained and supports HLS, DASH and browser offline storage. It is the preferred candidate if DASH-only Wikimedia derivatives become a required feature. Current Commons selection intentionally chooses browser-supported MP4/WebM/OGV transcodes, so adding Shaka now would increase bundle and test surface without improving the validated paths.
+- **Serwist:** the current service worker is deliberately conservative (static shell/assets only; APIs and media remain network-only). Serwist is a maintained Workbox-derived option, but no current defect justifies replacing the existing service worker in this release.
+- **ipaddr.js:** added MIT-licensed `ipaddr.js@2.5.0` from the upstream npm release to classify special IPv4/IPv6 ranges, including IPv4-mapped addresses, rather than maintaining a partial handwritten range table. The GitHub repository's newer development branch was not substituted for the published package release.
+
+### Additional defects fixed in this review
+
+- NASA `nasa_id` values are not guaranteed to be `\\w`/hyphen-only. Some official IDs contain spaces and punctuation. Validation now rejects path separators/control characters but accepts valid IDs, and the API encodes them as a single path segment for asset requests and original-item links.
+- NASA search hits are now verified against the actual `/asset/{nasa_id}` manifest before being exposed: a playable MP4 must exist, metadata duration must meet the feature-length gate, and explicit copyright/rights declarations are rejected. This prevents metadata-only search hits with no playable file.
+- NASA preview images are normalized to the official `images-assets.nasa.gov` host rather than trusting an arbitrary preview URL.
+- PeerTube thumbnail URLs are normalized and rejected if they contain credentials, non-HTTPS schemes, localhost or non-public/reserved IPs.
+- Provider result deduplication now collapses only identical provider IDs. Different editions/cuts from different providers are preserved even when title/year match.
+- `isPrivateIP` now delegates to ipaddr.js range classification and blocks non-unicast special ranges, including transition, benchmarking, documentation and reserved ranges. Regression cases cover mapped IPv6 and trailing-dot localhost.
+
+### Live provider acceptance (local production build)
+
+- `Apollo` search returned real Internet Archive, NASA, PeerTube and Wikimedia Commons results; every sampled result's detail endpoint returned a playable MP4, WebM or HLS URL and a runtime.
+- `Earth from Space` returned a NASA mobile MP4 and a PeerTube HLS title; both detail endpoints returned runtime and playback URLs.
+- `The General` returned multiple distinct Internet Archive editions and Wikimedia Commons versions; their detail endpoints resolved correctly.
+- Real upstream byte-range probes returned HTTP 206 for Internet Archive MP4 (video/mp4), NASA mobile MP4 (video/mp4), Wikimedia Commons 240p WebM (video/webm) and PeerTube HLS master playlists (application/vnd.apple.mpegurl). The Commons and PeerTube responses advertised `Access-Control-Allow-Origin: *`; the PeerTube master exposed 240p, 480p, 720p and 1080p variants.
+- These are HTTP/API and range checks, not proof of complete playback on a physical Android/iPhone device. Browser/device decoding, long-run buffering, full-file download completion and the post-change Render deployment remain separate acceptance gates.
+
+### Latest local verification (2026-11-16)
+
+- 52 Vitest files / 741 tests passed.
+- TypeScript typecheck and ESLint passed.
+- Production and full `npm audit` both reported zero known vulnerabilities.
+- Next.js 15.5.29 production build passed.
+- The public Render deployment was not changed by this local review; publish and redeploy the tested commit before claiming the public site has these fixes.
+
+Upstream references:
+- https://github.com/LibreSpark/LibreTV
+- https://github.com/video-dev/hls.js/releases/tag/v1.7.4
+- https://github.com/xqq/mpegts.js/pull/310
+- https://github.com/videojs/video.js/releases/tag/video.js@10.4.0
+- https://github.com/shaka-project/shaka-player
+- https://github.com/serwist/serwist
+- https://github.com/whitequark/ipaddr.js
+
+## Additional project comparison — 2026-11-16
+
+### FootageFlow — borrow the provider architecture, not the desktop application
+
+- Repository: https://github.com/xcslys99/FootageFlow
+- Latest reviewed README/release: v0.13.0; MIT; macOS 15+ Apple Silicon and Windows 11 x64 desktop application.
+- Its strongest reusable ideas are explicit per-provider capabilities (search, preview, rights, pagination, direct download), source-attribution sidecars, provider failure isolation, compound-query relevance, and duplicate review that preserves each result's individual rights.
+- It lists 22 sources, but several are key-required or discovery-only; a 22-source count does not mean 22 freely playable video sources. The desktop Swift/yt-dlp architecture is not a drop-in fit for this Next.js mobile PWA.
+- Decision: use its capability/rights model as a design reference; do not copy its desktop downloader or imply that discovery equals download permission.
+
+### OpenVid — useful source checklist, unsafe as an implementation base
+
+- Repository: https://github.com/tsotraki/openvid
+- MIT; Node.js/Express; its README describes PeerTube, Internet Archive, NASA, Wikimedia Commons and Dailymotion.
+- The reviewed `server.js` selects a random PeerTube instance instead of consistently using the host returned with each result, constructs NASA `~orig.mp4` URLs and reports unknown duration, and maps Archive search metadata without validating the actual selected file or item licence.
+- Decision: do not merge. The current adapter already has stricter runtime, rights, URL and mobile-transcode checks.
+
+### Movi Player — optional future codec module, not the default player
+
+- Repository: https://github.com/MrUjjwalG/movi-player
+- Reviewed release: v0.4.1; Apache-2.0. It advertises MKV, HEVC, AV1, HDR, multi-audio, advanced subtitles, HLS and DASH through WebCodecs/WASM and Shaka-based playback.
+- The README reports a roughly 50–410 KB JavaScript bundle plus a 1.8–3.2 MB WASM payload. That can help with formats browsers cannot decode natively, but it adds CPU, memory, download and battery costs on phones.
+- Decision: keep as an optional, lazy-loaded experiment for unsupported local/direct-file codecs only. Do not replace ArtPlayer or load WASM on the normal MP4/HLS path until physical Android/iOS tests prove a net benefit.
+
+### Player ecosystem re-check
+
+- The npm registry currently reports ArtPlayer 5.4.0, hls.js 1.7.4 and mpegts.js 1.8.2 as their latest published versions. Keep the existing compatible stack; do not install an unpublished GitHub workspace version just because its repository manifest is ahead.
+- Vidstack 1.15.7 is security-only maintenance through January 2028, and Plyr 3.8.5 is marked deprecated/security-only. Neither is a good new production base.
+- Video.js 10 is stable and is the strongest long-term player migration candidate, but replacing the current ArtPlayer integration would require a dedicated compatibility branch for fullscreen, skip marks, subtitles, source switching, recovery and mobile gestures.
+- Shaka Player 5.3.5 is a viable DASH/HLS engine if a required source becomes DASH-only. Current accepted sources already yield supported MP4, HLS, WebM or OGV media, so adding Shaka now would expand the bundle and test matrix without fixing a current failure.
+- Media Chrome 4.19.5 provides control UI components rather than a complete source/player replacement. Its components may be useful for a future visual redesign, but no control layer was swapped during this stability pass.
+
+### What was adopted in this worktree
+
+- `ipaddr.js`-based IPv4/IPv6 special-range classification, including mapped IPv6 and reserved ranges.
+- Bounded Archive/NASA metadata concurrency and per-record failure isolation.
+- Mandatory NASA asset-manifest verification before exposing search hits, including actual MP4 presence and item-level rights checks.
+- PeerTube media URL HTTPS/host/IP validation plus DNS preflight before returning a playback URL.
+- Provider-ID deduplication so different platform editions and their individual licences remain selectable.
+- Copyright-year detection and explicit negative/public-domain metadata handling to reduce both false acceptance and false rejection.

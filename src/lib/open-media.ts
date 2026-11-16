@@ -1,6 +1,30 @@
 import { Buffer } from 'node:buffer';
+import { isPrivateIP } from './network-address';
 
 export type OpenMediaProvider = 'archive' | 'nasa' | 'peertube' | 'commons';
+
+/** Run independent provider metadata lookups with a fixed concurrency ceiling. */
+export async function mapWithConcurrency<T, R>(
+  items: readonly T[],
+  concurrency: number,
+  mapper: (item: T, index: number) => Promise<R>
+): Promise<R[]> {
+  if (!Number.isFinite(concurrency) || concurrency < 1) {
+    throw new RangeError('Concurrency must be a positive finite number');
+  }
+  const results = new Array<R>(items.length);
+  let nextIndex = 0;
+  const workerCount = Math.min(items.length, Math.max(1, Math.floor(concurrency)));
+  const workers = Array.from({ length: workerCount }, async () => {
+    while (true) {
+      const index = nextIndex++;
+      if (index >= items.length) return;
+      results[index] = await mapper(items[index], index);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
 
 const SEARCH_STOP_WORDS = new Set(['the', 'a', 'an', 'of', 'and', 'for', 'to', 'in', 'on', 'at']);
 
@@ -23,7 +47,7 @@ const OPEN_MEDIA_QUERY_ALIASES = new Map<string, string>([
   ['蜘蛛侠3', 'Spider-Man 3'],
 ]);
 const ADULT_MEDIA_PATTERN = /\b(?:porn(?:ography)?|erotic|xxx|hentai|adult\s+(?:film|video|content)|sexually\s+explicit|nudity|nude\s+(?:film|video)|striptease|onlyfans)\b|色情|情色|成人视频|成人影片|裸露|裸体|福利片|伦理片/i;
-const CONTRADICTORY_RIGHTS_PATTERN = /all rights reserved|copyright\s*(?:©|\(c\)|:|by\b)|©\s*\d{4}/i;
+const CONTRADICTORY_RIGHTS_PATTERN = /all rights reserved|copyright(?:ed)?\s*(?:©|\(c\)|:|by\b|\d{4})|©\s*\d{4}/i;
 
 /** Reject obviously adult material even when an uploader labels it public domain. */
 export function isOpenMediaAdult(title: string, description = ''): boolean {
@@ -215,16 +239,32 @@ export interface NasaAssetManifest {
 export function hasExplicitCopyright(value: unknown): boolean {
   if (value === null || value === undefined || value === false) return false;
   if (typeof value === 'number') return value !== 0;
-  const text = String(value).trim().toLowerCase();
-  return Boolean(text) && !['false', 'no', 'none', 'n/a', 'na', '0', 'not copyrighted'].includes(text);
+  const text = String(value).trim().toLowerCase().replace(/[.。]+$/g, '');
+  if (!text) return false;
+  if (/^(?:false|no|none|n\/a|na|0)$/.test(text)) return false;
+  if (/^(?:not copyrighted|uncopyrighted|public domain(?: in the [a-z ]+)?|no copyright(?: restrictions?)?|no known copyright restrictions)$/.test(text)) return false;
+  return true;
+}
+
+export function normalizeNasaAssetUrl(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  try {
+    const url = new URL(value);
+    if (!['http:', 'https:'].includes(url.protocol)
+      || url.hostname.toLowerCase() !== 'images-assets.nasa.gov'
+      || url.username || url.password) return null;
+    url.protocol = 'https:';
+    return url.href;
+  } catch {
+    return null;
+  }
 }
 
 /** NASA /asset returns collection.items[].href, not a bare string array. */
 export function extractNasaAssetUrls(manifest: NasaAssetManifest): string[] {
   return (manifest.collection?.items ?? [])
-    .map((item) => item.href)
-    .filter((href): href is string => typeof href === 'string' && (href.startsWith('https://') || href.startsWith('http://')))
-    .map((href) => href.replace(/^http:/i, 'https:'));
+    .map((item) => normalizeNasaAssetUrl(item.href))
+    .filter((href): href is string => href !== null);
 }
 
 export interface CommonsLicenseMetadata {
@@ -409,8 +449,9 @@ export function isArchiveRightsAllowed(metadata: {
   licenseurl?: unknown;
 }): boolean {
   const rawLicense = typeof metadata.licenseurl === 'string' ? metadata.licenseurl.trim() : '';
-  const rights = typeof metadata.rights === 'string' ? metadata.rights.trim().toLowerCase() : '';
-  if (/all rights reserved|copyrighted|permission required|not for reuse|copyright status unknown/.test(rights)) return false;
+  const rights = typeof metadata.rights === 'string' ? metadata.rights.trim().toLowerCase().replace(/[.。]+$/g, '') : '';
+  const clearlyUnrestricted = /^(?:not copyrighted|uncopyrighted|public domain(?: in the usa)?|no known copyright restrictions|no copyright restrictions)$/i.test(rights);
+  if (!clearlyUnrestricted && /all rights reserved|copyrighted|copyright\s*(?:©|\(c\)|:|by\b|\d{4})|permission required|not for reuse|copyright status unknown/.test(rights)) return false;
   if (rawLicense) {
     try {
       const parsed = new URL(rawLicense);
@@ -421,6 +462,7 @@ export function isArchiveRightsAllowed(metadata: {
       return false;
     }
   }
+  if (clearlyUnrestricted) return true;
   if (!rights) return false;
   return /public\s*domain|no known copyright restrictions/.test(rights);
 }
@@ -452,11 +494,11 @@ export function selectArchiveVideoFile(files: ArchiveVideoFile[]): ArchiveVideoF
   return pool.sort((a, b) => rank(a) - rank(b))[0] ?? null;
 }
 
-/** NASA manifests contain mixed media; select an MP4 and prefer the mobile derivative. */
+/** NASA manifests contain mixed media; select an official NASA MP4 and prefer the mobile derivative. */
 export function selectNasaVideoUrl(urls: string[]): string | null {
   const candidates = urls
-    .filter((url) => /^https?:\/\//i.test(url) && /\.mp4(?:$|\?)/i.test(url))
-    .map((url) => url.replace(/^http:/i, 'https:'));
+    .map(normalizeNasaAssetUrl)
+    .filter((url): url is string => url !== null && /\.mp4(?:$|\?)/i.test(url));
   const rank = (url: string): number => {
     if (/~mobile\.mp4(?:$|\?)/i.test(url)) return 0;
     if (/~medium\.mp4(?:$|\?)/i.test(url)) return 1;
@@ -468,19 +510,37 @@ export function selectNasaVideoUrl(urls: string[]): string | null {
   return candidates.sort((a, b) => rank(a) - rank(b))[0] ?? null;
 }
 
+/** Reject private/local media URLs returned by federated instances before exposing them to browsers. */
+export function normalizePeerTubeMediaUrl(value: unknown): string | null {
+  if (typeof value !== 'string') return null;
+  try {
+    const url = new URL(value);
+    const rawHostname = url.hostname.replace(/^\[|\]$/g, '').toLowerCase();
+    const hostname = rawHostname.endsWith('.') ? rawHostname.slice(0, -1) : rawHostname;
+    if (url.protocol !== 'https:' || url.username || url.password
+      || hostname === 'localhost' || hostname.endsWith('.localhost')
+      || hostname.endsWith('.local') || hostname.endsWith('.internal')
+      || hostname.endsWith('.test') || hostname.endsWith('.invalid')
+      || isPrivateIP(hostname)) return null;
+    return url.href;
+  } catch {
+    return null;
+  }
+}
+
 /** PeerTube exposes HLS playlists and direct files on the detail endpoint. */
 export function selectPeerTubeStreamUrl(video: {
   streamingPlaylists?: Array<{ playlistUrl?: unknown }>;
   files?: Array<{ fileUrl?: unknown; resolution?: { id?: unknown } }>;
 }): string | null {
-  const playlist = video.streamingPlaylists?.find(
-    (item) => typeof item.playlistUrl === 'string' && /^https:\/\//i.test(item.playlistUrl)
-  )?.playlistUrl;
-  if (typeof playlist === 'string') return playlist;
+  const playlist = video.streamingPlaylists?.map((item) => normalizePeerTubeMediaUrl(item.playlistUrl))
+    .find((url): url is string => url !== null);
+  if (playlist) return playlist;
 
-  const files = (video.files ?? []).filter(
-    (item) => typeof item.fileUrl === 'string' && /^https:\/\//i.test(item.fileUrl)
-  );
+  const files = (video.files ?? []).flatMap((item) => {
+    const fileUrl = normalizePeerTubeMediaUrl(item.fileUrl);
+    return fileUrl ? [{ ...item, fileUrl }] : [];
+  });
   const rank = (item: { resolution?: { id?: unknown } }): number => {
     const resolution = Number(item.resolution?.id || 0);
     if (resolution === 480) return 0;

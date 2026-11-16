@@ -1,5 +1,15 @@
 # LibreTV Mobile Edition - Release Notes
 
+## Follow-up patch 2.23.3 (2026-11-16)
+
+- Added `ipaddr.js` 2.5.0 as a direct dependency and replaced partial hand-written IP checks with the library's non-unicast range classification, covering reserved, benchmarking, documentation, transition, multicast and IPv4-mapped IPv6 addresses.
+- PeerTube media URL validation now rejects trailing-dot localhost hosts as well as private, loopback, link-local, `.local`, `.internal`, `.test` and `.invalid` hosts before exposing direct playback URLs.
+- NASA asset IDs may contain spaces and punctuation; the adapter validates IDs safely and encodes them as one path segment for both search and detail requests.
+- Internet Archive and NASA metadata lookups now use explicit concurrency ceilings (8 and 4 respectively) to reduce request bursts while preserving provider result order.
+- Fixed-provider outbound proxy dispatchers are reused per configured proxy URI; the proxy path remains restricted to the fixed official provider allowlist, while user-defined sources keep connection-pinned SSRF checks.
+- Added regression coverage for reserved IP ranges, trailing-dot local hosts, NASA IDs with spaces, and provider-proxy dispatcher reuse.
+- Version bumped to 2.23.3. The Android TWA package is unchanged because this patch updates the web service, not the native shell.
+
 ## Base
 - Updated to official LibreTV 2.23.2 (2026-11-14).
 - Original Next.js 15 / React 19 application and server Route Handlers are retained; framework is patched to Next.js 15.5.29.

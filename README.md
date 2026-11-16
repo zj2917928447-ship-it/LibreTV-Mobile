@@ -27,7 +27,7 @@ LibreTV Next.js 迁移版：免费在线视频聚合搜索与观看平台。基�
 
 ## 开放影视资料库（公共领域 / Creative Commons）
 
-本部署额外提供一份 LibreTV 原生兼容订阅，聚合 Internet Archive、NASA Image and Video Library、PeerTube / SepiaSearch 与 Wikimedia Commons。只收录带有明确公共领域或开放许可声明、并且能取得受支持视频文件/播放清单的条目；未知许可、非商业许可及明确保留版权的条目会被过滤。平台元数据来自上传者或托管平台，不构成法律权利保证，使用前仍应核对原始条目和具体许可条件。
+本部署额外提供一份 LibreTV 原生兼容订阅，聚合 Internet Archive、NASA Image and Video Library、PeerTube / SepiaSearch 与 Wikimedia Commons。Internet Archive、PeerTube 和 Wikimedia Commons 只收录带有明确公共领域或开放许可声明、并且能取得受支持视频文件/播放清单的条目；未知许可、非商业许可及明确保留版权的条目会被过滤。NASA 来源使用官方资料库元数据，排除明确标记第三方版权的记录，但 NASA 单条素材的权利状态仍需核对，搜索结果会明确提示这一点。平台元数据来自上传者或托管平台，不构成法律权利保证，使用前仍应核对原始条目和具体许可条件。
 
 - **订阅 JSON**：`https://libretv-mobile-zj2917928447.onrender.com/open-media-sources.json`
 - **兼容 Apple CMS API**：`https://libretv-mobile-zj2917928447.onrender.com/api/open-media`
@@ -49,7 +49,7 @@ LibreTV Next.js 迁移版：免费在线视频聚合搜索与观看平台。基�
 
 用 Safari 打开已部署的 HTTPS 站点，点「分享」→「添加到主屏幕」。iOS 的安装入口由 Safari 提供。
 
-详细上游方案比较见 [GITHUB-UPSTREAM-REVIEW.md](./GITHUB-UPSTREAM-REVIEW.md)，手机端验收见 [MOBILE-ACCEPTANCE-REPORT-20261114.md](./MOBILE-ACCEPTANCE-REPORT-20261114.md)，依赖与安全审计见 [SECURITY-AUDIT-20261114.md](./SECURITY-AUDIT-20261114.md)。
+详细上游方案比较见 [GITHUB-UPSTREAM-REVIEW.md](./GITHUB-UPSTREAM-REVIEW.md)，本轮开源项目优化评估见 [GITHUB-OPTIMIZATION-REVIEW-20261116.md](./GITHUB-OPTIMIZATION-REVIEW-20261116.md)，最新手机端验收见 [MOBILE-ACCEPTANCE-REPORT-20261116.md](./MOBILE-ACCEPTANCE-REPORT-20261116.md)，依赖与安全审计见 [SECURITY-AUDIT-20261114.md](./SECURITY-AUDIT-20261114.md)。
 
 ## 部署
 

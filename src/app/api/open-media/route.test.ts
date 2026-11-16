@@ -196,6 +196,44 @@ describe('GET /api/open-media feature-film quality gate', () => {
     expect(archiveSearch?.searchParams.get('q')).toContain('http://creativecommons.org/publicdomain/mark/1.0/');
   });
 
+  it('keeps same-title feature films from different providers so users can compare source and licence', async () => {
+    fetchUpstreamJson.mockImplementation(async (input: string) => {
+      const url = new URL(input);
+      if (url.hostname === 'archive.org' && url.pathname === '/advancedsearch.php') {
+        return { response: { docs: [{ identifier: 'the-general-archive', title: 'The General (1926)', year: '1926', licenseurl: 'https://creativecommons.org/publicdomain/mark/1.0/' }] } };
+      }
+      if (url.hostname === 'archive.org' && url.pathname.startsWith('/metadata/')) {
+        return {
+          metadata: { mediatype: 'movies', title: 'The General (1926)', year: '1926', licenseurl: 'https://creativecommons.org/publicdomain/mark/1.0/', description: 'A silent feature film.' },
+          files: [{ name: 'the-general.mp4', format: 'MPEG4', length: '4551.7', size: '400000000' }],
+        };
+      }
+      if (url.hostname === 'images-api.nasa.gov' && url.pathname === '/search') {
+        return { collection: { items: [{ data: [{ nasa_id: 'NASA-GENERAL-001', title: 'The General (1926)', media_type: 'video', duration: 4551.7, date_created: '1926-01-01T00:00:00Z' }], links: [] }] } };
+      }
+      if (url.hostname === 'images-api.nasa.gov' && url.pathname === '/asset/NASA-GENERAL-001') {
+        return { collection: { items: [
+          { href: 'https://images-assets.nasa.gov/video/NASA-GENERAL-001/NASA-GENERAL-001~mobile.mp4' },
+          { href: 'https://images-assets.nasa.gov/video/NASA-GENERAL-001/metadata.json' },
+        ] } };
+      }
+      if (url.hostname === 'images-assets.nasa.gov' && url.pathname.endsWith('/metadata.json')) return {};
+      if (url.hostname === 'sepiasearch.org') return { data: [] };
+      if (url.hostname === 'commons.wikimedia.org') return { query: { pages: [] } };
+      return {};
+    });
+
+    const response = await GET(new Request('https://app.example/api/open-media?ac=videolist&wd=The%20General'));
+    const body = await response.json() as { list?: Array<{ vod_name?: string; type_name?: string }> };
+
+    expect(response.status).toBe(200);
+    expect(body.list).toHaveLength(2);
+    expect(body.list?.map((item) => item.type_name)).toEqual(expect.arrayContaining([
+      'Internet Archive · 公共领域/CC',
+      'NASA 影音资料（需核对单项权利）',
+    ]));
+  });
+
   it('returns Archive detail with the selected MP4 file runtime, not its byte size', async () => {
     fetchUpstreamJson.mockResolvedValue({
       metadata: {
@@ -263,7 +301,7 @@ describe('GET /api/open-media feature-film quality gate', () => {
   it('parses NASA TRT metadata and excludes short clips with no verified feature runtime', async () => {
     fetchUpstreamJson.mockImplementation(async (input: string) => {
       const url = new URL(input);
-      if (url.hostname === 'images-api.nasa.gov') {
+      if (url.hostname === 'images-api.nasa.gov' && url.pathname === '/search') {
         return {
           collection: {
             items: [
@@ -293,6 +331,15 @@ describe('GET /api/open-media feature-film quality gate', () => {
           },
         };
       }
+      if (url.hostname === 'images-api.nasa.gov' && url.pathname === '/asset/NASA-FEATURE-001') {
+        return { collection: { items: [
+          { href: 'http://images-assets.nasa.gov/video/NASA-FEATURE-001/NASA-FEATURE-001~mobile.mp4' },
+          { href: 'http://images-assets.nasa.gov/video/NASA-FEATURE-001/metadata.json' },
+        ] } };
+      }
+      if (url.hostname === 'images-assets.nasa.gov' && url.pathname.endsWith('/metadata.json')) {
+        return { 'AVAIL:Copyright': 'Public Domain' };
+      }
       return {};
     });
 
@@ -303,6 +350,40 @@ describe('GET /api/open-media feature-film quality gate', () => {
     expect(body.list).toHaveLength(1);
     expect(body.list?.[0].vod_name).toBe('Apollo Mission Control Documentary');
     expect(body.list?.[0].vod_remarks).toContain('48:22');
+  });
+
+  it('excludes NASA search hits without a playable MP4 or with explicit third-party copyright', async () => {
+    fetchUpstreamJson.mockImplementation(async (input: string) => {
+      const url = new URL(input);
+      if (url.hostname === 'images-api.nasa.gov' && url.pathname === '/search') {
+        return { collection: { items: [
+          { data: [{ nasa_id: 'NASA-UNPLAYABLE-001', title: 'Apollo Mission Control Documentary Unplayable', media_type: 'video', duration: 3600, description: 'A complete documentary.' }], links: [] },
+          { data: [{ nasa_id: 'NASA-COPYRIGHT-001', title: 'Apollo Mission Control Documentary Copyright', media_type: 'video', duration: 3600, description: 'A complete documentary.' }], links: [] },
+        ] } };
+      }
+      if (url.hostname === 'images-api.nasa.gov' && url.pathname.startsWith('/asset/')) {
+        const nasaId = url.pathname.split('/').pop();
+        const items = nasaId === 'NASA-UNPLAYABLE-001'
+          ? [{ href: 'https://images-assets.nasa.gov/video/NASA-UNPLAYABLE-001/poster.jpg' }]
+          : [
+            { href: 'https://images-assets.nasa.gov/video/NASA-COPYRIGHT-001/NASA-COPYRIGHT-001~mobile.mp4' },
+            { href: 'https://images-assets.nasa.gov/video/NASA-COPYRIGHT-001/metadata.json' },
+          ];
+        return { collection: { items } };
+      }
+      if (url.hostname === 'images-assets.nasa.gov' && url.pathname.endsWith('/metadata.json')) {
+        return { 'AVAIL:Copyright': 'Third-party copyright' };
+      }
+      return {};
+    });
+
+    const response = await GET(new Request('https://app.example/api/open-media?ac=videolist&wd=Apollo%20Mission'));
+    const body = await response.json() as { list?: unknown[] };
+
+    expect(response.status).toBe(200);
+    expect(body.list).toEqual([]);
+    expect(fetchUpstreamJson.mock.calls.some(([input]) => String(input).includes('/asset/NASA-UNPLAYABLE-001'))).toBe(true);
+    expect(fetchUpstreamJson.mock.calls.some(([input]) => String(input).includes('/asset/NASA-COPYRIGHT-001'))).toBe(true);
   });
 
   it('uses NASA QuickTime:Duration from the asset metadata when the search response omits duration', async () => {
@@ -377,6 +458,61 @@ describe('GET /api/open-media feature-film quality gate', () => {
     expect(body.list?.[0].vod_remarks).toContain('48:22');
     expect(body.list?.[0].vod_content).toContain('来源：NASA Image and Video Library');
     expect(body.list?.[0].vod_play_url).toContain('~mobile.mp4');
+  });
+
+  it('supports NASA asset IDs containing spaces in search and detail requests', async () => {
+    fetchUpstreamJson.mockImplementation(async (input: string) => {
+      const url = new URL(input);
+      if (url.hostname === 'images-api.nasa.gov' && url.pathname === '/search') {
+        return {
+          collection: {
+            items: [{
+              data: [{
+                nasa_id: 'Apollo 14 Launch Coverage',
+                title: 'Apollo 14 Launch Coverage',
+                media_type: 'video',
+                description: 'A complete archival NASA documentary.',
+                date_created: '1971-02-05T00:00:00Z',
+                center: 'KSC',
+              }],
+              links: [],
+            }],
+          },
+        };
+      }
+      if (url.hostname === 'images-api.nasa.gov' && url.pathname.startsWith('/asset/')) {
+        return { collection: { items: [
+          { href: 'http://images-assets.nasa.gov/video/Apollo 14 Launch Coverage/Apollo 14 Launch Coverage~mobile.mp4' },
+          { href: 'http://images-assets.nasa.gov/video/Apollo 14 Launch Coverage/metadata.json' },
+        ] } };
+      }
+      if (url.hostname === 'images-assets.nasa.gov' && url.pathname.endsWith('/metadata.json')) {
+        return {
+          'AVAIL:Title': 'Apollo 14 Launch Coverage',
+          'AVAIL:Description': 'A complete archival NASA documentary.',
+          'QuickTime:Duration': '0:48:22',
+        };
+      }
+      return {};
+    });
+
+    const searchResponse = await GET(new Request('https://app.example/api/open-media?ac=videolist&wd=Apollo'));
+    const searchBody = await searchResponse.json() as { list?: Array<{ vod_id?: string; vod_name?: string; vod_remarks?: string }> };
+    expect(searchResponse.status).toBe(200);
+    expect(searchBody.list).toHaveLength(1);
+    expect(searchBody.list?.[0].vod_name).toBe('Apollo 14 Launch Coverage');
+    expect(searchBody.list?.[0].vod_remarks).toContain('48:22');
+
+    const id = searchBody.list?.[0].vod_id;
+    expect(id).toBeTruthy();
+    const detailResponse = await GET(new Request('https://app.example/api/open-media?ac=videolist&ids=' + encodeURIComponent(id!)));
+    const detailBody = await detailResponse.json() as { list?: Array<{ vod_remarks?: string; vod_play_url?: string; vod_content?: string }> };
+    expect(detailResponse.status).toBe(200);
+    expect(detailBody.list).toHaveLength(1);
+    expect(detailBody.list?.[0].vod_remarks).toContain('48:22');
+    expect(detailBody.list?.[0].vod_content).toContain('https://images.nasa.gov/details/Apollo%2014%20Launch%20Coverage');
+    expect(detailBody.list?.[0].vod_play_url).toContain('Apollo%2014%20Launch%20Coverage~mobile.mp4');
+    expect(fetchUpstreamJson.mock.calls.some(([value]) => String(value).includes('/asset/Apollo%2014%20Launch%20Coverage'))).toBe(true);
   });
 
   it('resolves Chinese Spider-Man searches to English provider metadata terms', async () => {
