@@ -2,7 +2,7 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import type { LookupAddress } from 'node:dns';
 import { lookup as callbackLookup } from 'node:dns';
 import dns from 'node:dns/promises';
-import { Agent, buildConnector, fetch as undiciFetch } from 'undici';
+import { Agent, ProxyAgent, buildConnector, fetch as undiciFetch } from 'undici';
 
 /** 去掉 URL.hostname 对 IPv6 附加的方括号（"[::1]" → "::1"） */
 function stripBrackets(host: string): string {
@@ -209,6 +209,53 @@ export function createSSRFAgent(options: { allowPrivate?: boolean } = {}): Agent
 const GLOBAL_FETCH_WRAPPED = Symbol.for('libretv.ssrf.fetch.wrapped');
 
 /**
+ * Only fixed upstream provider hosts may use an explicitly configured outbound proxy.
+ * User-supplied source URLs and federated PeerTube instance hosts always keep the
+ * connection-pinned SSRF Agent below. This is an opt-in compatibility path for
+ * networks where direct egress is blocked (for example, a local VPN HTTP proxy).
+ */
+const TRUSTED_PROVIDER_PROXY_HOSTS = new Set([
+  'archive.org',
+  'commons.wikimedia.org',
+  'upload.wikimedia.org',
+  'thumb.wikimedia.org',
+  'images-api.nasa.gov',
+  'images-assets.nasa.gov',
+  'sepiasearch.org',
+]);
+
+export function isTrustedProviderProxyHost(hostname: string): boolean {
+  const normalized = hostname.trim().toLowerCase();
+  return TRUSTED_PROVIDER_PROXY_HOSTS.has(normalized.endsWith('.') ? normalized.slice(0, -1) : normalized);
+}
+
+function trustedProviderProxyUri(input: RequestInfo | URL): string | null {
+  const configuredProxy = process.env.LIBRETV_PROVIDER_PROXY?.trim();
+  if (!configuredProxy) return null;
+
+  let url: URL;
+  try {
+    const inputUrl = typeof input === 'string'
+      ? input
+      : input instanceof URL
+        ? input.href
+        : (input as Request).url;
+    url = new URL(inputUrl);
+  } catch {
+    return null;
+  }
+  if (!isTrustedProviderProxyHost(url.hostname)) return null;
+
+  try {
+    const proxyUrl = new URL(configuredProxy);
+    if (proxyUrl.protocol !== 'http:' && proxyUrl.protocol !== 'https:') return null;
+    return proxyUrl.href;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * 安装安全的 fetch SSRF 防护包装器。
  * 仅在 runWithSSRFProtection 激活的作用域内生效，自动注入安全专用的 Agent，
  * 不影响外部全局网络通信，杜绝 monkey-patch net.Socket.prototype 造成的全局副作用。
@@ -240,7 +287,26 @@ export function installFetchSSRFProtection(): void {
       return originalFetch(input, init);
     }
 
-    // 在受保护作用域内，如果未提供专属 dispatcher，自动注入安全专用的 Agent
+    // Only fixed, first-party provider hosts may opt into a configured local outbound proxy.
+    // fetch-utils has already performed the URL/DNS preflight; arbitrary source URLs and
+    // federated PeerTube hosts never enter this branch and retain connection-level pinning.
+    const proxyUri = trustedProviderProxyUri(input);
+    if (proxyUri) {
+      const proxyAgent = new ProxyAgent(proxyUri);
+      try {
+        const res = await undiciFetch(input as Parameters<typeof undiciFetch>[0], {
+          ...(init as object),
+          dispatcher: proxyAgent,
+        });
+        proxyAgent.close().catch(() => {});
+        return res as unknown as Response;
+      } catch (err) {
+        proxyAgent.destroy().catch(() => {});
+        throw err;
+      }
+    }
+
+    // All other protected requests use the connection-pinned SSRF Agent.
     const agent = createSSRFAgent({ allowPrivate: ctx.allowPrivate });
     try {
       // input/init 走 undici 自己的重载签名：DOM 的 Request 类型与 undici 的

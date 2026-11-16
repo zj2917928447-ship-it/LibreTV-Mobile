@@ -7,24 +7,90 @@ import {
   hasExplicitCopyright,
   hasContradictoryCopyrightClaim,
   isOpenMediaAdult,
+  isOpenMediaNonFeatureContent,
+  isFeatureLengthMedia,
+  parseMediaDurationSeconds,
+  parseNasaDurationSeconds,
+  extractMediaDurationSecondsFromText,
+  formatMediaDuration,
   isOpenMediaTitleRelevant,
   isAllowedCommonsLicence,
   isAllowedPeerTubeLicence,
   isArchiveRightsAllowed,
   selectArchiveVideoFile,
   selectCommonsVideoFile,
+  resolveOpenMediaQuery,
   selectNasaVideoUrl,
   selectPeerTubeStreamUrl,
 } from './open-media';
+
+describe('open-media search aliases', () => {
+  it('maps common Chinese Spider-Man titles to the English provider index terms', () => {
+    expect(resolveOpenMediaQuery('蜘蛛侠')).toBe('Spider-Man');
+    expect(resolveOpenMediaQuery('蜘蛛俠')).toBe('Spider-Man');
+    expect(resolveOpenMediaQuery(' 蜘蛛人 ')).toBe('Spider-Man');
+    expect(resolveOpenMediaQuery('蜘蛛俠英雄無歸')).toBe('Spider-Man: No Way Home');
+    expect(resolveOpenMediaQuery('蜘蛛侠英雄无归')).toBe('Spider-Man: No Way Home');
+    expect(resolveOpenMediaQuery('超凡蜘蛛侠2')).toBe('The Amazing Spider-Man 2');
+    expect(resolveOpenMediaQuery('流浪地球2')).toBe('流浪地球2');
+  });
+});
 
 describe('open-media search quality filters', () => {
   it('matches exact film phrases and meaningful multi-word titles without generic-word false positives', () => {
     expect(isOpenMediaTitleRelevant('The General (1926)', 'The General')).toBe(true);
     expect(isOpenMediaTitleRelevant('The General Index', 'The General')).toBe(false);
+    expect(isOpenMediaTitleRelevant('Medal for the General', 'The General')).toBe(false);
+    expect(isOpenMediaTitleRelevant('Apollo Missions Footage', 'Apollo Mission')).toBe(true);
     expect(isOpenMediaTitleRelevant('The General Data Protection Regulation', 'The General')).toBe(false);
-    expect(isOpenMediaTitleRelevant('Apollo Digest Series: Mission Control', 'Apollo Mission')).toBe(true);
+    expect(isOpenMediaTitleRelevant('Apollo Digest Series: Mission Control', 'Apollo Mission')).toBe(false);
+    expect(isOpenMediaTitleRelevant('Apollo Mission Control (1969)', 'Apollo Mission')).toBe(true);
     expect(isOpenMediaTitleRelevant('Spider-Man: No Way Home', 'Spider-Man')).toBe(true);
+    expect(isOpenMediaTitleRelevant('Earth Vs. The Spider (1958)', 'Spider')).toBe(true);
+    expect(isOpenMediaTitleRelevant('Dienamite: ceasing destruction of spider mites to revitalize gardens', 'Spider')).toBe(false);
+    expect(isOpenMediaTitleRelevant('Earth Vs. The Spider (1958)', 'Spider')).toBe(true);
+    expect(isOpenMediaTitleRelevant('Dienamite: ceasing the destruction of spider mites to revitalize gardens', 'Spider')).toBe(false);
+    expect(isOpenMediaTitleRelevant('The Man and the Spider', 'Spider-Man')).toBe(false);
     expect(isOpenMediaTitleRelevant('流浪地球2', '流浪地球')).toBe(true);
+  });
+
+  it('rejects short-form, music, VR, trailer and interview content', () => {
+    expect(isOpenMediaNonFeatureContent('Spider', 'Original song by Doctor Popular, performed on Nanoloop for iOS')).toBe(true);
+    expect(isOpenMediaNonFeatureContent('Spider-Man: Far From Home - VR Experience (HTC Vive)')).toBe(true);
+    expect(isOpenMediaNonFeatureContent('Spider-Man official trailer')).toBe(true);
+    expect(isOpenMediaNonFeatureContent('Spider-Man; The New Animated Series (2003) The Complete Series HD')).toBe(true);
+    expect(isOpenMediaNonFeatureContent('Original Spider-Man: Season 1 - Volume 1 (UK DVD ISO)')).toBe(true);
+    expect(isOpenMediaNonFeatureContent('Apollo Mission Control (1969)', 'NASA long-form documentary')).toBe(false);
+    expect(isOpenMediaNonFeatureContent('Star Wars: Episode IV - A New Hope')).toBe(false);
+    expect(isOpenMediaNonFeatureContent('Performance (1970)')).toBe(false);
+  });
+
+  it('parses duration metadata consistently and enforces the 20-minute feature threshold', () => {
+    expect(parseMediaDurationSeconds(228)).toBe(228);
+    expect(parseMediaDurationSeconds('03:48')).toBe(228);
+    expect(parseMediaDurationSeconds('1:12:39')).toBe(4359);
+    expect(parseMediaDurationSeconds('PT1H30M')).toBe(5400);
+    expect(parseMediaDurationSeconds('1 hr 20 min')).toBe(4800);
+    expect(parseMediaDurationSeconds('90 minutes')).toBe(5400);
+    expect(parseMediaDurationSeconds('unknown')).toBeNull();
+    expect(extractMediaDurationSecondsFromText('Runtime: 1:12:39')).toBe(4359);
+    expect(extractMediaDurationSecondsFromText('Feature film [1:12:39]')).toBe(4359);
+    expect(extractMediaDurationSecondsFromText('TRT: 90 minutes')).toBe(5400);
+    expect(extractMediaDurationSecondsFromText('Running time 75 min.')).toBe(4500);
+    expect(extractMediaDurationSecondsFromText('片长：72 分钟')).toBe(4320);
+    expect(isFeatureLengthMedia(1200)).toBe(true);
+    expect(isFeatureLengthMedia(1199)).toBe(false);
+    expect(isFeatureLengthMedia(86_401)).toBe(false);
+    expect(isFeatureLengthMedia(null)).toBe(false);
+    expect(formatMediaDuration(5400)).toBe('1:30:00');
+  });
+
+  it('reads NASA QuickTime runtime fields and XMP duration values as seconds', () => {
+    expect(parseNasaDurationSeconds({ 'QuickTime:Duration': '0:48:22' })).toBe(2902);
+    expect(parseNasaDurationSeconds({ 'QuickTime:MediaDuration': '0:05:29' })).toBe(329);
+    expect(parseNasaDurationSeconds({ 'XMP:Duration': { Value: 29617088, Scale: 1.11111111111111e-5 } })).toBeCloseTo(329.08, 1);
+    expect(parseNasaDurationSeconds({ 'QuickTime:Duration': '0 s', 'QuickTime:MediaDuration': '0:17:27' })).toBe(1047);
+    expect(parseNasaDurationSeconds({})).toBeNull();
   });
 
   it('filters obvious adult material even if it claims a public-domain licence', () => {
@@ -66,11 +132,14 @@ describe('open media rights filters', () => {
   it('accepts Archive.org public-domain rights or an explicit approved licence only', () => {
     expect(isArchiveRightsAllowed({ rights: 'Public Domain' })).toBe(true);
     expect(isArchiveRightsAllowed({ licenseurl: 'https://creativecommons.org/publicdomain/zero/1.0/' })).toBe(true);
+    expect(isArchiveRightsAllowed({ licenseurl: 'http://creativecommons.org/publicdomain/mark/1.0/' })).toBe(true);
+    expect(isArchiveRightsAllowed({ licenseurl: 'http://creativecommons.org/licenses/by/4.0/' })).toBe(true);
     expect(isArchiveRightsAllowed({ licenseurl: 'https://creativecommons.org/licenses/by/4.0/' })).toBe(true);
     expect(isArchiveRightsAllowed({ rights: 'All Rights Reserved' })).toBe(false);
     expect(isArchiveRightsAllowed({ rights: 'Public domain in the USA.' })).toBe(true);
     expect(isArchiveRightsAllowed({ rights: 'Copyright status unknown.' })).toBe(false);
     expect(isArchiveRightsAllowed({ rights: 'Public Domain', licenseurl: 'https://creativecommons.org/licenses/by-nc/4.0/' })).toBe(false);
+    expect(isArchiveRightsAllowed({ licenseurl: 'http://creativecommons.org/licenses/by-nc/4.0/' })).toBe(false);
     expect(isArchiveRightsAllowed({ rights: 'All Rights Reserved', licenseurl: 'https://creativecommons.org/publicdomain/zero/1.0/' })).toBe(false);
     expect(isArchiveRightsAllowed({})).toBe(false);
   });
@@ -195,6 +264,16 @@ describe('open media playback file selection', () => {
       { name: 'film.srt', format: 'SubRip', size: '1000' },
     ]);
     expect(file?.name).toBe('film_640x480.mp4');
+  });
+
+  it('prefers the longest verified Archive video when a small derivative is only a short clip', () => {
+    const file = selectArchiveVideoFile([
+      { name: 'film_640x480.mp4', format: 'MPEG4', size: '10000000', length: '228' },
+      { name: 'film_orig.mp4', format: 'MPEG4', size: '900000000', length: '4714.31' },
+      { name: 'film.srt', format: 'SubRip', size: '1000' },
+    ]);
+    expect(file?.name).toBe('film_orig.mp4');
+    expect(parseMediaDurationSeconds(file?.length)).toBeCloseTo(4714.31, 2);
   });
 
   it('prefers NASA mobile MP4 assets and upgrades legacy HTTP URLs to HTTPS', () => {

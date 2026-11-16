@@ -8,12 +8,19 @@ import {
   hasContradictoryCopyrightClaim,
   hasExplicitCopyright,
   isOpenMediaAdult,
+  isOpenMediaNonFeatureContent,
   isOpenMediaTitleRelevant,
+  isFeatureLengthMedia,
+  parseMediaDurationSeconds,
+  parseNasaDurationSeconds,
+  extractMediaDurationSecondsFromText,
+  formatMediaDuration,
   isAllowedCommonsLicence,
   isAllowedPeerTubeLicence,
   isArchiveRightsAllowed,
   selectArchiveVideoFile,
   selectCommonsVideoFile,
+  resolveOpenMediaQuery,
   selectNasaVideoUrl,
   selectPeerTubeStreamUrl,
   type CommonsVideoInfo,
@@ -25,10 +32,11 @@ export const runtime = 'nodejs';
 
 const SEARCH_CACHE_TTL = 5 * 60 * 1000;
 const DETAIL_CACHE_TTL = 10 * 60 * 1000;
-const PROVIDER_TIMEOUT_MS = 6500;
+const PROVIDER_TIMEOUT_MS = 12_000;
 const MAX_RESULTS_PER_PROVIDER = 6;
-const MAX_ARCHIVE_CANDIDATES = 12;
+const MAX_ARCHIVE_CANDIDATES = 24;
 const MAX_FEDERATED_CANDIDATES = 24;
+const MAX_NASA_METADATA_CANDIDATES = 12;
 
 interface CmsVod {
   vod_id: string;
@@ -48,7 +56,7 @@ interface ArchiveSearchResponse {
 
 interface ArchiveMetadataResponse {
   metadata?: Record<string, unknown>;
-  files?: Array<{ name?: string; format?: string; size?: string | number }>;
+  files?: Array<{ name?: string; format?: string; size?: string | number; length?: string | number }>;
 }
 
 interface NasaAssetResponse {
@@ -60,7 +68,7 @@ interface NasaAssetResponse {
 interface NasaSearchResponse {
   collection?: {
     items?: Array<{
-      data?: Array<Record<string, unknown>>;
+      data?: Array<Record<string, unknown> & { duration?: unknown }>;
       links?: Array<{ rel?: string; href?: string }>;
     }>;
   };
@@ -72,7 +80,7 @@ interface CommonsSearchResponse {
       pageid?: number;
       title?: string;
       imageinfo?: CommonsVideoInfo[];
-      videoinfo?: Array<{ derivatives?: CommonsVideoDerivative[] }>;
+      videoinfo?: Array<{ derivatives?: CommonsVideoDerivative[]; duration?: unknown; size?: number }>;
     }>;
   };
 }
@@ -121,6 +129,15 @@ function getYear(value: unknown): string | undefined {
   return match?.[0];
 }
 
+function archiveRightsLabel(rights: unknown, licenseurl: unknown): string {
+  const url = typeof licenseurl === 'string' ? licenseurl.trim().replace(/^http:/i, 'https:').toLowerCase() : '';
+  if (url.includes('/publicdomain/mark/1.0/')) return 'Public Domain Mark 1.0';
+  if (url.includes('/publicdomain/zero/1.0/')) return 'CC0 1.0';
+  if (url.includes('/licenses/by-sa/4.0/')) return 'CC BY-SA 4.0';
+  if (url.includes('/licenses/by/4.0/')) return 'CC BY 4.0';
+  return cleanText(rights, 120) || (url ? '开放许可' : '公开权利声明');
+}
+
 function cmsItem(
   provider: OpenMediaProvider,
   externalId: string,
@@ -130,6 +147,7 @@ function cmsItem(
     year?: string;
     remarks?: string;
     description?: string;
+    durationSeconds?: number;
   } = {}
 ): CmsVod {
   return {
@@ -142,21 +160,25 @@ function cmsItem(
       provider === 'commons' ? 'Wikimedia Commons · Public Domain / CC' :
         'PeerTube · Creative Commons',
     vod_year: options.year,
-    vod_remarks: options.remarks,
-    vod_content: options.description,
+    vod_remarks: [options.durationSeconds ? formatMediaDuration(options.durationSeconds) : '', options.remarks || ''].filter(Boolean).join(' · ') || undefined,
+    vod_content: [options.description || '', options.durationSeconds ? `片长：${formatMediaDuration(options.durationSeconds)}` : ''].filter(Boolean).join('\n') || undefined,
   };
 }
 
 async function searchArchive(query: string): Promise<CmsVod[]> {
   const terms = solrQuote(query);
+  const licenseUrls = [
+    'https://creativecommons.org/publicdomain/mark/1.0/',
+    'https://creativecommons.org/publicdomain/zero/1.0/',
+    'https://creativecommons.org/licenses/by/4.0/',
+    'https://creativecommons.org/licenses/by-sa/4.0/',
+  ];
   const rights = [
     'rights:"Public Domain"',
     'rights:"Public domain in the USA."',
     'rights:"No known copyright restrictions"',
-    'licenseurl:"https://creativecommons.org/publicdomain/mark/1.0/"',
-    'licenseurl:"https://creativecommons.org/publicdomain/zero/1.0/"',
-    'licenseurl:"https://creativecommons.org/licenses/by/4.0/"',
-    'licenseurl:"https://creativecommons.org/licenses/by-sa/4.0/"',
+    ...licenseUrls.flatMap((license) => [license, license.replace(/^https:/, 'http:')])
+      .map((license) => `licenseurl:${solrQuote(license)}`),
   ].join(' OR ');
   const params = new URLSearchParams({
     q: `mediatype:movies AND (${rights}) AND title:${terms}`,
@@ -191,13 +213,27 @@ async function searchArchive(query: string): Promise<CmsVod[]> {
     const title = cleanText(record.title ?? doc.title, 200);
     if (!title) return null;
     const description = cleanText(record.description ?? doc.description);
-    if (!isOpenMediaTitleRelevant(title, query) || isOpenMediaAdult(title, description) || hasContradictoryCopyrightClaim(description)) return null;
-    const rightsLabel = cleanText(record.rights ?? record.licenseurl ?? doc.rights ?? doc.licenseurl, 120);
+    // For a selected video file, files[].length is duration seconds and files[].size is bytes.
+    // Prefer the exact file runtime because it describes the media URL we actually return.
+    const durationSeconds = parseMediaDurationSeconds(file.length)
+      ?? parseMediaDurationSeconds(record.runtime ?? record.duration ?? record.runtime_seconds ?? record.run_time ?? record.TRT)
+      ?? extractMediaDurationSecondsFromText(`${title} ${description}`);
+    if (!isFeatureLengthMedia(durationSeconds)) return null;
+    if (
+      !isOpenMediaTitleRelevant(title, query)
+      || isOpenMediaAdult(title, description)
+      || isOpenMediaNonFeatureContent(title, description)
+      || hasContradictoryCopyrightClaim(description)
+    ) return null;
+    const rightsValue = record.rights ?? doc.rights;
+    const licenseUrl = record.licenseurl ?? doc.licenseurl;
+    const rightsLabel = archiveRightsLabel(rightsValue, licenseUrl);
     return cmsItem('archive', identifier, title, {
       picture: `https://archive.org/services/img/${encodeURIComponent(identifier)}`,
       year: getYear(record.year ?? doc.year),
       remarks: rightsLabel || '公开权利声明，播放详情中保留原始出处',
-      description: [description, `来源：Internet Archive（${identifier}）`, `权利声明：${rightsLabel || '未提供详细许可名称'}`].filter(Boolean).join('\n'),
+      durationSeconds,
+      description: [description, `来源：Internet Archive（${identifier}）`, `权利声明：${rightsLabel}`, licenseUrl ? `许可链接：${cleanText(licenseUrl, 240)}` : ''].filter(Boolean).join('\n'),
     });
   }));
   return resolved
@@ -207,52 +243,98 @@ async function searchArchive(query: string): Promise<CmsVod[]> {
     .slice(0, MAX_RESULTS_PER_PROVIDER);
 }
 
+async function getNasaAssetMetadata(nasaId: string): Promise<{ assets: string[]; metadata: Record<string, unknown> }> {
+  const assetResponse = await fetchUpstreamJson<NasaAssetResponse>(
+    `https://images-api.nasa.gov/asset/${encodeURIComponent(nasaId)}`,
+    { timeoutMs: PROVIDER_TIMEOUT_MS }
+  );
+  const assets = extractNasaAssetUrls(assetResponse);
+  const metadataUrl = assets.find((url) => /\/metadata\.json(?:\?|$)/i.test(url));
+  if (!metadataUrl) return { assets, metadata: {} };
+  try {
+    const metadata = await fetchUpstreamJson<Record<string, unknown>>(metadataUrl, { timeoutMs: PROVIDER_TIMEOUT_MS });
+    return { assets, metadata };
+  } catch {
+    // Keep usable asset URLs when NASA's optional metadata document is temporarily unavailable.
+    return { assets, metadata: {} };
+  }
+}
+
 async function searchNasa(query: string): Promise<CmsVod[]> {
-  const params = new URLSearchParams({ q: query, media_type: 'video', page_size: String(MAX_RESULTS_PER_PROVIDER) });
+  const params = new URLSearchParams({ q: query, media_type: 'video', page_size: String(MAX_FEDERATED_CANDIDATES) });
   const result = await fetchUpstreamJson<NasaSearchResponse>(
     `https://images-api.nasa.gov/search?${params.toString()}`,
     { timeoutMs: PROVIDER_TIMEOUT_MS }
   );
-  return (result.collection?.items ?? []).flatMap((item) => {
+  const candidates = (result.collection?.items ?? []).slice(0, MAX_FEDERATED_CANDIDATES).flatMap((item) => {
     const data = item.data?.[0];
     const nasaId = String(data?.nasa_id ?? '');
     const title = cleanText(data?.title, 200);
     const description = cleanText(data?.description);
     if (!/^[\w-]+$/.test(nasaId) || !title || data?.media_type !== 'video') return [];
-    if (!isOpenMediaTitleRelevant(title, query) || isOpenMediaAdult(title, description)) return [];
+    if (
+      !isOpenMediaTitleRelevant(title, query)
+      || isOpenMediaAdult(title, description)
+      || isOpenMediaNonFeatureContent(title, description)
+    ) return [];
     // NASA sometimes republishes third-party material; do not include records with an explicit copyright field.
     if (hasExplicitCopyright(data.copyright) || /all rights reserved|copyrighted/i.test(String(data.rights ?? ''))) return [];
-    const preview = item.links?.find((link) => link.rel === 'preview')?.href;
+    return [{ item, data, nasaId, title, description }];
+  }).slice(0, MAX_NASA_METADATA_CANDIDATES);
+
+  const resolved = await Promise.all(candidates.map(async ({ item, data, nasaId, title, description }) => {
+    let assets: string[] = [];
+    let metadata: Record<string, unknown> = {};
+    let durationSeconds = parseMediaDurationSeconds(data.duration);
+    if (durationSeconds === null) {
+      try {
+        const fetched = await getNasaAssetMetadata(nasaId);
+        assets = fetched.assets;
+        metadata = fetched.metadata;
+      } catch {
+        // The labelled TRT in NASA's search description remains a last-resort fallback.
+      }
+      durationSeconds = parseNasaDurationSeconds(metadata)
+        ?? extractMediaDurationSecondsFromText(`${title} ${description}`);
+    }
+    if (!isFeatureLengthMedia(durationSeconds)) return null;
+    if (hasExplicitCopyright(metadata['AVAIL:Copyright'] ?? metadata.Copyright ?? metadata.copyright)) return null;
+
+    const preview = item.links?.find((link) => link.rel === 'preview')?.href
+      ?? assets.find((url) => /~(?:large|medium|small)\.jpg(?:$|\?)/i.test(url));
     const center = cleanText(data.center, 40);
-    return [cmsItem('nasa', `${nasaId}|${center}`, title, {
+    return cmsItem('nasa', `${nasaId}|${center}`, title, {
       picture: preview?.replace(/^http:/, 'https:'),
       year: getYear(data.date_created),
       remarks: 'NASA 媒体库 · 请核对单项版权与使用说明',
+      durationSeconds,
       description: [
         description,
         `来源：NASA Image and Video Library（${center || 'NASA'}）`,
         `原始条目：https://images.nasa.gov/details/${nasaId}`,
         'NASA 内容通常不受美国版权保护，但第三方版权素材、可识别人物肖像权及 NASA 标识有额外限制；请查看原始条目说明。',
       ].filter(Boolean).join('\n'),
-    })];
-  });
+    });
+  }));
+  return resolved.filter((item): item is CmsVod => item !== null).slice(0, MAX_RESULTS_PER_PROVIDER);
 }
 
 async function searchCommons(query: string): Promise<CmsVod[]> {
   const params = new URLSearchParams({
     action: 'query',
     generator: 'search',
-    gsrsearch: `filetype:video ${query}`,
+    gsrsearch: 'filetype:video ' + query,
     gsrnamespace: '6',
     gsrlimit: String(MAX_FEDERATED_CANDIDATES),
-    prop: 'imageinfo',
+    prop: 'imageinfo|videoinfo',
     iiprop: 'url|mime|extmetadata',
+    viprop: 'derivatives|size',
     iiurlwidth: '480',
     format: 'json',
     formatversion: '2',
   });
   const result = await fetchUpstreamJson<CommonsSearchResponse>(
-    `https://commons.wikimedia.org/w/api.php?${params.toString()}`,
+    'https://commons.wikimedia.org/w/api.php?' + params.toString(),
     {
       timeoutMs: PROVIDER_TIMEOUT_MS,
       headers: { 'User-Agent': 'LibreTV-Mobile/2.23.2 (+https://github.com/zj2917928447-ship-it/LibreTV-Mobile)', Accept: 'application/json' },
@@ -261,24 +343,32 @@ async function searchCommons(query: string): Promise<CmsVod[]> {
   return (result.query?.pages ?? []).flatMap((page) => {
     const pageId = Number(page.pageid ?? 0);
     const info = page.imageinfo?.[0];
-    const media = selectCommonsVideoFile(info);
+    const videoInfo = page.videoinfo?.[0];
+    const media = selectCommonsVideoFile(info ? { ...info, derivatives: videoInfo?.derivatives } : undefined);
     const licence = info?.extmetadata;
-    if (!Number.isSafeInteger(pageId) || pageId <= 0 || !media || !isAllowedCommonsLicence(licence)) return [];
     const title = cleanText(page.title?.replace(/^File:/i, ''), 200);
+    const description = cleanText(commonsMetaText(licence?.ImageDescription) || commonsMetaText(licence?.Description), 1200);
+    const durationSeconds = parseMediaDurationSeconds(videoInfo?.duration ?? info?.duration ?? commonsMetaText(licence?.Duration))
+      ?? extractMediaDurationSecondsFromText(title + ' ' + description);
+    if (!Number.isSafeInteger(pageId) || pageId <= 0 || !media || !isAllowedCommonsLicence(licence) || !isFeatureLengthMedia(durationSeconds)) return [];
     if (!title) return [];
     const licenceName = cleanText(commonsMetaText(licence?.LicenseShortName) || commonsMetaText(licence?.UsageTerms), 100);
     const artist = cleanText(commonsMetaText(licence?.Artist) || commonsMetaText(licence?.Credit), 160);
-    const description = cleanText(commonsMetaText(licence?.ImageDescription) || commonsMetaText(licence?.Description), 1200);
-    if (!isOpenMediaTitleRelevant(title, query) || isOpenMediaAdult(title, description)) return [];
+    if (
+      !isOpenMediaTitleRelevant(title, query)
+      || isOpenMediaAdult(title, description)
+      || isOpenMediaNonFeatureContent(title, description)
+    ) return [];
     return [cmsItem('commons', String(pageId), title, {
       picture: media.thumbnail,
       year: getYear(title),
-      remarks: licenceName || '开放许可',
+      remarks: licenceName || '\u5f00\u653e\u8bb8\u53ef',
+      durationSeconds,
       description: [
         description,
-        artist ? `作者/来源：${artist}` : '',
-        `许可：${licenceName || '开放许可'}`,
-        info?.descriptionurl ? `原始条目：${info.descriptionurl}` : '',
+        artist ? '\u4f5c\u8005/\u6765\u6e90\uff1a' + artist : '',
+        '\u8bb8\u53ef\uff1a' + (licenceName || '\u5f00\u653e\u8bb8\u53ef'),
+        info?.descriptionurl ? '\u539f\u59cb\u6761\u76ee\uff1a' + info.descriptionurl : '',
       ].filter(Boolean).join('\n'),
     })];
   }).slice(0, MAX_RESULTS_PER_PROVIDER);
@@ -295,8 +385,14 @@ async function searchPeerTube(query: string): Promise<CmsVod[]> {
     const uuid = String(item.uuid ?? '');
     const title = cleanText(item.name, 200);
     const description = cleanText(item.description);
-    if (!/^[a-z0-9.-]+$/.test(host) || !/^[0-9a-f-]{36}$/i.test(uuid) || !title) return [];
-    if (!isOpenMediaTitleRelevant(title, query) || isOpenMediaAdult(title, description)) return [];
+    const durationSeconds = parseMediaDurationSeconds(item.duration)
+      ?? extractMediaDurationSecondsFromText(`${title} ${description}`);
+    if (!/^[a-z0-9.-]+$/.test(host) || !/^[0-9a-f-]{36}$/i.test(uuid) || !title || !isFeatureLengthMedia(durationSeconds)) return [];
+    if (
+      !isOpenMediaTitleRelevant(title, query)
+      || isOpenMediaAdult(title, description)
+      || isOpenMediaNonFeatureContent(title, description)
+    ) return [];
     if (!isAllowedPeerTubeLicence(item.licence) || item.isLive || item.nsfw) return [];
     const licence = item.licence?.label || '开放许可';
     const channel = cleanText(item.account?.displayName, 100);
@@ -304,6 +400,7 @@ async function searchPeerTube(query: string): Promise<CmsVod[]> {
       picture: item.thumbnailUrl,
       year: getYear(item.originallyPublishedAt ?? item.publishedAt),
       remarks: licence,
+      durationSeconds,
       description: [
         description,
         channel ? `作者/频道：${channel}` : '',
@@ -316,12 +413,14 @@ async function searchPeerTube(query: string): Promise<CmsVod[]> {
 }
 
 async function searchAll(query: string): Promise<CmsVod[]> {
+  // Provider catalogs mostly index English original titles; resolve known Chinese release aliases first.
+  const providerQuery = resolveOpenMediaQuery(query);
   const providerNames = ['Internet Archive', 'NASA', 'PeerTube', 'Wikimedia Commons'];
   const results = await Promise.allSettled([
-    searchArchive(query),
-    searchNasa(query),
-    searchPeerTube(query),
-    searchCommons(query),
+    searchArchive(providerQuery),
+    searchNasa(providerQuery),
+    searchPeerTube(providerQuery),
+    searchCommons(providerQuery),
   ]);
   results.forEach((result, index) => {
     if (result.status === 'rejected') {
@@ -332,14 +431,22 @@ async function searchAll(query: string): Promise<CmsVod[]> {
   if (fulfilled.length === 0) throw new Error('所有公开媒体服务暂时不可用');
   const combined = fulfilled.flatMap((result) => result.value);
   const seen = new Set<string>();
-  return combined.filter((item) => {
-    const provider = decodeOpenMediaId(item.vod_id)?.provider ?? 'unknown';
+  const unique = combined.filter((item) => {
     const title = item.vod_name.toLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
-    const key = `${provider}:${title}`;
+    const year = item.vod_year || '';
+    const key = `${title}:${year}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
   });
+  const normalizedQuery = providerQuery.toLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
+  const score = (title: string) => {
+    const normalizedTitle = title.toLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
+    if (normalizedTitle === normalizedQuery) return 3;
+    if (normalizedTitle.startsWith(normalizedQuery)) return 2;
+    return 1;
+  };
+  return unique.sort((a, b) => score(b.vod_name) - score(a.vod_name));
 }
 
 async function getArchiveDetail(identifier: string): Promise<CmsVod | null> {
@@ -355,15 +462,27 @@ async function getArchiveDetail(identifier: string): Promise<CmsVod | null> {
   if (!file?.name) return null;
   const title = cleanText(record.title, 200);
   const description = cleanText(record.description);
-  if (!title || isOpenMediaAdult(title, description) || hasContradictoryCopyrightClaim(description)) return null;
+  // The selected video file's length is its runtime in seconds; size is the byte count.
+  const durationSeconds = parseMediaDurationSeconds(file.length)
+    ?? parseMediaDurationSeconds(record.runtime ?? record.duration ?? record.runtime_seconds ?? record.run_time ?? record.TRT)
+    ?? extractMediaDurationSecondsFromText(`${title} ${description}`);
+  if (
+    !title
+    || !isFeatureLengthMedia(durationSeconds)
+    || isOpenMediaAdult(title, description)
+    || isOpenMediaNonFeatureContent(title, description)
+    || hasContradictoryCopyrightClaim(description)
+  ) return null;
   const mediaUrl = `https://archive.org/download/${encodeURIComponent(identifier)}/${encodeURIComponent(file.name)}`;
-  const rightsLabel = cleanText(record.rights ?? record.licenseurl, 120);
+  const rightsLabel = archiveRightsLabel(record.rights, record.licenseurl);
+  const licenseUrl = cleanText(record.licenseurl, 240);
   return {
     ...cmsItem('archive', identifier, title, {
       picture: `https://archive.org/services/img/${encodeURIComponent(identifier)}`,
       year: getYear(record.year),
       remarks: rightsLabel || 'Public Domain / CC',
-      description: [description, `来源：Internet Archive（${identifier}）`, `权利声明：${rightsLabel}`].filter(Boolean).join('\n'),
+      durationSeconds,
+      description: [description, `来源：Internet Archive（${identifier}）`, `权利声明：${rightsLabel}`, licenseUrl ? `许可链接：${licenseUrl}` : ''].filter(Boolean).join('\n'),
     }),
     vod_play_from: 'Internet Archive',
     vod_play_url: `在线播放$${mediaUrl}`,
@@ -373,20 +492,19 @@ async function getArchiveDetail(identifier: string): Promise<CmsVod | null> {
 async function getNasaDetail(externalId: string): Promise<CmsVod | null> {
   const [nasaId] = externalId.split('|');
   if (!/^[\w-]+$/.test(nasaId)) return null;
-  const assetResponse = await fetchUpstreamJson<NasaAssetResponse>(
-    `https://images-api.nasa.gov/asset/${encodeURIComponent(nasaId)}`,
-    { timeoutMs: 10000 }
-  );
-  const assets = extractNasaAssetUrls(assetResponse);
+  const { assets, metadata: record } = await getNasaAssetMetadata(nasaId);
   if (assets.length === 0) return null;
-  const metadataUrl = assets.find((url) => /metadata\.json$/i.test(url));
-  const record: Record<string, unknown> = metadataUrl
-    ? await fetchUpstreamJson<Record<string, unknown>>(metadataUrl.replace(/^http:/, 'https:'), { timeoutMs: 8000 }).catch(() => ({} as Record<string, unknown>))
-    : {};
   const copyright = record['AVAIL:Copyright'] ?? record.Copyright ?? record.copyright;
-  const title = cleanText(record['AVAIL:Title'], 200) || nasaId;
-  const description = cleanText(record['AVAIL:Description']);
-  if (hasExplicitCopyright(copyright) || isOpenMediaAdult(title, description)) return null;
+  const title = cleanText(record['AVAIL:Title'] ?? record['QuickTime:Title'] ?? record['XMP:Title'], 200) || nasaId;
+  const description = cleanText(record['AVAIL:Description'] ?? record['XMP:Description']);
+  const durationSeconds = parseNasaDurationSeconds(record)
+    ?? extractMediaDurationSecondsFromText(`${title} ${description}`);
+  if (
+    hasExplicitCopyright(copyright)
+    || !isFeatureLengthMedia(durationSeconds)
+    || isOpenMediaAdult(title, description)
+    || isOpenMediaNonFeatureContent(title, description)
+  ) return null;
   const mediaUrl = selectNasaVideoUrl(assets);
   if (!mediaUrl) return null;
   const poster = assets.find((asset) => /~(?:mobile|small|medium|large)\.jpg$/i.test(asset))?.replace(/^http:/, 'https:');
@@ -394,6 +512,7 @@ async function getNasaDetail(externalId: string): Promise<CmsVod | null> {
     ...cmsItem('nasa', externalId, title, {
       picture: poster,
       remarks: 'NASA 影音资料 · 请核对单项权利',
+      durationSeconds,
       description: [description, `来源：NASA Image and Video Library（${nasaId}）`, `原始条目：https://images.nasa.gov/details/${nasaId}`, 'NASA 内容通常不受美国版权保护，但第三方版权素材、可识别人物肖像权及 NASA 标识有额外限制；请核对原始媒体说明。'].filter(Boolean).join('\n'),
     }),
     vod_play_from: 'NASA',
@@ -408,13 +527,13 @@ async function getCommonsDetail(externalId: string): Promise<CmsVod | null> {
     pageids: externalId,
     prop: 'imageinfo|videoinfo',
     iiprop: 'url|mime|extmetadata',
-    viprop: 'derivatives',
+    viprop: 'derivatives|size',
     iiurlwidth: '480',
     format: 'json',
     formatversion: '2',
   });
   const result = await fetchUpstreamJson<CommonsSearchResponse>(
-    `https://commons.wikimedia.org/w/api.php?${params.toString()}`,
+    'https://commons.wikimedia.org/w/api.php?' + params.toString(),
     {
       timeoutMs: 10000,
       headers: { 'User-Agent': 'LibreTV-Mobile/2.23.2 (+https://github.com/zj2917928447-ship-it/LibreTV-Mobile)', Accept: 'application/json' },
@@ -422,33 +541,33 @@ async function getCommonsDetail(externalId: string): Promise<CmsVod | null> {
   );
   const page = result.query?.pages?.[0];
   const info = page?.imageinfo?.[0];
-  const media = selectCommonsVideoFile(info ? {
-    ...info,
-    derivatives: page?.videoinfo?.[0]?.derivatives,
-  } : undefined);
+  const videoInfo = page?.videoinfo?.[0];
+  const media = selectCommonsVideoFile(info ? { ...info, derivatives: videoInfo?.derivatives } : undefined);
   const licence = info?.extmetadata;
-  if (!page || !media || !isAllowedCommonsLicence(licence)) return null;
-  const title = cleanText(page.title?.replace(/^File:/i, ''), 200);
-  if (!title) return null;
+  const title = cleanText(page?.title?.replace(/^File:/i, ''), 200);
+  const description = cleanText(commonsMetaText(licence?.ImageDescription) || commonsMetaText(licence?.Description), 1200);
+  const durationSeconds = parseMediaDurationSeconds(videoInfo?.duration ?? info?.duration ?? commonsMetaText(licence?.Duration))
+    ?? extractMediaDurationSecondsFromText(title + ' ' + description);
+  if (!page || !media || !isAllowedCommonsLicence(licence) || !isFeatureLengthMedia(durationSeconds) || !title) return null;
   const licenceName = cleanText(commonsMetaText(licence?.LicenseShortName) || commonsMetaText(licence?.UsageTerms), 100);
   const artist = cleanText(commonsMetaText(licence?.Artist) || commonsMetaText(licence?.Credit), 160);
-  const description = cleanText(commonsMetaText(licence?.ImageDescription) || commonsMetaText(licence?.Description), 1200);
-  if (isOpenMediaAdult(title, description)) return null;
+  if (isOpenMediaAdult(title, description) || isOpenMediaNonFeatureContent(title, description)) return null;
   return {
     ...cmsItem('commons', externalId, title, {
       picture: media.thumbnail,
       year: getYear(title),
-      remarks: licenceName || '开放许可',
+      remarks: licenceName || '\u5f00\u653e\u8bb8\u53ef',
+      durationSeconds,
       description: [
         description,
-        artist ? `作者/来源：${artist}` : '',
-        `许可：${licenceName || '开放许可'}`,
-        media.isTranscode ? `手机优先转码：${media.height}p${media.bandwidth ? ` · ${(media.bandwidth / 1000).toFixed(0)} kbps` : ''}` : '未提供可用转码，使用原始媒体文件',
-        info?.descriptionurl ? `原始条目：${info.descriptionurl}` : '',
+        artist ? '\u4f5c\u8005/\u6765\u6e90\uff1a' + artist : '',
+        '\u8bb8\u53ef\uff1a' + (licenceName || '\u5f00\u653e\u8bb8\u53ef'),
+        media.isTranscode ? '\u624b\u673a\u4f18\u5148\u8f6c\u7801\uff1a' + media.height + 'p' + (media.bandwidth ? ' · ' + (media.bandwidth / 1000).toFixed(0) + ' kbps' : '') : '\u672a\u63d0\u4f9b\u53ef\u7528\u8f6c\u7801\uff0c\u4f7f\u7528\u539f\u59cb\u5a92\u4f53\u6587\u4ef6',
+        info?.descriptionurl ? '\u539f\u59cb\u6761\u76ee\uff1a' + info.descriptionurl : '',
       ].filter(Boolean).join('\n'),
     }),
     vod_play_from: 'Wikimedia Commons',
-    vod_play_url: `在线播放$${media.url}`,
+    vod_play_url: '在线播放$' + media.url,
   };
 }
 
@@ -465,7 +584,13 @@ async function getPeerTubeDetail(externalId: string): Promise<CmsVod | null> {
   const title = cleanText(video.name, 200);
   if (!title) return null;
   const sourceDescription = cleanText(video.description);
-  if (isOpenMediaAdult(title, sourceDescription)) return null;
+  const durationSeconds = parseMediaDurationSeconds(video.duration)
+    ?? extractMediaDurationSecondsFromText(`${title} ${sourceDescription}`);
+  if (
+    !isFeatureLengthMedia(durationSeconds)
+    || isOpenMediaAdult(title, sourceDescription)
+    || isOpenMediaNonFeatureContent(title, sourceDescription)
+  ) return null;
   const licence = video.licence?.label || '开放许可';
   const description = [
     sourceDescription,
@@ -478,6 +603,7 @@ async function getPeerTubeDetail(externalId: string): Promise<CmsVod | null> {
     ...cmsItem('peertube', externalId, title, {
       picture: video.thumbnailUrl || (video.thumbnailPath ? `https://${host}${video.thumbnailPath}` : undefined),
       remarks: licence,
+      durationSeconds,
       description,
     }),
     vod_play_from: 'PeerTube',

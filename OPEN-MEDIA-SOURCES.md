@@ -23,6 +23,14 @@
 
 搜索阶段会进行标题相关性过滤，排除明显成人内容；Internet Archive 条目若描述文本与许可元数据出现明显版权冲突（例如 All Rights Reserved）也会被排除。过滤规则是保守启发式，不代替逐条权利核验。
 
+## 时长来源与验证
+
+- Internet Archive：对选中的视频文件，`files[].length` 是媒体时长（秒），`files[].size` 是文件字节数；适配器优先读取实际播放文件的 `length`，再回退到条目级 `metadata.runtime`。不会把 `size` 当成时长。部分老文件没有 `length`，若也没有可验证的条目级时长，则不进入长片结果。
+- NASA：搜索接口不保证返回 `duration`。缺失时会继续读取 `/asset/{nasa_id}` 的 `metadata.json`，优先识别 `QuickTime:Duration`、`QuickTime:MediaDuration`、`QuickTime:TrackDuration`、`AVAIL:Duration` 与 `XMP:Duration`（按 `Value × Scale` 转为秒）；最后才使用明确标注的 TRT / Runtime 文本。仍无法验证时不把条目当成长片。
+- Wikimedia Commons：请求 MediaWiki `videoinfo` 的 `size` 属性以取得视频信息；`videoinfo.duration` 是播放时长（秒），`videoinfo.size` 是文件字节数，`derivatives` 提供可用转码。搜索和详情均保留真实时长，不从文件大小推算。
+- PeerTube：使用其视频 API 返回的 `duration` 秒数；不使用文件大小推算时长。
+- 所有提供方统一要求时长至少 20 分钟、最多 24 小时；缺少可靠时长的条目不会进入长片搜索结果。若同一 Archive 条目同时包含短预览和长片，优先选择已验证为长片的 MP4 文件，再按移动端友好程度选择转码。
+
 ## 限制
 
 - 这不是商业影视平台，不保证包含最新院线电影、热门国产剧或付费会员内容。

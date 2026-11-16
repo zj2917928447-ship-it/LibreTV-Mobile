@@ -3,6 +3,25 @@ import { Buffer } from 'node:buffer';
 export type OpenMediaProvider = 'archive' | 'nasa' | 'peertube' | 'commons';
 
 const SEARCH_STOP_WORDS = new Set(['the', 'a', 'an', 'of', 'and', 'for', 'to', 'in', 'on', 'at']);
+
+/** Common Chinese release titles mapped to the English metadata used by open-media indexes. */
+const OPEN_MEDIA_QUERY_ALIASES = new Map<string, string>([
+  ['蜘蛛侠', 'Spider-Man'],
+  ['蜘蛛俠', 'Spider-Man'],
+  ['蜘蛛人', 'Spider-Man'],
+  ['超凡蜘蛛俠', 'The Amazing Spider-Man'],
+  ['蜘蛛俠英雄歸來', 'Spider-Man: Homecoming'],
+  ['蜘蛛俠英雄遠征', 'Spider-Man: Far From Home'],
+  ['蜘蛛俠英雄無歸', 'Spider-Man: No Way Home'],
+  ['小蜘蛛', 'Spider-Man'],
+  ['蜘蛛侠英雄归来', 'Spider-Man: Homecoming'],
+  ['蜘蛛侠英雄远征', 'Spider-Man: Far From Home'],
+  ['蜘蛛侠英雄无归', 'Spider-Man: No Way Home'],
+  ['超凡蜘蛛侠', 'The Amazing Spider-Man'],
+  ['超凡蜘蛛侠2', 'The Amazing Spider-Man 2'],
+  ['蜘蛛侠2', 'Spider-Man 2'],
+  ['蜘蛛侠3', 'Spider-Man 3'],
+]);
 const ADULT_MEDIA_PATTERN = /\b(?:porn(?:ography)?|erotic|xxx|hentai|adult\s+(?:film|video|content)|sexually\s+explicit|nudity|nude\s+(?:film|video)|striptease|onlyfans)\b|色情|情色|成人视频|成人影片|裸露|裸体|福利片|伦理片/i;
 const CONTRADICTORY_RIGHTS_PATTERN = /all rights reserved|copyright\s*(?:©|\(c\)|:|by\b)|©\s*\d{4}/i;
 
@@ -16,10 +35,133 @@ export function hasContradictoryCopyrightClaim(description: string): boolean {
   return CONTRADICTORY_RIGHTS_PATTERN.test(description);
 }
 
+/** Minimum verified runtime for a feature-length film search. */
+export const MIN_FEATURE_DURATION_SECONDS = 20 * 60;
+export const MAX_FEATURE_DURATION_SECONDS = 24 * 60 * 60;
+
+const NON_FEATURE_TITLE_PATTERN = /\b(?:trailer|teaser|tv\s*spot|promo(?:tional)?|preview|clip|excerpt|highlight\s*reel|highlights?|behind\s+the\s+scenes|making\s+of|interview|review|reaction|recap|gameplay|walkthrough|demo|tutorial|music\s+video|concert|vr\s+experience|virtual\s+reality|b-?roll|short\s+film|webisode|fan\s+edit|compilation|commercial|video\s+diary|vlog|web\s+series|tv\s+series|animated\s+series|complete\s+series|season\s+\d+|episode\s+\d+)\b|预告片|预告|花絮|访谈|影评|解说|混剪|片段|短片|短视频|音乐视频|演示|体验|游戏实况|幕后|制作特辑|宣传片|集锦|精彩片段|试玩|测评|反应视频|第\d+季|第\d+集|剧集/i;
+const NON_FEATURE_DESCRIPTION_PATTERN = /\b(?:original\s+song|original\s+music|music\s+demo|music\s+app|music\s+performance|music\s+video|performed\s+on\s+[\w-]+|concert\s+performance|vr\s+experience|virtual\s+reality\s+experience|gameplay\s+footage|trailer\s+for|teaser\s+for|interview\s+with|review\s+of|reaction\s+to|behind\s+the\s+scenes|making\s+of|fan\s+edit|compilation\s+of\s+clips|nanoloop|htc\s+vive)\b|原唱|原创歌曲|音乐演示|音乐应用|游戏实况|预告片|访谈|幕后花絮/i;
+
+/** Reject trailers, music demos, interviews, clips and other non-feature material. */
+export function isOpenMediaNonFeatureContent(title: string, description = ''): boolean {
+  return NON_FEATURE_TITLE_PATTERN.test(title) || NON_FEATURE_DESCRIPTION_PATTERN.test(description);
+}
+
+/** Parse a duration value in seconds, MM:SS, HH:MM:SS or ISO-8601 PT form. */
+export function parseMediaDurationSeconds(value: unknown): number | null {
+  if (Array.isArray(value)) {
+    for (const part of value) {
+      const parsed = parseMediaDurationSeconds(part);
+      if (parsed !== null) return parsed;
+    }
+    return null;
+  }
+  if (typeof value === 'number') return Number.isFinite(value) && value > 0 ? value : null;
+  if (typeof value !== 'string') return null;
+  const raw = value.trim();
+  if (!raw) return null;
+
+  const iso = raw.match(/^PT(?:(\d+(?:\.\d+)?)H)?(?:(\d+(?:\.\d+)?)M)?(?:(\d+(?:\.\d+)?)S)?$/i);
+  if (iso) {
+    const seconds = Number(iso[1] || 0) * 3600 + Number(iso[2] || 0) * 60 + Number(iso[3] || 0);
+    return Number.isFinite(seconds) && seconds > 0 ? seconds : null;
+  }
+
+  const clock = raw.match(/^(\d{1,3}):(\d{1,2})(?::(\d{1,2}(?:\.\d+)?))?$/);
+  if (clock) {
+    const first = Number(clock[1]);
+    const second = Number(clock[2]);
+    const third = clock[3] === undefined ? null : Number(clock[3]);
+    if (second >= 60 || (third !== null && third >= 60)) return null;
+    const seconds = third === null ? first * 60 + second : first * 3600 + second * 60 + third;
+    return seconds > 0 ? seconds : null;
+  }
+
+  const units = raw.match(/^(?:(\d+(?:\.\d+)?)\s*(?:h|hr|hrs|hour|hours|小时))?\s*(?:(\d+(?:\.\d+)?)\s*(?:m|min|mins|minute|minutes|分钟))?\s*(?:(\d+(?:\.\d+)?)\s*(?:s|sec|secs|second|seconds|秒))?$/i);
+  if (units && (units[1] || units[2] || units[3])) {
+    const seconds = Number(units[1] || 0) * 3600 + Number(units[2] || 0) * 60 + Number(units[3] || 0);
+    return Number.isFinite(seconds) && seconds > 0 ? seconds : null;
+  }
+
+  if (/^\d+(?:\.\d+)?$/.test(raw)) {
+    const seconds = Number(raw);
+    return Number.isFinite(seconds) && seconds > 0 ? seconds : null;
+  }
+  return null;
+}
+
+/** Read the real runtime fields returned by NASA asset metadata.json. */
+export function parseNasaDurationSeconds(record: Record<string, unknown>): number | null {
+  for (const value of [
+    record['AVAIL:Duration'],
+    record['QuickTime:Duration'],
+    record['QuickTime:MediaDuration'],
+    record['QuickTime:TrackDuration'],
+    record.Duration,
+    record.duration,
+    record.runtime,
+    record.TRT,
+  ]) {
+    const parsed = parseMediaDurationSeconds(value);
+    if (parsed !== null) return parsed;
+  }
+
+  const xmp = record['XMP:Duration'];
+  if (xmp && typeof xmp === 'object') {
+    const value = Number((xmp as { Value?: unknown }).Value);
+    const scale = Number((xmp as { Scale?: unknown }).Scale);
+    const seconds = value * scale;
+    if (Number.isFinite(seconds) && seconds > 0) return seconds;
+  }
+  return null;
+}
+
+/** Extract labelled running times such as "TRT: 00:48:22" from NASA descriptions. */
+export function extractMediaDurationSecondsFromText(value: string): number | null {
+  const patterns = [
+    /(?:TRT|total\s+run(?:ning)?\s*time|running\s*time|runtime|duration|playtime)\s*[:=]?\s*(\d{1,3}:\d{2}(?::\d{2}(?:\.\d+)?)?)/i,
+    /(?:TRT|total\s+run(?:ning)?\s*time|running\s*time|runtime|duration|playtime)\s*[:=]?\s*(\d+(?:\.\d+)?\s*(?:h|hr|hrs|hour|hours|小时)(?:\s*\d+(?:\.\d+)?\s*(?:m|min|mins|minute|minutes|分钟))?(?:\s*\d+(?:\.\d+)?\s*(?:s|sec|secs|second|seconds|秒))?|\d+(?:\.\d+)?\s*(?:m|min|mins|minute|minutes|分钟)(?:\s*\d+(?:\.\d+)?\s*(?:s|sec|secs|second|seconds|秒))?|\d+(?:\.\d+)?\s*(?:s|sec|secs|second|seconds|秒))/i,
+    /(?:片长|时长|总时长)\s*[:：]?\s*(\d{1,3}:\d{2}(?::\d{2}(?:\.\d+)?)?)/,
+    /(?:片长|时长|总时长)\s*[:：]?\s*(\d+(?:\.\d+)?\s*小时(?:\s*\d+(?:\.\d+)?\s*分钟)?(?:\s*\d+(?:\.\d+)?\s*秒)?|\d+(?:\.\d+)?\s*分钟(?:\s*\d+(?:\.\d+)?\s*秒)?|\d+(?:\.\d+)?\s*秒)/,
+    /[\[(（]\s*(\d{1,3}:\d{2}:\d{2})\s*[\])）]/,
+  ];
+  for (const pattern of patterns) {
+    const match = value.match(pattern);
+    if (match) {
+      const seconds = parseMediaDurationSeconds(match[1]);
+      if (seconds !== null) return seconds;
+    }
+  }
+  return null;
+}
+
+export function isFeatureLengthMedia(durationSeconds: number | null | undefined): durationSeconds is number {
+  return typeof durationSeconds === 'number'
+    && Number.isFinite(durationSeconds)
+    && durationSeconds >= MIN_FEATURE_DURATION_SECONDS
+    && durationSeconds <= MAX_FEATURE_DURATION_SECONDS;
+}
+
+export function formatMediaDuration(durationSeconds: number): string {
+  const total = Math.max(0, Math.round(durationSeconds));
+  const hours = Math.floor(total / 3600);
+  const minutes = Math.floor((total % 3600) / 60);
+  const seconds = total % 60;
+  const pad = (part: number) => String(part).padStart(2, '0');
+  return hours > 0 ? `${hours}:${pad(minutes)}:${pad(seconds)}` : `${minutes}:${pad(seconds)}`;
+}
+
+/** Resolve a Chinese localized title to the English phrase indexed by public-media providers. */
+export function resolveOpenMediaQuery(query: string): string {
+  const raw = query.trim();
+  const normalized = raw.toLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
+  return OPEN_MEDIA_QUERY_ALIASES.get(normalized) ?? raw;
+}
+
 /**
- * Keep search results relevant to the requested title. For queries containing common
- * stop-words (e.g. "The General"), require a contiguous title phrase and reject a
- * following unrelated word such as "Index". Year suffixes and subtitle separators pass.
+ * Require a contiguous multi-word title phrase. Single-word searches must match
+ * the first or last title token, preventing "Spider" from matching "Dienamite
+ * ... spider mites ..." while retaining titles such as "Earth Vs. The Spider".
  */
 export function isOpenMediaTitleRelevant(title: string, query: string): boolean {
   const rawQuery = query.trim();
@@ -31,22 +173,39 @@ export function isOpenMediaTitleRelevant(title: string, query: string): boolean 
   const words = (value: string): string[] => value.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [];
   const queryWords = words(rawQuery);
   const titleWords = words(title);
-  if (queryWords.length === 0 || titleWords.length === 0) return false;
-  if (queryWords.some((word) => SEARCH_STOP_WORDS.has(word))) {
-    for (let i = 0; i <= titleWords.length - queryWords.length; i++) {
-      if (!queryWords.every((word, offset) => titleWords[i + offset] === word)) continue;
-      const next = titleWords[i + queryWords.length];
-      if (!next || /^\d{4}$/.test(next) || next === 'the' || next === 'a' || next === 'an') return true;
-    }
-    return false;
+  if (queryWords.length === 0 || titleWords.length === 0 || queryWords.every((word) => SEARCH_STOP_WORDS.has(word))) return false;
+
+  if (queryWords.length > 1) {
+    const titlePrefix = title.trim().toLowerCase();
+    const queryPrefix = rawQuery.toLowerCase();
+    const suffix = titlePrefix.slice(queryPrefix.length).trimStart();
+    if (titlePrefix.startsWith(queryPrefix) && [':', '：', '-', '–', '—', '(', '['].some((separator) => suffix.startsWith(separator))) return true;
   }
-  return queryWords.every((word) => titleWords.includes(word));
+
+  if (queryWords.length === 1) {
+    const last = titleWords[titleWords.length - 1];
+    const terminal = /^\d{4}$/.test(last) ? titleWords[titleWords.length - 2] : last;
+    return titleWords[0] === queryWords[0] || terminal === queryWords[0];
+  }
+
+  const wordMatches = (titleWord: string, queryWord: string) =>
+    titleWord === queryWord || titleWord === `${queryWord}s` || queryWord === `${titleWord}s`;
+  for (let i = 0; i <= titleWords.length - queryWords.length; i++) {
+    if (i !== 0) continue;
+    if (!queryWords.every((word, offset) => wordMatches(titleWords[i + offset], word))) continue;
+    const next = titleWords[i + queryWords.length];
+    if (!queryWords.some((word) => SEARCH_STOP_WORDS.has(word))) return true;
+    const allowedSubtitleWords = new Set(['the', 'a', 'an']);
+    if (!next || /^\d{4}$/.test(next) || allowedSubtitleWords.has(next)) return true;
+  }
+  return false;
 }
 
 export interface ArchiveVideoFile {
   name?: string;
   format?: string;
   size?: string | number;
+  length?: string | number;
 }
 
 export interface NasaAssetManifest {
@@ -72,6 +231,7 @@ export interface CommonsLicenseMetadata {
   LicenseShortName?: unknown;
   LicenseUrl?: unknown;
   UsageTerms?: unknown;
+  Duration?: unknown;
   Copyrighted?: unknown;
   Artist?: unknown;
   Credit?: unknown;
@@ -100,6 +260,7 @@ export interface CommonsVideoInfo {
   url?: unknown;
   thumburl?: unknown;
   mime?: unknown;
+  duration?: unknown;
   descriptionurl?: unknown;
   extmetadata?: CommonsLicenseMetadata;
   derivatives?: CommonsVideoDerivative[];
@@ -247,10 +408,19 @@ export function isArchiveRightsAllowed(metadata: {
   rights?: unknown;
   licenseurl?: unknown;
 }): boolean {
-  const license = typeof metadata.licenseurl === 'string' ? metadata.licenseurl.trim() : '';
+  const rawLicense = typeof metadata.licenseurl === 'string' ? metadata.licenseurl.trim() : '';
   const rights = typeof metadata.rights === 'string' ? metadata.rights.trim().toLowerCase() : '';
   if (/all rights reserved|copyrighted|permission required|not for reuse|copyright status unknown/.test(rights)) return false;
-  if (license) return ARCHIVE_ALLOWED_LICENSES.has(license);
+  if (rawLicense) {
+    try {
+      const parsed = new URL(rawLicense);
+      if (!['http:', 'https:'].includes(parsed.protocol) || parsed.hostname.toLowerCase() !== 'creativecommons.org') return false;
+      const normalized = `https://creativecommons.org${parsed.pathname.endsWith('/') ? parsed.pathname : `${parsed.pathname}/`}`;
+      return ARCHIVE_ALLOWED_LICENSES.has(normalized);
+    } catch {
+      return false;
+    }
+  }
   if (!rights) return false;
   return /public\s*domain|no known copyright restrictions/.test(rights);
 }
@@ -262,6 +432,14 @@ export function selectArchiveVideoFile(files: ArchiveVideoFile[]): ArchiveVideoF
     const format = typeof file.format === 'string' ? file.format.toLowerCase() : '';
     return name.endsWith('.mp4') && (format.includes('mpeg4') || format.includes('h.264') || format.includes('mp4') || !format);
   });
+  const withKnownDuration = candidates.filter((file) => parseMediaDurationSeconds(file.length) !== null);
+  const verifiedFeatureFiles = withKnownDuration.filter((file) => isFeatureLengthMedia(parseMediaDurationSeconds(file.length)));
+  // If the item contains both a short preview and a full film, never let a small preview win on size/resolution.
+  const pool = verifiedFeatureFiles.length > 0
+    ? verifiedFeatureFiles
+    : withKnownDuration.length > 0
+      ? withKnownDuration
+      : candidates;
   const rank = (file: ArchiveVideoFile): number => {
     const name = (file.name || '').toLowerCase();
     if (name.includes('~mobile')) return 0;
@@ -271,7 +449,7 @@ export function selectArchiveVideoFile(files: ArchiveVideoFile[]): ArchiveVideoF
     if (size > 0 && size <= 250 * 1024 * 1024) return 3;
     return 4;
   };
-  return candidates.sort((a, b) => rank(a) - rank(b))[0] ?? null;
+  return pool.sort((a, b) => rank(a) - rank(b))[0] ?? null;
 }
 
 /** NASA manifests contain mixed media; select an MP4 and prefer the mobile derivative. */

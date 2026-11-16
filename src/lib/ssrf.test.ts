@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import http from 'node:http';
-import { allowLivePrivate, checkLiveUrlAllowed, isPrivateIP, isValidProxyUrl, runWithSSRFProtection } from './ssrf';
+import { allowLivePrivate, checkLiveUrlAllowed, isPrivateIP, isTrustedProviderProxyHost, isValidProxyUrl, runWithSSRFProtection } from './ssrf';
 
 describe('live private-network policy', () => {
   it('private IPTV access is opt-in and disabled by default', async () => {
@@ -56,6 +56,18 @@ describe('isPrivateIP', () => {
     ['[2606:4700::1111]', false], // 公网 IPv6 不应被误杀
   ])('%s → %s', (ip, expected) => {
     expect(isPrivateIP(ip)).toBe(expected);
+  });
+});
+
+describe('trusted provider outbound proxy allowlist', () => {
+  it('allows only fixed official provider hosts and rejects arbitrary/federated hosts', () => {
+    expect(isTrustedProviderProxyHost('archive.org')).toBe(true);
+    expect(isTrustedProviderProxyHost('commons.wikimedia.org')).toBe(true);
+    expect(isTrustedProviderProxyHost('images-api.nasa.gov')).toBe(true);
+    expect(isTrustedProviderProxyHost('archive.org.')).toBe(true);
+    expect(isTrustedProviderProxyHost('evil.example')).toBe(false);
+    expect(isTrustedProviderProxyHost('spectra.video')).toBe(false);
+    expect(isTrustedProviderProxyHost('archive.org.evil.example')).toBe(false);
   });
 });
 
