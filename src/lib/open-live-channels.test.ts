@@ -5,10 +5,10 @@ import { parseM3u } from './m3u-parser';
 import { PUBLIC_LIVE_PACKS, resolvePublicLivePackUrl } from './public-live-packs';
 
 describe('open-live-channels.m3u & PUBLIC_LIVE_PACKS', () => {
-  it('内置直播频道表包含 9508+ 条经双阶实测去重的 HTTPS 频道与 12 大全中文分组', () => {
+  it('内置直播频道表包含 10082+ 条经双阶实测去重的 HTTPS 频道与 12 大全中文分组', () => {
     const raw = readFileSync(resolve(process.cwd(), 'public/open-live-channels.m3u'), 'utf8');
     const channels = parseM3u(raw, 'https://app.example/open-live-channels.m3u');
-    expect(channels.length).toBeGreaterThanOrEqual(9508);
+    expect(channels.length).toBeGreaterThanOrEqual(10082);
     const urls = new Set<string>();
     for (const ch of channels) {
       expect(ch.url.startsWith('https://')).toBe(true);
@@ -33,8 +33,8 @@ describe('open-live-channels.m3u & PUBLIC_LIVE_PACKS', () => {
     expect(groups.has('欧美与欧洲高清台')).toBe(true);
   });
 
-  it('公开频道分类包覆盖 250 大包且均可解析为合法 HTTPS 订阅地址', () => {
-    expect(PUBLIC_LIVE_PACKS.length).toBeGreaterThanOrEqual(250);
+  it('公开频道分类包覆盖 280 大包且均可解析为合法 HTTPS 订阅地址', () => {
+    expect(PUBLIC_LIVE_PACKS.length).toBeGreaterThanOrEqual(280);
     for (const pack of PUBLIC_LIVE_PACKS) {
       const resolved = resolvePublicLivePackUrl(pack, 'https://app.example');
       expect(resolved.startsWith('https://')).toBe(true);

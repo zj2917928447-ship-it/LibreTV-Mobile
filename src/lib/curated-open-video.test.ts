@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(5847);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(6476);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(108);
+    expect(seriesCount).toBeGreaterThanOrEqual(118);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -93,6 +93,14 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('狗舍谋杀案1933密室推理').some((v) => v.slug === 'locked-room-noir-he-walked-by-night-kennel-murder-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('反诈重案组1951探案剧').some((v) => v.slug === 'racket-squad-con-artist-detective-cases-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('门户号月球轨道空间站').some((v) => v.slug === 'nasa-lunar-gateway-viper-moon-rover-sls-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('铁扇公主').some((v) => v.slug === 'archive-tieshangongzhu')).toBe(true);
+    expect(searchCuratedOpenVideos('风云儿女').some((v) => v.slug === 'archive-childrenoftroubledtimes')).toBe(true);
+    expect(searchCuratedOpenVideos('夜半歌声').some((v) => v.slug === 'archive-song-at-midnight')).toBe(true);
+    expect(searchCuratedOpenVideos('桃李劫').some((v) => v.slug === 'archive-plunderofpeachandplum')).toBe(true);
+    expect(searchCuratedOpenVideos('亨利八世的私生活1933').some((v) => v.slug === 'oscar-british-hollywood-legends-henry-viii-cyrano-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('福尔摩斯与秘密武器1080p').some((v) => v.slug === 'sherlock-holmes-secret-weapon-1954-baker-street-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('飞侠哥顿1936太空歌剧').some((v) => v.slug === 'flash-gordon-1936-1955-space-opera-chronicles-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('独行侠1949原版西部剧').some((v) => v.slug === 'lone-ranger-bonanza-western-legends-8ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });

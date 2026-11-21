@@ -20,8 +20,8 @@ services:
       - key: LIVE_ALLOW_PRIVATE
         value: "0"
       - key: DEFAULT_SOURCES
-        value: '[{"name":"内置双语开放影视库（5847+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / ESO）","url":"https://libretv-mobile-zj2917928447.onrender.com/api/open-media?short=1&zh=1","detail":"https://libretv-mobile-zj2917928447.onrender.com"}]'
+        value: '[{"name":"内置双语开放影视库（6476+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / ESO）","url":"https://libretv-mobile-zj2917928447.onrender.com/api/open-media?short=1&zh=1","detail":"https://libretv-mobile-zj2917928447.onrender.com"}]'
       - key: DEFAULT_LIVE_SOURCES
-        value: '[{"name":"内置双阶实测超清直播（9508 台卫视 / 电影 / 动漫 / 纪实 / 欧美）","url":"https://libretv-mobile-zj2917928447.onrender.com/open-live-channels.m3u"}]'
+        value: '[{"name":"内置双阶实测超清直播（10082 台卫视 / 电影 / 动漫 / 纪实 / 欧美）","url":"https://libretv-mobile-zj2917928447.onrender.com/open-live-channels.m3u"}]'
       - key: NEXT_TELEMETRY_DISABLED
         value: "1"
