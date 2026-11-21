@@ -1,17 +1,20 @@
 /**
- * 全局按 host 限并发（模块级闸门，跨请求共享）。
- *
- * 使用场景：服务端代替用户向采集站发探测类请求（直播测活 / 画质探测）。
- * 同一运营商的几十个条目常共用一个 host，若只限单请求内的并发，
- * 「多用户 × 单请求并发」会叠加冲击同一弱源，被源站打挂甚至封掉本服务 IP。
- * 同一 host 最多 PER_HOST_CONCURRENCY 个在途请求，不同 host 互不影响；
- * 名额满时 FIFO 排队，空闲闸门及时清理避免 Map 无界增长。
+ * Global per-host concurrency gate shared across requests.
+ * Waiting requests can be cancelled when their browser connection closes.
  */
-
-/** 同一 host 允许的最大在途请求数 */
 const PER_HOST_CONCURRENCY = 3;
 
-const hostGates = new Map<string, { active: number; waiters: (() => void)[] }>();
+interface HostWaiter {
+  take: () => void;
+  abort: () => void;
+}
+
+interface HostGate {
+  active: number;
+  waiters: HostWaiter[];
+}
+
+const hostGates = new Map<string, HostGate>();
 
 export function hostOf(url: string): string {
   try {
@@ -21,34 +24,77 @@ export function hostOf(url: string): string {
   }
 }
 
-/** 取一个该 host 的在途名额，返回释放函数；名额满时排队等待 */
-export function acquireHostSlot(host: string): Promise<() => void> {
+function abortError(signal?: AbortSignal): Error {
+  if (signal?.reason instanceof Error) return signal.reason;
+  return new DOMException('The operation was aborted', 'AbortError');
+}
+
+/** Acquire a host slot; an aborted waiter is removed from the FIFO queue immediately. */
+export function acquireHostSlot(host: string, signal?: AbortSignal): Promise<() => void> {
+  if (signal?.aborted) return Promise.reject(abortError(signal));
+
   let gate = hostGates.get(host);
   if (!gate) {
     gate = { active: 0, waiters: [] };
     hostGates.set(host, gate);
   }
-  const g = gate;
-  return new Promise((resolve) => {
+  const current = gate;
+
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const cleanup = () => signal?.removeEventListener('abort', waiter.abort);
+
     const take = () => {
-      g.active++;
+      if (settled) return;
+      settled = true;
+      cleanup();
+      current.active++;
+      let released = false;
       resolve(() => {
-        g.active--;
-        // 唤醒的等待者同步接管名额（active-- 后立即 ++），不留被新请求插队的竞态窗口
-        const next = g.waiters.shift();
-        if (next) next();
-        else if (g.active === 0) hostGates.delete(host);
+        if (released) return;
+        released = true;
+        current.active--;
+        // Wake the next waiter synchronously so a new request cannot jump the FIFO queue.
+        const next = current.waiters.shift();
+        if (next) next.take();
+        else if (current.active === 0) hostGates.delete(host);
       });
     };
-    if (g.active < PER_HOST_CONCURRENCY) take();
-    else g.waiters.push(take);
+
+    const waiter: HostWaiter = {
+      take,
+      abort: () => {
+        if (settled) return;
+        settled = true;
+        const index = current.waiters.indexOf(waiter);
+        if (index >= 0) current.waiters.splice(index, 1);
+        cleanup();
+        reject(abortError(signal));
+        if (current.active === 0 && current.waiters.length === 0) hostGates.delete(host);
+      },
+    };
+
+    if (current.active < PER_HOST_CONCURRENCY) {
+      take();
+      return;
+    }
+
+    current.waiters.push(waiter);
+    signal?.addEventListener('abort', waiter.abort, { once: true });
+    // Cover an abort that races with listener registration.
+    if (signal?.aborted) waiter.abort();
   });
 }
 
-/** 在 host 闸门内执行 fn：排队等待的时间不占用 fn 内部的超时预算（超时在 fn 内自行起算） */
-export async function withHostLimit<T>(url: string, fn: () => Promise<T>): Promise<T> {
-  const release = await acquireHostSlot(hostOf(url));
+/** Wait time is outside the worker's own timeout; cancellation removes queued work. */
+export async function withHostLimit<T>(
+  url: string,
+  fn: () => Promise<T>,
+  signal?: AbortSignal
+): Promise<T> {
+  const release = await acquireHostSlot(hostOf(url), signal);
   try {
+    if (signal?.aborted) throw abortError(signal);
     return await fn();
   } finally {
     release();

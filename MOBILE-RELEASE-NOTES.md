@@ -1,6 +1,44 @@
-# LibreTV Mobile Edition - Release Notes
+# LibreTV Mobile - Release Notes
+
+## Follow-up patch 2.23.6 (2026-11-16)
+
+- Added a second, independent TMDB catalogue search alongside the existing Apple CMS/open-media playback-source search. Movie and TV metadata, localized titles, original titles, posters, overviews, years and ratings are shown in a separate section; metadata is never presented as an in-app playable stream.
+- Added TMDB Watch Providers lookups by user-selected region (US/CN/HK/TW/GB/CA/AU/JP/KR/IN/DE/FR). Subscription, free, ad-supported, rental and purchase providers are grouped separately. The app links to the TMDB watch page rather than inventing unsupported deep links.
+- Split TMDB metadata search and Watch Providers into separate API requests: film metadata renders first, while regional availability loads independently. Provider lookup failures no longer delay or hide search results; provider calls are capped at 10 titles, concurrency 3, 5-second per-call timeout and 30-minute cache.
+- Added persistent "正版观看地区" preference. Provider queries use the selected region; metadata search remains independent of the region.
+- Added server-only `TMDB_API_READ_ACCESS_TOKEN` support. The token is never exposed to the browser; TMDB calls use Bearer authentication, a per-host concurrency gate, request cancellation, bounded result counts and a 10-minute cache.
+- Added TMDB's official approved blue horizontal logo and required non-endorsement notice in the About page. JustWatch is explicitly credited for watch-provider availability data. Documentation states the free API is for non-commercial use with attribution; commercial use requires appropriate licensing.
+- Added a clear unconfigured state and setup link when no TMDB token is present. The secret must be configured in server environment variables, not pasted into chat or placed in a `NEXT_PUBLIC_` variable.
+- Split search results into "播放源搜索" and "影视资料与正版观看渠道". A CMS hit is labelled as a source candidate only; the app confirms playability only after detail parsing successfully returns episode playback URLs.
+- Render Blueprint now preselects the built-in open-media catalogue as a default source rather than relying on a password-gated default subscription import. The source contains public-domain/open-licensed media only and is not represented as a commercial film catalogue.
+- Fixed open-media alias cache identity: Chinese aliases such as "蜘蛛侠" share a versioned cache key with the resolved provider query "Spider-Man". Empty results are short-lived and are not CDN-cached, avoiding stale zero-result responses after alias changes.
+- Reviewed LibreTV community PR #981 (21 claimed validated direct CMS sources) as an example of multi-source validation. Its third-party source list was not copied wholesale because source ownership, ongoing availability and rights could not be independently established; the app continues to accept sources the operator is authorized to use.
+- No new runtime dependencies. Existing ArtPlayer, hls.js, mpegts.js, download manager, playback history, skip marks and Android TWA identity are unchanged.
+
+## Follow-up patch 2.23.5 (2026-11-16)
+
+- Added bounded JSON request-body parsing: search/quality requests are capped at 256 KiB, live-probe and source-list publish payloads at 512 KiB, and login/source-test payloads at 8 KiB. Oversized bodies return HTTP 413 before application parsing.
+- Centralized CMS source URL normalization. Search, detail and source-test routes reject malformed URLs, unsupported protocols and embedded URL credentials; CMS API/detail URL builders preserve existing query-string tokens instead of overwriting them.
+- Search cache keys now include source key, display name, URL, detail URL and adult flag; changing a source identity cannot return stale labels from another configuration.
+- Streamed search, quality probing and live probing now abort in-flight upstream requests when the browser disconnects. Per-host waiters are removed from the FIFO queue on cancellation, and host slots are released idempotently.
+- `fetchWithSafeRedirects` always follows redirects manually and revalidates every hop; the deprecated `safeRedirects: false` option can no longer disable the SSRF redirect guard. Redirect response bodies are cancelled before the next hop, and composed abort signals remain effective through response-body reads without accumulating anonymous listeners.
+- The generic VOD/media proxy now applies its timeout only while waiting for upstream response headers; media bodies are not cut off by the old 8-second timeout. HLS manifests are limited to 2 MiB and 10 seconds, empty/oversized/stalled manifests fail explicitly, and upstream error pages are not rewritten or cached as playlists.
+- Live-probe HLS manifests are limited to 1 MiB, preventing a user-supplied playlist URL from forcing an unbounded response-body allocation.
+- All upstream response bodies from user-configurable CMS and IPTV sources are now bounded while streaming: search page JSON 512 KiB, source-test JSON 1 MiB, detail JSON/HTML 2 MiB, source subscriptions 4 MiB, live M3U 8 MiB and XMLTV 32 MiB. Oversized bodies are cancelled instead of fully buffered.
+- XMLTV gzip decompression now has a 64 MiB output ceiling to prevent a small compressed EPG from expanding into an unbounded allocation.
+- Direct video downloads now validate actual container signatures even when the upstream claims `video/mp4`, reject HTML/JSON masquerading as video, cap signature reads at 64 bytes / 5 seconds, and sanitize Range to one byte range so multipart/byteranges cannot be mislabeled as a video file. MP4 detection handles leading `free` boxes and extended-size `ftyp` boxes.
+- Added regression coverage for cancellation, redirect-body cleanup, CMS query-token preservation, malformed source configs, oversized request/manifests, range handling, container signatures and HLS timeout behavior.
+- Version bumped to 2.23.5. Android TWA package remains unchanged; this is a server/PWA patch and remains backward-compatible with the existing signed APK.
 
 ## Follow-up patch 2.23.4 (2026-11-16)
+
+- Fixed an ArtPlayer 5.4.0 fullscreen regression: upstream issue [#1073](https://github.com/zhw2590582/ArtPlayer/issues/1073) confirms that web fullscreen followed by native fullscreen exits web fullscreen instead of entering native fullscreen. Both VOD and Live now keep the player inside its original container by setting `FULLSCREEN_WEB_IN_BODY=false`.
+- Centralized ArtPlayer static settings and restore both `FULLSCREEN_WEB_IN_BODY` and `CONTROL_HIDE_TIME` to the installed library defaults when the player unmounts, preventing route-to-route setting leakage.
+- Explicitly keep ArtPlayer `autoOrientation` disabled in both VOD and Live. The upstream safe-area fix exists in GitHub development code but is not in the current npm 5.4.0 package; the app does not activate that optional rotation plugin.
+- Added regression tests for the shared ArtPlayer settings and repeated trailing-dot local hostnames (`localhost..`, `localhost...`, and `api.localhost...`) in PeerTube media URL validation.
+- Version bumped to 2.23.4. Android TWA package remains unchanged; the server/PWA patch is backward-compatible with the existing signed APK.
+
+## Follow-up patch 2.23.3 (2026-11-16)
 
 - Fixed an ArtPlayer 5.4.0 fullscreen regression: upstream issue [#1073](https://github.com/zhw2590582/ArtPlayer/issues/1073) confirms that web fullscreen followed by native fullscreen exits web fullscreen instead of entering native fullscreen. Both VOD and Live now keep the player inside its original container by setting `FULLSCREEN_WEB_IN_BODY=false`.
 - Centralized ArtPlayer static settings and restore both `FULLSCREEN_WEB_IN_BODY` and `CONTROL_HIDE_TIME` to the installed library defaults when the player unmounts, preventing route-to-route setting leakage.

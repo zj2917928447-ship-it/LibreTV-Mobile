@@ -16,6 +16,7 @@
 - `PASSWORD` 与 `PROXY_SECRET` 由 Render 首次同步时生成，不写入 Git
 - `COOKIE_SECURE=true`
 - `LIVE_ALLOW_PRIVATE=0`，继续保持直播 SSRF 防护默认关闭内网放行
+- `DEFAULT_SOURCES` 预置本站开放媒体目录，首次访问自动显示并勾选；它只覆盖公共领域/开放许可资料，不是商业影视全集
 
 ## 首次部署
 
@@ -26,7 +27,8 @@
 5. 首次同步时 Render 自动生成 `PASSWORD` 与 `PROXY_SECRET`。
 6. 等待部署成功，打开 Render 分配的 `https://<service>.onrender.com`。
 7. 在 Render 服务的 **Environment** 页面查看自动生成的 `PASSWORD`，用于 LibreTV 登录；不要把它提交到 Git 或公开分享。
-8. 验证：
+8. 如需启用影视资料与正版观看渠道搜索，在 Environment 中新增 `TMDB_API_READ_ACCESS_TOKEN`，值为 TMDB Account Settings → API 下的 API Read Access Token。该 token 仅供服务端读取，绝不能放进 `NEXT_PUBLIC_` 变量或提交到 Git；非商业免费使用须按 TMDB 规范署名，商业用途先取得相应许可。
+9. 验证：
    - `/` 返回 200
    - `/manifest.webmanifest` 返回 200
    - `/api/status` 返回 200 且 `passwordRequired=true`
@@ -45,6 +47,6 @@ Render 官方明确说明 Free 实例**不应承载生产应用**，只适合测
 
 ## Android APK / TWA 的后续步骤
 
-稳定 Render HTTPS 域名部署成功后，运行 `scripts/build-twa-release.ps1 -SiteUrl https://<service>.onrender.com`。脚本会先检查首页、PWA manifest、192/512 图标，以及由 `/assetlinks` 路由提供的 `/.well-known/assetlinks.json` 是否匹配本地签名证书，再生成并校验正式 APK/AAB。随后用 Chrome 验证 Digital Asset Links，并在 Android 真机安装测试。
+稳定 Render HTTPS 域名部署成功后，运行 `scripts/build-twa-release.ps1 -SiteUrl https://<service>.onrender.com`。脚本会先确认线上 `/api/status` 版本与本地 `package.json` 完全一致、`/free` 页面返回 200，再检查首页、PWA manifest、192/512 图标，以及由 `/assetlinks` 路由提供的 `/.well-known/assetlinks.json` 是否匹配本地签名证书，最后生成并校验正式 APK/AAB。构建脚本会读取 Windows 系统代理配置给 Bubblewrap/Gradle 使用，不再硬编码已失效的 7688 端口。随后用 Chrome 验证 Digital Asset Links，并在 Android 真机安装测试。
 
 不能用临时 `trycloudflare.com` 隧道地址作为正式 APK 的默认站点：隧道停止或重建后 URL 会变化，APK 将失去可用的服务端入口。

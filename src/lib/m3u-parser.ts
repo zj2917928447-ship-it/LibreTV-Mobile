@@ -1,12 +1,12 @@
 import type { LiveChannel } from './types';
 
 /**
- * M3U / M3U8 直播播放列表解析。
+ * M3U / M3U8 与 TVBox TXT（#genre#）直播播放列表解析。
  *
- * 兼容两种常见写法：
- * - 标准：`#EXTINF:-1 tvg-id="cctv1" tvg-logo="..." group-title="央视",CCTV-1`
- * - 非标准（属性写在标题后）：`#EXTINF:-1,CCTV-1 tvg-id="cctv1"`
- * 另支持 `#EXTGRP:分组名` 补充分组（属性缺失时的常见替代写法）。
+ * 兼容三种常见写法：
+ * - 标准 M3U：`#EXTINF:-1 tvg-id="cctv1" tvg-logo="..." group-title="央视",CCTV-1`
+ * - 非标准 M3U（属性写在标题后）：`#EXTINF:-1,CCTV-1 tvg-id="cctv1"`（含 `#EXTGRP:分组名`）
+ * - 国内常见 TXT 频道表：`央视频道,#genre#` 分组行 + `CCTV-1,https://...`（兼容 `#http...` 多线拼接）
  *
  * 解析为单趟扫描（O(n)），频道按 URL 去重，仅保留 http(s) 流地址
  * （rtp:// udp:// rtsp:// 等浏览器无法播放的协议直接丢弃）。
@@ -63,9 +63,10 @@ export function parseM3u(content: string, baseUrl?: string): LiveChannel[] {
 
   const seen = new Set<string>();
   let ctx: ExtinfContext | null = null;
+  let txtGroup: string | undefined;
 
   for (const rawLine of content.split(/\r?\n/)) {
-    const line = rawLine.trim();
+    const line = rawLine.trim().replace(/^\uFEFF/, '');
     if (!line) continue;
 
     if (line.toUpperCase().startsWith('#EXTINF')) {
@@ -91,7 +92,44 @@ export function parseM3u(content: string, baseUrl?: string): LiveChannel[] {
       continue;
     }
 
-    if (line.startsWith('#')) continue; // 其余指令（#EXTVLCOPT 等）忽略
+    if (line.startsWith('#') || line.startsWith('//')) continue; // 其余指令或注释行忽略
+
+    // TVBox / 国内直播源常见 TXT 分组语法：`央视频道,#genre#`
+    const genreMatch = line.match(/^([^,，]+)[,，]\s*#genre#\s*$/i);
+    if (genreMatch) {
+      txtGroup = genreMatch[1].trim() || undefined;
+      ctx = null;
+      continue;
+    }
+
+    // TXT 频道行语法：`CCTV-1 综合,https://...`（兼容 `url1#https://url2` 多源备用线与 `$高清` 尾注）
+    if (!ctx) {
+      const txtChannelMatch = line.match(/^([^,]+),\s*(https?:\/\/.+)$/i);
+      if (txtChannelMatch && !/^https?:\/\//i.test(txtChannelMatch[1].trim())) {
+        const baseName = txtChannelMatch[1].trim();
+        const rawUrls = txtChannelMatch[2].split(/#(?=https?:\/\/)/i);
+        rawUrls.forEach((rawCandidate, idx) => {
+          const dollarTag = rawCandidate.match(/^(https?:\/\/[^\s$]+)\$([^\s/?&=]+)$/i);
+          const cleanedCandidate = dollarTag ? dollarTag[1] : rawCandidate;
+          const routeTag = dollarTag?.[2]?.trim();
+          const streamUrl = normalizeStreamUrl(cleanedCandidate, baseUrl);
+          if (!streamUrl || seen.has(streamUrl)) return;
+          seen.add(streamUrl);
+          const suffix = routeTag
+            ? ` (${routeTag})`
+            : rawUrls.length > 1 && idx > 0
+              ? ` (线路${idx + 1})`
+              : '';
+          channels.push({
+            id: stableId(streamUrl),
+            name: `${baseName}${suffix}`,
+            url: streamUrl,
+            group: txtGroup,
+          });
+        });
+        continue;
+      }
+    }
 
     // 非注释行即流地址
     const url = normalizeStreamUrl(line, baseUrl);

@@ -17,6 +17,8 @@ const TITLE_RE = /<title(?:\s[^>]*)?>([\s\S]*?)<\/title>/i;
 const DESC_RE = /<desc(?:\s[^>]*)?>([\s\S]*?)<\/desc>/i;
 
 const DEFAULT_WINDOW_MS = 24 * 60 * 60 * 1000;
+/** Prevent a small gzip EPG from expanding into an unbounded in-memory XML document. */
+export const MAX_XMLTV_DECOMPRESSED_BYTES = 64 * 1024 * 1024;
 
 /** 安全解码码点：畸形实体（越界/NaN）返回空串而非抛 RangeError，避免单条脏数据毁掉整份 EPG */
 function safeCodePoint(n: number): string {
@@ -75,13 +77,14 @@ function extractAttrs(attrText: string): Record<string, string> {
 export function parseXmltv(
   content: string | Buffer,
   windowMs: number = DEFAULT_WINDOW_MS,
-  now: number = Date.now()
+  now: number = Date.now(),
+  maxDecompressedBytes: number = MAX_XMLTV_DECOMPRESSED_BYTES
 ): Map<string, EpgProgram[]> {
   let text: string;
   if (Buffer.isBuffer(content)) {
     text =
       content.length >= 2 && content[0] === 0x1f && content[1] === 0x8b
-        ? gunzipSync(content).toString('utf8')
+        ? gunzipSync(content, { maxOutputLength: maxDecompressedBytes }).toString('utf8')
         : content.toString('utf8');
   } else {
     text = content;

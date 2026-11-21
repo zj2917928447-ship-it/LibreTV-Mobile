@@ -21,6 +21,8 @@ import { LiveEpgPanel } from '@/components/live-epg-panel';
 import { Spinner } from '@/components/states';
 import { useAuth } from '@/components/auth';
 import { allLiveSources, useAppStore } from '@/lib/store';
+import { PUBLIC_LIVE_PACKS, resolvePublicLivePackUrl } from '@/lib/public-live-packs';
+import { useToast } from '@/components/toast';
 import { cn } from '@/lib/utils';
 import { SmartImage } from '@/components/smart-image';
 
@@ -41,6 +43,7 @@ export default function LivePage() {
 function LiveContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { toast } = useToast();
   // 精确订阅所需字段：任何其他 store 变化（如测活写回）不应触发本组件重渲染
   const liveSelectedUrls = useAppStore((s) => s.liveSelectedUrls);
   const liveEnvSources = useAppStore((s) => s.liveEnvSources);
@@ -93,9 +96,28 @@ function LiveContent() {
         list.push({ ...c, epg: source.epg, sourceUrl: source.url });
       }
     }
-    const groups = [...new Set(list.map((c) => c.group).filter((g): g is string => Boolean(g)))].sort(
-      (a, b) => a.localeCompare(b, 'zh')
-    );
+    const PRIORITY_GROUPS = [
+      '华语卫视与影视',
+      '24小时电影大片',
+      '经典老片与热播剧',
+      '动漫番剧与少儿',
+      '太空与自然纪实',
+      '人文历史与科教',
+      '综艺喜剧与合家欢',
+      '美食旅行与慢直播',
+      '体育赛事与极限汽车',
+      '全球音乐与演唱会',
+      'CGTN与亚洲国际',
+      '欧美与欧洲高清台',
+    ];
+    const groups = [...new Set(list.map((c) => c.group).filter((g): g is string => Boolean(g)))].sort((a, b) => {
+      const ia = PRIORITY_GROUPS.indexOf(a);
+      const ib = PRIORITY_GROUPS.indexOf(b);
+      if (ia !== -1 && ib !== -1) return ia - ib;
+      if (ia !== -1) return -1;
+      if (ib !== -1) return 1;
+      return a.localeCompare(b, 'zh');
+    });
     return { channels: list, groups, failedCount: failed };
   }, [playlistsQuery.data]);
 
@@ -222,6 +244,48 @@ function LiveContent() {
     <div className="min-h-screen flex flex-col">
       <Header showSearch />
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-4">
+        <div className="mb-3 flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+          <span className="shrink-0 text-faint font-medium">一键频道库 (40包)：</span>
+          {PUBLIC_LIVE_PACKS.map((pack) => {
+            const origin = typeof window !== 'undefined' ? window.location.origin : '';
+            const packUrl = origin ? resolvePublicLivePackUrl(pack, origin) : pack.urlOrPath;
+            const active = liveSelectedUrls.includes(packUrl);
+            const shortTitle = pack.name.replace(/^IPTV-Org · /, '').replace(/（.*）$/, '');
+            return (
+              <button
+                key={pack.id}
+                type="button"
+                className={cn(
+                  'shrink-0 rounded-full border px-2.5 py-1 transition-colors',
+                  active
+                    ? 'border-accent/40 bg-accent/10 text-accent font-medium'
+                    : 'border-line bg-chip text-muted hover:text-content hover:border-accent/40'
+                )}
+                onClick={() => {
+                  if (!origin) return;
+                  const target = resolvePublicLivePackUrl(pack, origin);
+                  const state = useAppStore.getState();
+                  const exists =
+                    state.liveEnvSources.some((s) => s.url === target) ||
+                    state.liveSubscriptions.some((s) => s.url === target);
+                  if (exists) {
+                    state.toggleLiveSelected(target);
+                    toast(
+                      active ? `已暂时收起「${shortTitle}」` : `已启用「${shortTitle}」`,
+                      'info'
+                    );
+                  } else {
+                    state.addLiveSubscription(target, pack.name);
+                    toast(`已加载「${shortTitle}」（${pack.channelEstimate}）`, 'success');
+                  }
+                }}
+              >
+                {active ? '✓ ' : '+ '}
+                {shortTitle} ({pack.channelEstimate})
+              </button>
+            );
+          })}
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">
           {/* 主栏：播放器 + 信息条 + 节目单 */}
           <div className="min-w-0">
@@ -235,17 +299,68 @@ function LiveContent() {
                   volumeBoost={volumeBoost}
                 />
               ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-black">
+                <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-black px-4 py-3 text-center overflow-y-auto">
                   <span className="live-dot" />
-                  <p className="text-white/60 text-sm">
+                  <p className="text-white/80 text-xs sm:text-sm">
                     {sources.length === 0
                       ? liveEnvSources.length + liveSubscriptions.length > 0
                         ? '所有直播源均已停用，请在设置中勾选启用'
-                        : '请先在设置中添加直播源（M3U 订阅）'
+                        : '当前尚未启用任何直播频道源'
                       : playlistsQuery.isLoading
                         ? '频道列表加载中...'
-                        : '从右侧选择一个频道开始观看'}
+                        : `已就绪 ${channels.length} 个直播频道，点击下方频道立即开播`}
                   </p>
+                  {channels.length > 0 && (
+                    <>
+                      <div className="flex flex-wrap items-center justify-center gap-1.5 max-w-lg">
+                        {channels.slice(0, 5).map((ch) => (
+                          <button
+                            key={ch.url}
+                            type="button"
+                            className="rounded-full border border-white/20 bg-white/10 hover:bg-accent/25 hover:border-accent px-2.5 py-1 text-xs text-white transition-colors"
+                            onClick={() => selectChannel(ch)}
+                          >
+                            ▶ {ch.name}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="flex flex-wrap items-center justify-center gap-2">
+                        <button
+                          type="button"
+                          className="btn-primary btn-sm lg:hidden"
+                          onClick={() => setListOpen(true)}
+                        >
+                          打开全部频道列表 ({channels.length})
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-ghost btn-sm text-white/85 border border-white/20 hover:border-accent"
+                          onClick={() => {
+                            const pool = channels.slice(0, Math.min(channels.length, 120));
+                            const picked = pool[Math.floor(Math.random() * pool.length)];
+                            if (picked) selectChannel(picked);
+                          }}
+                        >
+                          随机换台
+                        </button>
+                      </div>
+                    </>
+                  )}
+                  {sources.length === 0 && liveEnvSources.length + liveSubscriptions.length === 0 && (
+                    <button
+                      type="button"
+                      className="btn-primary btn-sm"
+                      onClick={() => {
+                        const origin = typeof window !== 'undefined' ? window.location.origin : '';
+                        if (!origin) return;
+                        useAppStore
+                          .getState()
+                          .addLiveSubscription(`${origin}/open-live-channels.m3u`, '内置双阶实测超清直播频道');
+                      }}
+                    >
+                      一键启用内置免费频道
+                    </button>
+                  )}
                 </div>
               )}
             </div>

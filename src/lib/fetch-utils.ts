@@ -1,13 +1,14 @@
 /** 服务端上游请求工具：超时、重试、安全跳转、JSON 解析 */
 
 import { allowLivePrivate, checkLiveUrlAllowed, checkUpstreamAllowed, runWithSSRFProtection } from './ssrf';
+import { readResponseJsonLimited } from './response-body';
 
 export interface FetchOptions extends RequestInit {
   timeoutMs?: number;
   retries?: number;
   /**
-   * 安全跳转（默认开启）：禁用 fetch 的自动跟随，改为手动逐跳跟随，
-   * 每一跳重新执行 SSRF 校验——否则公网 URL 可 302 跳转到内网地址绕过预检。
+   * @deprecated Compatibility only. Redirects are always followed manually and each hop
+   * is revalidated; setting this to false cannot disable the SSRF redirect guard.
    */
   safeRedirects?: boolean;
   /**
@@ -114,10 +115,11 @@ export async function fetchWithSafeRedirects(
     let current = url;
     // headerTimeout 超时即 abort 内部 controller；外部 signal（调用方死线/客户端断开）链入同一 controller
     const controller = new AbortController();
-    if (init.signal) {
-      if (init.signal.aborted) controller.abort(init.signal.reason);
-      else init.signal.addEventListener('abort', () => controller.abort(init.signal?.reason), { once: true });
-    }
+    // Compose signals instead of attaching an anonymous listener to the request signal.
+    // The external signal must remain effective after headers (while the caller reads the
+    // response body), but a manual listener would otherwise remain attached for the life
+    // of a long request and accumulate across every manifest/segment fetch.
+    const signal = init.signal ? AbortSignal.any([init.signal, controller.signal]) : controller.signal;
     for (let hop = 0; hop <= MAX_REDIRECT_HOPS; hop++) {
       const verdict = allowPrivate
         ? await checkLiveUrlAllowed(current)
@@ -128,7 +130,7 @@ export async function fetchWithSafeRedirects(
       const timer = headerTimeoutMs ? setTimeout(() => controller.abort(), headerTimeoutMs) : null;
       let res: Response;
       try {
-        res = await fetch(current, { ...init, signal: controller.signal, redirect: 'manual' });
+        res = await fetch(current, { ...init, signal, redirect: 'manual' });
       } catch (err: unknown) {
         normalizeSSRFError(err);
       } finally {
@@ -137,7 +139,18 @@ export async function fetchWithSafeRedirects(
       if (!REDIRECT_STATUSES.has(res.status)) return { res, finalUrl: current };
       const location = res.headers.get('location');
       if (!location) return { res, finalUrl: current };
-      current = new URL(location, current).href;
+
+      // Redirect bodies are never exposed to the caller. Cancel them before the next hop
+      // so a large/interminate 3xx body cannot pin a socket or consume upstream bandwidth.
+      let nextUrl: string;
+      try {
+        nextUrl = new URL(location, current).href;
+      } catch (error) {
+        try { await res.body?.cancel(); } catch { /* ignore */ }
+        throw error;
+      }
+      try { await res.body?.cancel(); } catch { /* ignore */ }
+      current = nextUrl;
     }
     throw new Error('重定向次数过多');
   });
@@ -149,9 +162,10 @@ export async function fetchUpstream(url: string, options: FetchOptions = {}): Pr
 
 /** 同 fetchUpstream，额外返回重定向后的最终 URL */
 export async function fetchUpstreamWithMeta(url: string, options: FetchOptions = {}): Promise<FetchResult> {
-  const { timeoutMs = 8000, retries = 0, safeRedirects = true, allowPrivate = false, ...init } = options;
-  // 与 fetchWithSafeRedirects 同一口径（#980）：连接层放行内网＝直播口径 + 部署开关
-  const connectAllowPrivate = allowPrivate && allowLivePrivate();
+  const { timeoutMs = 8000, retries = 0, safeRedirects: _safeRedirects = true, allowPrivate = false, ...init } = options;
+  // Compatibility only: redirect following is always manual so every hop is revalidated,
+  // including requests routed through the fixed-provider outbound proxy.
+  void _safeRedirects;
   // 外部 signal（调用方的总死线中断）与单次超时合并：任一触发即中断请求
   const timeoutSignal = AbortSignal.timeout(timeoutMs);
   const signal = init.signal
@@ -160,21 +174,8 @@ export async function fetchUpstreamWithMeta(url: string, options: FetchOptions =
   let lastError: unknown;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      if (!safeRedirects) {
-        try {
-          const res = await runWithSSRFProtection({ allowPrivate: connectAllowPrivate }, () =>
-            fetch(url, {
-              ...init,
-              signal,
-              redirect: init.redirect ?? 'follow',
-            })
-          );
-          return { res, finalUrl: res.url || url };
-        } catch (err: unknown) {
-          normalizeSSRFError(err);
-        }
-      }
-      // 手动逐跳跟随，每一跳重新过 SSRF 校验
+      // Always follow redirects manually and revalidate every hop. `safeRedirects:false`
+      // remains accepted for compatibility but cannot disable the SSRF redirect guard.
       return await fetchWithSafeRedirects(url, { ...init, signal }, { allowPrivate });
     } catch (err) {
       lastError = err;
@@ -186,8 +187,7 @@ export async function fetchUpstreamWithMeta(url: string, options: FetchOptions =
 export async function fetchUpstreamJson<T = unknown>(url: string, options: FetchOptions = {}): Promise<T> {
   const res = await fetchUpstream(url, options);
   if (!res.ok) throw new Error(`上游请求失败: ${res.status}`);
-  const data = (await res.json()) as T;
-  return data;
+  return readResponseJsonLimited<T>(res, 4 * 1024 * 1024);
 }
 
 /** 内存 TTL 缓存（豆瓣推荐等热点数据） */

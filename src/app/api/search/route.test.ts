@@ -3,6 +3,12 @@ import { POST } from './route';
 import { SESSION_COOKIE, signSession } from '@/lib/auth';
 import type { SearchResponse, SearchStreamEvent, SourceConfig } from '@/lib/types';
 
+// 避免宿主机开启 TUN / Fake-IP (198.18.0.0/15) 时将 *.example.com 测试域名解析到保留网段
+vi.mock('node:dns/promises', () => {
+  const lookup = vi.fn(async () => [{ address: '93.184.216.34', family: 4 }]);
+  return { default: { lookup }, lookup };
+});
+
 /**
  * 聚合搜索接口单测：跨源聚合、同源去重、精确命中置顶、成人内容过滤、
  * 失败源不影响整体、SSRF 字面量拒绝。上游一律 mock fetch，无真实网络。
@@ -36,7 +42,7 @@ function mockUpstream(): void {
   vi.stubGlobal('fetch', fn);
 }
 
-function makeRequest(body: unknown, stream = false): Request {
+function makeRequest(body: unknown, stream = false, signal?: AbortSignal): Request {
   const { token } = signSession();
   return new Request(`https://local.test/api/search${stream ? '?stream=1' : ''}`, {
     method: 'POST',
@@ -45,6 +51,7 @@ function makeRequest(body: unknown, stream = false): Request {
       cookie: `${SESSION_COOKIE}=${token}`,
     },
     body: JSON.stringify(body),
+    signal,
   });
 }
 
@@ -103,6 +110,108 @@ describe('POST /api/search', () => {
     expect(data.failures[0]?.sourceKey).toBe('evil');
     // 上游一次请求都不应发生
     expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('aborts upstream page requests when the client disconnects during streamed search', async () => {
+    let upstreamSignal: AbortSignal | undefined;
+    const fetchSpy = vi.fn((_input: RequestInfo | URL, init?: RequestInit) => {
+      upstreamSignal = init?.signal ?? undefined;
+      return new Promise<Response>((_resolve, reject) => {
+        if (upstreamSignal?.aborted) {
+          reject(new DOMException('Aborted', 'AbortError'));
+          return;
+        }
+        upstreamSignal?.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true });
+      });
+    });
+    vi.stubGlobal('fetch', fetchSpy);
+
+    const client = new AbortController();
+    const response = await POST(makeRequest({
+      wd: '客户端取消测试',
+      sources: [{ key: 'abort-source', name: '取消源', url: 'https://cms-abort.example.com/api.php?abort-test=1' }],
+    }, true, client.signal));
+    await vi.waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
+    client.abort();
+
+    expect(upstreamSignal?.aborted).toBe(true);
+    expect(await response.text()).toBe('');
+
+    // A disconnected partial search must not cache cancellation as a real source failure.
+    const retryFetch = vi.fn(async () => new Response(cmsList([
+      { vod_id: 9, vod_name: '客户端取消测试', type_name: '国产剧' },
+    ]), { headers: { 'content-type': 'application/json' } }));
+    vi.stubGlobal('fetch', retryFetch);
+    const retry = await POST(makeRequest({
+      wd: '客户端取消测试',
+      sources: [{ key: 'abort-source', name: '取消源', url: 'https://cms-abort.example.com/api.php?abort-test=1' }],
+    }, true));
+    const retryText = await retry.text();
+    expect(retryFetch).toHaveBeenCalledTimes(1);
+    expect(retryText).toContain('客户端取消测试');
+  });
+
+  it('rejects oversized JSON requests before processing source entries', async () => {
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    const response = await POST(makeRequest({ wd: 'x'.repeat(300_000), sources: SOURCES }));
+    expect(response.status).toBe(413);
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('rejects malformed source entries and non-string search terms without throwing', async () => {
+    const malformedSource = await POST(makeRequest({ wd: '测试剧', sources: [null] }));
+    expect(malformedSource.status).toBe(400);
+    const malformedTerm = await POST(makeRequest({ wd: 123, sources: SOURCES }));
+    expect(malformedTerm.status).toBe(400);
+    const malformedBody = await POST(makeRequest(null));
+    expect(malformedBody.status).toBe(400);
+  });
+
+  it('does not reuse cached results when a source is renamed or assigned a new key', async () => {
+    const fetchSpy = vi.fn(async () => new Response(cmsList([{ vod_id: 1, vod_name: '测试剧', type_name: '国产剧' }]), {
+      headers: { 'content-type': 'application/json' },
+    }));
+    vi.stubGlobal('fetch', fetchSpy);
+
+    const first = await POST(makeRequest({
+      wd: '测试剧',
+      sources: [{ key: 'source-old', name: '旧名称', url: 'https://cms-cache.example/api.php', isAdult: false }],
+    }));
+    expect(first.status).toBe(200);
+
+    const second = await POST(makeRequest({
+      wd: '测试剧',
+      sources: [{ key: 'source-new', name: '新名称', url: 'https://cms-cache.example/api.php', isAdult: false }],
+    }));
+    const data = await second.json() as SearchResponse;
+
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(data.list[0]?.sourceKey).toBe('source-new');
+    expect(data.list[0]?.sourceName).toBe('新名称');
+  });
+
+  it('preserves existing query-string credentials when building CMS search URLs', async () => {
+    let requestedUrl = '';
+    vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
+      requestedUrl = String(input);
+      return new Response(cmsList([{ vod_id: 1, vod_name: '测试剧', type_name: '国产剧' }]), {
+        headers: { 'content-type': 'application/json' },
+      });
+    }));
+
+    const response = await POST(makeRequest({
+      wd: '测试剧',
+      sources: [{ key: 'token', name: '带令牌的源', url: 'https://cms-token.example/api.php?token=secret&client=mobile' }],
+    }));
+
+    expect(response.status).toBe(200);
+    const url = new URL(requestedUrl);
+    expect(url.searchParams.get('token')).toBe('secret');
+    expect(url.searchParams.get('client')).toBe('mobile');
+    expect(url.searchParams.get('ac')).toBe('videolist');
+    expect(url.searchParams.get('wd')).toBe('测试剧');
+    expect(url.searchParams.get('pg')).toBe('1');
   });
 
   it('stream=1 以 NDJSON 逐源推送并以 done 事件收尾', async () => {
@@ -210,5 +319,22 @@ describe('POST /api/search', () => {
     });
     const unauthorized = await POST(noCookie);
     expect(unauthorized.status).toBe(401);
+  });
+
+  it('搜中文「蜘蛛侠」时保留开放片库返回的 Spider-Man 英文结果并过滤无关项', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(cmsList([
+      { vod_id: 101, vod_name: 'Spider-Man : mutés et mutants', type_name: 'PeerTube · Creative Commons' },
+      { vod_id: 102, vod_name: '蜘蛛侠：纵横宇宙', type_name: '动作片' },
+      { vod_id: 103, vod_name: '完全无关的纪录片', type_name: '纪录片' },
+    ]), { headers: { 'content-type': 'application/json' } })));
+
+    const res = await POST(makeRequest({
+      wd: '蜘蛛侠',
+      sources: [{ key: 'open', name: '开放片库', url: 'https://open.example.com/api/open-media' }],
+      filterAdult: true,
+    }));
+    expect(res.status).toBe(200);
+    const data = await res.json() as SearchResponse;
+    expect(data.list.map((item) => item.vodId).sort()).toEqual(['101', '102']);
   });
 });

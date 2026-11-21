@@ -4,6 +4,7 @@ import { checkLiveUrlAllowed } from '@/lib/ssrf';
 import { fetchUpstream } from '@/lib/fetch-utils';
 import { getLiveCache, setLiveCache } from '@/lib/live-cache';
 import { currentAndNext, parseXmltv } from '@/lib/xmltv';
+import { readResponseBytesLimited } from '@/lib/response-body';
 import type { EpgProgram } from '@/lib/types';
 
 export const runtime = 'nodejs';
@@ -27,6 +28,7 @@ export async function GET(req: Request) {
   const url = sp.get('url')?.trim();
   const channel = sp.get('channel')?.trim();
   if (!url || !channel) return jsonError('缺少 url 或 channel 参数', 400);
+  if (url.length > 8192 || channel.length > 256) return jsonError('节目单地址或频道标识过长', 400);
   const force = sp.get('force') === '1';
 
   // 直播专用校验 + allowPrivate：与 playlist/stream/probe 同一把尺子，
@@ -43,7 +45,7 @@ export async function GET(req: Request) {
         return jsonError(`节目单地址请求失败: ${res.status}`, 502);
       }
       // gzip 由 parseXmltv 内识别（fetch 对 .gz 不会自动解压）
-      const buf = Buffer.from(await res.arrayBuffer());
+      const buf = Buffer.from(await readResponseBytesLimited(res, 32 * 1024 * 1024));
       programMap = parseXmltv(buf, WINDOW_MS);
       setLiveCache(key, programMap, CACHE_TTL_MS, buf.byteLength * 2);
     } catch (err) {

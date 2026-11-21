@@ -336,7 +336,7 @@ export function LivePlayer({ url, title, onPrevChannel, onNextChannel, volumeBoo
       airplay: true,
       theme: '#2563eb',
       controls,
-      lang: navigator.language.toLowerCase().startsWith('zh') ? 'zh-cn' : 'en',
+      lang: 'zh-cn',
       moreVideoAttr: { playsInline: true },
       customType: {
         m3u8: (video: HTMLVideoElement) => {

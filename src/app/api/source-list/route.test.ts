@@ -1,3 +1,4 @@
+import { createCipheriv } from 'node:crypto';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GET } from './route';
 import { SESSION_COOKIE, signSession } from '@/lib/auth';
@@ -11,6 +12,8 @@ const state = vi.hoisted(() => ({
   body: null as unknown,
   /** 上游原始响应文本（优先于 body），用于模拟非 JSON / 带注释响应 */
   rawText: null as string | null,
+  /** 按 URL 精确命中的子响应映射（用于测试 TVBox 多仓） */
+  urlMap: {} as Record<string, unknown>,
   /** 点播源公网校验的模拟实现，默认全部放行 */
   proxyAllowed: (() => true) as (url: string) => boolean,
   /** 直播源校验的模拟开关 */
@@ -19,11 +22,18 @@ const state = vi.hoisted(() => ({
 
 vi.mock('@/lib/fetch-utils', () => ({
   fetchUpstream: vi.fn(
-    async () =>
-      new Response(state.rawText ?? JSON.stringify(state.body), {
+    async (url: string) => {
+      if (url in state.urlMap) {
+        return new Response(JSON.stringify(state.urlMap[url]), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        });
+      }
+      return new Response(state.rawText ?? JSON.stringify(state.body), {
         status: 200,
         headers: { 'content-type': 'application/json' },
-      })
+      });
+    }
   ),
 }));
 
@@ -61,18 +71,20 @@ beforeAll(() => {
 beforeEach(() => {
   state.body = null;
   state.rawText = null;
+  state.urlMap = {};
   state.proxyAllowed = () => true;
   state.liveAllowed = true;
 });
 
 describe('GET /api/source-list', () => {
-  it('TVBOX 配置：导入直连类条目并透传跳过统计', async () => {
+  it('TVBOX 配置：导入 JSON 与 XML 直连类条目并透传跳过统计', async () => {
     state.body = {
       sites: [
         { name: '正版源', type: 1, api: 'https://vod.example.com/api.php/provide/vod' },
+        { name: 'XML源', type: 0, api: 'https://xml.example.com/api.php/provide/vod/at/xml' },
         { name: '蜘蛛A', type: 3, api: 'csp_AppYs' },
         { name: '蜘蛛B', type: 3, api: 'csp_XBPQ' },
-        { name: 'XML站', type: 0, api: 'https://xml.example.com/api.php/provide/vod/at/xml' },
+        { name: '未知类型', type: 2, api: 'https://legacy.example.com/custom' },
       ],
       lives: [{ name: '直播', type: 0, url: 'https://live.example.com/list.m3u' }],
     };
@@ -81,7 +93,10 @@ describe('GET /api/source-list', () => {
     const data = await readJson(res);
 
     expect(res.status).toBe(200);
-    expect(data.sources).toEqual([{ name: '正版源', url: 'https://vod.example.com/api.php/provide/vod' }]);
+    expect(data.sources).toEqual([
+      { name: '正版源', url: 'https://vod.example.com/api.php/provide/vod' },
+      { name: 'XML源', url: 'https://xml.example.com/api.php/provide/vod/at/xml' },
+    ]);
     expect(data.liveSources).toHaveLength(1);
     expect(data.stats).toMatchObject({ format: 'tvbox', skipped: 3, skippedByReason: { spider: 2, xml: 1 } });
   });
@@ -179,5 +194,76 @@ describe('GET /api/source-list', () => {
 
     expect(res.status).toBe(400);
     expect(data.error).toBe('订阅内容不是合法的 JSON');
+  });
+
+  it('TVBox 多仓索引（urls）：自动拉取子仓库并聚合点播源与 M3U/TXT 直播源', async () => {
+    state.body = {
+      name: '全网多仓精选',
+      urls: [
+        { name: '一号仓', url: 'https://repo.example.com/1.json' },
+        { name: '二号仓', url: 'https://repo.example.com/2.json' },
+      ],
+    };
+    state.urlMap = {
+      'https://repo.example.com/1.json': {
+        sites: [{ name: '主力CMS', type: 1, api: 'https://vod1.example.com/api.php/provide/vod' }],
+        lives: [{ name: '央视M3U', type: 0, url: 'https://live.example.com/cctv.m3u' }],
+      },
+      'https://repo.example.com/2.json': {
+        sites: [{ name: '备用CMS', type: 1, api: 'https://vod2.example.com/api.php/provide/vod' }],
+        lives: [{ name: '卫视TXT', type: 0, url: 'https://live.example.com/ws.txt' }],
+      },
+    };
+
+    const res = await GET(makeRequest('https://feed.example.com/multi.json'));
+    const data = await readJson(res);
+
+    expect(res.status).toBe(200);
+    expect(data.name).toBe('全网多仓精选');
+    expect(data.sources?.map((s) => s.name)).toEqual(['主力CMS', '备用CMS']);
+    expect(data.liveSources?.map((s) => s.name)).toEqual(['央视M3U', '卫视TXT']);
+    expect(data.stats).toMatchObject({ format: 'tvbox-multi' });
+  });
+
+  it('智能兼容：直接填入 M3U/TXT 直播列表或单个 Apple CMS 接口地址时自动识别导入', async () => {
+    state.rawText = '央视频道,#genre#\nCCTV-1,https://live.example.com/cctv1.m3u8';
+    const liveRes = await GET(makeRequest('https://feed.example.com/iptv.txt'));
+    const liveData = await readJson(liveRes);
+    expect(liveRes.status).toBe(200);
+    expect(liveData.liveSources).toEqual([{ name: 'feed.example.com (1 频道)', url: 'https://feed.example.com/iptv.txt' }]);
+
+    state.rawText = null;
+    state.body = { code: 1, pagecount: 10, list: [{ vod_id: 1, vod_name: '测试片' }] };
+    const cmsRes = await GET(makeRequest('https://cms.example.com/api.php/provide/vod/'));
+    const cmsData = await readJson(cmsRes);
+    expect(cmsRes.status).toBe(200);
+    expect(cmsData.sources).toEqual([{ name: 'cms.example.com', url: 'https://cms.example.com/api.php/provide/vod' }]);
+  });
+
+  it('TVBox 2423..2324 Hex AES-128-CBC 加密订阅：自动解密并导入直连源', async () => {
+    const plain = JSON.stringify({
+      sites: [{ name: '加密单仓CMS', type: 1, api: 'https://enc.example.com/api.php/provide/vod' }],
+      lives: [{ name: '加密直播M3U', type: 0, url: 'https://enc.example.com/live.m3u' }],
+    });
+    const keyRaw = 'secret2423';
+    const ivRaw = '1712345678901';
+    const cipher = createCipheriv(
+      'aes-128-cbc',
+      Buffer.from(keyRaw.padEnd(16, '0'), 'utf8'),
+      Buffer.from(ivRaw.padEnd(16, '0'), 'utf8')
+    );
+    const enc = Buffer.concat([cipher.update(Buffer.from(plain, 'utf8')), cipher.final()]);
+    state.rawText =
+      '2423' +
+      Buffer.from(keyRaw, 'utf8').toString('hex') +
+      '2324' +
+      enc.toString('hex') +
+      Buffer.from(ivRaw, 'utf8').toString('hex');
+
+    const res = await GET(makeRequest('https://feed.example.com/encrypted.txt'));
+    const data = await readJson(res);
+    expect(res.status).toBe(200);
+    expect(data.sources).toEqual([{ name: '加密单仓CMS', url: 'https://enc.example.com/api.php/provide/vod' }]);
+    expect(data.liveSources).toEqual([{ name: '加密直播M3U', url: 'https://enc.example.com/live.m3u' }]);
   });
 });

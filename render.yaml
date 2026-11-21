@@ -19,7 +19,9 @@ services:
         value: "true"
       - key: LIVE_ALLOW_PRIVATE
         value: "0"
-      - key: DEFAULT_SUBSCRIPTIONS
-        value: '[{"url":"https://libretv-mobile-zj2917928447.onrender.com/open-media-sources.json","name":"开放影视资料库（Internet Archive / NASA / PeerTube / Wikimedia Commons）","refreshDays":1}]'
+      - key: DEFAULT_SOURCES
+        value: '[{"name":"内置双语开放影视库（4015+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / ESO）","url":"https://libretv-mobile-zj2917928447.onrender.com/api/open-media?short=1&zh=1","detail":"https://libretv-mobile-zj2917928447.onrender.com"}]'
+      - key: DEFAULT_LIVE_SOURCES
+        value: '[{"name":"内置双阶实测超清直播（5994 台卫视 / 电影 / 动漫 / 纪实 / 欧美）","url":"https://libretv-mobile-zj2917928447.onrender.com/open-live-channels.m3u"}]'
       - key: NEXT_TELEMETRY_DISABLED
         value: "1"

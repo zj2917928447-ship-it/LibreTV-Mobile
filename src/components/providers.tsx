@@ -10,6 +10,34 @@ import { useAppStore, hydrateLiveProbeResults } from '@/lib/store';
 import { api, STATUS_QUERY_KEY } from '@/lib/client-api';
 import { applyEnvPresets } from '@/lib/subscription-sync';
 
+const STARTER_PACK_SEEDED_KEY = 'libretv-starter-pack-v16';
+
+function seedStarterResourcesOnce() {
+  if (typeof window === 'undefined') return;
+  try {
+    if (localStorage.getItem(STARTER_PACK_SEEDED_KEY) === '1') return;
+    localStorage.setItem(STARTER_PACK_SEEDED_KEY, '1');
+  } catch {
+    return;
+  }
+  const origin = window.location.origin;
+  if (!origin || !/^https?:\/\//i.test(origin)) return;
+  const state = useAppStore.getState();
+  if (state.customAPIs.length === 0 && state.envSources.length === 0) {
+    state.addCustomApi({
+      name: '内置双语开放影视库（公版经典 + 开源动画 + 太空纪实）',
+      url: `${origin}/api/open-media?short=1&zh=1`,
+      detail: origin,
+    });
+  }
+  if (state.liveSubscriptions.length === 0 && state.liveEnvSources.length === 0) {
+    state.addLiveSubscription(
+      `${origin}/open-live-channels.m3u`,
+      '内置精选直连高清台（华语卫视 / 电影 / 动漫 / 纪实）'
+    );
+  }
+}
+
 export function Providers({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
     () =>
@@ -40,13 +68,16 @@ export function Providers({ children }: { children: ReactNode }) {
         // 与 AuthProvider 共用同一 query key，/api/status 全站只发一次
         return queryClient.fetchQuery({ queryKey: STATUS_QUERY_KEY, queryFn: () => api.status() });
       })
-      .then((d) => {
+      .then(async (d) => {
         // 预置数据（DEFAULT_SOURCES / DEFAULT_LIVE_SOURCES / DEFAULT_SUBSCRIPTIONS）
         // 预置订阅要经鉴权接口拉取，首屏这次可能发生在登录之前而 401 静默失败；
         // 登录成功后由 AuthProvider 再调一次 applyEnvPresets 补齐（函数幂等）
-        if (d) return applyEnvPresets(d);
+        if (d) await applyEnvPresets(d);
+        seedStarterResourcesOnce();
       })
-      .catch(() => {});
+      .catch(() => {
+        seedStarterResourcesOnce();
+      });
   }, [queryClient]);
 
   return (

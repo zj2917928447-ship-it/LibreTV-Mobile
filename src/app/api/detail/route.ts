@@ -3,6 +3,10 @@ import { guardRequest } from '@/lib/api-guard';
 import { cmsRequestHeaders, parseDetail, parseDetailPageHtml } from '@/lib/cms-parser';
 import { fetchUpstream, getCache, setCache } from '@/lib/fetch-utils';
 import { checkUpstreamAllowed } from '@/lib/ssrf';
+import { buildCmsApiUrl, buildCmsDetailPageUrl, normalizeCmsSourceConfig, normalizePublicHttpUrl } from '@/lib/cms-url';
+import { readCmsPayloadLimited, readResponseTextLimited } from '@/lib/response-body';
+import { isSameOriginPath } from '@/lib/same-origin-builtin';
+import { GET as getOpenMedia } from '@/app/api/open-media/route';
 import type { SourceConfig, VideoDetail } from '@/lib/types';
 
 export const runtime = 'nodejs';
@@ -11,11 +15,9 @@ export const runtime = 'nodejs';
 const DETAIL_CACHE_TTL = 60 * 1000;
 
 function parseSource(raw: string | null): SourceConfig | null {
-  if (!raw) return null;
+  if (!raw || raw.length > 8192) return null;
   try {
-    const obj = JSON.parse(raw) as SourceConfig;
-    if (!obj || !/^https?:\/\//.test(obj.url || '')) return null;
-    return obj;
+    return normalizeCmsSourceConfig(JSON.parse(raw));
   } catch {
     return null;
   }
@@ -32,9 +34,13 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const id = (url.searchParams.get('id') || '').trim();
   const source = parseSource(url.searchParams.get('source'));
-  const baseUrl = (url.searchParams.get('baseUrl') || '').trim(); // 可选：详情页根地址
+  const rawBaseUrl = url.searchParams.get('baseUrl');
+  const baseUrl = rawBaseUrl ? normalizePublicHttpUrl(rawBaseUrl) : ''; // 可选：详情页根地址
 
-  if (!id || !/^[\w-]+$/.test(id)) {
+  if (rawBaseUrl && !baseUrl) {
+    return NextResponse.json({ error: '无效的详情页根地址' }, { status: 400 });
+  }
+  if (!id || id.length > 256 || /\.\./.test(id) || !/^[\w.:-]+$/u.test(id)) {
     return NextResponse.json({ error: '无效的视频ID' }, { status: 400 });
   }
   if (!source) {
@@ -45,25 +51,31 @@ export async function GET(req: Request) {
     // 详情页根地址：显式 detail 优先，其次 baseUrl 参数，最后用接口地址的 origin 推导
     // （Apple CMS 的详情页通常与接口同域）。脏 URL 会让 new URL 抛错，由外层 catch 兜底
     const detailRoot = (source.detail || baseUrl || new URL(source.url).origin).replace(/\/+$/, '');
-    const cacheKey = `detail:${source.url}|${detailRoot}|${id}`;
+    // Cached details include source labels/adult flags; changing the source key or name must not reuse stale metadata.
+    const cacheKey = `detail:${source.key}|${source.name}|${source.isAdult === true ? 1 : 0}|${source.url}|${detailRoot}|${id}`;
     const cached = getCache<VideoDetail>(cacheKey);
     if (cached) {
       return NextResponse.json(cached);
     }
 
-    // 用户可控地址发起服务端请求，先过 SSRF 校验（协议白名单 + 内网/保留地址）
-    const listVerdict = await checkUpstreamAllowed(source.url);
-    if (!listVerdict.ok) {
-      return NextResponse.json({ error: listVerdict.reason }, { status: 400 });
+    const builtInOpenMedia = isSameOriginPath(source.url, req, '/api/open-media', { allowSearch: true });
+    if (!builtInOpenMedia) {
+      // 用户可控地址发起服务端请求，先过 SSRF 校验（协议白名单 + 内网/保留地址）
+      const listVerdict = await checkUpstreamAllowed(source.url);
+      if (!listVerdict.ok) {
+        return NextResponse.json({ error: listVerdict.reason }, { status: 400 });
+      }
     }
 
     let resolved: VideoDetail | null = null;
 
     // 1) 标准列表接口
-    const api = `${source.url.replace(/\/+$/, '')}?ac=videolist&ids=${encodeURIComponent(id)}`;
-    const res = await fetchUpstream(api, { timeoutMs: 10000, headers: cmsRequestHeaders() });
+    const api = buildCmsApiUrl(source.url, { ac: 'videolist', ids: id });
+    const res = builtInOpenMedia
+      ? await getOpenMedia(new Request(api, { signal: req.signal }))
+      : await fetchUpstream(api, { timeoutMs: 10000, headers: cmsRequestHeaders() });
     if (res.ok) {
-      const data = await res.json();
+      const data = await readCmsPayloadLimited(res, 2 * 1024 * 1024);
       try {
         const detail = parseDetail(data, source);
         if (detail.episodes.length > 0) {
@@ -81,13 +93,13 @@ export async function GET(req: Request) {
       if (!detailVerdict.ok) {
         return NextResponse.json({ error: detailVerdict.reason }, { status: 400 });
       }
-      const detailUrl = `${detailRoot}/index.php/vod/detail/id/${id}.html`;
+      const detailUrl = buildCmsDetailPageUrl(detailRoot, id);
       const detailRes = await fetchUpstream(detailUrl, {
         timeoutMs: 10000,
         headers: { 'User-Agent': cmsRequestHeaders()['User-Agent'] },
       });
       if (detailRes.ok) {
-        const html = await detailRes.text();
+        const html = await readResponseTextLimited(detailRes, 2 * 1024 * 1024);
         resolved = parseDetailPageHtml(html, source);
       }
     }

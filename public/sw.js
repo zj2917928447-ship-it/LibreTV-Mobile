@@ -1,5 +1,5 @@
 /* Conservative PWA cache: never cache API responses or media streams. */
-const CACHE_NAME = 'libretv-static-v1';
+const CACHE_NAME = 'libretv-static-v17';
 const PRECACHE = [
   '/offline.html',
   '/icons/icon-192.png',
@@ -38,7 +38,7 @@ self.addEventListener('fetch', (event) => {
     url.pathname.startsWith('/api/') ||
     url.pathname === '/watch' ||
     url.pathname === '/live' ||
-    /\.(m3u8|m3u|mp4|m4v|webm|flv|ts|m4s|mpd|key)(?:$|\?)/i.test(url.pathname)
+    /\.(m3u8|m3u|txt|mp4|m4v|webm|flv|ts|m4s|mpd|key)(?:$|\?)/i.test(url.pathname)
   ) {
     return;
   }
@@ -47,7 +47,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request).catch(async () => {
         const offline = await caches.match('/offline.html');
-        return offline || new Response('Offline', {
+        return offline || new Response('当前无网络连接，请恢复网络后重试', {
           status: 503,
           headers: { 'Content-Type': 'text/plain; charset=utf-8' },
         });

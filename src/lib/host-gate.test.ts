@@ -30,6 +30,36 @@ describe('acquireHostSlot', () => {
     r4();
   });
 
+  it('客户端取消排队请求后立即移出 FIFO 队列，不阻塞后续请求', async () => {
+    const r1 = await acquireHostSlot('t-abort-waiter');
+    const r2 = await acquireHostSlot('t-abort-waiter');
+    const r3 = await acquireHostSlot('t-abort-waiter');
+    const client = new AbortController();
+    const cancelled = acquireHostSlot('t-abort-waiter', client.signal);
+    const next = acquireHostSlot('t-abort-waiter');
+
+    client.abort();
+    await expect(cancelled).rejects.toMatchObject({ name: 'AbortError' });
+    r1();
+    const r4 = await next;
+
+    r2();
+    r3();
+    r4();
+  });
+
+  it('重复释放同一个名额不会破坏并发计数', async () => {
+    const r1 = await acquireHostSlot('t-release-once');
+    r1();
+    r1();
+    const r2 = await acquireHostSlot('t-release-once');
+    const r3 = await acquireHostSlot('t-release-once');
+    const r4 = await acquireHostSlot('t-release-once');
+    r2();
+    r3();
+    r4();
+  });
+
   it('不同 host 互不影响', async () => {
     const r1 = await acquireHostSlot('t-a');
     const r2 = await acquireHostSlot('t-b');
@@ -62,6 +92,22 @@ describe('withHostLimit', () => {
       });
     await Promise.all(Array.from({ length: 8 }, task));
     expect(peak).toBe(3);
+  });
+
+  it('已取消的排队任务不会执行 fn', async () => {
+    const r1 = await acquireHostSlot('t-cancel-fn');
+    const r2 = await acquireHostSlot('t-cancel-fn');
+    const r3 = await acquireHostSlot('t-cancel-fn');
+    const client = new AbortController();
+    let called = false;
+    const pending = withHostLimit('t-cancel-fn', async () => { called = true; }, client.signal);
+
+    client.abort();
+    await expect(pending).rejects.toMatchObject({ name: 'AbortError' });
+    expect(called).toBe(false);
+    r1();
+    r2();
+    r3();
   });
 
   it('不同 host 之间不互相等待', async () => {

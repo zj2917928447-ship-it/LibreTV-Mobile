@@ -22,9 +22,15 @@ import {
   selectArchiveVideoFile,
   selectCommonsVideoFile,
   resolveOpenMediaQuery,
+  buildOpenMediaSearchCacheKey,
   selectNasaVideoUrl,
   selectPeerTubeStreamUrl,
   normalizePeerTubeMediaUrl,
+  isLocPublicDomainFilmTitle,
+  expandBilingualQueryAliases,
+  localizeOpenMediaItem,
+  extractArchiveSubtitleFiles,
+  isPlayableOpenMediaDuration,
 } from './open-media';
 
 describe('bounded provider concurrency', () => {
@@ -56,6 +62,11 @@ describe('open-media search aliases', () => {
     expect(resolveOpenMediaQuery('蜘蛛侠英雄无归')).toBe('Spider-Man: No Way Home');
     expect(resolveOpenMediaQuery('超凡蜘蛛侠2')).toBe('The Amazing Spider-Man 2');
     expect(resolveOpenMediaQuery('流浪地球2')).toBe('流浪地球2');
+  });
+
+  it('shares cache identity between Chinese aliases and English provider terms, with a versioned key', () => {
+    expect(buildOpenMediaSearchCacheKey('蜘蛛侠')).toBe(buildOpenMediaSearchCacheKey('Spider-Man'));
+    expect(buildOpenMediaSearchCacheKey('蜘蛛侠')).toBe('open-media:search:v2:spider-man');
   });
 });
 
@@ -129,8 +140,24 @@ describe('open-media search quality filters', () => {
   });
 });
 
+describe('Library of Congress public-domain film allowlist', () => {
+  it('accepts only titles from the curated free-to-use film set and normalizes punctuation', () => {
+    expect(isLocPublicDomainFilmTitle('The great train robbery')).toBe(true);
+    expect(isLocPublicDomainFilmTitle('St. Louis blues')).toBe(true);
+    expect(isLocPublicDomainFilmTitle('The Memphis Belle: a story of a Flying Fortress')).toBe(true);
+    expect(isLocPublicDomainFilmTitle('Popeye the Sailor Meets Sindbad the Sailor')).toBe(true);
+    expect(isLocPublicDomainFilmTitle('San Francisco earthquake and fire, April 18, 1906')).toBe(true);
+    expect(isLocPublicDomainFilmTitle('San Francisco earthquake and fire')).toBe(false);
+    expect(isLocPublicDomainFilmTitle('Spider-Man (2002)')).toBe(false);
+    expect(isLocPublicDomainFilmTitle('The Cry of Jazz')).toBe(false);
+  });
+});
+
 describe('open media identifiers', () => {
   it('round-trips provider IDs without characters rejected by LibreTV detail routing', () => {
+    const locId = encodeOpenMediaId('loc', '00694220|The great train robbery');
+    expect(decodeOpenMediaId(locId)).toEqual({ provider: 'loc', externalId: '00694220|The great train robbery' });
+
     const id = encodeOpenMediaId('peertube', 'instance.example|f03ea6c6-f3b1-4566-a0e1-9b5edaaeadb0');
     expect(id).toMatch(/^om-[\w-]+$/);
     expect(decodeOpenMediaId(id)).toEqual({
@@ -352,5 +379,36 @@ describe('open media playback file selection', () => {
       streamingPlaylists: [],
       files: [{ fileUrl: 'https://video.example/720.mp4', resolution: { id: 720 } }],
     })).toBe('https://video.example/720.mp4');
+  });
+});
+
+describe('bilingual lexicon, archive legacy publicdomain license and subtitle extraction', () => {
+  it('expands Chinese queries to English equivalents and localizes classic film titles', () => {
+    expect(expandBilingualQueryAliases('蜘蛛侠')).toEqual(expect.arrayContaining(['蜘蛛侠', 'Spider-Man']));
+    expect(resolveOpenMediaQuery('将军号')).toBe('The General');
+    expect(resolveOpenMediaQuery('辛特尔')).toBe('Sintel');
+    const localized = localizeOpenMediaItem('The General (1926)', '将军号');
+    expect(localized.displayTitle).toBe('将军号 / The General (1926)');
+    expect(localized.chineseSummary).toContain('巴斯特·基顿');
+  });
+
+  it('accepts Archive legacy creativecommons.org/licenses/publicdomain/ and CC 3.0 while still blocking NC', () => {
+    expect(isArchiveRightsAllowed({ licenseurl: 'http://creativecommons.org/licenses/publicdomain/' })).toBe(true);
+    expect(isArchiveRightsAllowed({ licenseurl: 'https://creativecommons.org/licenses/by/3.0/' })).toBe(true);
+    expect(isArchiveRightsAllowed({ licenseurl: 'https://creativecommons.org/licenses/by-nc/3.0/' })).toBe(false);
+    expect(isPlayableOpenMediaDuration(600, false)).toBe(false);
+    expect(isPlayableOpenMediaDuration(600, true)).toBe(true);
+  });
+
+  it('extracts and prioritizes Chinese subtitles over English subtitles from Archive files', () => {
+    const subs = extractArchiveSubtitleFiles([
+      { name: 'movie.en.srt' },
+      { name: 'movie.zh-CN.vtt' },
+      { name: '../evil.srt' },
+      { name: 'movie.mp4' },
+    ]);
+    expect(subs).toHaveLength(2);
+    expect(subs[0]).toMatchObject({ fileName: 'movie.zh-CN.vtt', lang: 'zh-CN', label: '简体中文字幕' });
+    expect(subs[1]).toMatchObject({ fileName: 'movie.en.srt', lang: 'en' });
   });
 });

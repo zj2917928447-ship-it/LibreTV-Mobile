@@ -32,6 +32,14 @@ import {
   TOUCH_CONTROL_HIDE_MS,
 } from '@/lib/control-hide';
 import { configureArtPlayerGlobals, restoreArtPlayerGlobals } from '@/lib/artplayer-globals';
+import {
+  convertSubtitleToVtt,
+  decodeSubtitleBytes,
+  findActiveSubtitleText,
+  parseSubtitleCues,
+  type SubtitleCue,
+} from '@/lib/subtitles';
+import type { SubtitleTrack } from '@/lib/types';
 
 /** 片段时间统一保留 1 位小数：与面板展示保持一致，避免浮点尾巴 */
 const round1 = (v: number) => Math.round(v * 10) / 10;
@@ -111,6 +119,18 @@ interface PlayerShellProps {
   onNextEpisode?: () => void;
   hasPrevEpisode?: boolean;
   hasNextEpisode?: boolean;
+  /** 可选：当前视频可用的远程字幕轨列表 */
+  subtitles?: SubtitleTrack[];
+  /** 可选：当前选中的字幕来源（'off' 关闭 | 'local' 本地外挂字幕 | 远程字幕下标字符串 '0'..'N'） */
+  activeSubtitleKey?: string;
+  /** 可选：用户从本地加载的字幕原始文本 */
+  localSubtitleText?: string;
+  /** 可选：字幕时间轴偏移（秒） */
+  subtitleOffset?: number;
+  /** 可选：字幕字号档位 */
+  subtitleSize?: 'sm' | 'md' | 'lg' | 'xl';
+  /** 可选：远程字幕加载完成时回传原始文本，供字幕栏执行一键中文翻译 */
+  onRemoteSubtitleLoaded?: (text: string) => void;
 }
 
 export function PlayerShell({
@@ -139,6 +159,12 @@ export function PlayerShell({
   onNextEpisode,
   hasPrevEpisode,
   hasNextEpisode,
+  subtitles,
+  activeSubtitleKey = 'off',
+  localSubtitleText = '',
+  subtitleOffset = 0,
+  subtitleSize = 'md',
+  onRemoteSubtitleLoaded,
 }: PlayerShellProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -200,7 +226,11 @@ export function PlayerShell({
   // 跳过按钮提示；用 ref 比较，避免 timeupdate 每 250ms 触发重渲染
   const [skipPrompt, setSkipPrompt] = useState<ResolvedSegment | null>(null);
   const skipPromptRef = useRef<ResolvedSegment | null>(null);
-  // 刚跳过的片段：给一个撤销窗口，误标导致跳掉正片时不必手动拖回去
+  // 双通道字幕状态：cues 驱动高清描边层，Blob URL 驱动原生 <video><track>（兼容 iOS 系统全屏）
+  const subtitleCuesRef = useRef<SubtitleCue[]>([]);
+  const subtitleOverlayRef = useRef<HTMLDivElement | null>(null);
+  const lastSubtitleTextRef = useRef('');
+  const [rawRemoteSubtitle, setRawRemoteSubtitle] = useState('');
   const [undoSkip, setUndoSkip] = useState<{ from: number; segment: ResolvedSegment } | null>(null);
   const undoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -517,9 +547,42 @@ export function PlayerShell({
     };
 
     const restoreEvents = ['loadedmetadata', 'durationchange', 'canplay'] as const;
-    const onRestoreEvent = () => { void restoreAndStart(); };
+    let directStallTimer: ReturnType<typeof setTimeout> | null = null;
+    if (!mediaUrl.startsWith('/api/proxy')) {
+      directStallTimer = setTimeout(() => {
+        if (
+          video.readyState === 0 &&
+          !playbackStartedRef.current &&
+          !videoErrorRetryUsedRef.current &&
+          currentMediaUrlRef.current === mediaUrl
+        ) {
+          videoErrorRetryUsedRef.current = true;
+          showHint('直连较慢，已自动切换代理通道...');
+          const proxiedUrl = `/api/proxy?url=${encodeURIComponent(mediaUrl)}`;
+          setupNativeMedia(video, proxiedUrl, true);
+          if (artRef.current) {
+            void artRef.current.switchUrl(proxiedUrl).catch(() => {});
+          } else {
+            video.src = proxiedUrl;
+            video.load();
+            void video.play().catch(() => {});
+          }
+        }
+      }, 6500);
+    }
+    const onRestoreEvent = () => {
+      if (directStallTimer) {
+        clearTimeout(directStallTimer);
+        directStallTimer = null;
+      }
+      void restoreAndStart();
+    };
     restoreEvents.forEach((event) => video.addEventListener(event, onRestoreEvent));
     restoreCleanupRef.current = () => {
+      if (directStallTimer) {
+        clearTimeout(directStallTimer);
+        directStallTimer = null;
+      }
       restoreEvents.forEach((event) => video.removeEventListener(event, onRestoreEvent));
     };
     if (checkExistingMetadata && video.readyState >= 1) void restoreAndStart();
@@ -611,7 +674,7 @@ export function PlayerShell({
       airplay: true,
       hotkey: false,
       theme: '#2563eb',
-      lang: navigator.language.toLowerCase().startsWith('zh') ? 'zh-cn' : 'en',
+      lang: 'zh-cn',
       moreVideoAttr: { crossOrigin: 'anonymous', playsInline: true },
       // 上/下集放在播放键右侧：换集是看剧最高频的动作，不该让用户滚回页面下方找按钮
       controls: [
@@ -665,7 +728,56 @@ export function PlayerShell({
       });
     });
 
-    // 进度条区间可视化：初始渲染一次，换集 duration 变化时重绘
+    const syncSubtitleDisplay = () => {
+      const overlay = subtitleOverlayRef.current;
+      if (!overlay) return;
+      const nextText = findActiveSubtitleText(subtitleCuesRef.current, art.currentTime);
+      if (nextText === lastSubtitleTextRef.current) return;
+      lastSubtitleTextRef.current = nextText;
+      overlay.textContent = nextText;
+      overlay.style.display = nextText ? 'block' : 'none';
+    };
+
+    if (art.template?.$player) {
+      const overlay = document.createElement('div');
+      overlay.dataset.libretvSubtitle = '1';
+      overlay.style.cssText = [
+        'position:absolute',
+        'left:6%',
+        'right:6%',
+        'bottom:10%',
+        'z-index:25',
+        'pointer-events:none',
+        'text-align:center',
+        'color:#ffffff',
+        'font-weight:600',
+        'line-height:1.45',
+        'white-space:pre-line',
+        'text-shadow:0 1px 3px rgba(0,0,0,0.95),0 0 6px rgba(0,0,0,0.9),1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000',
+        'display:none',
+      ].join(';');
+      art.template.$player.appendChild(overlay);
+      subtitleOverlayRef.current = overlay;
+    }
+
+    const onWebkitBeginFullscreen = () => {
+      const tracks = art.video?.textTracks;
+      if (!tracks) return;
+      for (let i = 0; i < tracks.length; i++) {
+        if (tracks[i].label === 'LibreTV-Subtitle') tracks[i].mode = 'showing';
+      }
+    };
+    const onWebkitEndFullscreen = () => {
+      const tracks = art.video?.textTracks;
+      if (!tracks) return;
+      for (let i = 0; i < tracks.length; i++) {
+        if (tracks[i].label === 'LibreTV-Subtitle') tracks[i].mode = 'hidden';
+      }
+    };
+    art.video?.addEventListener('webkitbeginfullscreen', onWebkitBeginFullscreen);
+    art.video?.addEventListener('webkitendfullscreen', onWebkitEndFullscreen);
+    art.on('video:timeupdate', syncSubtitleDisplay);
+    art.on('video:seeked', syncSubtitleDisplay);
     renderSkipMarks();
     art.on('video:durationchange', renderSkipMarks);
     // 全屏切换 / 播放器尺寸变化会重建控件，色带随之被清掉，这里补一次重绘
@@ -761,15 +873,27 @@ export function PlayerShell({
       // 而不是直接钉死错误遮罩——重建后视频轨重新 append，黑屏有声即可解除
       if (!playbackStartedRef.current && !videoErrorRetryUsedRef.current) {
         videoErrorRetryUsedRef.current = true;
-        showHint('播放异常，正在重试...');
         const failedUrl = currentMediaUrlRef.current;
         if (isDirectMediaUrl(failedUrl)) {
           mediaHealthyRef.current = true;
           art.type = '';
-          setupNativeMedia(art.video, failedUrl, true);
-          art.video.load();
-          void art.video.play().catch(() => {});
+          const retryUrl = failedUrl.startsWith('/api/proxy')
+            ? failedUrl
+            : `/api/proxy?url=${encodeURIComponent(failedUrl)}`;
+          showHint(
+            retryUrl !== failedUrl
+              ? '直连受阻，正在通过代理通道重试...'
+              : '播放异常，正在重试...'
+          );
+          setupNativeMedia(art.video, retryUrl, true);
+          if (retryUrl !== failedUrl) {
+            void art.switchUrl(retryUrl).catch(() => {});
+          } else {
+            art.video.load();
+            void art.video.play().catch(() => {});
+          }
         } else {
+          showHint('播放异常，正在重试...');
           art.type = 'm3u8';
           setupHls(art.video, failedUrl, true);
         }
@@ -1040,6 +1164,10 @@ export function PlayerShell({
       el?.removeEventListener('touchcancel', onTouchEnd);
       el?.removeEventListener('touchmove', onTouchMove);
       el?.removeEventListener('contextmenu', onContextMenu);
+      art.video?.removeEventListener('webkitbeginfullscreen', onWebkitBeginFullscreen);
+      art.video?.removeEventListener('webkitendfullscreen', onWebkitEndFullscreen);
+      subtitleOverlayRef.current?.remove();
+      subtitleOverlayRef.current = null;
       art.video?.removeEventListener('resize', reportVideoHeight);
       el?.removeEventListener('mousemove', showControlsOnPointerMove);
       el?.removeEventListener('mouseleave', hideControlsOnMouseLeave);
@@ -1138,6 +1266,103 @@ export function PlayerShell({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [adFilter]);
+
+  // —— 远程字幕轨拉取：选中远程字幕下标时下载并解码（同源优先，跨域失败自动走代理） ——
+  useEffect(() => {
+    if (activeSubtitleKey === 'off' || activeSubtitleKey === 'local') {
+      setRawRemoteSubtitle('');
+      return;
+    }
+    const idx = Number.parseInt(activeSubtitleKey, 10);
+    const track = Number.isInteger(idx) && idx >= 0 ? subtitles?.[idx] : undefined;
+    if (!track?.url) {
+      setRawRemoteSubtitle('');
+      return;
+    }
+    const controller = new AbortController();
+    const fetchSubtitleText = async () => {
+      try {
+        let res = await fetch(track.url, { signal: controller.signal });
+        if (!res.ok && /^https?:\/\//i.test(track.url)) {
+          res = await fetch(`/api/proxy?url=${encodeURIComponent(track.url)}`, { signal: controller.signal });
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const buf = await res.arrayBuffer();
+        if (controller.signal.aborted) return;
+        const decoded = decodeSubtitleBytes(new Uint8Array(buf.slice(0, 2 * 1024 * 1024)));
+        setRawRemoteSubtitle(decoded);
+        onRemoteSubtitleLoaded?.(decoded);
+        showHint(`已启用字幕：${track.label}`);
+      } catch {
+        if (!controller.signal.aborted) {
+          setRawRemoteSubtitle('');
+          onRemoteSubtitleLoaded?.('');
+          showHint('字幕加载失败，可尝试加载本地 .srt/.vtt 字幕');
+        }
+      }
+    };
+    void fetchSubtitleText();
+    return () => controller.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSubtitleKey, subtitles]);
+
+  // —— 字幕字号实时更新 ——
+  useEffect(() => {
+    const overlay = subtitleOverlayRef.current;
+    if (!overlay) return;
+    const sizeMap: Record<'sm' | 'md' | 'lg' | 'xl', string> = {
+      sm: 'clamp(13px, 2.2vw, 17px)',
+      md: 'clamp(15px, 2.8vw, 22px)',
+      lg: 'clamp(18px, 3.4vw, 27px)',
+      xl: 'clamp(21px, 4.1vw, 33px)',
+    };
+    overlay.style.fontSize = sizeMap[subtitleSize] || sizeMap.md;
+  }, [subtitleSize]);
+
+  // —— 同步内存 Cue 数组与原生 <video><track> WebVTT Blob ——
+  useEffect(() => {
+    const activeRaw =
+      activeSubtitleKey === 'off'
+        ? ''
+        : activeSubtitleKey === 'local'
+          ? localSubtitleText
+          : rawRemoteSubtitle;
+    const cues = activeRaw ? parseSubtitleCues(activeRaw, subtitleOffset) : [];
+    subtitleCuesRef.current = cues;
+    lastSubtitleTextRef.current = '';
+
+    const art = artRef.current;
+    const overlay = subtitleOverlayRef.current;
+    if (overlay) {
+      const nextText = art ? findActiveSubtitleText(cues, art.currentTime) : '';
+      lastSubtitleTextRef.current = nextText;
+      overlay.textContent = nextText;
+      overlay.style.display = nextText ? 'block' : 'none';
+    }
+
+    const video = art?.video as HTMLVideoElement | undefined;
+    if (!video) return;
+    video.querySelectorAll('track[data-libretv-track]').forEach((el) => el.remove());
+    if (cues.length === 0) return;
+
+    const vtt = convertSubtitleToVtt(activeRaw, subtitleOffset);
+    const blobUrl = URL.createObjectURL(new Blob([vtt], { type: 'text/vtt;charset=utf-8' }));
+    const trackEl = document.createElement('track');
+    trackEl.dataset.libretvTrack = '1';
+    trackEl.kind = 'subtitles';
+    trackEl.srclang = 'zh-CN';
+    trackEl.label = 'LibreTV-Subtitle';
+    trackEl.src = blobUrl;
+    video.appendChild(trackEl);
+    if (trackEl.track) {
+      trackEl.track.mode = 'hidden';
+    }
+
+    return () => {
+      trackEl.remove();
+      URL.revokeObjectURL(blobUrl);
+    };
+  }, [activeSubtitleKey, localSubtitleText, rawRemoteSubtitle, subtitleOffset, url]);
 
   return (
     <div className="relative w-full h-full">

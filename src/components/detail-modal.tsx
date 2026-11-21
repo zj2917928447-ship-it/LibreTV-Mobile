@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '@/lib/client-api';
+import { hasDescriptiveEpisodeNames } from '@/lib/cms-parser';
 import type { SearchResultItem, VideoDetail } from '@/lib/types';
 import { buildWatchUrl } from '@/lib/utils';
 import { formatRemarks } from '@/lib/remarks';
@@ -29,7 +30,10 @@ export function DetailModal({ item, onClose }: { item: SearchResultItem | null; 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [reversed, setReversed] = useState(false);
+  const [routeIndex, setRouteIndex] = useState(0);
   const [posterFailed, setPosterFailed] = useState(false);
+  const [translatedDesc, setTranslatedDesc] = useState('');
+  const [translatingDesc, setTranslatingDesc] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
@@ -51,9 +55,13 @@ export function DetailModal({ item, onClose }: { item: SearchResultItem | null; 
   useEffect(() => {
     if (!item) {
       setDetail(null);
+      setRouteIndex(0);
+      setTranslatedDesc('');
       setError('');
       return;
     }
+    setRouteIndex(0);
+    setTranslatedDesc('');
     const source = resolveSource(store, item.sourceKey, {
       url: item.sourceUrl,
       name: item.sourceName,
@@ -90,17 +98,27 @@ export function DetailModal({ item, onClose }: { item: SearchResultItem | null; 
 
   if (!item) return null;
 
-  const episodes = detail ? (reversed ? [...detail.episodes].reverse() : detail.episodes) : [];
+  const playRoutes = detail?.playRoutes ?? [];
+  const safeRouteIndex = playRoutes.length > 0 ? Math.min(routeIndex, playRoutes.length - 1) : 0;
+  const rawEpisodes = playRoutes[safeRouteIndex]?.episodes ?? detail?.episodes ?? [];
+  const rawEpisodeNames = playRoutes[safeRouteIndex]?.episodeNames ?? detail?.episodeNames ?? [];
+  const descriptiveNames = hasDescriptiveEpisodeNames(rawEpisodeNames);
+  const maxLabelLen = descriptiveNames
+    ? Math.max(0, ...rawEpisodeNames.map((n) => n.trim().length))
+    : 0;
+  const episodes = reversed ? [...rawEpisodes].reverse() : rawEpisodes;
   const info = detail?.videoInfo;
 
   const play = (index: number) => {
-    if (!detail || !detail.episodes[index]) return;
+    if (!detail || !rawEpisodes[index]) return;
     addSearchHistory(item.name).catch(() => {});
     router.push(
       buildWatchUrl({
         sourceKey: item.sourceKey,
         vodId: item.vodId,
         index,
+        route: safeRouteIndex,
+        episodeUrl: rawEpisodes[index],
         title: item.name,
         sourceUrl: item.sourceUrl,
       })
@@ -109,7 +127,7 @@ export function DetailModal({ item, onClose }: { item: SearchResultItem | null; 
 
   const copyLinks = async () => {
     if (!detail) return;
-    const ok = await copyToClipboard(detail.episodes.join('\n'));
+    const ok = await copyToClipboard(rawEpisodes.join('\n'));
     if (ok) toast('播放链接已复制', 'success');
     else toast('复制失败，请检查浏览器权限', 'error');
   };
@@ -191,43 +209,120 @@ export function DetailModal({ item, onClose }: { item: SearchResultItem | null; 
                     </div>
                   )}
                   {info?.desc && (
-                    <p className="text-sm text-muted leading-relaxed line-clamp-3">{info.desc}</p>
+                    <div className="space-y-1.5">
+                      <p className="text-sm text-muted leading-relaxed line-clamp-4">
+                        {translatedDesc || info.desc}
+                      </p>
+                      {!translatedDesc && /[A-Za-z]{12,}/.test(info.desc) && (
+                        <button
+                          type="button"
+                          className="text-xs text-accent hover:underline"
+                          disabled={translatingDesc}
+                          onClick={async () => {
+                            if (!info.desc) return;
+                            setTranslatingDesc(true);
+                            try {
+                              const lines = info.desc.split('\n').map((l) => l.trim()).filter(Boolean).slice(0, 10);
+                              const res = await fetch('/api/translate', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ lines }),
+                              });
+                              if (!res.ok) throw new Error('翻译失败');
+                              const data = (await res.json()) as { translations?: string[] };
+                              if (data.translations?.length) {
+                                setTranslatedDesc(data.translations.join('\n'));
+                              }
+                            } catch {
+                              toast('简介翻译暂不可用', 'error');
+                            } finally {
+                              setTranslatingDesc(false);
+                            }
+                          }}
+                        >
+                          {translatingDesc ? '正在翻译简介为中文…' : '将英文简介翻译为简体中文'}
+                        </button>
+                      )}
+                    </div>
+                  )}
+                  {detail.subtitles && detail.subtitles.length > 0 && (
+                    <p className="text-xs text-accent">
+                      已检测到 {detail.subtitles.length} 条可用字幕轨（进入播放页可自动挂载或一键汉化）
+                    </p>
                   )}
                 </div>
               </div>
 
               {episodes.length > 0 ? (
                 <>
+                  {playRoutes.length > 1 && (
+                    <div className="flex flex-wrap items-center gap-1.5 mb-3 pb-2.5 border-b border-line/60">
+                      <span className="text-xs text-faint mr-1">播放线路:</span>
+                      {playRoutes.map((route, idx) => (
+                        <button
+                          key={`${route.name}-${idx}`}
+                          type="button"
+                          onClick={() => setRouteIndex(idx)}
+                          className={cn(
+                            'rounded-full px-2.5 py-1 text-xs transition-colors border',
+                            idx === safeRouteIndex
+                              ? 'border-accent bg-accent/15 text-accent font-medium'
+                              : 'border-line bg-chip text-muted hover:text-content'
+                          )}
+                        >
+                          {route.name} ({route.episodes.length})
+                        </button>
+                      ))}
+                    </div>
+                  )}
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2">
-                      <button
-                        className="btn-ghost btn-sm"
-                        onClick={() => setReversed((v) => !v)}
-                        aria-label={reversed ? '切换为正序排列' : '切换为倒序排列'}
-                        title="调整剧集列表的排列顺序"
-                      >
-                        <Icon
-                          name="arrowDown"
-                          className={cn('w-3.5 h-3.5 transition-transform', reversed && 'rotate-180')}
-                        />
-                        {reversed ? '正序排列' : '倒序排列'}
-                      </button>
+                      {episodes.length > 1 && (
+                        <button
+                          className="btn-ghost btn-sm"
+                          onClick={() => setReversed((v) => !v)}
+                          aria-label={reversed ? '切换为正序排列' : '切换为倒序排列'}
+                          title="调整剧集列表的排列顺序"
+                        >
+                          <Icon
+                            name="arrowDown"
+                            className={cn('w-3.5 h-3.5 transition-transform', reversed && 'rotate-180')}
+                          />
+                          {reversed ? '正序排列' : '倒序排列'}
+                        </button>
+                      )}
                       <span className="text-sm text-faint">共 {episodes.length} 集</span>
                     </div>
                     <button className="btn-primary btn-sm" onClick={copyLinks}>
                       复制链接
                     </button>
                   </div>
-                  <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-2 max-h-[40vh] overflow-y-auto scrollbar-thin pr-1">
+                  <div
+                    className={cn(
+                      'grid gap-2 max-h-[40vh] overflow-y-auto scrollbar-thin pr-1',
+                      descriptiveNames
+                        ? maxLabelLen > 10
+                          ? 'grid-cols-1 sm:grid-cols-2'
+                          : 'grid-cols-3 sm:grid-cols-4 md:grid-cols-5'
+                        : 'grid-cols-4 sm:grid-cols-5 md:grid-cols-7'
+                    )}
+                  >
                     {episodes.map((_, i) => {
-                      const realIndex = reversed ? detail.episodes.length - 1 - i : i;
+                      const realIndex = reversed ? rawEpisodes.length - 1 - i : i;
+                      const label = descriptiveNames
+                        ? rawEpisodeNames[realIndex] || String(realIndex + 1)
+                        : String(realIndex + 1);
                       return (
                         <button
                           key={realIndex}
-                          className="btn-ghost btn-sm !px-1 text-center"
+                          className={cn(
+                            'btn-ghost btn-sm truncate',
+                            descriptiveNames && maxLabelLen > 10 ? '!px-2.5 text-left justify-start' : '!px-1.5 text-center'
+                          )}
+                          title={rawEpisodeNames[realIndex] || `第 ${realIndex + 1} 集`}
                           onClick={() => play(realIndex)}
                         >
-                          {realIndex + 1}
+                          {label}
                         </button>
                       );
                     })}

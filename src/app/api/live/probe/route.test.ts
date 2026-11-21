@@ -2,6 +2,12 @@ import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { POST } from './route';
 import { SESSION_COOKIE, signSession } from '@/lib/auth';
 
+// 避免宿主机开启 TUN / Fake-IP (198.18.0.0/15) 时将测试假域名 *.test 解析到保留网段导致误触发 SSRF
+vi.mock('node:dns/promises', () => {
+  const lookup = vi.fn(async () => [{ address: '93.184.216.34', family: 4 }]);
+  return { default: { lookup }, lookup };
+});
+
 /**
  * 测活接口单测：流式 NDJSON、codec 解析、内容校验、结果缓存、内网放行。
  * 上游一律用 mock fetch，不产生真实网络请求。
@@ -39,7 +45,11 @@ function mockUpstream(): { fn: ReturnType<typeof vi.fn> } {
   return { fn };
 }
 
-function makeRequest(urls: string[], stream: boolean): Request {
+function makeRequest(urls: string[], stream: boolean, signal?: AbortSignal): Request {
+  return makeBodyRequest({ urls }, stream, signal);
+}
+
+function makeBodyRequest(body: unknown, stream = false, signal?: AbortSignal): Request {
   const { token } = signSession();
   return new Request(`https://local.test/api/live/probe${stream ? '?stream=1' : ''}`, {
     method: 'POST',
@@ -47,7 +57,8 @@ function makeRequest(urls: string[], stream: boolean): Request {
       'Content-Type': 'application/json',
       cookie: `${SESSION_COOKIE}=${token}`,
     },
-    body: JSON.stringify({ urls }),
+    body: JSON.stringify(body),
+    signal,
   });
 }
 
@@ -70,6 +81,13 @@ afterEach(() => {
 });
 
 describe('POST /api/live/probe', () => {
+  it('rejects null and array JSON bodies instead of throwing', async () => {
+    const nullBody = await POST(makeBodyRequest(null));
+    const arrayBody = await POST(makeBodyRequest([]));
+    expect(nullBody.status).toBe(400);
+    expect(arrayBody.status).toBe(400);
+  });
+
   it('stream=1 以 NDJSON 逐条返回，并解析 master 的 CODECS', async () => {
     mockUpstream();
     const res = await POST(makeRequest(['https://iptv.test/master.m3u8'], true));
@@ -93,6 +111,21 @@ describe('POST /api/live/probe', () => {
     expect(data.results[0]).toMatchObject({ ok: true, level: 'segment' });
   });
 
+  it('rejects oversized HLS manifests and cancels the upstream response body', async () => {
+    let cancelled = false;
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(new ReadableStream<Uint8Array>({
+      start(controller) { controller.enqueue(new Uint8Array(1024 * 1024 + 1)); },
+      cancel() { cancelled = true; },
+    }), { status: 200, headers: { 'content-type': 'application/vnd.apple.mpegurl' } })));
+
+    const response = await POST(makeRequest(['https://large-manifest.test/live.m3u8?probe=oversize'], true));
+    const [line] = await readNdjson(response);
+
+    expect(line.ok).toBe(false);
+    expect(String(line.error)).toContain('1 MiB');
+    expect(cancelled).toBe(true);
+  });
+
   it('返回 HTML 的伪 m3u8 判为不可用', async () => {
     mockUpstream();
     const res = await POST(makeRequest(['https://fake.test/fake-page.m3u8'], true));
@@ -107,6 +140,27 @@ describe('POST /api/live/probe', () => {
     const [line] = await readNdjson(res);
     expect(line.ok).toBe(false);
     expect(String(line.error)).toContain('不是流媒体');
+  });
+
+  it('cancels in-flight upstream probes when the NDJSON response body is cancelled', async () => {
+    let upstreamSignal: AbortSignal | undefined;
+    const fetchSpy = vi.fn((_input: RequestInfo | URL, init?: RequestInit) => {
+      upstreamSignal = init?.signal ?? undefined;
+      return new Promise<Response>((_resolve, reject) => {
+        if (upstreamSignal?.aborted) {
+          reject(new DOMException('Aborted', 'AbortError'));
+          return;
+        }
+        upstreamSignal?.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true });
+      });
+    });
+    vi.stubGlobal('fetch', fetchSpy);
+
+    const response = await POST(makeRequest(['https://cancel-live-probe.example/live.ts'], true));
+    await vi.waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
+    await response.body?.cancel();
+
+    expect(upstreamSignal?.aborted).toBe(true);
   });
 
   it('成功结果命中服务端缓存，重复测活不再请求上游', async () => {

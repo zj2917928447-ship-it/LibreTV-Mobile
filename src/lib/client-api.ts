@@ -1,6 +1,6 @@
 'use client';
 
-import type { SearchResponse, SearchStreamEvent, SourceSearchOutcome, VideoDetail, DoubanResponse, BangumiCalendarResponse, AuthStatusResponse, SourceConfig, SearchResultItem, LivePlaylistResponse, LiveEpgResponse, SourceListPayload, QualityProbeItem, QualityProbeResult } from './types';
+import type { SearchResponse, SearchStreamEvent, SourceSearchOutcome, VideoDetail, DoubanResponse, BangumiCalendarResponse, AuthStatusResponse, SourceConfig, SearchResultItem, LivePlaylistResponse, LiveEpgResponse, SourceListPayload, QualityProbeItem, QualityProbeResult, CatalogSearchResponse, CatalogProvidersResponse, CatalogProviderLookupItem } from './types';
 
 /**
  * 客户端 API 封装。401 时触发全局事件打开登录框，
@@ -122,6 +122,19 @@ export const api = {
    * 每个源结算立即回调（健康源结果不再等坏源超时），最终以聚合结果 resolve。
    * 未传 onSource 或流不可用时回退为一次性 JSON 请求。
    */
+  catalogSearch: (query: string, region: string, signal?: AbortSignal) => {
+    const sp = new URLSearchParams({ q: query, region });
+    return request<CatalogSearchResponse>(`/api/catalog/search?${sp.toString()}`, { signal });
+  },
+
+  catalogProviders: (items: CatalogProviderLookupItem[], region: string, signal?: AbortSignal) =>
+    request<CatalogProvidersResponse>('/api/catalog/providers', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items, region }),
+      signal,
+    }),
+
   search: async (
     wd: string,
     sources: SourceConfig[],

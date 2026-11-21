@@ -51,6 +51,47 @@ describe('fetchUpstream 安全跳转', () => {
     expect(await res.text()).toBe('ok');
   });
 
+  it('跟随重定向前取消不可见的 3xx 响应体，避免占用上游连接', async () => {
+    let cancelled = false;
+    const redirectBody = new ReadableStream<Uint8Array>({
+      start(controller) { controller.enqueue(new Uint8Array([1, 2, 3])); },
+      cancel() { cancelled = true; },
+    });
+    mockFetch([
+      () => new Response(redirectBody, { status: 302, headers: { location: 'https://93.184.216.34/b' } }),
+      () => new Response('ok', { status: 200 }),
+    ]);
+
+    const res = await fetchUpstream(PUBLIC_URL);
+
+    expect(res.status).toBe(200);
+    expect(await res.text()).toBe('ok');
+    expect(cancelled).toBe(true);
+  });
+
+  it('响应头返回后，外部 AbortSignal 仍能取消响应体', async () => {
+    const upstream = { signal: null as AbortSignal | null };
+    let bodyCancelled = false;
+    const body = new ReadableStream<Uint8Array>({
+      start(controller) { controller.enqueue(new Uint8Array([1, 2, 3])); },
+      cancel() { bodyCancelled = true; },
+    });
+    vi.stubGlobal('fetch', vi.fn(async (_url: string, init?: RequestInit) => {
+      upstream.signal = init?.signal ?? null;
+      upstream.signal?.addEventListener('abort', () => { void body.cancel(); }, { once: true });
+      return new Response(body, { status: 200 });
+    }));
+
+    const client = new AbortController();
+    const response = await fetchUpstream(PUBLIC_URL, { signal: client.signal });
+    expect(response.status).toBe(200);
+    expect(upstream.signal?.aborted).toBe(false);
+
+    client.abort();
+    await vi.waitFor(() => expect(upstream.signal?.aborted).toBe(true));
+    expect(bodyCancelled).toBe(true);
+  });
+
   it('无跳转时直接返回响应', async () => {
     const spy = mockFetch([() => new Response('direct', { status: 200 })]);
     const res = await fetchUpstream(PUBLIC_URL);
@@ -71,6 +112,15 @@ describe('fetchUpstream 安全跳转', () => {
     });
     vi.stubGlobal('fetch', vi.fn(() => Promise.reject(err)));
     await expect(fetchUpstream(PUBLIC_URL)).rejects.toThrow(/连接目标被拒绝: 目标地址解析到私有\/保留网络/);
+  });
+
+  it('safeRedirects 为 false 时仍逐跳阻止重定向到内网地址', async () => {
+    const spy = mockFetch([
+      () => new Response(null, { status: 302, headers: { location: 'http://127.0.0.1:8080/secret' } }),
+    ]);
+
+    await expect(fetchUpstream(PUBLIC_URL, { safeRedirects: false })).rejects.toThrow(/跳转目标被拒绝/);
+    expect(spy.mock.calls.length).toBe(1);
   });
 
   it('safeRedirects 为 false 时，底层连接解析到私网 IP 也会转换抛出友好错误', async () => {

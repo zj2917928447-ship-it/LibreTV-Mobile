@@ -2,11 +2,15 @@ import { describe, expect, it } from 'vitest';
 import {
   extractEpisodesFromPlayUrl,
   extractM3u8FromText,
+  extractPlayRoutes,
   filterAdultResults,
   filterRelevantResults,
+  formatPlayRouteName,
+  hasDescriptiveEpisodeNames,
   isAdultContent,
   isRelevant,
   normalizeTitle,
+  parseCmsXmlPayload,
   parseDetail,
   parseDetailPageHtml,
   parseSearchList,
@@ -78,8 +82,106 @@ describe('extractEpisodesFromPlayUrl', () => {
     expect(extractEpisodesFromPlayUrl(play)).toEqual(['https://cdn/a.mp4']);
   });
 
-  it('空输入返回空数组', () => {
+  it('空输入返回空数组，裸 http(s) 直链自动识别', () => {
     expect(extractEpisodesFromPlayUrl('')).toEqual([]);
+    expect(extractEpisodesFromPlayUrl('https://cdn.example.com/movie.m3u8')).toEqual([
+      'https://cdn.example.com/movie.m3u8',
+    ]);
+  });
+});
+
+describe('extractPlayRoutes & episodeNames (多线路与真实集名)', () => {
+  it('解析 $$$ 多线路、中文化线路代号并保留真实集名', () => {
+    const playFrom = 'lzshare$$$lzm3u8$$$ffm3u8';
+    const playUrl = [
+      'HD国语$https://vip.lzcdn2.com/share/dead1#HD粤语$https://vip.lzcdn2.com/share/dead2',
+      'HD国语$https://vip.lzcdn2.com/2026/guoyu/index.m3u8#HD粤语$https://vip.lzcdn2.com/2026/yueyu/index.m3u8',
+      '超清国语$https://vip.ffzy.com/2026/guoyu/index.m3u8#超清粤语$https://vip.ffzy.com/2026/yueyu/index.m3u8#幕后花絮$https://vip.ffzy.com/2026/extra/index.m3u8',
+    ].join('$$$');
+
+    const routes = extractPlayRoutes(playUrl, playFrom);
+    expect(routes).toHaveLength(2);
+    expect(routes[0]).toEqual({
+      name: '量子 M3U8',
+      episodes: [
+        'https://vip.lzcdn2.com/2026/guoyu/index.m3u8',
+        'https://vip.lzcdn2.com/2026/yueyu/index.m3u8',
+      ],
+      episodeNames: ['HD国语', 'HD粤语'],
+    });
+    expect(routes[1]).toEqual({
+      name: '非凡 M3U8',
+      episodes: [
+        'https://vip.ffzy.com/2026/guoyu/index.m3u8',
+        'https://vip.ffzy.com/2026/yueyu/index.m3u8',
+        'https://vip.ffzy.com/2026/extra/index.m3u8',
+      ],
+      episodeNames: ['超清国语', '超清粤语', '幕后花絮'],
+    });
+  });
+
+  it('hasDescriptiveEpisodeNames 准确区分纯集号与描述性标题', () => {
+    expect(hasDescriptiveEpisodeNames(['第01集', '第02集', '第10集'])).toBe(false);
+    expect(hasDescriptiveEpisodeNames(['1', '2', 'EP03'])).toBe(false);
+    expect(hasDescriptiveEpisodeNames(['HD国语', 'HD粤语'])).toBe(true);
+    expect(hasDescriptiveEpisodeNames(['第01集 · 创生之柱', '第02集 · 宇宙悬崖'])).toBe(true);
+    expect(formatPlayRouteName('bfzym3u8', 0)).toBe('暴风 M3U8');
+    expect(formatPlayRouteName('', 1)).toBe('线路 2');
+  });
+
+  it('parseDetail 同时输出向后兼容 episodes 以及 playRoutes / episodeNames', () => {
+    const detail = parseDetail(
+      {
+        list: [
+          {
+            vod_id: '77',
+            vod_name: '钢铁之泪',
+            vod_play_from: 'Blender主线$$$HLS备线',
+            vod_play_url: '720p直连$https://cdn1.example/tos.mp4$$$自适应HLS$https://cdn2.example/tos.m3u8',
+          },
+        ],
+      },
+      source
+    );
+    expect(detail.episodes).toEqual(['https://cdn1.example/tos.mp4']);
+    expect(detail.episodeNames).toEqual(['720p直连']);
+    expect(detail.playRoutes).toHaveLength(2);
+    expect(detail.playRoutes?.[1].name).toBe('HLS备线');
+  });
+});
+
+describe('parseCmsXmlPayload (Maccms / SeaCMS XML)', () => {
+  it('解析标准 <rss><list><video> XML 为可搜索与可播放的统一结构', () => {
+    const xml = `<?xml version="1.0" encoding="utf-8"?>
+<rss version="5.1">
+  <list page="1" pagecount="3">
+    <video>
+      <id>9527</id>
+      <name><![CDATA[蜘蛛侠：纵横宇宙]]></name>
+      <pic>https://img.example.com/spider.jpg</pic>
+      <type>动画电影</type>
+      <year>2023</year>
+      <area>美国</area>
+      <note><![CDATA[1080P中字]]></note>
+      <des><![CDATA[迈尔斯跨越多元宇宙。]]></des>
+      <dl>
+        <dd flag="m3u8"><![CDATA[正片$https://cdn.example.com/spider/index.m3u8]]></dd>
+      </dl>
+    </video>
+  </list>
+</rss>`;
+    const parsed = parseCmsXmlPayload(xml);
+    expect(parsed.pagecount).toBe(3);
+    const list = parseSearchList(parsed, source);
+    expect(list).toHaveLength(1);
+    expect(list[0]).toMatchObject({
+      vodId: '9527',
+      name: '蜘蛛侠：纵横宇宙',
+      remarks: '1080P中字',
+    });
+    const detail = parseDetail(parsed, source);
+    expect(detail.episodes).toEqual(['https://cdn.example.com/spider/index.m3u8']);
+    expect(detail.videoInfo.desc).toBe('迈尔斯跨越多元宇宙。');
   });
 });
 

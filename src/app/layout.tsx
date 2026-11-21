@@ -4,17 +4,17 @@ import { Providers } from '@/components/providers';
 
 export const metadata: Metadata = {
   title: {
-    default: 'LibreTV - 免费在线视频搜索与观看平台',
-    template: '%s - LibreTV',
+    default: '自由影视 - 免费在线视频搜索与观看平台',
+    template: '%s - 自由影视',
   },
   description:
-    'LibreTV 是一个免费的在线视频搜索平台，无广告、安全，提供来自多个视频源的内容搜索与观看服务，无需注册即可使用。',
+    '自由影视（LibreTV）是一个免费的中文在线视频搜索与观看平台，支持多源聚合搜索、外挂中文字幕与免费开放影视资源。',
   manifest: '/manifest.webmanifest',
   // 图标与门户站（LibreTV-portal）同一套：同一张 artwork 导出的多尺寸 + 根目录 favicon.ico 兜底。
   // 只声明单张 512 时，抓取端只能拿大图缩放，小尺寸下易糊、看起来「没填满」。
   appleWebApp: {
     capable: true,
-    title: 'LibreTV',
+    title: '自由影视',
     statusBarStyle: 'black-translucent',
   },
   formatDetection: { telephone: false },

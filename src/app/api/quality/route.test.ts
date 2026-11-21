@@ -13,6 +13,7 @@ const state = vi.hoisted(() => ({
   calls: 0,
   /** 模拟 probeQuality 抛异常（客户端断开） */
   abort: false,
+  waitForAbort: false,
   /** 内存缓存，模拟 fetch-utils 内的 getCache/setCache */
   cache: new Map<string, { value: unknown; expiresAt: number }>(),
 }));
@@ -33,9 +34,14 @@ vi.mock('@/lib/fetch-utils', () => ({
 }));
 
 vi.mock('@/lib/quality-probe', () => ({
-  probeQuality: vi.fn(async () => {
+  probeQuality: vi.fn(async (_item: unknown, signal?: AbortSignal) => {
     state.calls++;
-    if (state.abort) throw new DOMException('aborted', 'AbortError');
+    if (state.abort || signal?.aborted) throw new DOMException('aborted', 'AbortError');
+    if (state.waitForAbort) {
+      return new Promise((_resolve, reject) => {
+        signal?.addEventListener('abort', () => reject(new DOMException('aborted', 'AbortError')), { once: true });
+      });
+    }
     return { sourceKey: 'mock', vodId: 'mock', height: 1080 };
   }),
 }));
@@ -52,13 +58,39 @@ function post(items: unknown[]): Request {
   });
 }
 
+function postStream(items: unknown[], signal?: AbortSignal): Request {
+  return new Request('https://local.test/api/quality?stream=1', {
+    method: 'POST',
+    body: JSON.stringify({ items }),
+    signal,
+  });
+}
+
 beforeEach(() => {
   state.calls = 0;
   state.abort = false;
+  state.waitForAbort = false;
   state.cache.clear();
 });
 
 describe('POST /api/quality', () => {
+  it('rejects null and array JSON bodies instead of throwing', async () => {
+    const nullBody = await POST(new Request('https://local.test/api/quality', { method: 'POST', body: 'null' }));
+    const arrayBody = await POST(new Request('https://local.test/api/quality', { method: 'POST', body: '[]' }));
+    expect(nullBody.status).toBe(400);
+    expect(arrayBody.status).toBe(400);
+  });
+
+  it('rejects malformed CMS source configs before starting quality probes', async () => {
+    const response = await POST(post([
+      { source: { key: 'x', name: 'bad', url: 'https://user:pass@s.test/api' }, id: '1' },
+      { source: { key: 'x', name: 'bad', url: 'https://s.test/' + 'a'.repeat(3000) }, id: '2' },
+    ]));
+
+    expect(response.status).toBe(400);
+    expect(state.calls).toBe(0);
+  });
+
   it('同 URL + detail + 影片的多条请求合并成一次上游探测，但结果按各自 sourceKey 返回', async () => {
     // 同一份资源挂了两个源（订阅 + 自定义常见），url 与 id 相同、sourceKey 不同
     const res = await POST(post([item('a', 'https://s.test/api'), item('b', 'https://s.test/api')]));
@@ -97,6 +129,22 @@ describe('POST /api/quality', () => {
     state.abort = false;
     await POST(post([item('a', 'https://s.test/api')]));
     expect(state.calls).toBe(2);
+  });
+
+  it('aborts in-flight quality probes when a streamed client disconnects', async () => {
+    state.waitForAbort = true;
+    const client = new AbortController();
+    const response = await POST(postStream([item('abort', 'https://abort-quality.example/api')], client.signal));
+    const reader = response.body!.getReader();
+    const first = await reader.read();
+    expect(new TextDecoder().decode(first.value)).toContain('ping');
+    await vi.waitFor(() => expect(state.calls).toBe(1));
+
+    client.abort();
+    const next = await reader.read();
+
+    expect(next.done).toBe(true);
+    expect(state.cache.size).toBe(0);
   });
 
   it('流式响应先写一行心跳，客户端据此区分「网关拦了」与「探测失败」', async () => {

@@ -12,7 +12,7 @@ import { SearchHistoryDropdown, useSearchHistory } from './search-history';
 import { cn } from '@/lib/utils';
 import { OPEN_SETTINGS_EVENT } from '@/lib/ui-events';
 
-/** 顶部导航：Logo、搜索框（首页外）、历史、设置 */
+/** 顶部导航：Logo、搜索框（首页外）、免费资源、历史、设置 */
 export function Header({ showSearch = false }: { showSearch?: boolean }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -54,9 +54,10 @@ export function Header({ showSearch = false }: { showSearch?: boolean }) {
     <>
       <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur border-b border-line">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-2 sm:gap-3">
-          <Link href="/" aria-label="LibreTV 首页" className="flex items-center shrink-0">
+          <Link href="/" aria-label="自由影视 首页" className="flex items-center gap-2 shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icons/icon-512.png" alt="LibreTV" className="w-7 h-7 rounded-lg" />
+            <img src="/icons/icon-512.png" alt="自由影视" className="w-7 h-7 rounded-lg" />
+            <span className="font-semibold text-sm text-content hidden xs:inline sm:inline">自由影视</span>
           </Link>
 
           {showSearch && (
@@ -117,6 +118,9 @@ export function Header({ showSearch = false }: { showSearch?: boolean }) {
             <HeaderLink href="/live" active={pathname === '/live'}>
               直播
             </HeaderLink>
+            <HeaderLink href="/free" active={pathname === '/free'}>
+              免费资源
+            </HeaderLink>
             <HeaderLink href="/about" active={pathname === '/about'}>
               关于
             </HeaderLink>
@@ -132,8 +136,28 @@ export function Header({ showSearch = false }: { showSearch?: boolean }) {
             </IconButton>
           </nav>
 
-          {/* 手机：设置直接露出（最常用），其余收进汉堡菜单 */}
-          <div className="sm:hidden flex items-center gap-1 shrink-0">
+          {/* 手机：将最核心的「免费影院」「直播」「设置」直接露出，次要操作收进汉堡菜单 */}
+          <div className="sm:hidden flex items-center gap-0.5 shrink-0">
+            <Link
+              href="/free"
+              onClick={closeMenu}
+              className={cn(
+                'px-2 py-1 rounded-md text-xs font-medium transition-colors',
+                pathname === '/free' ? 'bg-accent/15 text-accent' : 'text-muted hover:text-content'
+              )}
+            >
+              免费影院
+            </Link>
+            <Link
+              href="/live"
+              onClick={closeMenu}
+              className={cn(
+                'px-2 py-1 rounded-md text-xs font-medium transition-colors',
+                pathname === '/live' ? 'bg-accent/15 text-accent' : 'text-muted hover:text-content'
+              )}
+            >
+              直播
+            </Link>
             {/* 与菜单项一致：打开抽屉前先收起菜单，否则关掉设置后汉堡菜单还摊在那儿 */}
             <IconButton
               label="设置"
@@ -164,6 +188,9 @@ export function Header({ showSearch = false }: { showSearch?: boolean }) {
             <div className="grid grid-cols-2 gap-1.5">
               <MenuRow href="/live" active={pathname === '/live'} icon="bolt" onNavigate={closeMenu}>
                 直播
+              </MenuRow>
+              <MenuRow href="/free" active={pathname === '/free'} icon="link" onNavigate={closeMenu}>
+                免费资源
               </MenuRow>
               <MenuRow href="/about" active={pathname === '/about'} icon="alert" onNavigate={closeMenu}>
                 关于

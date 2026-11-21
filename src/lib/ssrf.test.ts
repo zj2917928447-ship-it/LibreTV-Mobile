@@ -85,6 +85,8 @@ describe('trusted provider outbound proxy allowlist', () => {
     expect(isTrustedProviderProxyHost('archive.org')).toBe(true);
     expect(isTrustedProviderProxyHost('commons.wikimedia.org')).toBe(true);
     expect(isTrustedProviderProxyHost('images-api.nasa.gov')).toBe(true);
+    expect(isTrustedProviderProxyHost('search.joinpeertube.org')).toBe(true);
+    expect(isTrustedProviderProxyHost('www.loc.gov')).toBe(true);
     expect(isTrustedProviderProxyHost('archive.org.')).toBe(true);
     expect(isTrustedProviderProxyHost('evil.example')).toBe(false);
     expect(isTrustedProviderProxyHost('spectra.video')).toBe(false);
@@ -140,6 +142,14 @@ describe('DNS Rebinding & Connection SSRF Protection (#941)', () => {
   it(
     'a request to a public origin inside the protected scope must succeed',
     async (ctx) => {
+      // 若宿主机启用了 Clash/Mihomo Fake-IP (198.18.0.0/15)，系统 DNS 会把任意公网域名劫持为保留地址；
+      // 此时无真实公网 DNS 环境可供连外网验证，按受限网络同等跳过。
+      const dnsPromises = await import('node:dns/promises');
+      const hostResolved = await dnsPromises.default.lookup('example.com', { all: true }).catch(() => []);
+      if (hostResolved.length === 0 || hostResolved.some((r) => isPrivateIP(r.address))) {
+        ctx.skip();
+        return;
+      }
       let res: Response;
       try {
         res = await runWithSSRFProtection({ allowPrivate: false }, async () => {

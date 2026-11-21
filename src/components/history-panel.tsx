@@ -149,14 +149,17 @@ function HistoryItem({ item }: { item: HistoryEntry }) {
     item.playbackPosition > 10 && item.duration > 0 && item.playbackPosition < item.duration * 0.95;
   const percent = hasPercent ? Math.round((item.playbackPosition / item.duration) * 100) : 0;
 
-  const href = buildWatchUrl({
-    sourceKey: item.sourceKey,
-    vodId: item.vodId,
-    index: item.episodeIndex,
-    title: item.title,
-    sourceUrl: source?.url,
-    detail: source?.detail,
-  });
+  const href =
+    item.sourceKey === '__open_free__'
+      ? `/free?play=${encodeURIComponent(item.vodId)}${item.episodeIndex > 0 ? `&ep=${item.episodeIndex}` : ''}`
+      : buildWatchUrl({
+          sourceKey: item.sourceKey,
+          vodId: item.vodId,
+          index: item.episodeIndex,
+          title: item.title,
+          sourceUrl: source?.url,
+          detail: source?.detail,
+        });
 
   const remove = () => {
     void removeHistory(item.sourceKey, item.vodId).then(() => {
@@ -213,6 +216,7 @@ function HistoryItem({ item }: { item: HistoryEntry }) {
           <div className="min-w-0 flex-1">
             <div className="text-sm font-medium text-content truncate">{item.title}</div>
             <div className="text-xs text-faint mt-0.5 flex items-center gap-1.5 flex-wrap">
+              {item.sourceKey === '__open_free__' && <span className="text-accent">免费影院</span>}
               {item.totalEpisodes > 0 && <span>第 {item.episodeIndex + 1}/{item.totalEpisodes} 集</span>}
               {hasPercent && <span>· {formatTime(item.playbackPosition)}</span>}
               <span>· {formatRelativeTime(item.timestamp)}</span>

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { SESSION_COOKIE, checkRateLimit, sessionFromCookieHeader, signSession, checkPassword, clearRateLimit, isPasswordConfigured } from '@/lib/auth';
+import { readJsonBodyLimited, RequestBodyTooLargeError } from '@/lib/request-body';
 
 export const runtime = 'nodejs';
 
@@ -21,9 +22,14 @@ export async function POST(req: Request) {
 
   let password = '';
   try {
-    const body = (await req.json()) as { password?: string };
-    password = String(body.password ?? '');
-  } catch {
+    const body = await readJsonBodyLimited<unknown>(req, 8 * 1024);
+    password = body && typeof body === 'object' && !Array.isArray(body)
+      ? String((body as Record<string, unknown>).password ?? '')
+      : '';
+  } catch (error) {
+    if (error instanceof RequestBodyTooLargeError) {
+      return NextResponse.json({ success: false, error: '登录请求体过大' }, { status: 413 });
+    }
     return NextResponse.json({ success: false, error: '请求格式错误' }, { status: 400 });
   }
 

@@ -1,4 +1,4 @@
-import type { SearchResultItem, VideoDetail } from './types';
+import type { SearchResultItem, SubtitleTrack, VideoDetail, VideoPlayRoute } from './types';
 
 /**
  * Apple CMS（苹果CMS）资源站响应解析
@@ -10,11 +10,97 @@ const M3U8_PATTERN = /\$https?:\/\/[^"'\s]+?\.m3u8/g;
 const UA_HEADERS = {
   'User-Agent':
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-  Accept: 'application/json',
+  Accept: 'application/json, application/xml, text/xml, */*;q=0.8',
 };
 
 export function cmsRequestHeaders(): Record<string, string> {
   return { ...UA_HEADERS };
+}
+
+function decodeXmlEntities(raw: string): string {
+  const cdataStripped = raw.trim().replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/i, '$1');
+  return cdataStripped
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, '$1')
+    .replace(/&#x([0-9a-fA-F]{1,6});/g, (_, hex: string) => {
+      const code = Number.parseInt(hex, 16);
+      return Number.isFinite(code) && code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : '';
+    })
+    .replace(/&#(\d{1,7});/g, (_, dec: string) => {
+      const code = Number.parseInt(dec, 10);
+      return Number.isFinite(code) && code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : '';
+    })
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .trim();
+}
+
+function readXmlTagText(block: string, tag: string): string {
+  const re = new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`, 'i');
+  const match = block.match(re);
+  return match ? decodeXmlEntities(match[1]) : '';
+}
+
+/**
+ * 将苹果 CMS / 海洋 CMS（type=0）标准 `<rss><list><video>...</video></list></rss>` XML 响应
+ * 归一化为与 JSON 接口一致的 `{ code, page, pagecount, list }` 结构。
+ */
+export function parseCmsXmlPayload(xml: string): {
+  code: number;
+  page: number;
+  pagecount: number;
+  list: Record<string, unknown>[];
+} {
+  const clean = xml.replace(/^\uFEFF/, '').trim();
+  if (!/<(?:rss|list)\b/i.test(clean)) {
+    throw new Error('API返回的数据格式无效');
+  }
+
+  const listOpen = clean.match(/<list\b([^>]*)>/i)?.[1] ?? '';
+  const page = Number.parseInt(listOpen.match(/\bpage=["']?(\d+)/i)?.[1] ?? '1', 10) || 1;
+  const pagecount = Number.parseInt(listOpen.match(/\bpagecount=["']?(\d+)/i)?.[1] ?? '1', 10) || 1;
+
+  const list: Record<string, unknown>[] = [];
+  const videoRegex = /<video\b[^>]*>([\s\S]*?)<\/video>/gi;
+  let match: RegExpExecArray | null;
+  while ((match = videoRegex.exec(clean)) !== null && list.length < 200) {
+    const block = match[1];
+    const vodId = readXmlTagText(block, 'id');
+    const vodName = readXmlTagText(block, 'name');
+    const playFlags: string[] = [];
+    const playGroups: string[] = [];
+    const dlContent = block.match(/<dl\b[^>]*>([\s\S]*?)<\/dl>/i)?.[1] ?? block;
+    const ddRegex = /<dd\b([^>]*)>([\s\S]*?)<\/dd>/gi;
+    let ddMatch: RegExpExecArray | null;
+    while ((ddMatch = ddRegex.exec(dlContent)) !== null) {
+      const attrs = ddMatch[1] ?? '';
+      const flag = attrs.match(/\bflag=["']([^"']*)["']/i)?.[1]?.trim() || `线路${playGroups.length + 1}`;
+      const urlGroup = decodeXmlEntities(ddMatch[2]);
+      if (urlGroup) {
+        playFlags.push(flag);
+        playGroups.push(urlGroup);
+      }
+    }
+
+    list.push({
+      vod_id: vodId,
+      vod_name: vodName,
+      vod_pic: readXmlTagText(block, 'pic') || undefined,
+      type_name: readXmlTagText(block, 'type') || undefined,
+      vod_year: readXmlTagText(block, 'year') || undefined,
+      vod_area: readXmlTagText(block, 'area') || undefined,
+      vod_director: readXmlTagText(block, 'director') || undefined,
+      vod_actor: readXmlTagText(block, 'actor') || undefined,
+      vod_remarks: readXmlTagText(block, 'note') || readXmlTagText(block, 'state') || undefined,
+      vod_content: readXmlTagText(block, 'des') || undefined,
+      ...(playFlags.length > 0 ? { vod_play_from: playFlags.join('$$$') } : {}),
+      ...(playGroups.length > 0 ? { vod_play_url: playGroups.join('$$$') } : {}),
+    });
+  }
+
+  return { code: 1, page, pagecount, list };
 }
 
 /** 搜索响应 → 统一结果列表 */
@@ -46,27 +132,119 @@ export function parseSearchList(
   });
 }
 
+const PLAY_FROM_LABELS: Record<string, string> = {
+  lzm3u8: '量子 M3U8',
+  ffm3u8: '非凡 M3U8',
+  bfzym3u8: '暴风 M3U8',
+  ikm3u8: '爱坤 M3U8',
+  snm3u8: '索尼 M3U8',
+  wjm3u8: '无尽 M3U8',
+  hnzym3u8: '红牛 M3U8',
+  dyttm3u8: '电影天堂 M3U8',
+  jsm3u8: '极速 M3U8',
+  subm3u8: '光速 M3U8',
+  ukm3u8: 'U酷 M3U8',
+  kuaikan: '快看直连',
+  m3u8: 'M3U8 直连',
+  mp4: 'MP4 直连',
+};
+
+const NUMERIC_EPISODE_LABEL = /^(?:第\s*0*\d+\s*[集话期章节回]?|0*\d+|ep?\.?\s*0*\d+)$/iu;
+
+export function formatPlayRouteName(raw: string | undefined, index: number): string {
+  const trimmed = (raw ?? '').trim();
+  if (!trimmed) return `线路 ${index + 1}`;
+  const mapped = PLAY_FROM_LABELS[trimmed.toLowerCase()];
+  return mapped ?? trimmed;
+}
+
+/** 判断分集名是否包含描述性标题（如「HD国语」「第01集 · 创生之柱」「花絮」，而非纯集号） */
+export function hasDescriptiveEpisodeNames(episodeNames?: readonly string[]): boolean {
+  if (!episodeNames || episodeNames.length === 0) return false;
+  return episodeNames.some((name) => {
+    const trimmed = name.trim();
+    return Boolean(trimmed) && !NUMERIC_EPISODE_LABEL.test(trimmed);
+  });
+}
+
 /**
- * 从 vod_play_url 中提取分集地址：格式 源1$$$源2，集1$URL1#集2$URL2。
- * 部分源（如量子 lziapi、非凡 ffzy）第一条线路是网页中转页（…/share/xxx，不可播），
- * 真实 m3u8 在后面的线路里，因此优先取包含 m3u8 直链的线路；均无 m3u8 时回退第一条。
+ * 解析苹果CMS `vod_play_url` 与 `vod_play_from` 的 `$$$` 多线路及 `#`/`$` 分集名称：
+ * 1. 自动识别并保留真实的集名标签（如「HD国语」「HD粤语」「第01集 · 宇宙悬崖」）；
+ * 2. 当存在直连流媒体线路（.m3u8 / .mp4 / .webm 等）时，自动剔除不可直接播放的 `/share/` 网页中转壳线路，
+ *    并将直连媒体线路排在最前。
  */
-export function extractEpisodesFromPlayUrl(playUrl: string): string[] {
+export function extractPlayRoutes(playUrl: string, playFrom?: string): VideoPlayRoute[] {
   if (!playUrl) return [];
-  const groups = playUrl
+  const fromParts = (playFrom ?? '').split('$$$');
+  const parsedGroups = playUrl
     .split('$$$')
-    .map((group) =>
-      group
+    .map((group, groupIdx) => {
+      const entries = group
         .split('#')
         .map((ep) => {
-          const parts = ep.split('$');
-          return parts.length > 1 ? parts[1] : '';
+          const trimmedEp = ep.trim();
+          if (!trimmedEp) return null;
+          const parts = trimmedEp.split('$');
+          if (parts.length > 1) {
+            const label = parts[0].trim();
+            const url = parts.slice(1).join('$').trim();
+            return url.startsWith('http://') || url.startsWith('https://') ? { label, url } : null;
+          }
+          return /^https?:\/\//i.test(trimmedEp) ? { label: '', url: trimmedEp } : null;
         })
-        .filter((url) => url.startsWith('http://') || url.startsWith('https://'))
-    )
-    .filter((eps) => eps.length > 0);
-  if (groups.length === 0) return [];
-  return groups.find((eps) => eps.some((url) => url.includes('.m3u8'))) ?? groups[0];
+        .filter((entry): entry is { label: string; url: string } => entry !== null);
+
+      if (entries.length === 0) return null;
+      const episodes = entries.map((e) => e.url);
+      const episodeNames = entries.map((e, idx) => e.label || (entries.length === 1 ? '正片' : `第${idx + 1}集`));
+      const isDirectStream = episodes.some((u) =>
+        /\.(?:m3u8|mp4|webm|mkv|m4v|ogg|mov|ts)(?:$|[?#])/i.test(u) || u.includes('.m3u8')
+      );
+      const isHtmlShareWrapper =
+        !isDirectStream && episodes.every((u) => /\/share\/[A-Za-z0-9_-]+$/i.test(u));
+
+      return {
+        rawFrom: fromParts[groupIdx],
+        episodes,
+        episodeNames,
+        isDirectStream,
+        isHtmlShareWrapper,
+      };
+    })
+    .filter((g): g is NonNullable<typeof g> => g !== null);
+
+  if (parsedGroups.length === 0) return [];
+
+  const hasNonWrapper = parsedGroups.some((g) => !g.isHtmlShareWrapper);
+  const filtered = hasNonWrapper
+    ? parsedGroups.filter((g) => !g.isHtmlShareWrapper)
+    : parsedGroups;
+
+  const sorted = [...filtered].sort((a, b) => Number(b.isDirectStream) - Number(a.isDirectStream));
+
+  // 去重完全相同首集 URL 的镜像重复线路，保持界面清爽
+  const seenSignature = new Set<string>();
+  const uniqueRoutes: VideoPlayRoute[] = [];
+  for (const item of sorted) {
+    const sig = item.episodes.join('|');
+    if (seenSignature.has(sig)) continue;
+    seenSignature.add(sig);
+    uniqueRoutes.push({
+      name: formatPlayRouteName(item.rawFrom, uniqueRoutes.length),
+      episodes: item.episodes,
+      episodeNames: item.episodeNames,
+    });
+  }
+  return uniqueRoutes;
+}
+
+/**
+ * 从 vod_play_url 中提取主线路分集地址：格式 源1$$$源2，集1$URL1#集2$URL2。
+ * 部分源（如量子 lziapi、非凡 ffzy）第一条线路是网页中转页（…/share/xxx，不可播），
+ * 真实 m3u8 在后面的线路里，因此优先取包含直连流媒体的线路；均无时回退第一条。
+ */
+export function extractEpisodesFromPlayUrl(playUrl: string): string[] {
+  return extractPlayRoutes(playUrl)[0]?.episodes ?? [];
 }
 
 /** 从简介文本中兜底提取 m3u8 链接 */
@@ -74,6 +252,22 @@ export function extractM3u8FromText(text: string): string[] {
   if (!text) return [];
   const matches = text.match(M3U8_PATTERN) || [];
   return matches.map((link) => link.replace(/^\$/, ''));
+}
+
+function parseSubtitles(raw: unknown): SubtitleTrack[] | undefined {
+  if (!Array.isArray(raw)) return undefined;
+  const tracks: SubtitleTrack[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== 'object') continue;
+    const rec = item as Record<string, unknown>;
+    const label = str(rec.label);
+    const lang = str(rec.lang) || 'und';
+    const url = str(rec.url);
+    const format = rec.format === 'vtt' || rec.format === 'srt' || rec.format === 'ass' ? rec.format : undefined;
+    if (!label || !url || (!url.startsWith('/') && !/^https?:\/\//i.test(url))) continue;
+    tracks.push({ label, lang, url, format });
+  }
+  return tracks.length > 0 ? tracks : undefined;
 }
 
 /** 详情 JSON 响应 → 统一详情 */
@@ -86,12 +280,22 @@ export function parseDetail(
     throw new Error('获取到的详情内容无效');
   }
   const vod = d.list[0];
-  let episodes = extractEpisodesFromPlayUrl(String(vod.vod_play_url ?? ''));
+  let playRoutes = extractPlayRoutes(String(vod.vod_play_url ?? ''), str(vod.vod_play_from));
+  let episodes = playRoutes[0]?.episodes ?? [];
   if (episodes.length === 0) {
     episodes = extractM3u8FromText(String(vod.vod_content ?? ''));
+    if (episodes.length > 0) {
+      const episodeNames = episodes.map((_, idx) => (episodes.length === 1 ? '正片' : `第${idx + 1}集`));
+      playRoutes = [{ name: formatPlayRouteName(str(vod.vod_play_from), 0), episodes, episodeNames }];
+    }
   }
+  const episodeNames = playRoutes[0]?.episodeNames;
+  const subtitles = parseSubtitles(vod.vod_subtitles);
   return {
     episodes,
+    ...(episodeNames && episodeNames.length > 0 ? { episodeNames } : {}),
+    ...(playRoutes.length > 0 ? { playRoutes } : {}),
+    ...(subtitles ? { subtitles } : {}),
     videoInfo: {
       title: str(vod.vod_name),
       cover: str(vod.vod_pic),
@@ -277,9 +481,15 @@ export function isRelevant(name: string, wd: string): boolean {
   return isRelevantPrepared(name, query);
 }
 
-/** 丢弃无关结果；即使全部不相关，也不能返回源站的原始目录。 */
-export function filterRelevantResults<T extends { name?: string }>(items: T[], wd: string): T[] {
-  const query = prepareQuery(wd);
-  if (!query) return items;
-  return items.filter((item) => isRelevantPrepared(item.name || '', query));
+/** 丢弃无关结果；即使全部不相关，也不能返回源站的原始目录。支持传入双语等价别名以保留跨语种译名命中。 */
+export function filterRelevantResults<T extends { name?: string }>(
+  items: T[],
+  wd: string,
+  aliases: readonly string[] = []
+): T[] {
+  const queries = [wd, ...aliases]
+    .map(prepareQuery)
+    .filter((q): q is PreparedQuery => Boolean(q));
+  if (queries.length === 0) return items;
+  return items.filter((item) => queries.some((query) => isRelevantPrepared(item.name || '', query)));
 }

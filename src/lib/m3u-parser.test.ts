@@ -120,4 +120,38 @@ https://s.example.com/ok.m3u8`;
     expect(parseM3u('随便一段文本\n没有地址')).toEqual([]);
     expect(parseM3u('#EXTINF:-1,孤儿频道')).toEqual([]);
   });
+
+  it('兼容国内常见 TXT 分组格式（#genre#）与多线备用流拼接', () => {
+    const txt = [
+      '央视频道,#genre#',
+      'CCTV-1 综合,https://live.example.com/cctv1.m3u8#https://bak.example.com/cctv1.m3u8',
+      'CCTV-6 电影,https://live.example.com/cctv6.m3u8$超清主线',
+      '',
+      '卫视频道，#genre#',
+      '湖南卫视,https://live.example.com/hunan.m3u8',
+      '组播无效,rtp://239.0.0.1:5000',
+    ].join('\n');
+    const channels = parseM3u(txt);
+    expect(channels).toHaveLength(4);
+    expect(channels[0]).toMatchObject({
+      name: 'CCTV-1 综合',
+      url: 'https://live.example.com/cctv1.m3u8',
+      group: '央视频道',
+    });
+    expect(channels[1]).toMatchObject({
+      name: 'CCTV-1 综合 (线路2)',
+      url: 'https://bak.example.com/cctv1.m3u8',
+      group: '央视频道',
+    });
+    expect(channels[2]).toMatchObject({
+      name: 'CCTV-6 电影 (超清主线)',
+      url: 'https://live.example.com/cctv6.m3u8',
+      group: '央视频道',
+    });
+    expect(channels[3]).toMatchObject({
+      name: '湖南卫视',
+      url: 'https://live.example.com/hunan.m3u8',
+      group: '卫视频道',
+    });
+  });
 });

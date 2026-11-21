@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { guardRequest, jsonError } from '@/lib/api-guard';
 import { fetchUpstreamWithMeta } from '@/lib/fetch-utils';
 import { withHostLimit } from '@/lib/host-gate';
+import { readJsonBodyLimited, RequestBodyTooLargeError } from '@/lib/request-body';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -56,6 +57,7 @@ const THROUGHPUT_BYTES = 128 * 1024;
 const THROUGHPUT_BUDGET_MS = 2500;
 /** 吞吐采样所需的最低剩余预算：预算不足时跳过采样，避免拖长探测长尾 */
 const THROUGHPUT_MIN_REMAINING_MS = 1500;
+const MAX_M3U8_BYTES = 1024 * 1024;
 /**
  * 结果缓存：成功结果稳定，失败可能是瞬断，分开设置。
  * 成功 30min：客户端结果本身有 6h TTL，这里覆盖多用户/多轮补测场景，避免重复打上游；
@@ -129,11 +131,36 @@ function refererOf(url: string): string | undefined {
  * 若给 manifest 也带 `Range: bytes=0-1` 会只拿到 2 字节（如 `#E`），
  * 导致 m3u8 解析与 #EXTM3U 校验失败而被误判为不可用。
  */
+/** Read a bounded HLS manifest; a malicious URL must not make a probe buffer an unbounded body. */
+async function readM3u8TextLimited(response: Response): Promise<string> {
+  if (!response.body) throw new Error('m3u8 响应没有内容');
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let total = 0;
+  let text = '';
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.byteLength;
+      if (total > MAX_M3U8_BYTES) throw new RangeError('m3u8 播放列表超过 1 MiB 上限');
+      text += decoder.decode(value, { stream: true });
+    }
+    return text + decoder.decode();
+  } catch (error) {
+    try { await reader.cancel(error); } catch { /* ignore */ }
+    throw error;
+  } finally {
+    try { reader.releaseLock(); } catch { /* ignore */ }
+  }
+}
+
 async function fetchHeadersOnly(
   url: string,
   timeoutMs: number,
   referer?: string,
-  range = false
+  range = false,
+  signal?: AbortSignal
 ): Promise<FetchHeadResult> {
   const headers: Record<string, string> = {
     'User-Agent': UA,
@@ -149,6 +176,7 @@ async function fetchHeadersOnly(
     retries: 0,
     headers,
     allowPrivate: true,
+    signal,
   });
   const contentType = res.headers.get('content-type') || '';
   const isM3u8 =
@@ -157,8 +185,8 @@ async function fetchHeadersOnly(
 
   let text: string | undefined;
   if (isM3u8) {
-    // m3u8 是小文本，读取以供解析；分片则不读取
-    text = await res.text();
+    // m3u8 是小文本，读取以供解析；限制体积，分片则不读取
+    text = await readM3u8TextLimited(res);
   } else if (res.body) {
     try { await res.body.cancel(); } catch { /* 忽略 */ }
   }
@@ -222,7 +250,7 @@ function elapsed(start: number): number {
  * 与分片可达性检查是两次独立请求（前者只取响应头即 cancel）。
  * 服务器忽略 Range 时按整段返回，读到 THROUGHPUT_BYTES 即停，不影响估算。
  */
-async function measureThroughput(segmentUrl: string, referer?: string): Promise<number | undefined> {
+async function measureThroughput(segmentUrl: string, referer?: string, signal?: AbortSignal): Promise<number | undefined> {
   const start = performance.now();
   try {
     const { res } = await fetchUpstreamWithMeta(segmentUrl, {
@@ -235,6 +263,7 @@ async function measureThroughput(segmentUrl: string, referer?: string): Promise<
         ...(referer ? { Referer: referer } : {}),
       },
       allowPrivate: true,
+      signal,
     });
     if (!res.ok || !res.body) return undefined;
     const reader = res.body.getReader();
@@ -242,10 +271,16 @@ async function measureThroughput(segmentUrl: string, referer?: string): Promise<
     for (;;) {
       const remaining = THROUGHPUT_BUDGET_MS - (performance.now() - start);
       if (remaining <= 0) break;
-      const chunk = await Promise.race([
-        reader.read(),
-        new Promise<null>((resolve) => setTimeout(() => resolve(null), remaining)),
-      ]);
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      const timeout = new Promise<null>((resolve) => {
+        timer = setTimeout(() => resolve(null), remaining);
+      });
+      let chunk: Awaited<ReturnType<typeof reader.read>> | null;
+      try {
+        chunk = await Promise.race([reader.read(), timeout]);
+      } finally {
+        if (timer) clearTimeout(timer);
+      }
       if (!chunk || chunk.done) break;
       bytes += chunk.value?.length ?? 0;
       if (bytes >= THROUGHPUT_BYTES) break;
@@ -261,17 +296,22 @@ async function measureThroughput(segmentUrl: string, referer?: string): Promise<
 }
 
 /** 两级探测：manifest →（master 时穿透 variant）→ 分片 */
-async function probeOne(url: string): Promise<ProbeOutcome> {
+async function probeOne(url: string, signal?: AbortSignal): Promise<ProbeOutcome> {
   const start = performance.now();
   const deadline = start + URL_BUDGET_MS;
   const remaining = () => deadline - performance.now();
 
   const referer = refererOf(url);
-  const timeout = () => Math.min(LEVEL_TIMEOUT_MS, Math.max(500, Math.round(remaining())));
+  const timeout = () => {
+    const left = Math.floor(remaining());
+    if (left <= 0) throw new DOMException('探测超时', 'TimeoutError');
+    return Math.max(1, Math.min(LEVEL_TIMEOUT_MS, left));
+  };
 
   try {
     // 第一级：入口地址
-    const entry = await fetchHeadersOnly(url, timeout(), referer);
+    if (signal?.aborted) throw signal.reason ?? new DOMException('探测已取消', 'AbortError');
+    const entry = await fetchHeadersOnly(url, timeout(), referer, false, signal);
     if (!entry.ok) {
       return { url, ok: false, status: entry.status, ms: elapsed(start), error: `入口响应 ${entry.status}` };
     }
@@ -323,7 +363,7 @@ async function probeOne(url: string): Promise<ProbeOutcome> {
       return { url, ok: false, ms: elapsed(start), error: 'playlist 中没有可用的流地址' };
     }
     if (variant !== null) {
-      const variantRes = await fetchHeadersOnly(variant, timeout(), referer);
+      const variantRes = await fetchHeadersOnly(variant, timeout(), referer, false, signal);
       const variantText = (variantRes.text || '').replace(/^\uFEFF/, '').trimStart();
       if (!variantRes.ok || !HEADER_OK.test(variantText)) {
         return {
@@ -350,7 +390,8 @@ async function probeOne(url: string): Promise<ProbeOutcome> {
       segmentUrl,
       Math.min(timeout(), SEGMENT_TIMEOUT_MS),
       referer,
-      true
+      true,
+      signal
     );
     // ms 只统计分片往返：三级累计耗时当作「延迟」对用户没有参考意义
     const segmentMs = elapsed(segmentStart);
@@ -368,7 +409,7 @@ async function probeOne(url: string): Promise<ProbeOutcome> {
     // 分片可达：采样实际吞吐，识别「可达但限速」的源（绿点却播不了的主因）
     const kbps =
       remaining() > THROUGHPUT_MIN_REMAINING_MS
-        ? await measureThroughput(segmentUrl, referer)
+        ? await measureThroughput(segmentUrl, referer, signal)
         : undefined;
     return {
       url,
@@ -380,6 +421,7 @@ async function probeOne(url: string): Promise<ProbeOutcome> {
       kbps,
     };
   } catch (err) {
+    if (signal?.aborted) return { url, ok: false, ms: elapsed(start), error: '探测已取消' };
     const timedOut = performance.now() >= deadline;
     return {
       url,
@@ -413,7 +455,14 @@ function ndjsonResponse(urls: string[], reqSignal: AbortSignal): Response {
     else pending.push(u);
   }
 
-  let closed = false;
+  const streamAbortController = new AbortController();
+  let closed = reqSignal.aborted;
+  let finished = false;
+  const onAbort = () => {
+    closed = true;
+    streamAbortController.abort(new DOMException('客户端已断开', 'AbortError'));
+  };
+  if (closed) onAbort();
   const stream = new ReadableStream<Uint8Array>({
     start(controller) {
       const send = (o: ProbeOutcome) => {
@@ -422,24 +471,33 @@ function ndjsonResponse(urls: string[], reqSignal: AbortSignal): Response {
           controller.enqueue(encoder.encode(JSON.stringify(o) + '\n'));
         } catch {
           closed = true;
+          if (!streamAbortController.signal.aborted) {
+            streamAbortController.abort(new DOMException('客户端已断开', 'AbortError'));
+          }
         }
       };
       const finish = () => {
-        if (closed) return;
+        reqSignal.removeEventListener('abort', onAbort);
+        if (finished) return;
+        finished = true;
         closed = true;
         try { controller.close(); } catch { /* 已关闭 */ }
       };
-      reqSignal.addEventListener('abort', () => { closed = true; }, { once: true });
+      if (!closed) reqSignal.addEventListener('abort', onAbort, { once: true });
 
       for (const o of cachedOutcomes) send(o);
 
       let cursor = 0;
       const worker = async () => {
         while (cursor < pending.length) {
-          if (closed || reqSignal.aborted) return;
+          if (closed || streamAbortController.signal.aborted) return;
           const url = pending[cursor++];
-          const outcome = await withHostLimit(url, () => probeOne(url));
-          if (closed || reqSignal.aborted) return;
+          const outcome = await withHostLimit(
+            url,
+            () => probeOne(url, streamAbortController.signal),
+            streamAbortController.signal
+          );
+          if (closed || streamAbortController.signal.aborted) return;
           cacheSet(url, outcome);
           send(outcome);
         }
@@ -448,9 +506,14 @@ function ndjsonResponse(urls: string[], reqSignal: AbortSignal): Response {
         .then(finish)
         .catch(finish);
     },
-    cancel() {
-      // 客户端主动断开
+    cancel(reason) {
+      // Client cancellation must abort active upstream requests and remove queued host waiters.
       closed = true;
+      finished = true;
+      reqSignal.removeEventListener('abort', onAbort);
+      if (!streamAbortController.signal.aborted) {
+        streamAbortController.abort(reason ?? new DOMException('客户端已取消测活', 'AbortError'));
+      }
     },
   });
 
@@ -491,16 +554,21 @@ export async function POST(req: Request) {
   const guarded = guardRequest(req);
   if (guarded) return guarded;
 
-  let body: { urls?: unknown };
+  let rawBody: unknown;
   try {
-    body = (await req.json()) as { urls?: unknown };
-  } catch {
+    rawBody = await readJsonBodyLimited(req, 512 * 1024);
+  } catch (error) {
+    if (error instanceof RequestBodyTooLargeError) return jsonError('测活请求体过大', 413);
     return jsonError('无效请求体', 400);
   }
+  if (!rawBody || typeof rawBody !== 'object' || Array.isArray(rawBody)) return jsonError('无效请求体', 400);
+  const body = rawBody as { urls?: unknown };
   if (!Array.isArray(body.urls)) return jsonError('urls 必须为字符串数组', 400);
 
   const urls = [...new Set(
-    body.urls.filter((u): u is string => typeof u === 'string' && /^https?:\/\//.test(u))
+    body.urls
+      .filter((u): u is string => typeof u === 'string' && u.length <= 8192 && /^https?:\/\//i.test(u.trim()))
+      .map((u) => u.trim())
   )].slice(0, MAX_URLS);
   const stream = new URL(req.url).searchParams.get('stream') === '1';
   if (urls.length === 0) {
@@ -525,12 +593,19 @@ export async function POST(req: Request) {
   const worker = async () => {
     while (cursor < pending.length) {
       const url = pending[cursor++];
-      const outcome = await withHostLimit(url, () => probeOne(url));
+      const outcome = await withHostLimit(url, () => probeOne(url, req.signal), req.signal);
+      if (req.signal.aborted) return;
       cacheSet(url, outcome);
       outcomes.set(url, outcome);
     }
   };
-  await Promise.all(Array.from({ length: Math.min(CONCURRENCY, pending.length) }, worker));
+  try {
+    await Promise.all(Array.from({ length: Math.min(CONCURRENCY, pending.length) }, worker));
+  } catch (error) {
+    if (req.signal.aborted) return new Response(null, { status: 499 });
+    throw error;
+  }
+  if (req.signal.aborted) return new Response(null, { status: 499 });
 
   return NextResponse.json(
     { results: urls.map((u) => outcomes.get(u)!) },

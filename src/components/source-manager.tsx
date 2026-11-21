@@ -220,10 +220,62 @@ const VOD_FILTERS: { id: VodFilter; label: string }[] = [
   { id: 'manual', label: '手动添加' },
 ];
 
+const OPEN_VOD_GALLERIES = [
+  {
+    id: 'open-all',
+    name: '内置双语开放影视总馆（4015+ 名片与 68 部连播剧集）',
+    hint: '覆盖全球六大开放片库与内置精选直连大片',
+    path: '/api/open-media?short=1&zh=1',
+  },
+  {
+    id: 'open-series',
+    name: '多集连播高清剧集专馆（68部 4K/1080p 连续剧与大师合集）',
+    hint: '1917定格恐龙、孤军浴血记、国会图书馆长片、大力水手、猫眼星云、韦伯第一缕光',
+    path: '/api/open-media?short=1&zh=1&series=1',
+  },
+  {
+    id: 'open-direct',
+    name: '国内毫秒直连秒播专馆（3780+ 部官方 1080p 直连片源）',
+    hint: '零海外等待、国内网络 HTTP 200/206 秒起播',
+    path: '/api/open-media?short=1&zh=1&direct=1',
+  },
+  {
+    id: 'open-animation',
+    name: '开源动画与独立短片专馆（Blender / 国际CC动画）',
+    hint: '辛特尔、巨兔邦尼、宇宙洗衣店、超人1941、大力水手',
+    path: '/api/open-media?short=1&zh=1&cat=animation',
+  },
+  {
+    id: 'open-space',
+    name: '太空宇宙与科学 1080p 专馆（韦伯 / 哈勃 / NASA / ESO）',
+    hint: '哈勃宇宙讲堂、詹姆斯·韦伯深空、好奇号18亿像素火星',
+    path: '/api/open-media?short=1&zh=1&cat=space',
+  },
+  {
+    id: 'open-thriller',
+    name: '悬疑推理与科幻惊悚专馆（阿加莎 / 希区柯克 / 黑色电影）',
+    hint: '无人生还、谜中谜、活死人之夜、大都会、钢铁之泪',
+    path: '/api/open-media?short=1&zh=1&cat=thriller',
+  },
+  {
+    id: 'open-comedy',
+    name: '爆笑喜剧与剑侠冒险专馆（卓别林 / 基顿 / 歌舞剑侠）',
+    hint: '将军号、淘金记、福尔摩斯二世、大鼻子情圣',
+    path: '/api/open-media?short=1&zh=1&cat=comedy',
+  },
+  {
+    id: 'open-chinese',
+    name: '早期华语影史瑰宝专馆（费穆 / 阮玲玉 / 赵丹 / 张爱玲）',
+    hint: '小城之春、马路天使、十字街头、神女、铁扇公主',
+    path: '/api/open-media?short=1&zh=1&cat=chinese',
+  },
+] as const;
+
 function VodSourcesPanel() {
   const store = useAppStore();
   const { toast } = useToast();
   const [editing, setEditing] = useState<string | null>(null);
+  const [galleriesOpen, setGalleriesOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<VodFilter>('all');
   const { tests, runTest } = useSourceTests();
@@ -288,12 +340,74 @@ function VodSourcesPanel() {
         title="点播源"
         hint={empty ? undefined : `共 ${all.length} 个 · 已启用 ${all.filter((s) => store.selectedKeys.includes(s.key)).length}`}
         extra={
-          <button className="btn-primary btn-sm" onClick={() => setEditing('__new__')}>
-            <Icon name="plus" className="w-3.5 h-3.5" />
-            添加 API
-          </button>
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              className="btn-ghost btn-sm text-accent"
+              onClick={() => setGalleriesOpen((v) => !v)}
+            >
+              {galleriesOpen ? '收起分馆' : `精选片库分馆 (${OPEN_VOD_GALLERIES.length})`}
+            </button>
+            <button className="btn-primary btn-sm" onClick={() => setEditing('__new__')}>
+              <Icon name="plus" className="w-3.5 h-3.5" />
+              添加 API
+            </button>
+          </div>
         }
       />
+
+      {(galleriesOpen || empty) && (
+        <div className="mb-3 rounded-lg border border-line bg-chip/60 p-3 space-y-2">
+          <div>
+            <div className="text-xs font-semibold text-content">内置免费开放点播分馆（一键添加 · 标准 Apple CMS v10 兼容）</div>
+            <div className="text-[11px] text-faint mt-0.5">可按喜好单独添加或组合启用任意题材专馆，同时兼容苹果 CMS JSON/XML 接口</div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+            {OPEN_VOD_GALLERIES.map((g) => {
+              const origin = typeof window !== 'undefined' ? window.location.origin : '';
+              const fullUrl = origin ? `${origin}${g.path}` : g.path;
+              const matched = all.find((s) => s.url === fullUrl);
+              const enabled = matched ? store.selectedKeys.includes(matched.key) : false;
+              return (
+                <div
+                  key={g.id}
+                  className="flex items-center justify-between gap-2 rounded-md border border-line/70 bg-surface px-2.5 py-2"
+                >
+                  <div className="min-w-0">
+                    <div className="text-xs font-medium text-content truncate">{g.name}</div>
+                    <div className="text-[10px] text-faint truncate">{g.hint}</div>
+                  </div>
+                  <button
+                    type="button"
+                    className={cn(
+                      'shrink-0 rounded px-2 py-1 text-[11px] font-medium transition-colors',
+                      matched && enabled
+                        ? 'bg-success/15 text-success cursor-default'
+                        : 'bg-accent/15 text-accent hover:bg-accent/25'
+                    )}
+                    onClick={() => {
+                      if (!origin) return;
+                      if (matched) {
+                        if (!enabled) {
+                          store.setSelectedKeys([...new Set([...store.selectedKeys, matched.key])]);
+                          toast(`已启用「${g.name}」`, 'success');
+                        } else {
+                          toast('该分馆已在启用列表中', 'info');
+                        }
+                      } else {
+                        store.addCustomApi({ name: g.name, url: fullUrl, detail: origin });
+                        toast(`已添加并启用「${g.name}」`, 'success');
+                      }
+                    }}
+                  >
+                    {matched ? (enabled ? '已启用' : '启用') : '+ 添加'}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       <SourceForm
         visible={editing === '__new__'}
@@ -308,11 +422,28 @@ function VodSourcesPanel() {
         <EmptyState
           icon="link"
           title="还没有添加任何点播源"
-          description="添加一个 Apple CMS 采集站 API 即可开始搜索影片；也可到「数据源订阅」一次导入点播源与直播源"
+          description="可一键添加内置双语开放片库，或添加 Apple CMS JSON 接口、AList /vod 接口，也可到「数据源订阅」导入 TVBox / SourceList JSON 源列表"
           action={
-            <button className="btn-primary btn-sm" onClick={() => setEditing('__new__')}>
-              添加第一个点播源
-            </button>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <button
+                className="btn-primary btn-sm"
+                onClick={() => {
+                  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+                  if (!origin) return;
+                  store.addCustomApi({
+                    name: '内置双语开放影视库（公版经典 + 开源动画）',
+                    url: `${origin}/api/open-media?short=1&zh=1`,
+                    detail: origin,
+                  });
+                  toast('已添加并启用内置双语开放影视库', 'success');
+                }}
+              >
+                一键启用内置免费片库
+              </button>
+              <button className="btn-ghost btn-sm" onClick={() => setEditing('__new__')}>
+                手动添加 API
+              </button>
+            </div>
           }
         />
       ) : (
@@ -769,6 +900,26 @@ function HomePanel() {
             { value: 'hot-list', label: '影视榜单', hint: '豆瓣周榜 / 百度热播' },
           ]}
         />
+        <SelectRow
+          label="正版观看地区"
+          description="用于查询 Netflix、Disney+ 等地区性观看渠道；只影响渠道列表，不影响影视资料搜索。"
+          value={store.watchRegion}
+          onChange={(v) => store.updateSettings({ watchRegion: v })}
+          options={[
+            { value: 'CN', label: '中国大陆（CN）' },
+            { value: 'HK', label: '中国香港（HK）' },
+            { value: 'TW', label: '中国台湾（TW）' },
+            { value: 'US', label: '美国（US）' },
+            { value: 'GB', label: '英国（GB）' },
+            { value: 'CA', label: '加拿大（CA）' },
+            { value: 'AU', label: '澳大利亚（AU）' },
+            { value: 'JP', label: '日本（JP）' },
+            { value: 'KR', label: '韩国（KR）' },
+            { value: 'IN', label: '印度（IN）' },
+            { value: 'DE', label: '德国（DE）' },
+            { value: 'FR', label: '法国（FR）' },
+          ]}
+        />
       </div>
     </section>
   );
@@ -811,11 +962,13 @@ function SourceSubscriptions() {
       // 如实说明跳过/截断情况，避免用户疑惑「配置里站点很多，为何只导入了个位数」
       const detail = describeParseStats(stats, { includeSamples: false });
       const formatLabel =
-        stats?.format === 'tvbox'
-          ? '（TVBOX 配置）'
-          : stats?.format === 'source-catalog'
-            ? '（接口源列表）'
-            : '';
+        stats?.format === 'tvbox-multi'
+          ? '（TVBOX 多仓聚合）'
+          : stats?.format === 'tvbox'
+            ? '（TVBOX 配置）'
+            : stats?.format === 'source-catalog'
+              ? '（接口源列表）'
+              : '';
       toast(`已同步 ${vodCount} 个点播源、${liveCount} 个直播源${formatLabel}${detail ? `；${detail}` : ''}`, 'success');
       setSubUrl('');
     } catch (err) {
@@ -1001,7 +1154,7 @@ function SourceSubscriptions() {
       <div className="flex gap-2 mb-2">
         <input
           className="input flex-1 min-w-0"
-          placeholder="订阅地址（LibreTV 源列表或 TVBOX 配置的 JSON URL）"
+          placeholder="支持 TVBox 多仓(urls)/单仓(sites)、LibreTV 订阅或接口目录 JSON URL"
           value={subUrl}
           onChange={(e) => setSubUrl(e.target.value)}
           onKeyDown={(e) => {
@@ -1017,10 +1170,25 @@ function SourceSubscriptions() {
         </button>
       </div>
       {store.subscriptions.length === 0 ? (
-        <p className="text-xs text-faint">
-          一份订阅可同时下发点播源与直播源，支持 LibreTV 源列表与 TVBOX 配置（仅导入可直接使用的接口，Spider 类站点自动跳过）；
-          「导出数据源」生成的 JSON 托管到任意 URL 即可分享给他人订阅。
-        </p>
+        <div className="space-y-2 text-xs text-faint">
+          <p>
+            一份订阅可同时导入点播源与直播源，全面兼容 <strong>TVBox 多仓索引（urls / storeHouse）</strong>、
+            <strong>TVBox 单仓（sites + M3U/TXT 直播）</strong>、<strong>LibreTV-SourceList</strong> 与接口目录 JSON。
+          </p>
+          <button
+            type="button"
+            className="btn-ghost btn-sm text-accent"
+            disabled={syncing.size > 0}
+            onClick={() => {
+              const origin = typeof window !== 'undefined' ? window.location.origin : '';
+              if (!origin) return;
+              void sync(`${origin}/open-media-sources.json`);
+            }}
+          >
+            <Icon name="plus" className="w-3.5 h-3.5" />
+            一键订阅内置开放影视库清单
+          </button>
+        </div>
       ) : (
         <ul className="space-y-2">
           {store.subscriptions.map((sub) => {

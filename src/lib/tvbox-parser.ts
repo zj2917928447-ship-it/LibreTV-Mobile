@@ -37,14 +37,177 @@ const SPIDER_PATTERN = /^csp_|\.(?:jar|js|py)(?:[?#].*)?$/i;
 /** 非 http(s) 的相对/本地资源（如 ./json/xxx.json）同样需要 TVBOX 引擎 */
 const LOCAL_ASSET_PATTERN = /^\.{0,2}\//;
 /**
- * Apple CMS 直连接口特征（type 缺失或写成 XML / 外链时用于宽容识别）：
- * 需为 api.php/provide/vod 接口，且排除 XML 通道（/at/xml）——后者本站解析不了。
+ * Apple CMS / 海洋 CMS 直连接口特征（type 缺失或写成外链时用于宽容识别）：
+ * 同时兼容 JSON 与 `/at/xml` / `/inc/api.php` 等标准采集接口（服务端已内置 XML 解析）。
  */
-const CMS_API_PATTERN = /\/api\.php\/provide\/vod(?![^?#]*\/at\/xml)(?:[/?#]|$)/i;
+const CMS_API_PATTERN = /\/api\.php\/provide\/vod(?:[/?#]|$)|\/inc\/(?:feifei|maccms|api)[^?#]*\.php(?:[/?#]|$)/i;
 /** M3U 播放列表特征 */
 const M3U_PATTERN = /\.m3u8?(?:[?#].*)?$/i;
-/** 纯文本频道列表特征（TVBOX 的 txt 直播源，本站无法解析） */
-const TXT_PATTERN = /\.txt(?:[?#].*)?$/i;
+
+/** TVBox 多仓（Multi-Repo）单次最多展开的子仓库数，兼顾大仓完整度与防放大攻击 */
+export const MAX_MULTI_REPO_CHILDREN = 15;
+
+export interface TvboxMultiRepoEntry {
+  url: string;
+  name?: string;
+}
+
+function resolveMaybeRelativeHttpUrl(raw: unknown, trimTrailingSlash: boolean, baseUrl?: string): string | undefined {
+  const direct = normalizeUrl(raw, trimTrailingSlash);
+  if (direct) return direct;
+  if (!baseUrl || typeof raw !== 'string') return undefined;
+  const trimmed = raw.trim();
+  if (!trimmed || /^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return undefined;
+  try {
+    const resolved = new URL(trimmed, baseUrl);
+    if (resolved.protocol !== 'http:' && resolved.protocol !== 'https:') return undefined;
+    return normalizeUrl(resolved.href, trimTrailingSlash);
+  } catch {
+    return undefined;
+  }
+}
+
+/** 识别 TVBox 多仓索引格式：`{ urls: [{ url, name }] }` 或 `{ storeHouse: [...] }` / `{ depot: [...] }` */
+export function isTvboxMultiRepoPayload(raw: unknown): boolean {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return false;
+  const obj = raw as Record<string, unknown>;
+  if (Array.isArray(obj.sites) || Array.isArray(obj.lives) || Array.isArray(obj.sources)) return false;
+  return Array.isArray(obj.urls) || Array.isArray(obj.storeHouse) || Array.isArray(obj.depot);
+}
+
+/** 识别直接返回 Apple CMS 视频列表响应的单站点接口（用户误把单站 API 粘贴进订阅框时自动兜底） */
+export function isSingleCmsApiResponse(raw: unknown): boolean {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return false;
+  const obj = raw as Record<string, unknown>;
+  if (isTvboxPayload(obj) || isTvboxMultiRepoPayload(obj) || Array.isArray(obj.sources) || Array.isArray(obj.liveSources)) {
+    return false;
+  }
+  return Array.isArray(obj.list) && ('code' in obj || 'pagecount' in obj || Array.isArray(obj.class));
+}
+
+/** 提取 TVBox 多仓索引中的有效公网 http(s) 子仓库列表（支持按 baseUrl 解析相对子仓地址） */
+export function extractTvboxMultiRepoEntries(
+  raw: unknown,
+  baseUrl?: string
+): {
+  name?: string;
+  entries: TvboxMultiRepoEntry[];
+  skippedInvalid: number;
+  truncatedRepos: number;
+} {
+  if (!isTvboxMultiRepoPayload(raw)) {
+    throw new Error('不是合法的 TVBox 多仓订阅格式');
+  }
+  const obj = raw as Record<string, unknown>;
+  const list = (Array.isArray(obj.urls)
+    ? obj.urls
+    : Array.isArray(obj.storeHouse)
+      ? obj.storeHouse
+      : Array.isArray(obj.depot)
+        ? obj.depot
+        : []) as unknown[];
+
+  const seen = new Set<string>();
+  const entries: TvboxMultiRepoEntry[] = [];
+  let skippedInvalid = 0;
+  let truncatedRepos = 0;
+
+  for (const item of list) {
+    if (!item || typeof item !== 'object' || Array.isArray(item)) {
+      skippedInvalid += 1;
+      continue;
+    }
+    const rec = item as Record<string, unknown>;
+    const rawUrlText = String(rec.url ?? '').trim();
+    const url = resolveMaybeRelativeHttpUrl(rec.url, false, baseUrl);
+    if (!url || SPIDER_PATTERN.test(url) || (!baseUrl && LOCAL_ASSET_PATTERN.test(rawUrlText))) {
+      skippedInvalid += 1;
+      continue;
+    }
+    if (seen.has(url)) continue;
+    if (entries.length >= MAX_MULTI_REPO_CHILDREN) {
+      truncatedRepos += 1;
+      continue;
+    }
+    seen.add(url);
+    entries.push({ url, name: optionalString(rec.name) });
+  }
+
+  return {
+    name: optionalString(obj.name),
+    entries,
+    skippedInvalid,
+    truncatedRepos,
+  };
+}
+
+/** 合并多个子仓库的解析结果，统一按地址去重并遵守 MAX_VOD_SOURCES / MAX_LIVE_SOURCES 上限 */
+export function mergeParsedSubscriptions(
+  children: SourceListPayload[],
+  options: { name?: string; extraInvalid?: number } = {}
+): SourceListPayload {
+  const seenVod = new Set<string>();
+  const seenLive = new Set<string>();
+  const sources: SourceListPayload['sources'] = [];
+  const liveSources: SourceListPayload['liveSources'] = [];
+  const byReason: Partial<Record<SubscriptionSkipReason, number>> = {};
+  const samples: string[] = [];
+  let skipped = 0;
+  let truncated = 0;
+
+  if (options.extraInvalid && options.extraInvalid > 0) {
+    skipped += options.extraInvalid;
+    byReason.invalidUrl = (byReason.invalidUrl ?? 0) + options.extraInvalid;
+  }
+
+  for (const child of children) {
+    for (const s of child.sources) {
+      const key = s.url.replace(/\/+$/, '');
+      if (seenVod.has(key)) continue;
+      if (sources.length >= MAX_VOD_SOURCES) {
+        truncated += 1;
+        continue;
+      }
+      seenVod.add(key);
+      sources.push(s);
+    }
+    for (const l of child.liveSources) {
+      if (seenLive.has(l.url)) continue;
+      if (liveSources.length >= MAX_LIVE_SOURCES) {
+        truncated += 1;
+        continue;
+      }
+      seenLive.add(l.url);
+      liveSources.push(l);
+    }
+    if (child.stats) {
+      skipped += child.stats.skipped;
+      truncated += child.stats.truncated;
+      for (const [k, v] of Object.entries(child.stats.skippedByReason)) {
+        const reason = k as SubscriptionSkipReason;
+        if (v) byReason[reason] = (byReason[reason] ?? 0) + v;
+      }
+      for (const sample of child.stats.skippedSamples ?? []) {
+        if (samples.length < SKIPPED_SAMPLE_LIMIT && !samples.includes(sample)) {
+          samples.push(sample);
+        }
+      }
+    }
+  }
+
+  return {
+    name: options.name || children.find((c) => c.name)?.name || 'TVBox 多仓聚合订阅',
+    sources,
+    liveSources,
+    stats: {
+      format: 'tvbox-multi',
+      skipped,
+      skippedByReason: byReason,
+      ...(samples.length > 0 ? { skippedSamples: samples } : {}),
+      truncated,
+    },
+  };
+}
 
 /** 跳过原因示例名最多保留条数（提示文案不宜过长） */
 const SKIPPED_SAMPLE_LIMIT = 3;
@@ -80,13 +243,45 @@ function emptyStats(format: SubscriptionParseStats['format']): SubscriptionParse
 }
 
 /**
- * 宽容 JSON 解析：部分共享配置带行注释、块注释或尾随逗号
+ * 解包 TVBox / FongMi 共享接口常见的 `前缀混淆**Base64(JSON)` 或纯 Base64(JSON) 封装。
+ * 若输入本就是明文 JSON 或 HTML 错误页则原样返回。
+ */
+function unwrapTvboxEncodedText(raw: string): string {
+  const clean = raw.replace(/^\uFEFF/, '').trim();
+  if (!clean || clean.startsWith('{') || clean.startsWith('[') || clean.startsWith('<') || clean.startsWith('/')) {
+    return clean;
+  }
+  const tryDecodeBase64Json = (candidate: string): string | null => {
+    const compact = candidate.replace(/\s+/g, '');
+    if (compact.length < 16 || !/^[A-Za-z0-9+/=_-]+$/.test(compact)) return null;
+    try {
+      const normalized = compact.replace(/-/g, '+').replace(/_/g, '/');
+      const decoded = Buffer.from(normalized, 'base64').toString('utf8').replace(/^\uFEFF/, '').trim();
+      if (decoded.startsWith('{') || decoded.startsWith('[') || decoded.startsWith('//') || decoded.startsWith('/*')) {
+        return decoded;
+      }
+    } catch {
+      /* ignore */
+    }
+    return null;
+  };
+
+  const starIdx = clean.lastIndexOf('**');
+  if (starIdx >= 0) {
+    const decoded = tryDecodeBase64Json(clean.slice(starIdx + 2));
+    if (decoded) return decoded;
+  }
+  return tryDecodeBase64Json(clean) ?? clean;
+}
+
+/**
+ * 宽容 JSON 解析：兼容 TVBox `**` Base64 封装、行注释、块注释与尾随逗号
  * （TVBOX 客户端用的 fastjson 默认容忍，标准 JSON.parse 会直接失败）。
  * 这里在字符串外部剥离这些痕迹后再解析，字符串内的 `//`（如 https://）不受影响。
  */
 export function parseSubscriptionJson(text: string): unknown {
   try {
-    return JSON.parse(stripJsonArtifacts(text.replace(/^\uFEFF/, '')));
+    return JSON.parse(stripJsonArtifacts(unwrapTvboxEncodedText(text)));
   } catch {
     throw new Error('订阅内容不是合法的 JSON');
   }
@@ -237,8 +432,8 @@ function isMixedCatalogPayload(json: unknown): boolean {
  * 否则「一条带 baseUrl」会让其余 url 条目被静默丢弃，回退到 LibreTV 解析也救不了
  * （那边读 url，丢的是 baseUrl 那批），两种都是无声的数据损失。
  */
-export function parseSubscriptionPayload(json: unknown): SourceListPayload {
-  if (isTvboxPayload(json)) return parseTvboxPayload(json);
+export function parseSubscriptionPayload(json: unknown, baseUrl?: string): SourceListPayload {
+  if (isTvboxPayload(json)) return parseTvboxPayload(json, baseUrl);
   if (isSourceCatalogPayload(json)) return parseSourceCatalogPayload(json);
   if (isMixedCatalogPayload(json)) {
     throw new Error(
@@ -311,14 +506,14 @@ export function parseSourceCatalogPayload(json: unknown): SourceListPayload {
 }
 
 /** 解析 TVBOX 配置：sites / lives → 本站点播源与直播源，附带跳过与截断统计 */
-export function parseTvboxPayload(json: unknown): SourceListPayload {
+export function parseTvboxPayload(json: unknown, baseUrl?: string): SourceListPayload {
   const record = (json ?? {}) as Record<string, unknown>;
   const rawSites = Array.isArray(record.sites) ? record.sites : [];
   const rawLives = Array.isArray(record.lives) ? record.lives : [];
   const skipped: SkipCounter = { count: 0, byReason: {}, samples: [] };
 
   const vod = collectVodSources(rawSites, skipped);
-  const live = collectLiveSources(rawLives, skipped);
+  const live = collectLiveSources(rawLives, skipped, baseUrl);
 
   if (vod.sources.length === 0 && live.liveSources.length === 0) {
     throw new Error(
@@ -412,10 +607,11 @@ function collectVodSources(rawSites: unknown[], skipped: SkipCounter) {
       continue;
     }
 
-    // 可导入判定：显式 JSON 接口，或类型缺失/写成 XML、外链但地址命中 Apple CMS 特征
+    // 可导入判定：显式 JSON(type=1) 或 XML(type=0) 采集接口，或类型缺失/外链但地址命中 CMS 特征
     const importable =
       type === SITE_TYPE_JSON ||
-      ((type === undefined || type === SITE_TYPE_XML || type === SITE_TYPE_API) && CMS_API_PATTERN.test(api));
+      type === SITE_TYPE_XML ||
+      ((type === undefined || type === SITE_TYPE_API) && CMS_API_PATTERN.test(api));
     if (!importable) {
       markSkipped(skipped, type === SITE_TYPE_API ? 'spider' : 'xml', name);
       continue;
@@ -438,8 +634,8 @@ function collectVodSources(rawSites: unknown[], skipped: SkipCounter) {
   return { sources, truncated };
 }
 
-/** 收集直播源：只接受 M3U 播放列表 */
-function collectLiveSources(rawLives: unknown[], skipped: SkipCounter) {
+/** 收集直播源：支持 M3U 与 TXT（#genre#）播放列表（含相对路径解析），跳过单仓 JSON */
+function collectLiveSources(rawLives: unknown[], skipped: SkipCounter, baseUrl?: string) {
   const seen = new Set<string>();
   const liveSources: SourceListPayload['liveSources'] = [];
   let truncated = 0;
@@ -448,14 +644,14 @@ function collectLiveSources(rawLives: unknown[], skipped: SkipCounter) {
     if (!raw || typeof raw !== 'object' || Array.isArray(raw)) continue;
     const live = raw as Record<string, unknown>;
     const name = optionalString(live.name);
-    const url = normalizeUrl(live.url, false);
+    const url = resolveMaybeRelativeHttpUrl(live.url, false, baseUrl);
     if (!url) {
       markSkipped(skipped, 'invalidUrl', name);
       continue;
     }
     const type = toNumber(live.type);
-    // 单仓 JSON 直播订阅本站不支持；txt 频道列表无法被 M3U 解析器识别
-    if ((type !== undefined && type !== LIVE_TYPE_PLAYLIST) || (!M3U_PATTERN.test(url) && TXT_PATTERN.test(url))) {
+    // 单仓 JSON 直播订阅（type=1）暂不支持；type=0 或缺省的 M3U / TXT 频道列表均由 parseM3u 解析
+    if ((type !== undefined && type !== LIVE_TYPE_PLAYLIST) || (!M3U_PATTERN.test(url) && /\.json(?:[?#].*)?$/i.test(url))) {
       markSkipped(skipped, 'nonM3uLive', name);
       continue;
     }
@@ -465,7 +661,7 @@ function collectLiveSources(rawLives: unknown[], skipped: SkipCounter) {
       continue;
     }
     seen.add(url);
-    liveSources.push({ name: name || hostnameOf(url), url, epg: normalizeUrl(live.epg, false) });
+    liveSources.push({ name: name || hostnameOf(url), url, epg: resolveMaybeRelativeHttpUrl(live.epg, false, baseUrl) });
   }
 
   return { liveSources, truncated };

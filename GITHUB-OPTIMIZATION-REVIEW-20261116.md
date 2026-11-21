@@ -1,7 +1,30 @@
-# LibreTV Mobile 2.23.4 — GitHub 开源项目优化评估
+# LibreTV Mobile 2.23.6 — GitHub 开源项目优化评估
 
 评估日期：2026-11-16  
 目标：在保留现有 LibreTV 功能与 Android TWA 发布链的前提下，筛选真正值得吸收的上游项目和修复。
+
+## 2.23.6：双轨搜索与社区方案复核
+
+### C 方案实施
+- 保留现有 CMS / 开放媒体搜索作为「播放源候选」通道；仅在详情接口解析出剧集播放 URL 后才确认可播放。
+- 新增 TMDB `/search/multi` 电影/剧集资料搜索，服务端 Bearer token，不向浏览器暴露密钥。
+- 新增 TMDB Watch Providers 地区查询，展示订阅、免费、广告、租赁、购买分类，并按用户设置的 ISO 国家地区代码查询。
+- 复审后将资料搜索与 Watch Providers 拆成两个 API：资料结果先返回，正版渠道并行加载；最多 10 部影片、3 并发、单次 5 秒超时、30 分钟缓存，避免渠道 API 慢时阻塞影片搜索。
+- TMDB 文档明确 Watch Providers 由 JustWatch 合作提供，不提供完整深链，而是返回 TMDB 观看页；实现按该约定展示并注明 JustWatch 来源。
+- 影视资料与点播源候选分开显示，不把元数据冒充成可播放视频。
+- Render Blueprint 将开放媒体目录改为 `DEFAULT_SOURCES` 预置源，首次访问自动勾选，避免依赖登录后才同步的默认订阅。
+- 开放媒体中文别名缓存改为按解析后的 provider query 生成版本化 cache key；空结果不进入 CDN 缓存。
+
+### GitHub 社区方案核对
+- LibreTV [PR #981](https://github.com/LibreSpark/LibreTV/pull/981) 声称有 21 个逐项测试的直连 CMS 源，验证链包括搜索、详情和 m3u8 提取；该 PR 当前仍为 open，未合并。
+- 没有把 PR 的第三方源地址直接复制进默认配置：PR 说明来源来自外部聚合站的直连线路，域名可能变动；不能仅凭 PR 声明确认所有源的授权状态与当前可用性。
+- 采用其「逐源探测 + 搜索/详情/播放地址三阶段验证」的方法，但默认只预置本站开放许可资料库；用户可添加自己拥有或获授权使用的 CMS 源。
+
+### TMDB 官方规则
+- 使用 TMDB 官方 API Read Access Token（Bearer）并在服务端调用；API key 不进入浏览器。
+- TMDB 官方 FAQ 要求应用使用其 Logo，并在 About/Credits 放置不背书声明；本项目使用 TMDB 官方 approved blue logo 资产和规定文案。
+- TMDB 官方说明其开发者 API 免费仅限非商业用途且必须署名；商业用途需联系 TMDB 获取许可。
+- TMDB Watch Providers 文档明确要求标注 JustWatch，并指出 API 不返回完整平台深链；本项目只链接其返回的 TMDB watch URL。
 
 ## 结论
 
@@ -61,6 +84,33 @@
 - [mpegts.js PR #310](https://github.com/xqq/mpegts.js/pull/310)
 - [Serwist Releases](https://github.com/serwist/serwist/releases)
 - [ipaddr.js](https://github.com/whitequark/ipaddr.js)
+
+## 2.23.5 稳定性修复与 GitHub 复核
+
+### 本轮修复
+- API JSON 请求体增加真实字节上限，避免只信任 `Content-Length` 或对不受限的请求体直接 `req.json()`。
+- CMS 点播源 URL 统一规范化，拒绝不支持协议与 URL userinfo；API URL 构建保留已有 query token；搜索缓存按来源标识、名称、详情页地址和成人标记区分。
+- 搜索、画质探测、直播测活的 NDJSON 客户端取消会终止上游请求；同 host 等待队列中的任务立即退出，不再占用并发槽。
+- `fetchWithSafeRedirects` 始终手动逐跳校验，`safeRedirects:false` 不能关闭 SSRF 检查；3xx 响应体在下一跳前取消，AbortSignal 通过组合信号贯穿响应体生命周期。
+- 点播代理只对响应头等待限时，不再用 8 秒总超时切断长视频/分片；HLS 清单上限 2 MiB / 10 秒，直播测活清单上限 1 MiB。
+- 直链下载验证实际文件头，限制单一 Range 请求，防止 multipart/byteranges 被错误标记为 MP4；签名读取有 5 秒上限。
+- 为上游响应统一增加流式字节上限：CMS 搜索 512 KiB/页、源测试 1 MiB、详情 JSON/HTML 2 MiB、源订阅 4 MiB、直播 M3U 8 MiB、XMLTV 32 MiB、通用第三方 JSON 4 MiB；超限立即取消 body。
+- XMLTV gzip 解压设置 64 MiB 输出上限，防止压缩炸弹；新增通用 bounded response reader 与 gzip 上限回归测试。
+- 画质探测也复用 CMS 源配置规范化，拒绝 URL userinfo 和超长字段；代理、下载、直播订阅及 EPG 入口增加 URL / 频道标识长度上限。
+
+### 上游问题核对
+- ArtPlayer [#1073](https://github.com/zhw2590582/ArtPlayer/issues/1073) 报告 5.4.0 网页全屏切系统全屏会退出网页全屏；上游评论给出的规避设置是 `FULLSCREEN_WEB_IN_BODY=false`，本项目 VOD/Live 均已采用。
+- ArtPlayer [#1033](https://github.com/zhw2590582/ArtPlayer/issues/1033) 讨论 iOS standalone 安全区与可选自动旋屏插件；当前应用显式 `autoOrientation:false`，不启用该问题涉及的旋转路径。
+- LibreTV [#937](https://github.com/LibreSpark/LibreTV/issues/937) 描述 iOS 控制栏 3 秒自动隐藏；本项目触屏策略使用 `Number.MAX_SAFE_INTEGER`，并避免合成 mousemove 抢先切换控制栏。
+- LibreTV [#977](https://github.com/LibreSpark/LibreTV/issues/977) 指出 Blob 下载触发不等于设备已落盘；当前下载管理器已区分「已生成，待保存」，保留 Blob 重试入口，不再误报已保存。
+
+### 替代项目结论（按当前 GitHub 主分支 README / package 元数据复核）
+- [Video.js 10](https://github.com/videojs/video.js) 的 `@videojs/core` 当前为 10.4.0，README 标注 v10 stable，并提供现代模块化及 React 方向；它是值得做独立原型的候选，但不是 ArtPlayer 的 API 兼容替换。
+- [Shaka Player](https://github.com/shaka-project/shaka-player) 当前 5.3.0（2026-10-16），支持 HLS / DASH 和 IndexedDB 离线存储；iOS/iPadOS 在不支持 MSE 的环境回退到原生 HLS。若未来要增加 DASH 或离线下载，它是更合适的专项候选，但不应与 hls.js 无规划地并存。
+- [Plyr](https://github.com/sampotts/plyr) 的 README 已明确标为 deprecated / security updates only，并指向 Video.js 10；不再把 Plyr 作为新项目候选。
+- [Movi Player](https://github.com/MrUjjwalG/movi-player) 0.4.1 用 WASM 处理 MKV / HEVC / AV1 / HDR，并通过 Shaka、hls.js、dash.js 处理自适应流；README 标示 JS 50–410 KB、WASM 约 1.8–3.2 MB。对当前以 HLS / MP4 为主的手机网页，额外 WASM 下载、内存和 Canvas 播放链路的成本不划算，只适合将来明确需要浏览器解码 MKV/HEVC 的可选实验。
+- [ArtPlayer](https://github.com/zhw2590582/ArtPlayer) 主分支 package 源码已出现 5.4.1，但 CHANGELOG 将 safe-area 修复列在 Unreleased；本项目锁定的 npm 5.4.0 不应直接假定已包含该修复。当前 5.4.0 的 fullscreen 回归继续用 `FULLSCREEN_WEB_IN_BODY=false` 规避。
+- [hls.js](https://github.com/video-dev/hls.js) 是 HLS 媒体加载 / transmux 引擎，不是 UI 播放器；项目已使用 hls.js 1.7.4，保留现有 ArtPlayer + hls.js + mpegts.js 组合，避免重复引入第二套 HLS 引擎。
 
 ## 2.23.4 播放器兼容性修复
 

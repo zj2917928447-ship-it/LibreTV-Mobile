@@ -15,12 +15,66 @@ import { rewriteM3u8, LIVE_STREAM_BASE } from '@/lib/m3u8';
  * 旧地址（缓存页 / 已下发的播放列表）不受影响。
  */
 
-const TIMEOUT_MS = parseInt(process.env.REQUEST_TIMEOUT || '8000', 10);
-const MAX_RETRIES = parseInt(process.env.MAX_RETRIES || '1', 10);
+const TIMEOUT_MS = (() => {
+  const value = Number.parseInt(process.env.REQUEST_TIMEOUT || '8000', 10);
+  return Number.isFinite(value) ? Math.min(30_000, Math.max(1_000, value)) : 8_000;
+})();
+const MAX_RETRIES = (() => {
+  const value = Number.parseInt(process.env.MAX_RETRIES || '1', 10);
+  return Number.isFinite(value) ? Math.min(3, Math.max(0, value)) : 1;
+})();
 const HEADER_TIMEOUT_MS = 15_000;
+const MAX_M3U8_BYTES = 2 * 1024 * 1024;
+const M3U8_BODY_TIMEOUT_MS = 10_000;
 const UA =
   process.env.USER_AGENT ||
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
+/** Keep long-lived live streams tied to the browser request and release listeners on close/cancel. */
+function createClientBoundStream(
+  body: ReadableStream<Uint8Array>,
+  signal: AbortSignal,
+  onClientAbort: () => void,
+  upstreamController: AbortController
+): ReadableStream<Uint8Array> {
+  const reader = body.getReader();
+  let cleaned = false;
+  const onSignalAbort = () => {
+    cleanup();
+    upstreamController.abort();
+    void reader.cancel(signal.reason).catch(() => {});
+  };
+  const cleanup = () => {
+    if (cleaned) return;
+    cleaned = true;
+    signal.removeEventListener('abort', onClientAbort);
+    signal.removeEventListener('abort', onSignalAbort);
+  };
+  signal.addEventListener('abort', onSignalAbort, { once: true });
+  if (signal.aborted) onSignalAbort();
+
+  return new ReadableStream<Uint8Array>({
+    async pull(controller) {
+      try {
+        const result = await reader.read();
+        if (result.done) {
+          cleanup();
+          controller.close();
+        } else {
+          controller.enqueue(result.value);
+        }
+      } catch (error) {
+        cleanup();
+        controller.error(error);
+      }
+    },
+    async cancel(reason) {
+      cleanup();
+      upstreamController.abort();
+      await reader.cancel(reason);
+    },
+  });
+}
 
 /**
  * 精确域名匹配：仅 `douban.com` 本身及其子域放行。
@@ -50,6 +104,61 @@ function isAnonymousImageHost(host: string): boolean {
 
 // 未鉴权的图片等资源也允许走代理（豆瓣防盗链需要 Referer 伪装）；
 // 但为防止被当作开放代理滥用，仅放行上述公开图片域，其余必须已登录。
+/** Bound manifest memory and body time; media segments remain unlimited streaming responses. */
+async function readM3u8Text(
+  response: Response,
+  signal: AbortSignal,
+  abortUpstream?: () => void
+): Promise<string> {
+  if (!response.body) throw new Error('上游没有返回 m3u8 播放列表内容');
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  const deadline = Date.now() + M3U8_BODY_TIMEOUT_MS;
+  let total = 0;
+  let text = '';
+
+  try {
+    for (;;) {
+      if (signal.aborted) throw signal.reason ?? new DOMException('客户端已断开', 'AbortError');
+      const remaining = deadline - Date.now();
+      if (remaining <= 0) throw new DOMException('读取 m3u8 播放列表超时', 'TimeoutError');
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      let onAbort: (() => void) | undefined;
+      const interrupted = new Promise<never>((_resolve, reject) => {
+        timer = setTimeout(() => reject(new DOMException('读取 m3u8 播放列表超时', 'TimeoutError')), remaining);
+        onAbort = () => reject(signal.reason ?? new DOMException('客户端已断开', 'AbortError'));
+        signal.addEventListener('abort', onAbort, { once: true });
+      });
+      let result: ReadableStreamReadResult<Uint8Array>;
+      try {
+        result = await Promise.race([reader.read(), interrupted]);
+      } finally {
+        if (timer) clearTimeout(timer);
+        if (onAbort) signal.removeEventListener('abort', onAbort);
+      }
+      if (result.done) break;
+      total += result.value.byteLength;
+      if (total > MAX_M3U8_BYTES) throw new RangeError('m3u8 播放列表超过 2 MiB 上限');
+      text += decoder.decode(result.value, { stream: true });
+    }
+    return text + decoder.decode();
+  } catch (error) {
+    abortUpstream?.();
+    try { await reader.cancel(error); } catch { /* ignore */ }
+    throw error;
+  } finally {
+    try { reader.releaseLock(); } catch { /* ignore */ }
+  }
+}
+
+function hasM3u8Extension(value: string): boolean {
+  try {
+    return new URL(value).pathname.toLowerCase().endsWith('.m3u8');
+  } catch {
+    return value.split(/[?#]/, 1)[0].toLowerCase().endsWith('.m3u8');
+  }
+}
+
 function looksLikeImageUrl(target: string): boolean {
   const host = (() => {
     try { return new URL(target).hostname; } catch { return ''; }
@@ -71,6 +180,8 @@ export function decodePathTarget(encodedUrl: string): string {
 export async function handleProxyRequest(req: Request, targetUrl: string): Promise<Response> {
   const guarded = guardRequest(req);
   if (guarded && !looksLikeImageUrl(targetUrl)) return guarded;
+  if (targetUrl.length > 8192) return new NextResponse('URL 过长', { status: 414 });
+  if (req.signal.aborted) return new Response(null, { status: 499 });
 
   if (!isValidProxyUrl(targetUrl)) {
     return new NextResponse('无效的 URL', { status: 400 });
@@ -94,48 +205,83 @@ export async function handleProxyRequest(req: Request, targetUrl: string): Promi
   let lastError: unknown = null;
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const result = await fetchWithSafeRedirects(targetUrl, {
-        headers,
-        signal: AbortSignal.timeout(TIMEOUT_MS),
-      });
+      // The timeout applies only while waiting for upstream headers. Never time-limit
+      // the response body: slow HLS segments and long VOD streams must remain readable.
+      const result = await fetchWithSafeRedirects(
+        targetUrl,
+        { headers, signal: req.signal },
+        { headerTimeoutMs: TIMEOUT_MS }
+      );
       response = result.res;
       finalUrl = result.finalUrl;
       lastError = null;
       break;
     } catch (err) {
+      if (req.signal.aborted) return new Response(null, { status: 499 });
       lastError = err;
     }
   }
   if (!response) {
+    if (req.signal.aborted) return new Response(null, { status: 499 });
     return new NextResponse(
       `代理请求失败: ${lastError instanceof Error ? lastError.message : '未知错误'}`,
       { status: 502 }
     );
   }
 
+  if (req.signal.aborted) {
+    try { await response.body?.cancel(); } catch { /* ignore */ }
+    return new Response(null, { status: 499 });
+  }
   const contentType = response.headers.get('content-type') || '';
+  if (!response.ok) {
+    try { await response.body?.cancel(); } catch { /* ignore */ }
+    return NextResponse.json(
+      { error: `代理上游返回 ${response.status}` },
+      {
+        status: response.status === 304 ? 502 : response.status,
+        headers: { 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' },
+      }
+    );
+  }
+  const normalizedContentType = contentType.toLowerCase();
   const isM3u8 =
-    contentType.includes('mpegurl') || contentType.includes('x-mpegurl') ||
-    targetUrl.toLowerCase().endsWith('.m3u8');
+    normalizedContentType.includes('mpegurl') || normalizedContentType.includes('x-mpegurl') ||
+    hasM3u8Extension(targetUrl);
 
   // m3u8 文本：重写为代理地址（以重定向后的最终 URL 为 base 解析相对地址）
   if (isM3u8) {
-    const text = await response.text();
-    return new NextResponse(rewriteM3u8(text, finalUrl), {
-      status: response.status,
-      headers: {
-        'Content-Type': 'application/vnd.apple.mpegurl',
-        'Cache-Control': 'no-store',
-        'Access-Control-Allow-Origin': '*',
-      },
-    });
+    try {
+      const text = await readM3u8Text(response, req.signal);
+      if (req.signal.aborted) return new Response(null, { status: 499 });
+      return new NextResponse(rewriteM3u8(text, finalUrl), {
+        status: response.status,
+        headers: {
+          'Content-Type': 'application/vnd.apple.mpegurl',
+          'Cache-Control': 'no-store',
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
+    } catch (error) {
+      try { await response.body?.cancel(); } catch { /* ignore */ }
+      if (req.signal.aborted) return new Response(null, { status: 499 });
+      return new NextResponse(`读取播放列表失败: ${error instanceof Error ? error.message : '未知错误'}`, {
+        status: 502,
+        headers: { 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' },
+      });
+    }
   }
 
-  // 其余（图片 / JSON / 分片 / key）流式透传
+  // 其余（图片 / MP4 / WebM / JSON / 分片 / key）流式透传
   const outHeaders = new Headers();
   for (const name of ['content-type', 'accept-ranges', 'content-range', 'etag', 'last-modified']) {
     const v = response.headers.get(name);
     if (v) outHeaders.set(name, v);
+  }
+  // 仅当上游未附带压缩编码时保留原始字节长度，保障 MP4/WebM Range 拖动与进度计算精确
+  if (!response.headers.get('content-encoding')) {
+    const cl = response.headers.get('content-length');
+    if (cl) outHeaders.set('content-length', cl);
   }
   // fetch 会自动解压，转发时必须去掉长度相关头避免浏览器二次解压
   // 图片基本不变：长缓存交给浏览器与边缘 CDN（分片 / key 仍保守 1 小时）
@@ -154,11 +300,9 @@ export async function handleProxyRequest(req: Request, targetUrl: string): Promi
 /**
  * 直播流专用长连接代理（不复用 /api/proxy）：
  *
- * /api/proxy 的 AbortSignal.timeout(TIMEOUT_MS) 作用于整个响应流，
- * 8 秒后即切断长连接——对 HTTP-FLV（单一无限长连接）是致命的。
- * 本路由改为「仅对响应头等待设超时」（fetchWithSafeRedirects 的
- * headerTimeoutMs）：fetch 拿到响应头后立即清除计时器，
- * 之后 body 无限时长流式透传，直到客户端断开。
+ * 两条代理路径均只限制等待上游响应头的时间，不限制媒体 body 时长。
+ * 直播路径额外保留自建 IPTV 的 LIVE_ALLOW_PRIVATE 策略、独立 HLS 重写基址、
+ * no-store 长连接响应头，并且不重试（重试对直播无意义）。
  *
  * - 不重试（重试对直播无意义）；
  * - m3u8 manifest 仍需重写（变体/分片地址改指本路由），FLV 等纯透传；
@@ -168,14 +312,18 @@ export async function handleProxyRequest(req: Request, targetUrl: string): Promi
 export async function handleLiveStreamRequest(req: Request, targetUrl: string): Promise<Response> {
   const guarded = guardRequest(req);
   if (guarded) return guarded;
+  if (targetUrl.length > 8192) return jsonError('直播 URL 过长', 414);
+  if (req.signal.aborted) return new Response(null, { status: 499 });
 
   const verdict = await checkLiveUrlAllowed(targetUrl);
+  if (req.signal.aborted) return new Response(null, { status: 499 });
   if (!verdict.ok) return jsonError(verdict.reason, 403);
 
   const controller = new AbortController();
-  // 客户端断开（切台/关页）时终止上游连接，防止连接泄漏
+  // Client disconnect (channel switch/page close) must stop the upstream request.
   const onClientAbort = () => controller.abort();
-  req.signal.addEventListener('abort', onClientAbort, { once: true });
+  if (req.signal.aborted) controller.abort();
+  else req.signal.addEventListener('abort', onClientAbort, { once: true });
 
   const headers: Record<string, string> = { 'User-Agent': UA, Accept: '*/*' };
 
@@ -191,41 +339,64 @@ export async function handleLiveStreamRequest(req: Request, targetUrl: string): 
     response = result.res;
     finalUrl = result.finalUrl;
   } catch (err) {
+    req.signal.removeEventListener('abort', onClientAbort);
+    if (req.signal.aborted) return new Response(null, { status: 499 });
     return jsonError(
       `直播流连接失败: ${err instanceof Error ? err.message : '未知错误'}`,
       502
     );
   }
 
-  if (!response.ok && response.body) {
+  if (req.signal.aborted) {
+    try { await response.body?.cancel(); } catch { /* ignore */ }
+    req.signal.removeEventListener('abort', onClientAbort);
+    return new Response(null, { status: 499 });
+  }
+
+  if (!response.ok) {
     // 非直播正常响应（403/404 等）：透传原始状态码便于前端与开发者工具定位
     // （一律包成 502 会掩盖「token 过期 403」与「源瞬断」的区别）
-    try { await response.body.cancel(); } catch { /* 忽略 */ }
+    try { await response.body?.cancel(); } catch { /* 忽略 */ }
+    req.signal.removeEventListener('abort', onClientAbort);
     return NextResponse.json(
       { error: `直播流上游返回 ${response.status}` },
       {
-        status: response.status,
+        // 304 cannot carry a JSON response body; surface it as a gateway error instead.
+        status: response.status === 304 ? 502 : response.status,
         headers: { 'Cache-Control': 'no-store', 'X-Live-Upstream-Status': String(response.status) },
       }
     );
   }
 
   const contentType = response.headers.get('content-type') || '';
+  const normalizedContentType = contentType.toLowerCase();
   const isM3u8 =
-    contentType.includes('mpegurl') || contentType.includes('x-mpegurl') ||
-    targetUrl.toLowerCase().split('?')[0].endsWith('.m3u8');
+    normalizedContentType.includes('mpegurl') || normalizedContentType.includes('x-mpegurl') ||
+    hasM3u8Extension(targetUrl);
 
   // HLS manifest：重写变体/分片地址指向本路由，保证后续请求同源同鉴权。
   // 关键：以重定向后的最终 URL 为 base 解析相对地址（gslb 调度源 302 后路径会变）
   if (isM3u8) {
-    const text = await response.text();
-    return new NextResponse(rewriteM3u8(text, finalUrl, 0, LIVE_STREAM_BASE), {
-      status: response.status,
-      headers: {
-        'Content-Type': 'application/vnd.apple.mpegurl',
-        'Cache-Control': 'no-store',
-      },
-    });
+    try {
+      const text = await readM3u8Text(response, req.signal, () => controller.abort());
+      req.signal.removeEventListener('abort', onClientAbort);
+      return new NextResponse(rewriteM3u8(text, finalUrl, 0, LIVE_STREAM_BASE), {
+        status: response.status,
+        headers: {
+          'Content-Type': 'application/vnd.apple.mpegurl',
+          'Cache-Control': 'no-store',
+        },
+      });
+    } catch (error) {
+      req.signal.removeEventListener('abort', onClientAbort);
+      if (req.signal.aborted) return new Response(null, { status: 499 });
+      return jsonError(`读取直播播放列表失败: ${error instanceof Error ? error.message : '未知错误'}`, 502);
+    }
+  }
+
+  if (!response.body) {
+    req.signal.removeEventListener('abort', onClientAbort);
+    return jsonError('直播流上游没有返回内容', 502);
   }
 
   // FLV / TS 等流媒体：纯流式透传（禁止缓冲与缓存）
@@ -235,7 +406,7 @@ export async function handleLiveStreamRequest(req: Request, targetUrl: string): 
   outHeaders.set('Cache-Control', 'no-store, no-transform');
   outHeaders.set('X-Accel-Buffering', 'no');
 
-  return new NextResponse(response.body, {
+  return new NextResponse(createClientBoundStream(response.body, req.signal, onClientAbort, controller), {
     status: response.status,
     headers: outHeaders,
   });

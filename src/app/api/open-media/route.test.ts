@@ -218,7 +218,7 @@ describe('GET /api/open-media feature-film quality gate', () => {
         ] } };
       }
       if (url.hostname === 'images-assets.nasa.gov' && url.pathname.endsWith('/metadata.json')) return {};
-      if (url.hostname === 'sepiasearch.org') return { data: [] };
+      if (url.hostname === 'search.joinpeertube.org') return { data: [] };
       if (url.hostname === 'commons.wikimedia.org') return { query: { pages: [] } };
       return {};
     });
@@ -260,7 +260,7 @@ describe('GET /api/open-media feature-film quality gate', () => {
   it('excludes short PeerTube music videos and VR experiences even when their title matches', async () => {
     fetchUpstreamJson.mockImplementation(async (input: string) => {
       const url = new URL(input);
-      if (url.hostname === 'sepiasearch.org') {
+      if (url.hostname === 'search.joinpeertube.org') {
         return {
           data: [
             peerTubeVideo('Spider', 228, 'Original song by Doctor Popular, performed on Nanoloop for iOS.'),
@@ -515,6 +515,103 @@ describe('GET /api/open-media feature-film quality gate', () => {
     expect(fetchUpstreamJson.mock.calls.some(([value]) => String(value).includes('/asset/Apollo%2014%20Launch%20Coverage'))).toBe(true);
   });
 
+  it('adds only allowlisted Library of Congress public-domain films with official MP4 playback', async () => {
+    fetchUpstreamJson.mockImplementation(async (input: string) => {
+      const url = new URL(input);
+      if (url.hostname === 'www.loc.gov' && url.pathname === '/film-and-videos/') {
+        return {
+          content: {
+            results: [
+              {
+                title: 'The great train robbery',
+                url: 'https://www.loc.gov/item/00694220/',
+                access_restricted: false,
+                group: ['selections-from-the-national-film-registry'],
+                date: '1903',
+                description: ['Silent film from 1903.'],
+                image_url: ['https://tile.loc.gov/poster.jpg'],
+                resources: [{ video: 'https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00000765/00000765.mp4', duration: 701 }],
+              },
+              {
+                title: 'Spider-Man (2002)',
+                url: 'https://www.loc.gov/item/99999999/',
+                access_restricted: false,
+                group: ['selections-from-the-national-film-registry'],
+                resources: [{ video: 'https://tile.loc.gov/spiderman.mp4', duration: 7200 }],
+              },
+              {
+                title: 'The Cry of Jazz',
+                url: 'https://www.loc.gov/item/2022602507/',
+                access_restricted: false,
+                group: ['selections-from-the-national-film-registry'],
+                resources: [{ video: 'https://tile.loc.gov/cry-of-jazz.mp4', duration: 2000 }],
+              },
+              {
+                title: 'The great train robbery',
+                url: 'https://www.loc.gov/item/11111111/',
+                access_restricted: true,
+                group: ['selections-from-the-national-film-registry'],
+                resources: [{ video: 'https://tile.loc.gov/restricted.mp4', duration: 701 }],
+              },
+              {
+                title: 'The great train robbery',
+                url: 'https://www.loc.gov/item/22222222/',
+                access_restricted: false,
+                group: ['selections-from-the-national-film-registry'],
+                resources: [{ video: 'https://media.example/unauthorized.mp4', duration: 701 }],
+              },
+            ],
+          },
+        };
+      }
+      return {};
+    });
+
+    const response = await GET(new Request('https://app.example/api/open-media?ac=videolist&wd=The%20great%20train%20robbery'));
+    const body = await response.json() as { list?: Array<{ vod_id?: string; vod_name?: string; type_name?: string; vod_play_url?: string }> };
+    const locRequest = fetchUpstreamJson.mock.calls
+      .map(([input]) => new URL(input as string))
+      .find((url) => url.hostname === 'www.loc.gov');
+
+    expect(response.status).toBe(200);
+    expect(body.list).toHaveLength(1);
+    expect(body.list?.[0].vod_name).toBe('The great train robbery');
+    expect(body.list?.[0].type_name).toContain('Library of Congress');
+    expect(body.list?.[0].vod_play_url).toContain('tile.loc.gov');
+    expect(locRequest?.searchParams.get('fa')).toBe('partof:selections from the national film registry');
+  });
+
+  it('returns direct Library of Congress MP4 playback only for an allowlisted film detail', async () => {
+    fetchUpstreamJson.mockImplementation(async (input: string) => {
+      const url = new URL(input);
+      if (url.hostname === 'www.loc.gov' && url.pathname === '/film-and-videos/') {
+        return {
+          content: {
+            results: [{
+              title: 'The great train robbery',
+              url: 'https://www.loc.gov/item/00694220/',
+              access_restricted: false,
+              group: ['selections-from-the-national-film-registry'],
+              date: '1903',
+              resources: [{ video: 'https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00000765/00000765.mp4', duration: 701 }],
+            }],
+          },
+        };
+      }
+      return {};
+    });
+
+    const id = encodeOpenMediaId('loc', '00694220|The great train robbery');
+    const response = await GET(new Request('https://app.example/api/open-media?ac=videolist&ids=' + id));
+    const body = await response.json() as { list?: Array<{ vod_name?: string; vod_play_from?: string; vod_play_url?: string }> };
+
+    expect(response.status).toBe(200);
+    expect(body.list).toHaveLength(1);
+    expect(body.list?.[0].vod_name).toBe('The great train robbery');
+    expect(body.list?.[0].vod_play_from).toBe('Library of Congress');
+    expect(body.list?.[0].vod_play_url).toBe('在线播放$https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00000765/00000765.mp4');
+  });
+
   it('resolves Chinese Spider-Man searches to English provider metadata terms', async () => {
     fetchUpstreamJson.mockResolvedValue({});
 
@@ -525,10 +622,91 @@ describe('GET /api/open-media feature-film quality gate', () => {
     expect(response.status).toBe(200);
     expect(body.code).toBe(1);
     expect(body.list).toEqual([]);
-    expect(requestedUrls).toHaveLength(4);
+    expect(requestedUrls).toHaveLength(5);
     expect(requestedUrls.some((url) => url.hostname === 'archive.org' && url.searchParams.get('q')?.includes('Spider-Man'))).toBe(true);
     expect(requestedUrls.some((url) => url.hostname === 'images-api.nasa.gov' && url.searchParams.get('q') === 'Spider-Man')).toBe(true);
-    expect(requestedUrls.some((url) => url.hostname === 'sepiasearch.org' && url.searchParams.get('search') === 'Spider-Man')).toBe(true);
+    expect(requestedUrls.some((url) => url.hostname === 'search.joinpeertube.org' && url.searchParams.get('search') === 'Spider-Man')).toBe(true);
     expect(requestedUrls.some((url) => url.hostname === 'commons.wikimedia.org' && url.searchParams.get('gsrsearch') === 'filetype:video Spider-Man')).toBe(true);
+    expect(requestedUrls.some((url) => url.hostname === 'www.loc.gov' && url.searchParams.get('q') === 'Spider-Man')).toBe(true);
+  });
+
+  it('serves instant curated poster wall via ac=browse and resolves curated direct streams', async () => {
+    const browseRes = await GET(new Request('https://app.example/api/open-media?ac=browse&category=animation'));
+    const browseBody = await browseRes.json() as {
+      code?: number;
+      category?: string;
+      list?: Array<{ vod_id?: string; vod_name?: string; vod_pic?: string }>;
+    };
+    expect(browseRes.status).toBe(200);
+    expect(browseBody.code).toBe(1);
+    expect(browseBody.category).toBe('animation');
+    expect((browseBody.list ?? []).length).toBeGreaterThanOrEqual(5);
+
+    const sintel = browseBody.list?.find((item) => item.vod_name?.includes('辛特尔'));
+    expect(sintel?.vod_id).toBeTruthy();
+
+    const detailRes = await GET(
+      new Request(`https://app.example/api/open-media?ac=videolist&ids=${encodeURIComponent(sintel!.vod_id!)}&zh=1&short=1`)
+    );
+    const detailBody = await detailRes.json() as {
+      code?: number;
+      list?: Array<{ vod_play_url?: string; vod_content?: string }>;
+    };
+    expect(detailRes.status).toBe(200);
+    expect(detailBody.list?.[0]?.vod_play_url).toContain('video.blender.org');
+    expect(detailBody.list?.[0]?.vod_content).toContain('中文导览：');
+  });
+
+  it('returns curated playable hits in enhanced zh=1&short=1 mode even if all external providers fail', async () => {
+    fetchUpstreamJson.mockRejectedValue(new Error('Upstream timeout in direct network'));
+
+    const res = await GET(new Request('https://app.example/api/open-media?ac=videolist&wd=%E8%BE%9B%E7%89%B9%E5%B0%94&zh=1&short=1'));
+    const body = await res.json() as { code?: number; list?: Array<{ vod_name?: string }> };
+    expect(res.status).toBe(200);
+    expect(body.code).toBe(1);
+    expect((body.list ?? []).length).toBeGreaterThanOrEqual(1);
+    expect(body.list?.[0]?.vod_name).toContain('辛特尔');
+  });
+
+  it('supports dynamic online multi-page browsing via ac=browse&pg=2', async () => {
+    fetchUpstreamJson.mockImplementation(async (input: string) => {
+      const url = new URL(input);
+      if (url.hostname === 'tilvids.com') {
+        return {
+          data: [
+            peerTubeVideo('Classic Cinema Storytelling Essay', 900, 'An open film analysis.'),
+          ],
+        };
+      }
+      return {};
+    });
+
+    const res = await GET(new Request('https://app.example/api/open-media?ac=browse&category=all&pg=2'));
+    const body = await res.json() as { code?: number; page?: number; list?: Array<{ vod_name?: string }> };
+    expect(res.status).toBe(200);
+    expect(body.code).toBe(1);
+    expect(body.page).toBe(2);
+    expect((body.list ?? []).length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('supports Apple CMS v10 ac=list category browsing and specialized ?cat=chinese sub-galleries', async () => {
+    const listRes = await GET(new Request('https://app.example/api/open-media?ac=list&t=5&pg=1'));
+    const listBody = await listRes.json() as {
+      code?: number;
+      class?: Array<{ type_id: number; type_name: string }>;
+      list?: Array<{ vod_name?: string }>;
+    };
+    expect(listRes.status).toBe(200);
+    expect(listBody.code).toBe(1);
+    expect((listBody.class ?? []).length).toBe(5);
+    expect((listBody.list ?? []).length).toBeGreaterThanOrEqual(10);
+
+    const subSearch = await GET(
+      new Request('https://app.example/api/open-media?ac=videolist&wd=%E5%B0%8F%E5%9F%8E%E4%B9%8B%E6%98%A5&short=1&zh=1&cat=chinese')
+    );
+    const subBody = await subSearch.json() as { code?: number; list?: Array<{ vod_name?: string }> };
+    expect(subSearch.status).toBe(200);
+    expect(subBody.code).toBe(1);
+    expect(subBody.list?.[0]?.vod_name).toContain('小城之春');
   });
 });

@@ -1,12 +1,15 @@
 'use client';
 
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { Header } from '@/components/header';
+import { HomeInstantHub } from '@/components/home-instant-hub';
 import { RecommendSection } from '@/components/douban-section';
 import { DetailModal } from '@/components/detail-modal';
 import { AggregatedCard, aggregateResults } from '@/components/video-card';
+import { CatalogResults } from '@/components/catalog-results';
 import { useAppStore, resolveSource, isInDisabledSubscription, isSourceDisabled } from '@/lib/store';
 import { api } from '@/lib/client-api';
 import type { SearchResultItem, SourceSearchOutcome } from '@/lib/types';
@@ -47,6 +50,7 @@ function HomeContent() {
   const yellowFilter = useAppStore((s) => s.yellowFilter);
   const sourceHealth = useAppStore((s) => s.sourceHealth);
   const subscriptions = useAppStore((s) => s.subscriptions);
+  const watchRegion = useAppStore((s) => s.watchRegion);
   const [input, setInput] = useState(urlQuery);
   const [detailItem, setDetailItem] = useState<SearchResultItem | null>(null);
   /** 流式搜索中已结算的源（data 就绪前用于增量渲染） */
@@ -65,13 +69,18 @@ function HomeContent() {
     key;
 
   const selectedSources = useMemo(() => {
-    // selectedKeys 可能含历史残留的重复 key：按 key 去重，避免同源重复搜索
-    const seen = new Set<string>();
+    // 同时按 key 和规范化 URL 去重：旧订阅导入源与新部署预置源可能指向同一 API。
+    const seenKeys = new Set<string>();
+    const seenUrls = new Set<string>();
     return selectedKeys
       .map((key) => resolveSource({ customAPIs, envSources }, key))
       .filter((s): s is NonNullable<typeof s> => {
-        if (!s || !validateSourceUrl(s.url) || seen.has(s.key)) return false;
-        seen.add(s.key);
+        if (!s || !validateSourceUrl(s.url) || seenKeys.has(s.key)) return false;
+        let normalizedUrl = s.url.trim().replace(/\/+$/, '');
+        try { normalizedUrl = new URL(normalizedUrl).href.replace(/\/+$/, ''); } catch { return false; }
+        if (seenUrls.has(normalizedUrl)) return false;
+        seenKeys.add(s.key);
+        seenUrls.add(normalizedUrl);
         return true;
       })
       // 自动停用期内的源不参与搜索（到期自动恢复）
@@ -91,6 +100,25 @@ function HomeContent() {
       ),
     [selectedKeys, sourceHealth, subscriptions]
   );
+
+  const catalogQuery = useQuery({
+    queryKey: ['catalog-search', urlQuery, watchRegion],
+    queryFn: ({ signal }) => api.catalogSearch(urlQuery.slice(0, 100), watchRegion, signal),
+    enabled: Boolean(urlQuery),
+    staleTime: 300_000,
+  });
+  const catalogItems = catalogQuery.data?.list ?? [];
+  const catalogProviderKey = catalogItems.map((item) => `${item.mediaType}:${item.id}`).join(',');
+  const catalogProvidersQuery = useQuery({
+    queryKey: ['catalog-providers', watchRegion, catalogProviderKey],
+    queryFn: ({ signal }) => api.catalogProviders(
+      catalogItems.map(({ id, mediaType }) => ({ id, mediaType })),
+      watchRegion,
+      signal
+    ),
+    enabled: Boolean(catalogQuery.data?.configured && catalogQuery.data?.provider === 'tmdb' && catalogItems.length > 0),
+    staleTime: 1_800_000,
+  });
 
   const searchQuery = useQuery({
     queryKey: ['search', urlQuery, selectedKeys, yellowFilter],
@@ -184,10 +212,13 @@ function HomeContent() {
         <section className={cn('flex flex-col items-center', urlQuery ? 'mb-6' : 'mt-8 mb-8')}>
           {!urlQuery && (
             <header className="text-center mb-6">
-              <h1 className="text-4xl sm:text-5xl font-bold brand-gradient">LibreTV</h1>
+              <h1 className="text-4xl sm:text-5xl font-bold brand-gradient">自由影视</h1>
+              <p className="text-xs sm:text-sm text-muted mt-2">
+                中文聚合影视搜索 · 支持外挂中文字幕 · 免费开放片库与正版导航
+              </p>
             </header>
           )}
-          {urlQuery && <h1 className="sr-only">LibreTV 视频搜索</h1>}
+          {urlQuery && <h1 className="sr-only">自由影视 视频搜索</h1>}
           {/* 定位容器比胶囊宽一圈：浮层按它的宽度对齐，接缝处不会与胶囊边框错位 1px */}
           <div ref={searchHistory.containerRef} className="relative w-full max-w-2xl">
             <form
@@ -326,6 +357,11 @@ function HomeContent() {
               </div>
             )}
 
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <h3 className="text-sm font-semibold text-content">播放源搜索</h3>
+              <span className="text-[11px] text-faint">搜索你添加并启用的点播源</span>
+            </div>
+            <p className="mb-3 text-[11px] text-faint">命中点播源代表找到资源候选；打开详情并成功解析出剧集播放地址后，才会确认可播放。</p>
             {selectedSources.length === 0 ? (
               <NoSourceGuide
                 hasSources={customAPIs.length > 0 || envSources.length > 0}
@@ -356,25 +392,77 @@ function HomeContent() {
               </>
             ) : isSearching ? (
               <ResultsSkeleton />
+            ) : (catalogQuery.data?.list?.length ?? 0) > 0 || catalogQuery.isFetching ? (
+              <div className="rounded-xl border border-line bg-chip/60 px-4 py-3 flex flex-wrap items-center justify-between gap-2.5">
+                <div className="text-xs text-muted leading-relaxed">
+                  当前已启用的点播源未收录「<span className="text-content font-medium">{urlQuery}</span>」（商业院线正片不在公版开放库中）· 已在下方匹配中文影视资料与国内平台直达入口
+                </div>
+                <div className="flex flex-wrap items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    className="btn-primary btn-sm"
+                    onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
+                  >
+                    <Icon name="plus" className="w-3.5 h-3.5" />
+                    导入 TVBox 多仓 / 片源
+                  </button>
+                  <Link href="/free" className="btn-ghost btn-sm text-accent">
+                    免费高清影院
+                  </Link>
+                </div>
+              </div>
             ) : (
               <EmptyState
                 icon="search"
-                title="没有找到匹配的结果"
-                description="请尝试其他关键词或更换点播源"
-                className="!py-16"
+                title="点播源暂未命中"
+                description="可在设置中导入你拥有或获授权使用的 TVBox 多仓 / 苹果 CMS 订阅源，或前往免费影院观看公版与开源大片"
+                className="!py-10"
+                action={
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    <button
+                      type="button"
+                      className="btn-primary btn-sm"
+                      onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
+                    >
+                      <Icon name="plus" className="w-3.5 h-3.5" />
+                      导入 TVBox 多仓 / 订阅源
+                    </button>
+                    <Link href="/free" className="btn-ghost btn-sm text-accent">
+                      浏览免费高清影院
+                    </Link>
+                  </div>
+                }
               />
             )}
+
+            <CatalogResults
+              query={urlQuery}
+              response={catalogQuery.data}
+              providers={catalogProvidersQuery.data}
+              directItems={list}
+              loading={catalogQuery.isFetching && !catalogQuery.data}
+              providersLoading={catalogProvidersQuery.isFetching && !catalogProvidersQuery.data}
+              error={catalogQuery.error instanceof Error ? catalogQuery.error.message : undefined}
+              providersError={catalogProvidersQuery.error instanceof Error ? catalogProvidersQuery.error.message : undefined}
+              onSearchKeyword={(kw) => {
+                setInput(kw);
+                runSearch(kw);
+              }}
+            />
           </section>
         )}
 
-        {/* 首页推荐（有搜索时隐藏） */}
+        {/* 首页内置直连影院与推荐（有搜索时隐藏） */}
         {!urlQuery && (
-          <RecommendSection
-            onPick={(title) => {
-              setInput(title);
-              runSearch(title);
-            }}
-          />
+          <>
+            <HomeInstantHub />
+            <RecommendSection
+              onPick={(title) => {
+                setInput(title);
+                runSearch(title);
+              }}
+            />
+          </>
         )}
       </main>
 
@@ -411,11 +499,23 @@ function NoSourceGuide({
   hasSources?: boolean;
   hasSelectedKeys?: boolean;
 }) {
+  const { toast } = useToast();
   const title = !hasSources
     ? '还没有添加点播源'
     : hasSelectedKeys
       ? '当前没有可参与搜索的点播源'
       : '还没有启用点播源';
+
+  const enableBuiltInOpenMedia = () => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    if (!origin) return;
+    useAppStore.getState().addCustomApi({
+      name: '内置双语开放影视库（公版经典 + 开源动画）',
+      url: `${origin}/api/open-media?short=1&zh=1`,
+      detail: origin,
+    });
+    toast('已启用内置双语开放影视库，正在自动重新搜索', 'success');
+  };
 
   return (
     <div className="border border-dashed border-line rounded-xl p-6 sm:p-10 text-center max-w-lg mx-auto">
@@ -423,8 +523,7 @@ function NoSourceGuide({
       <p className="text-sm text-muted leading-relaxed">
         {!hasSources ? (
           <>
-            LibreTV 不内置影视采集站。请添加你有权使用的 Apple CMS JSON API，或导入你信任的
-            LibreTV / TVBox JSON 源列表。添加示例：
+            你可以一键启用本站自带的免费公版开放片库，或在设置中添加你拥有/获授权使用的 Apple CMS JSON 接口、TVBox 多仓 JSON 订阅及 AList 网盘接口：
             <code className="block mt-2 text-accent text-xs break-all">https://example.com/api.php/provide/vod</code>
           </>
         ) : hasSelectedKeys ? (
@@ -433,13 +532,24 @@ function NoSourceGuide({
           <>打开设置，在「源管理 → 点播源」中勾选要参与搜索的来源。</>
         )}
       </p>
-      <button
-        type="button"
-        className="btn-primary btn-sm mt-4 w-full sm:w-auto"
-        onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
-      >
-        {!hasSources ? '打开设置添加点播源' : '打开设置管理点播源'}
-      </button>
+      <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
+        {!hasSources && (
+          <button
+            type="button"
+            className="btn-primary btn-sm"
+            onClick={enableBuiltInOpenMedia}
+          >
+            一键启用内置免费片库
+          </button>
+        )}
+        <button
+          type="button"
+          className={cn(!hasSources ? 'btn-ghost btn-sm' : 'btn-primary btn-sm')}
+          onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
+        >
+          {!hasSources ? '导入自定义源 / 订阅' : '打开设置管理点播源'}
+        </button>
+      </div>
       <p className="mt-3 text-xs text-faint">请只添加你拥有或获授权使用的来源。</p>
     </div>
   );

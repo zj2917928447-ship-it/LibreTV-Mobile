@@ -1,12 +1,17 @@
 {
-  "name": "LibreTV 开放影视资料库（Internet Archive / NASA / PeerTube / Wikimedia Commons）",
-  "version": 2,
+  "name": "自由影视 · 开放影视与超清直播资源包（4015+ 名片与68部连播剧集 / 5994+ 直播）",
+  "version": 16,
   "sources": [
     {
-      "name": "开放影视资料库（Internet Archive / NASA / PeerTube / Wikimedia Commons）",
-      "url": "https://libretv-mobile-zj2917928447.onrender.com/api/open-media",
+      "name": "内置双语开放影视库（公版经典 / 国会图书馆直连 / 开源动画 / NASA / 韦伯 / 哈勃 / ESO 1080p）",
+      "url": "https://libretv-mobile-zj2917928447.onrender.com/api/open-media?short=1&zh=1",
       "detail": "https://libretv-mobile-zj2917928447.onrender.com"
     }
   ],
-  "liveSources": []
+  "liveSources": [
+    {
+      "name": "内置双阶实测超清直播（5994 台卫视 / 电影 / 动漫 / 纪实 / 欧美）",
+      "url": "https://libretv-mobile-zj2917928447.onrender.com/open-live-channels.m3u"
+    }
+  ]
 }

@@ -14,6 +14,60 @@ function stripBrackets(host: string): string {
 
 
 const BLOCKED_HOSTNAMES = new Set(['localhost', '127.0.0.1', '0.0.0.0', '::1']);
+const FAKE_IP_BENCHMARK_RE = /^198\.1[89]\.\d{1,3}\.\d{1,3}$/;
+const dohRealIpCache = new Map<string, { addresses: LookupAddress[]; expiresAt: number }>();
+let dohBootstrapAgent: Agent | null = null;
+
+function isAllFakeIpAddresses(list: readonly { address: string }[]): boolean {
+  return list.length > 0 && list.every((item) => FAKE_IP_BENCHMARK_RE.test(item.address));
+}
+
+/**
+ * 兼容本地 TUN / Fake-IP 模式（Clash / Mihomo / Sing-box 将公网域名统一映射为 198.18.0.0/15）：
+ * 仅当系统 DNS 把非字面量域名解析到 198.18.0.0/15 时，通过字面量公网 IP 的加密 DoH（223.5.5.5 / 1.1.1.1）
+ * 查询真实权威 A 记录，并逐条复核 `!isPrivateIP(ip)` 后将连接直接绑定到真实公网 IP。
+ * 若权威 DNS 仍返回内网/保留/198.18 地址或无记录，依旧按 SSRF 严格拦截。
+ */
+async function resolveFakeIpToPublicViaDoH(hostname: string): Promise<LookupAddress[] | null> {
+  if (process.env.VITEST) return null;
+  const key = hostname.toLowerCase();
+  const cached = dohRealIpCache.get(key);
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.addresses;
+  }
+  if (!dohBootstrapAgent) {
+    dohBootstrapAgent = new Agent({ connectTimeout: 2500, keepAliveTimeout: 5000 });
+  }
+  const endpoints = [
+    `https://223.5.5.5/resolve?name=${encodeURIComponent(key)}&type=A`,
+    `https://1.1.1.1/dns-query?name=${encodeURIComponent(key)}&type=A`,
+  ];
+  for (const endpoint of endpoints) {
+    try {
+      const res = await undiciFetch(endpoint, {
+        headers: { Accept: 'application/dns-json' },
+        dispatcher: dohBootstrapAgent,
+        signal: AbortSignal.timeout(2500),
+      });
+      if (!res.ok) continue;
+      const body = (await res.json()) as { Answer?: Array<{ type?: number; data?: string }> };
+      const ipv4s = (body.Answer ?? [])
+        .filter((ans) => ans.type === 1 && typeof ans.data === 'string' && /^\d{1,3}(?:\.\d{1,3}){3}$/.test(ans.data))
+        .map((ans) => ans.data!.trim());
+      if (ipv4s.length === 0) continue;
+      if (ipv4s.some((ip) => isPrivateIP(ip))) {
+        return null;
+      }
+      const verified: LookupAddress[] = ipv4s.map((address) => ({ address, family: 4 }));
+      if (dohRealIpCache.size > 512) dohRealIpCache.clear();
+      dohRealIpCache.set(key, { addresses: verified, expiresAt: Date.now() + 120_000 });
+      return verified;
+    } catch {
+      // try next DoH endpoint
+    }
+  }
+  return null;
+}
 
 /** URL 字面量校验：协议白名单 + 主机名/字面量 IP 黑名单 */
 export function isValidProxyUrl(urlString: string): boolean {
@@ -39,7 +93,14 @@ export async function isBlockedByDNS(urlString: string): Promise<boolean> {
       return isPrivateIP(hostname);
     }
     const result = await dns.lookup(hostname, { all: true });
-    return result.some((r) => isPrivateIP(r.address));
+    if (result.some((r) => isPrivateIP(r.address))) {
+      if (isAllFakeIpAddresses(result)) {
+        const realPublic = await resolveFakeIpToPublicViaDoH(hostname);
+        if (realPublic && realPublic.length > 0) return false;
+      }
+      return true;
+    }
+    return false;
   } catch {
     return false; // 解析失败不阻断，交给后续请求处理
   }
@@ -129,13 +190,29 @@ export function createSSRFAgent(options: { allowPrivate?: boolean } = {}): Agent
         return cb(new Error(`未找到主机地址: ${hostname}`), '');
       }
       if (!allowPrivate) {
-        for (const item of list) {
-          if (isPrivateIP(item.address)) {
-            const blockErr = Object.assign(new Error(`目标地址解析到私有/保留网络 (${item.address})`), {
-              code: 'ERR_SSRF_BLOCKED',
+        const hasPrivate = list.some((item) => isPrivateIP(item.address));
+        if (hasPrivate) {
+          if (isAllFakeIpAddresses(list)) {
+            void resolveFakeIpToPublicViaDoH(cleanHost).then((realPublic) => {
+              if (!realPublic || realPublic.length === 0) {
+                const blockErr = Object.assign(
+                  new Error(`目标地址解析到私有/保留网络 (${list[0].address})`),
+                  { code: 'ERR_SSRF_BLOCKED' }
+                );
+                cb(blockErr, '');
+                return;
+              }
+              const wantAll = opts && typeof opts === 'object' && (opts as { all?: boolean }).all;
+              if (wantAll) cb(null, realPublic);
+              else cb(null, realPublic[0].address, realPublic[0].family);
             });
-            return cb(blockErr, '');
+            return;
           }
+          const bad = list.find((item) => isPrivateIP(item.address))!;
+          const blockErr = Object.assign(new Error(`目标地址解析到私有/保留网络 (${bad.address})`), {
+            code: 'ERR_SSRF_BLOCKED',
+          });
+          return cb(blockErr, '');
         }
       }
 
@@ -197,6 +274,8 @@ const TRUSTED_PROVIDER_PROXY_HOSTS = new Set([
   'images-api.nasa.gov',
   'images-assets.nasa.gov',
   'sepiasearch.org',
+  'search.joinpeertube.org',
+  'www.loc.gov',
 ]);
 
 let providerProxyUri: string | null = null;

@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { guardRequest } from '@/lib/api-guard';
 import { getCache, setCache } from '@/lib/fetch-utils';
 import { withHostLimit } from '@/lib/host-gate';
+import { readJsonBodyLimited, RequestBodyTooLargeError } from '@/lib/request-body';
+import { normalizeCmsSourceConfig } from '@/lib/cms-url';
 import { probeQuality } from '@/lib/quality-probe';
 import type { QualityProbeItem, QualityProbeResult } from '@/lib/types';
 
@@ -32,13 +34,12 @@ interface CachedProbe {
   error?: string;
 }
 
-function isProbeItem(v: unknown): v is QualityProbeItem {
-  if (!v || typeof v !== 'object') return false;
+function normalizeProbeItem(v: unknown): QualityProbeItem | null {
+  if (!v || typeof v !== 'object' || Array.isArray(v)) return null;
   const item = v as { source?: unknown; id?: unknown };
-  if (!item.source || typeof item.source !== 'object') return false;
-  const source = item.source as Record<string, unknown>;
-  if (typeof source.key !== 'string' || typeof source.url !== 'string') return false;
-  return typeof item.id === 'string' && item.id.length > 0 && item.id.length <= 64;
+  if (typeof item.id !== 'string' || !item.id.trim() || item.id.length > 64) return null;
+  const source = normalizeCmsSourceConfig(item.source);
+  return source ? { source, id: item.id.trim() } : null;
 }
 
 function cacheKey(item: QualityProbeItem): string {
@@ -71,17 +72,24 @@ export async function POST(req: Request) {
   const guarded = guardRequest(req);
   if (guarded) return guarded;
 
-  let body: QualityBody;
+  let rawBody: unknown;
   try {
-    body = (await req.json()) as QualityBody;
-  } catch {
+    rawBody = await readJsonBodyLimited(req, 256 * 1024);
+  } catch (error) {
+    if (error instanceof RequestBodyTooLargeError) {
+      return NextResponse.json({ error: '画质探测请求体过大' }, { status: 413 });
+    }
     return NextResponse.json({ error: '请求格式错误' }, { status: 400 });
   }
+  if (!rawBody || typeof rawBody !== 'object' || Array.isArray(rawBody)) {
+    return NextResponse.json({ error: '请求格式错误' }, { status: 400 });
+  }
+  const body = rawBody as QualityBody;
 
   if (!Array.isArray(body.items) || body.items.length === 0) {
     return NextResponse.json({ error: '请提供待探测的条目' }, { status: 400 });
   }
-  const items = body.items.filter(isProbeItem).slice(0, MAX_ITEMS);
+  const items = body.items.map(normalizeProbeItem).filter((item): item is QualityProbeItem => item !== null).slice(0, MAX_ITEMS);
   if (items.length === 0) {
     return NextResponse.json({ error: '条目格式无效' }, { status: 400 });
   }
@@ -94,7 +102,7 @@ export async function POST(req: Request) {
   // 那个源在前端就永远拿不到结果、徽章不亮
   const inflight = new Map<string, Promise<CachedProbe>>();
 
-  const resolveItem = async (item: QualityProbeItem): Promise<QualityProbeResult> => {
+  const resolveItem = async (item: QualityProbeItem, signal: AbortSignal = req.signal): Promise<QualityProbeResult> => {
     const key = cacheKey(item);
     const cached = getCache<CachedProbe>(key);
     if (cached) {
@@ -107,7 +115,9 @@ export async function POST(req: Request) {
           // per-host 闸门放在最外层：同一采集站的多个影片共用一个 host，
           // 只限单请求内的 CONCURRENCY 挡不住「多用户 × 单请求并发」的叠加冲击。
           // 排队等待不占用 probeQuality 内部的 8s 死线（超时在拿到名额后才起算）
-          const result = await withHostLimit(item.source.url, () => probeQuality(item, req.signal));
+          if (signal.aborted) throw signal.reason ?? new DOMException('探测已取消', 'AbortError');
+          const result = await withHostLimit(item.source.url, () => probeQuality(item, signal), signal);
+          if (signal.aborted) throw signal.reason ?? new DOMException('探测已取消', 'AbortError');
           const value: CachedProbe = { height: result.height, error: result.error };
           // 「测不出」（height 缺失且无 error）同样是有效结论，也要缓存，
           // 否则单码率源每次展开都会被重复探测一遍
@@ -127,35 +137,55 @@ export async function POST(req: Request) {
   if (!isStream) {
     const results: QualityProbeResult[] = [];
     await runWithConcurrency(items, CONCURRENCY, async (item) => {
-      results.push(await resolveItem(item));
+      results.push(await resolveItem(item, req.signal));
     });
+    if (req.signal.aborted) return new Response(null, { status: 499 });
     return NextResponse.json({ results });
   }
 
   const encoder = new TextEncoder();
+  const streamAbortController = new AbortController();
+  let closed = req.signal.aborted;
+  const onClientAbort = () => {
+    closed = true;
+    streamAbortController.abort(new DOMException('客户端已断开', 'AbortError'));
+  };
+  if (closed) onClientAbort();
+  else req.signal.addEventListener('abort', onClientAbort, { once: true });
+
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
-      let closed = false;
       const send = (payload: QualityProbeResult | { ping: true }) => {
         if (closed) return;
         try {
           controller.enqueue(encoder.encode(JSON.stringify(payload) + '\n'));
         } catch {
           closed = true; // 客户端已断开
+          if (!streamAbortController.signal.aborted) {
+            streamAbortController.abort(new DOMException('客户端已断开', 'AbortError'));
+          }
         }
       };
       // 首字节心跳：客户端据此区分「请求被网关/反代拦下」与「探测过程本身失败」。
       // 一行 10 字节，换来线上排障时最关键的一条信息。
       send({ ping: true });
       await runWithConcurrency(items, CONCURRENCY, async (item) => {
-        if (closed) return;
-        send(await resolveItem(item));
+        if (closed || streamAbortController.signal.aborted) return;
+        send(await resolveItem(item, streamAbortController.signal));
       });
       closed = true;
+      req.signal.removeEventListener('abort', onClientAbort);
       try {
         controller.close();
       } catch {
         /* 已断开 */
+      }
+    },
+    cancel(reason) {
+      closed = true;
+      req.signal.removeEventListener('abort', onClientAbort);
+      if (!streamAbortController.signal.aborted) {
+        streamAbortController.abort(reason ?? new DOMException('客户端已取消探测', 'AbortError'));
       }
     },
   });

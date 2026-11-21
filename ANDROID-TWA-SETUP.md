@@ -95,7 +95,7 @@ The repeatable release builder is `scripts/build-twa-release.ps1`. To rebuild af
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\\build-twa-release.ps1 -SiteUrl https://libretv-mobile-zj2917928447.onrender.com
 ```
 
-It rejects temporary/local origins, validates the live site, PWA manifest, icons and Digital Asset Links fingerprint, updates the TWA manifest, builds APK/AAB, then verifies APK signature and alignment.
+It rejects temporary/local origins, verifies that the deployed `/api/status` version exactly matches the local `package.json` version and that `/free` is present, validates the live site, PWA manifest, icons and Digital Asset Links fingerprint, updates the TWA manifest, builds APK/AAB, then verifies APK signature and alignment. It reads the existing Windows system proxy for Bubblewrap/Gradle instead of assuming port 7688. This prevents accidentally signing an APK that still opens an older deployment without the Free Resources Center.
 
 The repository is public, so Render was deployed from the public Blueprint URL without installing Render's GitHub App. Public-repository URL deploys require manual redeploys after future commits.
 

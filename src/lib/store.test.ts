@@ -25,6 +25,7 @@ beforeEach(() => {
     liveFavorites: [],
     liveRecent: [],
     yellowFilter: false,
+    watchRegion: 'CN',
     skipMarks: {},
   });
 });
@@ -64,6 +65,14 @@ describe('subKeyPrefix / keyBelongsToSubscription', () => {
     // 修复前 startsWith(prefix) 会把碰撞订阅的源误判为 base 订阅所有
     expect(keyBelongsToSubscription(`${collidingPrefix}_0`, base)).toBe(false);
     expect(keyBelongsToSubscription(`${base}_0`, base)).toBe(true);
+  });
+});
+
+describe('搜索地区设置', () => {
+  it('默认使用 CN（中国大陆），用户修改后保存在全局设置状态中', () => {
+    expect(store().watchRegion).toBe('CN');
+    store().updateSettings({ watchRegion: 'GB' });
+    expect(store().watchRegion).toBe('GB');
   });
 });
 

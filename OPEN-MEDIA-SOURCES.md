@@ -1,6 +1,6 @@
 # LibreTV 开放影视资料库
 
-本订阅不是第三方采集站合集，而是 LibreTV 自带的只读适配器，聚合公开档案与明确开放许可的视频。当前包含 Internet Archive、NASA、PeerTube 与 Wikimedia Commons 四个提供方。
+本订阅不是第三方采集站合集，而是 LibreTV 自带的只读适配器，聚合公开档案与明确开放许可的视频。当前包含 Internet Archive、Library of Congress 公共领域电影精选、NASA、PeerTube 全球搜索与 Wikimedia Commons。应用内 `/free` 页面直接调用该接口，无需手动添加订阅，也不需要 TMDB Token。
 
 ## 订阅地址
 
@@ -16,8 +16,9 @@
 |---|---|---|
 | Internet Archive | 公共领域电影、开放许可影片 | 仅接受条目元数据明确声明 Public Domain、Public Domain Mark、CC0、CC BY 4.0 或 CC BY-SA 4.0，且存在 MP4 文件 |
 | NASA Image and Video Library | NASA 官方视频、任务纪录片、历史影像 | 过滤显式标记第三方版权的条目；保留来源说明，观看前仍应核对原始条目 |
-| PeerTube / SepiaSearch | 联邦视频平台中的开放许可视频 | 只接受许可 ID 1、2、3、7、8；排除未知许可、非商业许可和 All Rights Reserved |
+| PeerTube 全球搜索 | 联邦视频平台中的开放许可视频 | 使用 `search.joinpeertube.org`；只接受许可 ID 1、2、3、7、8；排除未知许可、非商业许可和 All Rights Reserved |
 | Wikimedia Commons | 公共领域与 CC 视频文件 | 只接受 Public Domain、CC0、CC BY、CC BY-SA、CC BY-ND；排除非商业、明确版权所有及非 HTTPS/非官方上传 CDN 文件 |
+| Library of Congress | National Film Registry 公共领域电影精选 | 限定在 LOC 的精选集 facet，并对影片标题使用 Free to Use and Reuse 公共领域清单白名单；只接受 `access_restricted=false`、官方精选集分组和 `tile.loc.gov` HTTPS MP4 |
 
 许可元数据由上传者/平台提供，适配器不构成法律权利保证。对 Internet Archive、PeerTube 与 Wikimedia Commons，详情页会保留原始来源和许可标签；使用者仍需遵守署名、相同方式共享、禁止演绎等具体许可条件。
 
@@ -29,7 +30,7 @@
 - NASA：搜索接口不保证返回 `duration`。每个候选条目都会先读取 `/asset/{nasa_id}` 的真实媒体清单，确认存在可播放的官方 MP4，再读取 `metadata.json`；优先识别 `QuickTime:Duration`、`QuickTime:MediaDuration`、`QuickTime:TrackDuration`、`AVAIL:Duration` 与 `XMP:Duration`（按 `Value × Scale` 转为秒）；最后才使用明确标注的 TRT / Runtime 文本。仍无法验证时不把条目当成长片。NASA 的 `nasa_id` 可能含空格和标点，适配器会拒绝路径分隔符/控制字符并对安全 ID 做单段 URL 编码。
 - Wikimedia Commons：请求 MediaWiki `videoinfo` 的 `size` 属性以取得视频信息；`videoinfo.duration` 是播放时长（秒），`videoinfo.size` 是文件字节数，`derivatives` 提供可用转码。搜索和详情均保留真实时长，不从文件大小推算。
 - PeerTube：使用其视频 API 返回的 `duration` 秒数；不使用文件大小推算时长。
-- 所有提供方统一要求时长至少 20 分钟、最多 24 小时；缺少可靠时长的条目不会进入长片搜索结果。若同一 Archive 条目同时包含短预览和长片，优先选择已验证为长片的 MP4 文件，再按移动端友好程度选择转码。
+- Internet Archive、NASA、PeerTube 与 Wikimedia Commons 要求时长至少 20 分钟、最多 24 小时；缺少可靠时长的条目不会进入长片搜索结果。Library of Congress 是明确列入公共领域精选清单的历史电影，允许 60 秒至 24 小时，避免误删《The Great Train Robbery》等早期短片。若同一 Archive 条目同时包含短预览和长片，优先选择已验证为长片的 MP4 文件，再按移动端友好程度选择转码。
 
 ## 限制
 
@@ -48,7 +49,7 @@
 
 `/api/open-media?ac=videolist&ids=om-...` 返回详情和播放地址。
 
-本适配器只请求固定的 Internet Archive、NASA、SepiaSearch 与 Wikimedia Commons API；PeerTube 实例域名及其详情返回的播放地址均经过公网地址与 DNS rebinding SSRF 检查。NASA 搜索结果必须先通过 `/asset/{nasa_id}` 验证实际存在可播放 MP4，不能只凭搜索元数据展示结果。
+本适配器只请求固定的 Internet Archive、NASA、PeerTube 全球搜索、Library of Congress 与 Wikimedia Commons API；PeerTube 实例域名及其详情返回的播放地址均经过公网地址与 DNS rebinding SSRF 检查。NASA 搜索结果必须先通过 `/asset/{nasa_id}` 验证实际存在可播放 MP4，不能只凭搜索元数据展示结果。LOC 结果必须同时命中精选集分组、公共领域标题白名单和官方 MP4 域名。
 
 ## 2026-11-16 稳定性与安全更新
 
@@ -59,4 +60,4 @@
 - 同名同年的不同来源不再合并成一条，用户可以比较不同剪辑版本、编码格式、来源和许可。仅相同提供方的相同资源 ID 才会去重。
 - IP 范围判定统一使用 `ipaddr.js`，覆盖 IPv4、IPv6、映射 IPv6、文档网段、基准测试网段、组播及保留地址。
 
-适配器仍然只做只读搜索与详情解析，不接受用户提交的上游 URL，不下载或托管视频文件。
+适配器仍然只做只读搜索与详情解析，不接受用户提交的上游 URL，不下载或托管视频文件。Tubi、Pluto TV、Plex、The Roku Channel、Xumo Play、Sling Freestream、Fawesome、PBS、Hoopla 与 Kanopy 只在 `/free` 页面提供官方免费入口；这些平台没有向 LibreTV 开放通用第三方直播放流 API，因此由平台自己的播放器播放。Hoopla 与 Kanopy 需要参与图书馆/大学资格；PBS 的 Passport 扩展片库可能需要捐赠支持。

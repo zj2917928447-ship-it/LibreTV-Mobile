@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/client-api';
+import { hasDescriptiveEpisodeNames } from '@/lib/cms-parser';
 // 播放器（artplayer + hls.js）按需加载：拆出独立 chunk，不占首屏 First Load JS
 const PlayerShell = dynamic(() => import('@/components/player-shell').then((m) => m.PlayerShell), {
   ssr: false,
@@ -18,6 +19,7 @@ const PlayerShell = dynamic(() => import('@/components/player-shell').then((m) =
 import { EmptyState, LoadingState, Spinner } from '@/components/states';
 import { SwitchSourceModal } from '@/components/switch-source';
 import { SkipMarkPanel } from '@/components/skip-mark-panel';
+import { SubtitleControlPanel, useSubtitleController } from '@/components/subtitle-bar';
 import {
   endingTailSeconds,
   skipMarkKey,
@@ -67,12 +69,18 @@ function WatchContent() {
   const directUrl = searchParams.get('url') || '';
   const titleParam = searchParams.get('title') || '';
   const indexParam = parseInt(searchParams.get('index') || '0', 10) || 0;
+  const routeParam = parseInt(searchParams.get('route') || '0', 10) || 0;
 
   const [reversed, setReversed] = useState(false);
   const [batchDownloadMode, setBatchDownloadMode] = useState(false);
   const [selectedDownloadEpisodes, setSelectedDownloadEpisodes] = useState<Set<number>>(() => new Set());
   const [switchOpen, setSwitchOpen] = useState(false);
   const [skipPanelOpen, setSkipPanelOpen] = useState(false);
+  const [translatedDesc, setTranslatedDesc] = useState('');
+  const [translatingDesc, setTranslatingDesc] = useState(false);
+  useEffect(() => {
+    setTranslatedDesc('');
+  }, [sourceKey, vodId]);
   // 播放器对外暴露的精确时间读取接口（「记录当前」用），随播放器卸载置空
   const playerApiRef = useRef<PlayerSkipApi | null>(null);
   // 播放框：小屏「跳过标记」抽屉要按它的底边算剩余高度，避免压住画面
@@ -120,7 +128,29 @@ function WatchContent() {
     staleTime: 5 * 60_000,
   });
 
-  const episodes = useMemo(() => detailQuery.data?.episodes ?? [], [detailQuery.data]);
+  const playRoutes = useMemo(() => detailQuery.data?.playRoutes ?? [], [detailQuery.data]);
+  const activeRouteIndex = useMemo(
+    () => (playRoutes.length > 0 ? Math.min(Math.max(routeParam, 0), playRoutes.length - 1) : 0),
+    [playRoutes.length, routeParam]
+  );
+  const episodes = useMemo(
+    () => playRoutes[activeRouteIndex]?.episodes ?? detailQuery.data?.episodes ?? [],
+    [playRoutes, activeRouteIndex, detailQuery.data]
+  );
+  const episodeNames = useMemo(
+    () => playRoutes[activeRouteIndex]?.episodeNames ?? detailQuery.data?.episodeNames ?? [],
+    [playRoutes, activeRouteIndex, detailQuery.data]
+  );
+  const descriptiveNames = useMemo(() => hasDescriptiveEpisodeNames(episodeNames), [episodeNames]);
+  const maxLabelLen = useMemo(
+    () => (descriptiveNames ? Math.max(0, ...episodeNames.map((n) => n.trim().length)) : 0),
+    [descriptiveNames, episodeNames]
+  );
+  const remoteSubtitles = detailQuery.data?.subtitles;
+  const { state: subtitleState, setState: setSubtitleState } = useSubtitleController(
+    remoteSubtitles,
+    `${sourceKey}:${vodId}:${indexParam}`
+  );
   useEffect(() => {
     setBatchDownloadMode(false);
     setSelectedDownloadEpisodes(new Set());
@@ -165,6 +195,28 @@ function WatchContent() {
       router.replace(`/watch?${sp.toString()}`, { scroll: false });
     },
     [router, searchParams, episodes, directUrl]
+  );
+
+  const goRoute = useCallback(
+    (nextRouteIndex: number) => {
+      const targetRoute = playRoutes[nextRouteIndex];
+      if (!targetRoute || targetRoute.episodes.length === 0) return;
+      const targetEpIndex = Math.min(currentIndex, targetRoute.episodes.length - 1);
+      const sp = new URLSearchParams(searchParams.toString());
+      if (nextRouteIndex > 0) sp.set('route', String(nextRouteIndex));
+      else sp.delete('route');
+      sp.set('index', String(targetEpIndex));
+      sp.set('url', targetRoute.episodes[targetEpIndex]);
+      const curTime = Math.floor(playerApiRef.current?.getCurrentTime() ?? 0);
+      if (curTime > 3 && targetEpIndex === currentIndex) {
+        sp.set('position', String(curTime));
+      } else {
+        sp.delete('position');
+      }
+      router.replace(`/watch?${sp.toString()}`, { scroll: false });
+      toast(`已切换至「${targetRoute.name}」`, 'info');
+    },
+    [playRoutes, currentIndex, searchParams, router, toast]
   );
 
   // 进度恢复优先级：URL position 参数 > IndexedDB 记录
@@ -299,9 +351,13 @@ function WatchContent() {
           <HomeButton />
           <div className="min-w-0">
             <h1 className="text-sm font-medium text-content truncate">{videoTitle}</h1>
-            <p className="text-xs text-faint">
+            <p className="text-xs text-faint truncate">
               {source.name}
-              {episodes.length > 0 && ` · 第 ${currentIndex + 1}/${episodes.length} 集`}
+              {playRoutes.length > 1 && playRoutes[activeRouteIndex] && ` · ${playRoutes[activeRouteIndex].name}`}
+              {episodes.length > 0 &&
+                (descriptiveNames && episodeNames[currentIndex]
+                  ? ` · ${episodeNames[currentIndex]}`
+                  : ` · 第 ${currentIndex + 1}/${episodes.length} 集`)}
             </p>
           </div>
           <div className="ml-auto flex items-center gap-1.5 sm:gap-2 shrink-0">
@@ -349,9 +405,9 @@ function WatchContent() {
                   onPendingStart={setPendingStart}
                   onPlayerApi={(api) => { playerApiRef.current = api; }}
                   onRecordSegment={handleRecordSegment}
-                  episodeKey={`${sourceKey}:${vodId}:${currentIndex}`}
+                  episodeKey={`${sourceKey}:${vodId}:${activeRouteIndex}:${currentIndex}`}
                   nextUrl={currentIndex + 1 < episodes.length ? episodes[currentIndex + 1] : undefined}
-                  nextEpisodeKey={currentIndex + 1 < episodes.length ? `${sourceKey}:${vodId}:${currentIndex + 1}` : undefined}
+                  nextEpisodeKey={currentIndex + 1 < episodes.length ? `${sourceKey}:${vodId}:${activeRouteIndex}:${currentIndex + 1}` : undefined}
                   getRestorePosition={getRestorePosition}
                   onTimeUpdate={handleProgress}
                   onPause={handleProgress}
@@ -360,6 +416,14 @@ function WatchContent() {
                   hasNextEpisode={episodes.length > 0 && currentIndex < episodes.length - 1}
                   onPrevEpisode={() => goEpisode(currentIndex - 1)}
                   onNextEpisode={() => goEpisode(currentIndex + 1)}
+                  subtitles={remoteSubtitles}
+                  activeSubtitleKey={subtitleState.activeKey}
+                  localSubtitleText={subtitleState.localText}
+                  subtitleOffset={subtitleState.offset}
+                  subtitleSize={subtitleState.size}
+                  onRemoteSubtitleLoaded={(text) =>
+                    setSubtitleState((prev) => ({ ...prev, remoteLoadedText: text }))
+                  }
                   onQuality={(height) => {
                     // 播放实测是最权威的画质来源，回写后搜索列表里该「源 + 影片」直接显示
                     if (!sourceKey || !vodId) return;
@@ -413,6 +477,12 @@ function WatchContent() {
                   <span className="ml-1 inline-block size-1.5 rounded-full bg-faint" aria-label="本剧跳过已关闭" />
                 )}
               </button>
+              <SubtitleControlPanel
+                remoteTracks={remoteSubtitles}
+                state={subtitleState}
+                onChange={setSubtitleState}
+                onToast={(msg) => toast(msg, 'info')}
+              />
               <label className="flex items-center gap-1.5 text-xs text-muted ml-auto cursor-pointer">
                 <input
                   type="checkbox"
@@ -443,10 +513,73 @@ function WatchContent() {
                 };
               }}
             />
+
+            {detailQuery.data?.videoInfo?.desc && (
+              <div className="mt-3 rounded-lg bg-surface-raised border border-line p-3 text-xs text-muted leading-relaxed">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <span className="font-medium text-content">剧情简介</span>
+                  {/[A-Za-z]{12,}/.test(translatedDesc || detailQuery.data.videoInfo.desc) && (
+                    <button
+                      type="button"
+                      className="text-accent hover:underline disabled:opacity-50"
+                      disabled={translatingDesc}
+                      onClick={async () => {
+                        const rawDesc = detailQuery.data?.videoInfo?.desc;
+                        if (!rawDesc) return;
+                        setTranslatingDesc(true);
+                        try {
+                          const lines = rawDesc.split('\n').map((l) => l.trim()).filter(Boolean).slice(0, 12);
+                          const res = await fetch('/api/translate', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ lines }),
+                          });
+                          if (!res.ok) throw new Error('翻译失败');
+                          const data = (await res.json()) as { translations?: string[] };
+                          if (data.translations?.length) {
+                            setTranslatedDesc(data.translations.join('\n'));
+                            toast('已将英文简介翻译为简体中文', 'success');
+                          }
+                        } catch {
+                          toast('简介翻译暂不可用，请稍后重试', 'error');
+                        } finally {
+                          setTranslatingDesc(false);
+                        }
+                      }}
+                    >
+                      {translatingDesc ? '正在翻译简介…' : '翻译英文简介'}
+                    </button>
+                  )}
+                </div>
+                <p className="whitespace-pre-line line-clamp-5">{translatedDesc || detailQuery.data.videoInfo.desc}</p>
+              </div>
+            )}
           </div>
 
           {/* 剧集侧栏 */}
           <aside className="bg-surface-raised rounded-lg p-3 h-fit">
+            {playRoutes.length > 1 && (
+              <div className="mb-3 pb-2.5 border-b border-line/70">
+                <div className="text-xs font-medium text-muted mb-1.5">播放线路 ({playRoutes.length})</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {playRoutes.map((route, rIdx) => (
+                    <button
+                      key={`${route.name}-${rIdx}`}
+                      type="button"
+                      onClick={() => goRoute(rIdx)}
+                      className={cn(
+                        'rounded-full px-2.5 py-0.5 text-xs transition-colors border',
+                        rIdx === activeRouteIndex
+                          ? 'border-accent bg-accent/15 text-accent font-medium'
+                          : 'border-line bg-chip text-muted hover:text-content'
+                      )}
+                    >
+                      {route.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="flex items-center justify-between gap-2 mb-2.5">
               <h2 className="text-sm font-semibold text-content">
                 剧集列表{episodes.length > 0 && `（${episodes.length}）`}
@@ -522,11 +655,22 @@ function WatchContent() {
                 <EmptyState variant="plain" title={detailQuery.isError ? '获取剧集失败' : '暂无剧集信息'} />
               )
             ) : (
-              <div className="grid grid-cols-6 sm:grid-cols-8 lg:grid-cols-4 gap-1.5 max-h-[65vh] overflow-y-auto scrollbar-thin pr-1">
+              <div
+                className={cn(
+                  'grid gap-1.5 max-h-[65vh] overflow-y-auto scrollbar-thin pr-1',
+                  descriptiveNames
+                    ? maxLabelLen > 10
+                      ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-1'
+                      : 'grid-cols-3 sm:grid-cols-4 lg:grid-cols-2'
+                    : 'grid-cols-6 sm:grid-cols-8 lg:grid-cols-4'
+                )}
+              >
                 {orderedEpisodes.map((realIndex) => (
                   <EpisodeButton
                     key={realIndex}
                     index={realIndex}
+                    label={descriptiveNames ? episodeNames[realIndex] : undefined}
+                    longLabel={descriptiveNames && maxLabelLen > 10}
                     active={realIndex === currentIndex}
                     selected={selectedDownloadEpisodes.has(realIndex)}
                     selectionMode={batchDownloadMode}
@@ -566,15 +710,19 @@ function WatchContent() {
   );
 }
 
-/** 集数按钮：激活时自动滚动进可视区（长剧列表） */
+/** 集数按钮：激活时自动滚动进可视区（长剧列表），支持真实集名标签展示 */
 function EpisodeButton({
   index,
+  label,
+  longLabel = false,
   active,
   selected = false,
   selectionMode = false,
   onClick,
 }: {
   index: number;
+  label?: string;
+  longLabel?: boolean;
   active: boolean;
   selected?: boolean;
   selectionMode?: boolean;
@@ -586,18 +734,21 @@ function EpisodeButton({
     if (active) ref.current?.scrollIntoView({ block: 'nearest' });
   }, [active]);
 
+  const text = label?.trim() || String(index + 1);
   return (
     <button
       ref={ref}
       className={cn(
-        'btn btn-sm !px-1',
+        'btn btn-sm truncate',
+        longLabel ? '!px-2.5 text-left justify-start' : '!px-1.5',
         selectionMode && selected ? 'bg-accent/20 text-accent border border-accent/50' : active ? 'episode-active' : 'btn-ghost'
       )}
+      title={text}
       aria-pressed={selectionMode ? selected : active}
-      aria-label={selectionMode ? `第 ${index + 1} 集${selected ? '，已选择下载' : '，未选择'}` : `播放第 ${index + 1} 集`}
+      aria-label={selectionMode ? `${text}${selected ? '，已选择下载' : '，未选择'}` : `播放 ${text}`}
       onClick={onClick}
     >
-      {selectionMode && selected ? `✓ ${index + 1}` : index + 1}
+      {selectionMode && selected ? `✓ ${text}` : text}
     </button>
   );
 }

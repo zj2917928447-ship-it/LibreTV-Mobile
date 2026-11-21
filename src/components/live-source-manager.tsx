@@ -8,6 +8,12 @@ import { formatRelativeTime, hostnameOf, validateSourceUrl, cn } from '@/lib/uti
 import { SearchInput, SectionTitle, TestBadge, useSourceTests } from './settings-shared';
 import { EmptyState } from './states';
 import { Icon } from './icon';
+import {
+  getPublicPackCategory,
+  PUBLIC_LIVE_PACKS,
+  resolvePublicLivePackUrl,
+  type PublicPackCategory,
+} from '@/lib/public-live-packs';
 
 /**
  * 直播源管理（嵌入设置抽屉）：M3U 订阅的添加 / 探活 / 移除 / 导出，
@@ -42,7 +48,32 @@ export function LiveSourceManager() {
   const [editing, setEditing] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<LiveFilter>('all');
+  const [packsOpen, setPacksOpen] = useState(false);
+  const [packCat, setPackCat] = useState<PublicPackCategory>('all');
   const { tests, runTest } = useSourceTests();
+
+  const existingUrls = useMemo(
+    () => new Set([...store.liveEnvSources.map((s) => s.url), ...store.liveSubscriptions.map((s) => s.url)]),
+    [store.liveEnvSources, store.liveSubscriptions]
+  );
+
+  const togglePublicPack = (pack: (typeof PUBLIC_LIVE_PACKS)[number]) => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    if (!origin) return;
+    const targetUrl = resolvePublicLivePackUrl(pack, origin);
+    if (existingUrls.has(targetUrl)) {
+      if (!store.liveSelectedUrls.includes(targetUrl)) {
+        store.toggleLiveSelected(targetUrl);
+        toast(`已启用「${pack.name}」`, 'success');
+      } else {
+        toast('该频道包已在启用列表中', 'info');
+      }
+      return;
+    }
+    store.addLiveSubscription(targetUrl, pack.name);
+    void runTest(targetUrl, () => api.liveTest(targetUrl));
+    toast(`已添加并启用「${pack.name}」（约 ${pack.channelEstimate}）`, 'success');
+  };
 
   const rows = useMemo<LiveRow[]>(() => {
     const preset: LiveRow[] = store.liveEnvSources.map((s) => ({
@@ -110,14 +141,122 @@ export function LiveSourceManager() {
     <section>
       <SectionTitle
         title="直播源"
-        hint={empty ? 'M3U 订阅 · /live 页面播放' : `共 ${store.liveEnvSources.length + store.liveSubscriptions.length} 个 · 已启用 ${store.liveSelectedUrls.length}`}
+        hint={empty ? 'M3U / TXT 订阅 · /live 页面播放' : `共 ${store.liveEnvSources.length + store.liveSubscriptions.length} 个 · 已启用 ${store.liveSelectedUrls.length}`}
         extra={
-          <button className="btn-primary btn-sm" onClick={() => setAdding(true)}>
-            <Icon name="plus" className="w-3.5 h-3.5" />
-            添加直播源
-          </button>
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              className="btn-ghost btn-sm text-accent"
+              onClick={() => setPacksOpen((v) => !v)}
+            >
+              {packsOpen ? '收起频道库' : '精选频道库 (96000+)'}
+            </button>
+            <button className="btn-primary btn-sm" onClick={() => setAdding(true)}>
+              <Icon name="plus" className="w-3.5 h-3.5" />
+              添加直播源
+            </button>
+          </div>
         }
       />
+
+      {(packsOpen || empty) && (
+        <div className="mb-3 rounded-lg border border-line bg-chip/60 p-3 space-y-2">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <div className="text-xs font-semibold text-content">156 大公开直播频道分类包（一键添加 · 国内直连可用）</div>
+              <div className="text-[11px] text-faint mt-0.5">同时兼容标准 M3U 与国内常见 TXT（#genre#）直播列表</div>
+            </div>
+            <button
+              type="button"
+              className="btn-ghost btn-sm text-accent text-[11px]"
+              onClick={() => {
+                const origin = typeof window !== 'undefined' ? window.location.origin : '';
+                if (!origin) return;
+                const subset = PUBLIC_LIVE_PACKS.filter(
+                  (p) => packCat === 'all' || getPublicPackCategory(p) === packCat
+                ).slice(0, 16);
+                let addedCount = 0;
+                for (const p of subset) {
+                  const u = resolvePublicLivePackUrl(p, origin);
+                  if (!existingUrls.has(u)) {
+                    store.addLiveSubscription(u, p.name);
+                    addedCount++;
+                  } else if (!store.liveSelectedUrls.includes(u)) {
+                    store.toggleLiveSelected(u);
+                    addedCount++;
+                  }
+                }
+                toast(
+                  addedCount > 0
+                    ? `已批量启用 ${addedCount} 个频道包`
+                    : '当前分类精选包均已在启用列表中',
+                  'success'
+                );
+              }}
+            >
+              批量启用本类
+            </button>
+          </div>
+          <div className="flex flex-wrap items-center gap-1 pb-1">
+            {(
+              [
+                ['all', `全部 (${PUBLIC_LIVE_PACKS.length})`],
+                ['chinese', '华语与亚洲'],
+                ['cinema', '影视与动漫'],
+                ['doc_sport', '纪实与体育'],
+                ['global', '欧美与多语'],
+              ] as const
+            ).map(([cid, clabel]) => (
+              <button
+                key={cid}
+                type="button"
+                onClick={() => setPackCat(cid)}
+                className={cn(
+                  'rounded-full px-2.5 py-0.5 text-[11px] transition-colors border',
+                  packCat === cid
+                    ? 'border-accent/50 bg-accent/15 text-accent font-medium'
+                    : 'border-line/70 bg-surface text-muted hover:text-content'
+                )}
+              >
+                {clabel}
+              </button>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-72 overflow-y-auto pr-0.5">
+            {PUBLIC_LIVE_PACKS.filter((p) => packCat === 'all' || getPublicPackCategory(p) === packCat).map((pack) => {
+              const origin = typeof window !== 'undefined' ? window.location.origin : '';
+              const packUrl = origin ? resolvePublicLivePackUrl(pack, origin) : pack.urlOrPath;
+              const added = existingUrls.has(packUrl);
+              const enabled = store.liveSelectedUrls.includes(packUrl);
+              return (
+                <div
+                  key={pack.id}
+                  className="flex items-center justify-between gap-2 rounded-md border border-line/70 bg-surface px-2.5 py-2"
+                >
+                  <div className="min-w-0">
+                    <div className="text-xs font-medium text-content truncate">{pack.name}</div>
+                    <div className="text-[10px] text-faint truncate">
+                      {pack.channelEstimate} · {pack.hint}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    className={cn(
+                      'shrink-0 rounded px-2 py-1 text-[11px] font-medium transition-colors',
+                      added && enabled
+                        ? 'bg-success/15 text-success cursor-default'
+                        : 'bg-accent/15 text-accent hover:bg-accent/25'
+                    )}
+                    onClick={() => togglePublicPack(pack)}
+                  >
+                    {added ? (enabled ? '已启用' : '启用') : '+ 添加'}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* 与点播源一致：由「+ 添加 / 编辑」按钮展开同一表单，而非常驻占位 */}
       <LiveSourceForm
@@ -144,11 +283,26 @@ export function LiveSourceManager() {
         <EmptyState
           icon="link"
           title="还没有添加任何直播源"
-          description="添加 M3U 地址后即可在「直播」页按分组浏览与播放频道；也可在「数据源订阅」中一次导入点播源与直播源；部署者还可通过 DEFAULT_LIVE_SOURCES 环境变量预置。"
+          description="可一键启用本站内置免费太空直播与开源影院频道，或添加任意公开 IPTV M3U 地址，也可在「数据源订阅」一次导入点播源与直播源。"
           action={
-            <button className="btn-primary btn-sm" onClick={() => setAdding(true)}>
-              添加第一个直播源
-            </button>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <button
+                className="btn-primary btn-sm"
+                onClick={() => {
+                  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+                  if (!origin) return;
+                  const m3uUrl = `${origin}/open-live-channels.m3u`;
+                  store.addLiveSubscription(m3uUrl, '内置免费太空直播与开源影院频道');
+                  void runTest(m3uUrl, () => api.liveTest(m3uUrl));
+                  toast('已启用内置免费直播频道，可前往「直播」页观看', 'success');
+                }}
+              >
+                一键启用内置免费频道
+              </button>
+              <button className="btn-ghost btn-sm" onClick={() => setAdding(true)}>
+                手动添加 M3U
+              </button>
+            </div>
           }
         />
       ) : (

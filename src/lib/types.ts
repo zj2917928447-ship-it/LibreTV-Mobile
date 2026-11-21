@@ -40,9 +40,35 @@ export interface VideoInfo {
   sourceUrl?: string;
 }
 
+export interface SubtitleTrack {
+  /** 字幕显示名称，例如“简体中文”或“English” */
+  label: string;
+  /** BCP-47 语言代码，例如 zh-CN / en */
+  lang: string;
+  /** 字幕下载地址（同源 API 或公开 HTTPS 地址） */
+  url: string;
+  /** 原始字幕格式 */
+  format?: 'vtt' | 'srt' | 'ass';
+}
+
+export interface VideoPlayRoute {
+  /** 播放线路名称，例如「官方超清主线」「量子 M3U8」「备用直连」 */
+  name: string;
+  /** 该线路下的分集播放地址列表 */
+  episodes: string[];
+  /** 与 episodes 一一对应的分集显示名（如「HD国语」「第01集 · 创生之柱」） */
+  episodeNames: string[];
+}
+
 export interface VideoDetail {
   episodes: string[];
+  /** 默认主线路的分集标题（与 episodes 等长） */
+  episodeNames?: string[];
+  /** 多播放线路列表（苹果CMS $$$ 多线路，已按 m3u8/直链优先级排序） */
+  playRoutes?: VideoPlayRoute[];
   videoInfo: VideoInfo;
+  /** 可选：片源附带的外挂字幕列表 */
+  subtitles?: SubtitleTrack[];
 }
 
 export interface DoubanItem {
@@ -103,6 +129,64 @@ export interface QualityProbeResult {
 export interface SearchResponse {
   list: SearchResultItem[];
   failures: { sourceKey: string; error: string; timedOut?: boolean }[];
+}
+
+/** TMDB catalogue metadata is deliberately separate from direct CMS playback results. */
+export type CatalogMediaType = 'movie' | 'tv';
+export type CatalogProviderType = 'flatrate' | 'free' | 'ads' | 'rent' | 'buy';
+
+export interface CatalogProvider {
+  id: number;
+  name: string;
+  logoUrl?: string;
+}
+
+export interface CatalogProviderGroup {
+  type: CatalogProviderType;
+  label: string;
+  providers: CatalogProvider[];
+}
+
+export interface CatalogSearchResult {
+  id: number;
+  mediaType: CatalogMediaType;
+  title: string;
+  originalTitle?: string;
+  overview: string;
+  releaseDate?: string;
+  year?: string;
+  posterUrl?: string;
+  rating?: number;
+  voteCount?: number;
+  tmdbUrl: string;
+  doubanUrl?: string;
+}
+
+export interface CatalogSearchResponse {
+  configured: boolean;
+  region: string;
+  provider?: 'tmdb' | 'douban' | 'bangumi';
+  list: CatalogSearchResult[];
+}
+
+export interface CatalogProviderLookupItem {
+  id: number;
+  mediaType: CatalogMediaType;
+}
+
+export interface CatalogProviderAvailability {
+  id: number;
+  mediaType: CatalogMediaType;
+  providerGroups: CatalogProviderGroup[];
+  watchUrl?: string;
+  /** False means the provider lookup failed; it does not mean the title is unavailable. */
+  checked: boolean;
+}
+
+export interface CatalogProvidersResponse {
+  configured: boolean;
+  region: string;
+  list: CatalogProviderAvailability[];
 }
 
 /** /api/search?stream=1 的 NDJSON 事件：逐源推送 + 最终聚合 */
@@ -212,7 +296,7 @@ export type SubscriptionSkipReason =
 /** 订阅解析统计：说明跳过与截断情况，用于导入结果提示 */
 export interface SubscriptionParseStats {
   /** 识别出的订阅格式 */
-  format: 'libretv' | 'tvbox' | 'source-catalog';
+  format: 'libretv' | 'tvbox' | 'tvbox-multi' | 'source-catalog';
   /** 被跳过的条目总数 */
   skipped: number;
   /** 跳过原因分类计数 */

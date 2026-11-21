@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   buildDownloadContentDisposition,
+  detectVideoFileContentType,
   isDownloadableVideoContentType,
   isSafeDownloadTarget,
   sanitizeDownloadFilename,
@@ -39,6 +40,24 @@ describe('download filename safety', () => {
     expect(isDownloadableVideoContentType('video/webm')).toBe(true);
     expect(isDownloadableVideoContentType('application/octet-stream')).toBe(true);
     expect(isDownloadableVideoContentType('application/webm')).toBe(true);
-    expect(isDownloadableVideoContentType('')).toBe(true);
+    expect(isDownloadableVideoContentType('')).toBe(false);
+  });
+});
+
+describe('video container signature detection', () => {
+  it('recognizes MP4, WebM, Ogg, FLV and AVI headers', () => {
+    expect(detectVideoFileContentType(Uint8Array.from([0, 0, 0, 24, 102, 116, 121, 112, 105, 115, 111, 109]))).toBe('video/mp4');
+    expect(detectVideoFileContentType(Uint8Array.from([0, 0, 0, 8, 102, 114, 101, 101, 0, 0, 0, 16, 102, 116, 121, 112, 105, 115, 111, 109]))).toBe('video/mp4');
+    expect(detectVideoFileContentType(Uint8Array.from([0, 0, 0, 1, 102, 116, 121, 112, 0, 0, 0, 0, 0, 0, 0, 20, 105, 115, 111, 109]))).toBe('video/mp4');
+    expect(detectVideoFileContentType(Uint8Array.from([0x1a, 0x45, 0xdf, 0xa3]))).toBe('video/webm');
+    expect(detectVideoFileContentType(new TextEncoder().encode('OggS'))).toBe('video/ogg');
+    expect(detectVideoFileContentType(new TextEncoder().encode('FLV'))).toBe('video/x-flv');
+    expect(detectVideoFileContentType(new TextEncoder().encode('RIFF1234AVI '))).toBe('video/x-msvideo');
+  });
+
+  it('does not treat HTML, JSON or empty bytes as a video container', () => {
+    expect(detectVideoFileContentType(new TextEncoder().encode('<html>login</html>'))).toBeNull();
+    expect(detectVideoFileContentType(new TextEncoder().encode('{"error":"expired"}'))).toBeNull();
+    expect(detectVideoFileContentType(new Uint8Array())).toBeNull();
   });
 });

@@ -2,8 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { MAX_LIVE_SOURCES, MAX_VOD_SOURCES } from './source-list';
 import {
   describeParseStats,
+  extractTvboxMultiRepoEntries,
   isSourceCatalogPayload,
+  isTvboxMultiRepoPayload,
   isTvboxPayload,
+  mergeParsedSubscriptions,
   parseSubscriptionJson,
   parseSubscriptionPayload,
   parseTvboxPayload,
@@ -73,19 +76,20 @@ describe('parseTvboxPayload', () => {
     expect(result.stats?.skipped).toBe(0);
   });
 
-  it('Spider、本地资源、XML 与非 CMS 外链站点跳过并分类计数', () => {
+  it('Spider、本地资源与非 CMS 外链站点跳过并分类计数，type=0 XML 采集站正常导入', () => {
     const result = parseTvboxPayload({
       sites: [
         { name: '正版源', type: 1, api: 'https://ok.example.com/api.php/provide/vod' },
+        { name: 'XML站', type: 0, api: 'https://xml.example.com/api.php/provide/vod/at/xml' },
         { name: '蜘蛛A', type: 3, api: 'csp_AppYs' },
         { name: '蜘蛛B', api: 'https://cdn.example.com/spider.jar' },
         { name: '本地JS', type: 1, api: './json/heimuer.js' },
-        { name: 'XML站', type: 0, api: 'https://xml.example.com/api.php/provide/vod/at/xml' },
         { name: '外链站', type: 4, api: 'https://api.example.com/v1/list' },
+        { name: '未知协议类型', type: 2, api: 'https://legacy.example.com/custom' },
       ],
     });
 
-    expect(result.sources.map((s) => s.name)).toEqual(['正版源']);
+    expect(result.sources.map((s) => s.name)).toEqual(['正版源', 'XML站']);
     expect(result.stats?.skipped).toBe(5);
     expect(result.stats?.skippedByReason).toEqual({ spider: 4, xml: 1 });
     expect(result.stats?.skippedSamples).toEqual(['蜘蛛A', '蜘蛛B', '本地JS']);
@@ -103,7 +107,7 @@ describe('parseTvboxPayload', () => {
     expect(result.stats?.skippedByReason).toEqual({ unsearchable: 1 });
   });
 
-  it('直播：单仓 JSON 与 txt 频道列表跳过，非 M3U 地址计入 invalidUrl', () => {
+  it('直播：兼容导入 M3U 与 TXT 频道列表，单仓 JSON 跳过，坏协议计入 invalidUrl', () => {
     const result = parseTvboxPayload({
       sites: [vodSite('https://a.example.com/api.php/provide/vod')],
       lives: [
@@ -114,9 +118,9 @@ describe('parseTvboxPayload', () => {
       ],
     });
 
-    expect(result.liveSources.map((s) => s.name)).toEqual(['直播A']);
-    expect(result.stats?.skipped).toBe(3);
-    expect(result.stats?.skippedByReason).toEqual({ nonM3uLive: 2, invalidUrl: 1 });
+    expect(result.liveSources.map((s) => s.name)).toEqual(['直播A', 'txt列表']);
+    expect(result.stats?.skipped).toBe(2);
+    expect(result.stats?.skippedByReason).toEqual({ nonM3uLive: 1, invalidUrl: 1 });
   });
 
   it('按地址去重（点播去尾部斜杠后比较，直播保留原样）', () => {
@@ -352,5 +356,73 @@ describe('parseSubscriptionJson', () => {
 
   it('非法内容抛出可读错误', () => {
     expect(() => parseSubscriptionJson('<html>403 Forbidden</html>')).toThrow(/不是合法的 JSON/);
+  });
+});
+
+describe('TVBox 多仓（urls / storeHouse）', () => {
+  it('识别并提取多仓子仓库列表，自动去重与过滤坏链接', () => {
+    const raw = {
+      name: '主力多仓总汇',
+      urls: [
+        { name: '一号线', url: 'https://repo.example.com/1.json' },
+        { name: '重复一号线', url: 'https://repo.example.com/1.json' },
+        { name: '本地非法', url: './local.json' },
+        { name: '二号线', url: 'https://repo.example.com/2.json' },
+      ],
+    };
+    expect(isTvboxMultiRepoPayload(raw)).toBe(true);
+    expect(isTvboxMultiRepoPayload({ storeHouse: [{ url: 'https://repo.example.com/a.json' }] })).toBe(true);
+    expect(isTvboxMultiRepoPayload({ sites: [] })).toBe(false);
+
+    const extracted = extractTvboxMultiRepoEntries(raw);
+    expect(extracted.name).toBe('主力多仓总汇');
+    expect(extracted.entries).toEqual([
+      { name: '一号线', url: 'https://repo.example.com/1.json' },
+      { name: '二号线', url: 'https://repo.example.com/2.json' },
+    ]);
+    expect(extracted.skippedInvalid).toBe(1);
+  });
+
+  it('合并多个子仓库解析结果并跨仓去重', () => {
+    const child1 = parseTvboxPayload({
+      sites: [vodSite('https://vod1.example.com/api.php/provide/vod')],
+      lives: [{ name: '直播1', url: 'https://live.example.com/1.m3u' }],
+    });
+    const child2 = parseTvboxPayload({
+      sites: [
+        vodSite('https://vod1.example.com/api.php/provide/vod/'),
+        vodSite('https://vod2.example.com/api.php/provide/vod'),
+      ],
+      lives: [{ name: '直播TXT', url: 'https://live.example.com/2.txt' }],
+    });
+
+    const merged = mergeParsedSubscriptions([child1, child2], { name: '聚合总仓' });
+    expect(merged.name).toBe('聚合总仓');
+    expect(merged.sources).toHaveLength(2);
+    expect(merged.liveSources).toHaveLength(2);
+    expect(merged.stats?.format).toBe('tvbox-multi');
+  });
+
+  it('兼容 TVBox 前缀混淆**Base64 编码配置与相对路径子仓库/直播列表解析', () => {
+    const inner = JSON.stringify({
+      name: 'Base64混淆配置',
+      sites: [{ name: 'CMS站', type: 1, api: 'https://vod.example.com/api.php/provide/vod' }],
+      lives: [{ name: '相对TXT', type: 0, url: './live/channels.txt' }],
+    });
+    const encoded = `fakeImageHeader12345**${Buffer.from(inner, 'utf8').toString('base64')}`;
+    const parsedJson = parseSubscriptionJson(encoded);
+    const result = parseSubscriptionPayload(parsedJson, 'https://box.example.com/sub/main.json');
+
+    expect(result.name).toBe('Base64混淆配置');
+    expect(result.sources).toHaveLength(1);
+    expect(result.liveSources).toEqual([
+      { name: '相对TXT', url: 'https://box.example.com/sub/live/channels.txt', epg: undefined },
+    ]);
+
+    const multiRel = extractTvboxMultiRepoEntries(
+      { urls: [{ name: '相对子仓', url: './child.json' }] },
+      'https://box.example.com/root/index.json'
+    );
+    expect(multiRel.entries).toEqual([{ name: '相对子仓', url: 'https://box.example.com/root/child.json' }]);
   });
 });

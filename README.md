@@ -25,9 +25,15 @@ LibreTV Next.js 迁移版：免费在线视频聚合搜索与观看平台。基�
 - **首页推荐**：豆瓣（电影/剧集分类浏览）、Bangumi 新番放送表或影视榜单（豆瓣周榜 + 百度热播，经 60s API），设置中切换；均服务端直连 + 缓存，Bangumi/榜单免 key 免配置（`60S_API_BASE` 可指向自部署 60s 实例）
 - **PWA**：可安装到桌面 / 主屏幕，亮暗双主题无首屏闪烁
 
+## 免费资源中心
+
+应用内 `/free` 页面无需 LibreTV 登录即可使用，集中展示免费资源：可直接搜索并播放 Internet Archive、Library of Congress 公共领域电影精选、PeerTube 开放许可视频、Wikimedia Commons 和符合版权筛选规则的 NASA 影音资料；另提供 Tubi、Pluto TV、Plex、The Roku Channel、Xumo Play、Sling Freestream、Fawesome、PBS、Hoopla、Kanopy 共 10 个官方免费入口。前五类来源中符合条件的媒体可在 LibreTV 内播放，其他平台通过官方网页打开，不抓取或伪造其内部播放地址。所有入口均无需在 LibreTV 内配置 TMDB Token 或购买会员；Hoopla / Kanopy 需要参与图书馆或大学资格，PBS 部分 Passport 内容需支持当地电视台，广告、地区和片单限制仍然适用。
+
+Windows 本机运行可双击 `启动LibreTV本地版.bat`。脚本只为 LibreTV 进程读取当前 Windows 系统代理（例如 `127.0.0.1:7897`），不会修改系统代理设置；默认地址为 `http://127.0.0.1:3000`。
+
 ## 开放影视资料库（公共领域 / Creative Commons）
 
-本部署额外提供一份 LibreTV 原生兼容订阅，聚合 Internet Archive、NASA Image and Video Library、PeerTube / SepiaSearch 与 Wikimedia Commons。Internet Archive、PeerTube 和 Wikimedia Commons 只收录带有明确公共领域或开放许可声明、并且能取得受支持视频文件/播放清单的条目；未知许可、非商业许可及明确保留版权的条目会被过滤。NASA 来源使用官方资料库元数据，排除明确标记第三方版权的记录，但 NASA 单条素材的权利状态仍需核对，搜索结果会明确提示这一点。平台元数据来自上传者或托管平台，不构成法律权利保证，使用前仍应核对原始条目和具体许可条件。
+本部署额外提供一份 LibreTV 原生兼容订阅，聚合 Internet Archive、Library of Congress 公共领域电影精选、NASA Image and Video Library、PeerTube 全球搜索与 Wikimedia Commons。Internet Archive、PeerTube 和 Wikimedia Commons 只收录带有明确公共领域或开放许可声明、并且能取得受支持视频文件/播放清单的条目；未知许可、非商业许可及明确保留版权的条目会被过滤。Library of Congress 仅接入其明确标注为公共领域的 National Film Registry 精选影片，并限制到官方 MP4 文件。NASA 来源使用官方资料库元数据，排除明确标记第三方版权的记录，但 NASA 单条素材的权利状态仍需核对，搜索结果会明确提示这一点。平台元数据来自上传者或托管平台，不构成法律权利保证，使用前仍应核对原始条目和具体许可条件。
 
 - **订阅 JSON**：`https://libretv-mobile-zj2917928447.onrender.com/open-media-sources.json`
 - **兼容 Apple CMS API**：`https://libretv-mobile-zj2917928447.onrender.com/api/open-media`
@@ -139,7 +145,8 @@ PASSWORD=your-password npm start   # 监听 8080
 | --- | --- | --- |
 | `PASSWORD` | 是 | 访问密码；未设置时站点会提示管理员配置 |
 | `PROXY_SECRET` | 否 | 会话/代理签名密钥；不设置时从 PASSWORD 派生（多实例部署建议显式设置） |
-| `DEFAULT_SOURCES` | 否 | 预置采集站（JSON 数组），用户端自动出现且默认勾选，详见[配置文档](https://libretv.is-an.org/wiki/Configuration.html) |
+| `DEFAULT_SOURCES` | 否 | 预置采集站（JSON 数组），用户端自动出现且默认勾选；Render Blueprint 默认预置本站开放媒体目录（仅公共领域/开放许可资料），详见[配置文档](https://libretv.is-an.org/wiki/Configuration.html) |
+| `TMDB_API_READ_ACCESS_TOKEN` | 否 | TMDB API Read Access Token（服务端密钥）；配置后启用影视资料搜索与地区性正版观看渠道查询。仅限遵守 TMDB 条款的非商业用途；商业用途需联系 TMDB 获取许可。不要使用 `NEXT_PUBLIC_` 前缀，不要将真实 token 提交到 Git |
 | `REQUEST_TIMEOUT` | 否 | 代理上游请求超时（毫秒），默认 8000 |
 | `MAX_RETRIES` | 否 | 代理请求重试次数，默认 1 |
 | `SEARCH_MAX_PAGES` | 否 | 每个搜索源最多抓取的页数（1-50，默认 5）。第一页会读取源站 `pagecount`，实际页数 = min(源站总页数，该值)；页间并行请求，单页失败只丢该页 |
@@ -153,10 +160,17 @@ PASSWORD=your-password npm start   # 监听 8080
 | `DEFAULT_RECOMMEND_SOURCE` | 否 | 首页推荐数据源的默认值（`douban` / `bangumi` / `hot-list`，出厂默认 `hot-list`）；仅对未在设置中主动选择过的用户生效，用户的选择始终优先 |
 | `LIVE_ALLOW_PRIVATE` | 否 | 设为 `1` 时允许直播流代理访问内网/保留地址（自建 IPTV 场景），默认关闭以维持 SSRF 防护 |
 
+## 影视资料与正版观看渠道
+
+- 在 Render 服务的 Environment 页面或自托管环境中设置 `TMDB_API_READ_ACCESS_TOKEN`。获取方式：登录 TMDB，进入 Account Settings → API → API Read Access Token；令牌只保存在服务器端。
+- 设置 → 偏好设置 → 首页与内容过滤 → 正版观看地区，可选择 US、CN、HK、TW、GB、CA、AU、JP、KR、IN、DE、FR。
+- TMDB 影视资料与海报须按 TMDB 要求署名；本产品不代表 TMDB。Watch Providers 数据须注明 JustWatch 来源。资料搜索与正版渠道查询分开请求，渠道查询失败不会影响影片资料展示。完整署名见「关于」页面。
+- TMDB API 免费使用仅适用于非商业用途，且需遵守其 API 条款；如项目主要用于营收，需先联系 TMDB 确认商业许可。
+
 ## 使用说明
 
 1. **添加点播源**：设置 → 源管理 → 点播源 → 添加 API，填入 Apple CMS 采集站地址（如 `https://example.com/api.php/provide/vod`），可选填详情页地址（部分源需要爬详情页提取播放地址）。
-2. **搜索**：勾选点播源后输入片名；搜索通过服务端聚合，个别源失败不影响整体结果。
+2. **搜索**：点播源结果与 TMDB 影视资料分开展示。点播源命中表示存在来源候选，进入详情成功解析出剧集地址后才确认可播放；TMDB 区展示影片资料，配置 `TMDB_API_READ_ACCESS_TOKEN` 后还会查询所选地区的订阅/免费/广告/租赁/购买渠道。观看渠道信息由 JustWatch 提供，不会把影视资料误标为站内可播放。
 3. **播放**：详情弹窗选择剧集进入 `/watch`；支持快捷键（空格/←→/↑↓/F/Alt+←→）、移动端长按 3 倍速、自动连播、换源测速。观看/暂停时后续分片自动缓存到本地（设置可关），播放页可「下载本集」（TS/MP4）离线观看。播放页「跳过标记」可标记片头/中段/片尾区间（快捷键 Shift+I 片头结束、Shift+O 片尾开始、Shift+S·Shift+E 中段区间），之后同剧各集与同名资源自动跳过——片头/中段跳到片段末尾，片尾则直接结束本集（是否连播下一集由自动连播决定），三类片段共用「自动跳过片段」一个开关；跳过时提示条带「撤销」，「跳过标记」侧栏可逐剧关闭、微调边界、试跳起点/终点（记录与试跳都会先暂停），命中区间在进度条上着色。侧栏是非模态的：不遮画面、不挡播放器点击，可以一边看一边标。
 4. **进度与历史**：自动保存在本设备 IndexedDB，仅定位信息入库，播放时自动同步最新剧集。
 5. **配置迁移**：设置 → 数据 → 配置导入导出（兼容旧版 LibreTV-Settings JSON 的历史记录迁移）。

@@ -78,6 +78,11 @@ describe('parseXmltv', () => {
     expect(cctv1.map((p) => p.title)).toEqual(['新闻30分']);
   });
 
+  it('拒绝解压后超过上限的 gzip XMLTV，防止压缩炸弹耗尽内存', () => {
+    const compressed = gzipSync(Buffer.from(SAMPLE, 'utf8'));
+    expect(() => parseXmltv(compressed, undefined, NOW, 128)).toThrow();
+  });
+
   it('解析 gzip 压缩内容', () => {
     const compressed = gzipSync(Buffer.from(SAMPLE, 'utf8'));
     expect(compressed[0]).toBe(0x1f);
