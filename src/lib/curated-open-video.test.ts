@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(4070);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(4384);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(68);
+    expect(seriesCount).toBeGreaterThanOrEqual(74);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -74,6 +74,8 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('球幕电影全集').some((v) => v.slug === 'eso-planetarium-fulldome-masterpieces-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('1917定格动画恐龙').some((v) => v.slug === 'loc-origins-of-american-animation-dinosaurs-krazy-kat-10ep')).toBe(true);
     expect(searchCuratedOpenVideos('孤军浴血记1919').some((v) => v.slug === 'loc-silent-epic-features-lost-battalion-buffalo-bill-7ep')).toBe(true);
+    expect(searchCuratedOpenVideos('远大前程1946大卫里恩').some((v) => v.slug === 'world-noir-mystery-sherlock-great-expectations-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('罗曼太空望远镜2026发射').some((v) => v.slug === 'nasa-roman-space-telescope-2026-launch-4k-8ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });

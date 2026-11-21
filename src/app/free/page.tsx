@@ -54,12 +54,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
+      { label: '远大前程与福尔摩斯长片 (8部)', query: '远大前程1946大卫里恩', tag: '悬疑经典长片连映' },
+      { label: '黄金年代彩色冒险喜剧 (7部)', query: '约翰韦恩驯妻记', tag: '大鼻子情圣/小公主' },
+      { label: '罗曼望远镜2026发射 (8集)', query: '罗曼太空望远镜2026发射', tag: '2026最新4K全集' },
       { label: '1917定格恐龙与疯狂猫 (10集)', query: '1917定格动画恐龙', tag: '金刚大师定格神作' },
-      { label: '孤军浴血记等默片长片 (7部)', query: '孤军浴血记1919', tag: 'LOC国家放映室直连' },
       { label: '国会图书馆公版长片典藏 (8部)', query: '国会图书馆直连电影全集', tag: 'LOC官方直连' },
       { label: '大力水手战辛巴达等起源 (10集)', query: '大力水手大战辛巴达', tag: '影史百年直连' },
-      { label: '哈勃×欧几里得猫眼星云 (10集)', query: '哈勃欧几里得猫眼星云', tag: '2026最新联名' },
-      { label: '韦伯宇宙第一缕光 (8集)', query: '宇宙第一缕光韦伯', tag: 'NASA深空全集' },
     ],
   },
   {
@@ -380,6 +380,34 @@ const DOMESTIC_FREE_PLATFORMS = [
     url: 'https://www.chnmuseum.cn/',
     category: '国宝历史微片',
     note: '国内直连 · 殿堂文物解说',
+  },
+  {
+    name: '故宫博物院 · 数字文物与紫禁城视听馆',
+    description: '故宫博物院官方公益视听平台，免费观看《故宫新事》、紫禁城古建匠艺与宫廷珍宝超清纪录短片。',
+    url: 'https://www.dpm.org.cn/',
+    category: '紫禁国宝影像',
+    note: '国内直连 · 皇家古建超清纪实',
+  },
+  {
+    name: '中国科普博览 · 中科院官方科学视频库',
+    description: '中国科学院官方科普门户，汇聚量子物理、天眼 FAST、航空航天与前沿地球科学演讲及纪录短片。',
+    url: 'https://www.kepu.net.cn/',
+    category: '中科院硬核科普',
+    note: '国内直连 · 国家级科学视听',
+  },
+  {
+    name: '央视戏曲 · 九州大戏台与全本戏曲电影',
+    description: 'CCTV-11 戏曲频道官方点播库，免费观看京剧、越剧、黄梅戏、豫剧与粤剧经典名段及戏曲电影全集。',
+    url: 'https://tv.cctv.com/cctv11/',
+    category: '传统戏曲电影',
+    note: '国内直连 · 长辈最爱全集免VIP',
+  },
+  {
+    name: '央视音乐 · 风华国乐与交响音乐会现场',
+    description: 'CCTV-15 音乐频道官方高清库，展播民族器乐盛典、世界名曲交响现场与经典影视金曲音乐会。',
+    url: 'https://tv.cctv.com/cctv15/',
+    category: '国乐交响现场',
+    note: '国内直连 · 高音质视听盛宴',
   },
 ];
 
@@ -713,7 +741,7 @@ export default function FreeResourcesPage() {
       if (!response.ok || data.code !== 1) throw new Error(data.msg || '免费资源搜索暂时不可用，请稍后重试。');
       setResults(data.list ?? []);
       if ((data.list ?? []).length === 0) {
-        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 42 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
+        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 46 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
       }
     } catch (cause) {
       setResults([]);
@@ -814,7 +842,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              4070+ 部 100% 实测直连大片与 68 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 42 大国内正版免费片库。
+              4384+ 部 100% 实测直连大片与 74 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 46 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -823,7 +851,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                5994台直播源 (.m3u)
+                7321台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -838,7 +866,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (5994+ 直连 / 96000+ 扩展)
+              免费电视直播 (7321+ 直连 / 108000+ 扩展)
             </Link>
             <button
               type="button"
@@ -1293,7 +1321,7 @@ export default function FreeResourcesPage() {
 
         <section className="mb-8">
           <div className="mb-3">
-            <h2 className="text-lg font-semibold text-content">国内四十二大正版免费影视专区（全中文 · 免代理直达）</h2>
+            <h2 className="text-lg font-semibold text-content">国内四十六大正版免费影视专区（全中文 · 免代理直达）</h2>
             <p className="text-sm text-muted mt-1">
               精选国内无需订阅 VIP 会员即可观看的正版免费电影、电视剧与纪录片官方片库，全部自带中文配音或中文字幕。
             </p>

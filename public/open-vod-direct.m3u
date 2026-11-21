@@ -1,6 +1,153 @@
 #EXTM3U
 #PLAYLIST:自由影视 · 内置直连超清点播片单（支持 PotPlayer / VLC / Kodi / IINA / TVBox 直接打开点播）
 
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/mclintok_widescreen" group-title="多集连播剧集 · 好莱坞黄金年代特艺彩色冒险与喜剧长片殿堂：驯妻记、大鼻子情圣、小公主与奇幻森林 (7部连播)",第01部 · 《驯妻记 McLintock!》1963约翰·韦恩特艺彩色西部欢喜冤家大片
+https://archive.org/download/mclintok_widescreen/McLintock_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/mclintok_widescreen" group-title="多集连播剧集 · 好莱坞黄金年代特艺彩色冒险与喜剧长片殿堂：驯妻记、大鼻子情圣、小公主与奇幻森林 (7部连播)",第02部 · 《大鼻子情圣》1950何塞·费勒斩获奥斯卡最佳男主角剑侠经典
+https://archive.org/download/Cyrano_DeBergerac/Cyrano_De_Bergerac_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/mclintok_widescreen" group-title="多集连播剧集 · 好莱坞黄金年代特艺彩色冒险与喜剧长片殿堂：驯妻记、大鼻子情圣、小公主与奇幻森林 (7部连播)",第03部 · 《小公主》1939秀兰·邓波儿首部特艺彩色温情名作
+https://archive.org/download/little_princess/little_princess_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/mclintok_widescreen" group-title="多集连播剧集 · 好莱坞黄金年代特艺彩色冒险与喜剧长片殿堂：驯妻记、大鼻子情圣、小公主与奇幻森林 (7部连播)",第04部 · 《奇幻森林 / 丛林之书》1942特艺彩色狼孩毛克利丛林冒险大片
+https://archive.org/download/JungleBook/Jungle_Book_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/mclintok_widescreen" group-title="多集连播剧集 · 好莱坞黄金年代特艺彩色冒险与喜剧长片殿堂：驯妻记、大鼻子情圣、小公主与奇幻森林 (7部连播)",第05部 · 《我最爱的黑发女郎》1947鲍勃·霍普爆笑侦探乌龙喜剧
+https://archive.org/download/my_favorite_brunette/my_favorite_brunette_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/mclintok_widescreen" group-title="多集连播剧集 · 好莱坞黄金年代特艺彩色冒险与喜剧长片殿堂：驯妻记、大鼻子情圣、小公主与奇幻森林 (7部连播)",第06部 · 《飞行傻瓜》1939劳莱与哈台经典欢笑长片
+https://archive.org/download/TheFlyingDeuces/The_Flying_Deuces_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/mclintok_widescreen" group-title="多集连播剧集 · 好莱坞黄金年代特艺彩色冒险与喜剧长片殿堂：驯妻记、大鼻子情圣、小公主与奇幻森林 (7部连播)",第07部 · 《当铺奇遇记》1916查理·卓别林巅峰肢体喜剧杰作
+https://archive.org/download/CC_1916_10_02_ThePawnshop/CC_1916_10_02_ThePawnshop_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="多集连播剧集 · 大师悬疑与黑色电影长片全集：远大前程、福尔摩斯秘密武器、荒岛猎杀与幽灵列车 (8部连播)",第01部 · 《远大前程》1946大卫·里恩执导斩获两项奥斯卡金像奖传世巨作
+https://archive.org/download/GreatExpectations1946/GreatExpectations1946_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="多集连播剧集 · 大师悬疑与黑色电影长片全集：远大前程、福尔摩斯秘密武器、荒岛猎杀与幽灵列车 (8部连播)",第02部 · 《福尔摩斯与秘密武器》1943夏洛克·福尔摩斯大战莫里亚蒂密码悬疑片
+https://archive.org/download/secret_weapon/secret_weapon_ipod_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="多集连播剧集 · 大师悬疑与黑色电影长片全集：远大前程、福尔摩斯秘密武器、荒岛猎杀与幽灵列车 (8部连播)",第03部 · 《最危险的游戏》1932孤岛生存智斗惊悚电影开山鼻祖
+https://archive.org/download/TheMostDangerousGame/TheMostDangerousGame_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="多集连播剧集 · 大师悬疑与黑色电影长片全集：远大前程、福尔摩斯秘密武器、荒岛猎杀与幽灵列车 (8部连播)",第04部 · 《突然之间》1954弗兰克·辛纳屈小镇火车站暗杀博弈经典
+https://archive.org/download/suddenly/suddenly_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="多集连播剧集 · 大师悬疑与黑色电影长片全集：远大前程、福尔摩斯秘密武器、荒岛猎杀与幽灵列车 (8部连播)",第05部 · 《致命冲击 Impact》1949借刀杀人反噬奇案黑色电影代表作
+https://archive.org/download/impact/impact_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="多集连播剧集 · 大师悬疑与黑色电影长片全集：远大前程、福尔摩斯秘密武器、荒岛猎杀与幽灵列车 (8部连播)",第06部 · 《幽灵列车》1941暴风雨夜偏僻小站午夜鬼车推理片
+https://archive.org/download/TheGhostTrain/TheGhostTrain_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="多集连播剧集 · 大师悬疑与黑色电影长片全集：远大前程、福尔摩斯秘密武器、荒岛猎杀与幽灵列车 (8部连播)",第07部 · 《西伯利亚恐怖快车》1973跨欧亚蒸汽列车远古冰封异形悬疑名片
+https://archive.org/download/Horror_Express/Horror_Express_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="多集连播剧集 · 大师悬疑与黑色电影长片全集：远大前程、福尔摩斯秘密武器、荒岛猎杀与幽灵列车 (8部连播)",第08部 · 《流沙深渊》1950二十美元引发的连环泥潭黑色犯罪片
+https://archive.org/download/Quicksand_clear/Quicksand.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Sita_Sings_the_Blues" group-title="多集连播剧集 · 百年科幻奇幻电影先驱巨制：1916海底两万里、1925失落的世界、复活之日与希塔唱蓝调 (7部连播)",第01部 · 《希塔唱蓝调》2008柏林电影节水晶熊特别奖高分爵士神话动画长片
+https://archive.org/download/Sita_Sings_the_Blues/Sita_Sings_the_Blues_DVD_NTSC3.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Sita_Sings_the_Blues" group-title="多集连播剧集 · 百年科幻奇幻电影先驱巨制：1916海底两万里、1925失落的世界、复活之日与希塔唱蓝调 (7部连播)",第02部 · 《海底两万里》1916凡尔纳原著鹦鹉螺号潜艇水下实拍科幻先驱
+https://archive.org/download/20000LeaguesUndertheSea/20000_Leagues_Under_the_Sea_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Sita_Sings_the_Blues" group-title="多集连播剧集 · 百年科幻奇幻电影先驱巨制：1916海底两万里、1925失落的世界、复活之日与希塔唱蓝调 (7部连播)",第03部 · 《失落的世界》1925高原史前恐龙复活闯入伦敦特效里程碑长片
+https://archive.org/download/lost_world/lost_world_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Sita_Sings_the_Blues" group-title="多集连播剧集 · 百年科幻奇幻电影先驱巨制：1916海底两万里、1925失落的世界、复活之日与希塔唱蓝调 (7部连播)",第04部 · 《复活之日》1980深作欣二执导全球多国取景南极末日科幻大片 (103分钟)
+https://archive.org/download/cco_virus/ccoPublicDomainVirus_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Sita_Sings_the_Blues" group-title="多集连播剧集 · 百年科幻奇幻电影先驱巨制：1916海底两万里、1925失落的世界、复活之日与希塔唱蓝调 (7部连播)",第05部 · 《泥人哥连出世记》1920欧洲魔幻表现主义影史巨作
+https://archive.org/download/TheGolem_893/TheGolem_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Sita_Sings_the_Blues" group-title="多集连播剧集 · 百年科幻奇幻电影先驱巨制：1916海底两万里、1925失落的世界、复活之日与希塔唱蓝调 (7部连播)",第06部 · 《古堡惊魂夜》1959文森特·普莱斯百万美金古堡试胆经典
+https://archive.org/download/The_House_On_Haunted_Hill/The_House_On_Haunted_Hill_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Sita_Sings_the_Blues" group-title="多集连播剧集 · 百年科幻奇幻电影先驱巨制：1916海底两万里、1925失落的世界、复活之日与希塔唱蓝调 (7部连播)",第07部 · 《灵魂狂欢节》1962启发大卫·林奇的超现实心理悬疑名片
+https://archive.org/download/CarnivalOfSouls1962/Carnival_of_Souls.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~thumb.jpg" group-title="多集连播剧集 · 2026最新太空旗舰升空全纪实：NASA 南希·格雷斯·罗曼广域太空望远镜 4K 发射与总装全集 (8集连播)",第01集 · 4K超清全程实况：罗曼广域红外太空望远镜点火升空奔赴深空
+https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~thumb.jpg" group-title="多集连播剧集 · 2026最新太空旗舰升空全纪实：NASA 南希·格雷斯·罗曼广域太空望远镜 4K 发射与总装全集 (8集连播)",第02集 · 4K无人机空中追踪视角：火箭拔地而起穿云破雾壮美瞬间
+https://images-assets.nasa.gov/video/KSC-20260830-MH-SPX01-0001-Roman_Space_Telescope_Launch_ISO_Drone-4K-M26246/KSC-20260830-MH-SPX01-0001-Roman_Space_Telescope_Launch_ISO_Drone-4K-M26246~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~thumb.jpg" group-title="多集连播剧集 · 2026最新太空旗舰升空全纪实：NASA 南希·格雷斯·罗曼广域太空望远镜 4K 发射与总装全集 (8集连播)",第03集 · 高速慢动作摄影：导流槽烈焰冲击波与火箭升空细节
+https://images-assets.nasa.gov/video/KSC-20260830-MH-CSH01-0002-Roman_Space_Telescope_Launch_High_Speed_Footage/KSC-20260830-MH-CSH01-0002-Roman_Space_Telescope_Launch_High_Speed_Footage~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~thumb.jpg" group-title="多集连播剧集 · 2026最新太空旗舰升空全纪实：NASA 南希·格雷斯·罗曼广域太空望远镜 4K 发射与总装全集 (8集连播)",第04集 · 发射前夕空中致敬：战机4K低空掠过39A发射台待命火箭
+https://images-assets.nasa.gov/video/KSC-20260829-VP-FMX03-0001-NASA_Administrator_Flyby_Roman_Space_Telescope_LC_39A-4K-M26246/KSC-20260829-VP-FMX03-0001-NASA_Administrator_Flyby_Roman_Space_Telescope_LC_39A-4K-M26246~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~thumb.jpg" group-title="多集连播剧集 · 2026最新太空旗舰升空全纪实：NASA 南希·格雷斯·罗曼广域太空望远镜 4K 发射与总装全集 (8集连播)",第05集 · 整装出征：罗曼望远镜从厂房稳步转运至传奇39A发射台
+https://images-assets.nasa.gov/video/KSC-20260824-MH-GSF01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249/KSC-20260824-MH-GSF01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~thumb.jpg" group-title="多集连播剧集 · 2026最新太空旗舰升空全纪实：NASA 南希·格雷斯·罗曼广域太空望远镜 4K 发射与总装全集 (8集连播)",第06集 · 发射场洁净室最后冲刺：整流罩封装前精密检查
+https://images-assets.nasa.gov/video/KSC-20260818-MH-JMT01-0001-Roman_Space_Telescope_Processing_at_PHSF-M21913/KSC-20260818-MH-JMT01-0001-Roman_Space_Telescope_Processing_at_PHSF-M21913~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~thumb.jpg" group-title="多集连播剧集 · 2026最新太空旗舰升空全纪实：NASA 南希·格雷斯·罗曼广域太空望远镜 4K 发射与总装全集 (8集连播)",第07集 · 4K洁净室直击：罗曼太空望远镜深空推进舱精准吊装
+https://images-assets.nasa.gov/video/Moving_Roman_-_Propulsion4k/Moving_Roman_-_Propulsion4k~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_4K-M26246~thumb.jpg" group-title="多集连播剧集 · 2026最新太空旗舰升空全纪实：NASA 南希·格雷斯·罗曼广域太空望远镜 4K 发射与总装全集 (8集连播)",第08集 · 百倍哈勃视场如何炼成？罗曼望远镜光学与探测系统大合体
+https://images-assets.nasa.gov/video/NASAsRomanSpaceTelescopeSystemsAssemble_1080/NASAsRomanSpaceTelescopeSystemsAssemble_1080~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第01集 · 为何跨越三亿公里锁定它？揭秘太阳系时间胶囊“贝努”小行星
+https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第02集 · 初见钻石星体：冥王号探测器成功抵达贝努小行星
+https://images-assets.nasa.gov/video/GSFC_20181203_Arrival_m12166_OSIRIS-REx/GSFC_20181203_Arrival_m12166_OSIRIS-REx~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第03集 · 创纪录极低环绕轨道：在微弱引力下绕飞直径仅500米的小行星
+https://images-assets.nasa.gov/video/GSFC_20181231_Bennu_m13123_Orbit_Insertion/GSFC_20181231_Bennu_m13123_Orbit_Insertion~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第04集 · 纤毫毕现：超清拼接绘制贝努小行星全球表面巨石三维地图
+https://images-assets.nasa.gov/video/GSFC_20200226_M4795_BennuGlobal/GSFC_20200226_M4795_BennuGlobal~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第05集 · 环游异星地貌：沉浸式飞越贝努赤道山脊与古老撞击坑
+https://images-assets.nasa.gov/video/GSFC_20201008_M13729_BennuTour/GSFC_20201008_M13729_BennuTour~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第06集 · 乱石滩里找车位：如何在遍布巨砾的表面选出“夜莺”采样点
+https://images-assets.nasa.gov/video/GSFC_20200227_M13565_Nightingale/GSFC_20200227_M13565_Nightingale~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第07集 · 星际触碰采样挑战：TAG机械臂五秒一触即走硬核原理
+https://images-assets.nasa.gov/video/GSFC_20201014_M13730_COT/GSFC_20201014_M13730_COT~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第08集 · 意外惊喜：在贝努表面竟发现来自灶神星的异星陨石碎片
+https://images-assets.nasa.gov/video/GSFC_20200921_M13707_VestaBennu/GSFC_20200921_M13707_VestaBennu~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第09集 · 采样冲击现场回传：触碰瞬间碎石飞溅与地表凹坑前后对比
+https://images-assets.nasa.gov/video/GSFC_20210511_M13857_OREx_Imagery/GSFC_20210511_M13857_OREx_Imagery~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="多集连播剧集 · 星际采矿抓一把小行星回家：NASA 冥王号探测器登陆贝努小行星触碰采样全纪实 (10集连播)",第10集 · 满载太阳系原始星尘样本：挥别贝努踏上返航地球归途
+https://images-assets.nasa.gov/video/GSFC_20210510_M13854_BennuFarewell/GSFC_20210510_M13854_BennuFarewell~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第01集 · 十年绕月巡天精华：LRO如何彻底改写人类对月球的认知
+https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~medium.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第02集 · 国际观月夜导览：用望远镜辨认月海、第谷环形山与阿波罗着陆区
+https://images-assets.nasa.gov/video/ObserveTheMoon_16x9/ObserveTheMoon_16x9~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第03集 · 百个月昼阴晴圆缺：轨道视角连续记录月球昼夜晨昏线推移
+https://images-assets.nasa.gov/video/GSFC_20171006_LRO_m12739_100LunarDays_Pt1/GSFC_20171006_LRO_m12739_100LunarDays_Pt1~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第04集 · 未来月球地下城入口？斜视角窥探深达百米的月球熔岩天坑
+https://images-assets.nasa.gov/video/GSFC_20140717_LROC_m11612_Lunar_Pit/GSFC_20140717_LROC_m11612_Lunar_Pit~medium.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第05集 · 二十亿年不见阳光的冰封秘境：月球极区永久阴影陨石坑
+https://images-assets.nasa.gov/video/GSFC_20130306_Moons_m11218_Shadowed/GSFC_20130306_Moons_m11218_Shadowed~medium.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第06集 · 月面环形山破译地球往事：两亿九千万年前小行星撞击潮激增之谜
+https://images-assets.nasa.gov/video/GSFC_20190207_LRO_m13144_Impacts/GSFC_20190207_LRO_m13144_Impacts~large.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第07集 · 月球今天仍在被撞击：前后对比揪出月表新诞生的鲜活撞击坑
+https://images-assets.nasa.gov/video/GSFC_20150317_LRO_m11806_NewCrater/GSFC_20150317_LRO_m11806_NewCrater~medium.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第08集 · 站在月亮上看日食：当地球遮住太阳时月球表面发生了什么
+https://images-assets.nasa.gov/video/GSFC_20140408_LRO_M11516_Lunar/GSFC_20140408_LRO_M11516_Lunar~medium.mp4
+
+#EXTINF:-1 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="多集连播剧集 · 凝视月球十年高精地图：NASA 月球勘测轨道器探秘月面熔岩天坑、永久阴影区与月食测温全集 (9集连播)",第09集 · 冰火两重天：红外辐射计实测月全食期间月表温度骤变
+https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Moonview/GSFC_20110617_LRO_m10794_Eclipse_Moonview~large.mp4
+
 #EXTINF:-1 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046607/00046607.gif" group-title="多集连播剧集 · 百年动画起源与定格恐龙神作：《金刚》大师1917史前恐龙、疯狂猫与1900魔法素描本全集 (10集连播)",第01集 · 《恐龙与缺失的一环》1917《金刚》特效宗师威利斯·奥布莱恩定格恐龙代表作
 https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046607/00046607.mp4
 
@@ -13701,3 +13848,927 @@ https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047650/00047650.mp4
 
 #EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180329/00180329.gif" group-title="太空宇宙与科学1080p",路易斯·马蒂内蒂 (1894)
 https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180329/00180329.mp4
+
+#EXTINF:551 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01676820/01676820.gif" group-title="太空宇宙与科学1080p",要么有一个世界，要么一个也没有 (1946)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01676820/01676820.mp4
+
+#EXTINF:496 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601427/2018601427.gif" group-title="太空宇宙与科学1080p",《全美新闻》——摘录。1945年5月 (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601427/2018601427.mp4
+
+#EXTINF:411 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600204/2018600204.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年5月，第4期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600204/2018600204.mp4
+
+#EXTINF:362 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600207/2018600207.gif" group-title="太空宇宙与科学1080p",全美新闻。[1945年5月，第1期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600207/2018600207.mp4
+
+#EXTINF:400 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601428/2018601428.gif" group-title="太空宇宙与科学1080p",《全美新闻》——摘录。1945年6月，第2期 (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601428/2018601428.mp4
+
+#EXTINF:434 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600168/2018600168.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年4月，第3期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600168/2018600168.mp4
+
+#EXTINF:147 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600212/2018600212.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945-02-25，第1期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600212/2018600212.mp4
+
+#EXTINF:384 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600165/2018600165.gif" group-title="太空宇宙与科学1080p",全美新闻。[1945-09 (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600165/2018600165.mp4
+
+#EXTINF:697 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02023033/02023033.gif" group-title="太空宇宙与科学1080p",《新闻中的女性》第1卷第34期 (1950)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02023033/02023033.mp4
+
+#EXTINF:421 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600209/2018600209.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1944年9月，第1期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600209/2018600209.mp4
+
+#EXTINF:2188 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01302465/01302465.gif" group-title="爆笑喜剧与国会图书馆典藏",团结一致，胜利必属我们：通用汽车模具与刀具工人1939年罢工的故事 (1939)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01302465/01302465.mp4
+
+#EXTINF:573 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00049471/00049471.gif" group-title="太空宇宙与科学1080p",男孩遇见了狗 (1938)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00049471/00049471.mp4
+
+#EXTINF:690 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01950394/01950394.gif" group-title="太空宇宙与科学1080p",与电视同行 (1949)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01950394/01950394.mp4
+
+#EXTINF:427 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600166/2018600166.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年8月，第1期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600166/2018600166.mp4
+
+#EXTINF:535 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00151197/00151197.gif" group-title="太空宇宙与科学1080p",让我们走向美国！：一篇屏幕编辑评论文章 (1936)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00151197/00151197.mp4
+
+#EXTINF:310 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600208/2018600208.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年4月，第1期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600208/2018600208.mp4
+
+#EXTINF:359 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600172/2018600172.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年7月，第1期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600172/2018600172.mp4
+
+#EXTINF:411 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600167/2018600167.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年3月，第1期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600167/2018600167.mp4
+
+#EXTINF:405 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600171/2018600171.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年1月，第2期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600171/2018600171.mp4
+
+#EXTINF:430 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01925319/01925319.gif" group-title="太空宇宙与科学1080p",全美新闻。[1944年3月] (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01925319/01925319.mp4
+
+#EXTINF:381 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600206/2018600206.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年4月，第4期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600206/2018600206.mp4
+
+#EXTINF:388 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601426/2018601426.gif" group-title="太空宇宙与科学1080p",全美新闻。[1945-02-25，第2期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601426/2018601426.mp4
+
+#EXTINF:1405 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02447820/02447820.gif" group-title="爆笑喜剧与国会图书馆典藏",图书馆肖像 (1940)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02447820/02447820.mp4
+
+#EXTINF:750 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01912566/01912566.gif" group-title="太空宇宙与科学1080p",新闻中的女性。[第1卷，第42期？] (1950)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01912566/01912566.mp4
+
+#EXTINF:359 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600170/2018600170.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1944年11月，第2期] (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600170/2018600170.mp4
+
+#EXTINF:210 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600210/2018600210.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1944年9月，第2期] (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600210/2018600210.mp4
+
+#EXTINF:1189 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00014982/00014982.gif" group-title="爆笑喜剧与国会图书馆典藏",全明星债券反弹 (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00014982/00014982.mp4
+
+#EXTINF:543 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600174/2018600174.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年3月，第2期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600174/2018600174.mp4
+
+#EXTINF:450 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600211/2018600211.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1944年11月，第1期] (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600211/2018600211.mp4
+
+#EXTINF:462 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02024000/02024000.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年1月，第3期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02024000/02024000.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601507/2018601507.gif" group-title="太空宇宙与科学1080p",《全美新闻》——摘录。1945年6月，第1期 (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601507/2018601507.mp4
+
+#EXTINF:423 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601430/2018601430.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年7月，第2期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601430/2018601430.mp4
+
+#EXTINF:490 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00012430/00012430.gif" group-title="太空宇宙与科学1080p",电视机 (1939)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00012430/00012430.mp4
+
+#EXTINF:374 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601240/2018601240.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年6月，第2期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601240/2018601240.mp4
+
+#EXTINF:211 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600164/2018600164.gif" group-title="太空宇宙与科学1080p",全美新闻。[1942-08] (1942)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600164/2018600164.mp4
+
+#EXTINF:1290 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02428011/02428011.gif" group-title="爆笑喜剧与国会图书馆典藏",第一课 (1952)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02428011/02428011.mp4
+
+#EXTINF:512 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00195567/00195567.gif" group-title="太空宇宙与科学1080p",《阿尔伯特在笨拙之地》 (1950)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00195567/00195567.mp4
+
+#EXTINF:3048 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01850340/01850340.gif" group-title="爆笑喜剧与国会图书馆典藏",凭着这些双手 (1950)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01850340/01850340.mp4
+
+#EXTINF:1491 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02001639/02001639.gif" group-title="爆笑喜剧与国会图书馆典藏",于是，他们就这样生活着。 (1940)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02001639/02001639.mp4
+
+#EXTINF:464 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831735/01831735.gif" group-title="太空宇宙与科学1080p",《小雨滴的冒险之旅》 (1948)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831735/01831735.mp4
+
+#EXTINF:158 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02766129/02766129.gif" group-title="太空宇宙与科学1080p",派拉蒙新闻特别报道！私刑处决事件震惊全国！ (1933)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02766129/02766129.mp4
+
+#EXTINF:359 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601433/2018601433.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年4月，第2期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601433/2018601433.mp4
+
+#EXTINF:629 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02297371/02297371.gif" group-title="太空宇宙与科学1080p",玛丽·皮克福德与“Coquette”竞赛获奖者 (1929)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02297371/02297371.mp4
+
+#EXTINF:429 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601435/2018601435.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年3月，第4期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601435/2018601435.mp4
+
+#EXTINF:558 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00158670/00158670.gif" group-title="太空宇宙与科学1080p",走出美国烟草之乡。 (1949)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00158670/00158670.mp4
+
+#EXTINF:476 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601436/2018601436.gif" group-title="太空宇宙与科学1080p",全美新闻。[1945年5月，第3期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601436/2018601436.mp4
+
+#EXTINF:435 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601431/2018601431.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年8月，第2期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601431/2018601431.mp4
+
+#EXTINF:1349 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017090/00017090.gif" group-title="爆笑喜剧与国会图书馆典藏",无线技术的神奇魅力 (1923)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017090/00017090.mp4
+
+#EXTINF:364 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601434/2018601434.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年3月，第3期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601434/2018601434.mp4
+
+#EXTINF:1387 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02306842/02306842.gif" group-title="爆笑喜剧与国会图书馆典藏",告别童年 (1951)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02306842/02306842.mp4
+
+#EXTINF:630 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02120353/02120353.gif" group-title="太空宇宙与科学1080p",人力资源的浪费 (1947)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02120353/02120353.mp4
+
+#EXTINF:607 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00526861/00526861.gif" group-title="太空宇宙与科学1080p",佩塔贾收藏。第8号，电话术语——未署名作品 (1928)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00526861/00526861.mp4
+
+#EXTINF:621 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02006522/02006522.gif" group-title="太空宇宙与科学1080p",酒精呢？ (1955)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02006522/02006522.mp4
+
+#EXTINF:1348 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02028104/02028104.gif" group-title="爆笑喜剧与国会图书馆典藏",昔日棒球明星——精选集 (1931)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02028104/02028104.mp4
+
+#EXTINF:1140 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00145611/00145611.gif" group-title="爆笑喜剧与国会图书馆典藏",美国的图书馆 (1980)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00145611/00145611.mp4
+
+#EXTINF:2224 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02275547/02275547.gif" group-title="爆笑喜剧与国会图书馆典藏",洛雷塔·杨工作室拍摄的影像，1934—1936年——洛雷塔·杨——家庭电影 (1934)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02275547/02275547.mp4
+
+#EXTINF:472 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601432/2018601432.gif" group-title="太空宇宙与科学1080p",全美新闻。[1945-02] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601432/2018601432.mp4
+
+#EXTINF:163 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02506868/02506868.gif" group-title="太空宇宙与科学1080p",奥克兰奥克斯队对阵旧金山海豹队的棒球比赛开场式。1918年4月2日 (1918)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02506868/02506868.mp4
+
+#EXTINF:607 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01968745/01968745.gif" group-title="太空宇宙与科学1080p",可怕的真相 (1951)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01968745/01968745.mp4
+
+#EXTINF:105 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02766144/02766144.gif" group-title="太空宇宙与科学1080p",帕特新闻：“弗里斯科陷入罢工风波！” (1934)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02766144/02766144.mp4
+
+#EXTINF:2270 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01917149/01917149.gif" group-title="爆笑喜剧与国会图书馆典藏",《米亚：一个关于水的故事》 (1950)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01917149/01917149.mp4
+
+#EXTINF:627 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02007475/02007475.gif" group-title="太空宇宙与科学1080p",让我们走向美国！：一篇屏幕编辑评论文章 (1936)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02007475/02007475.mp4
+
+#EXTINF:1546 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531054/02531054.gif" group-title="爆笑喜剧与国会图书馆典藏",第二次世界大战时期的彩色影像——巴斯托涅的破坏景象；航拍画面；伞兵乘飞机起飞。 (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531054/02531054.mp4
+
+#EXTINF:2314 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02320537/02320537.gif" group-title="爆笑喜剧与国会图书馆典藏",迈向未来——走进塑料世界 (1952)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02320537/02320537.mp4
+
+#EXTINF:1349 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02507964/02507964.gif" group-title="爆笑喜剧与国会图书馆典藏",奥克西多尔进入高位 (1938)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02507964/02507964.mp4
+
+#EXTINF:1483 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831737/01831737.gif" group-title="爆笑喜剧与国会图书馆典藏",通往云的管道 (1951)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831737/01831737.mp4
+
+#EXTINF:1007 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02301482/02301482.gif" group-title="爆笑喜剧与国会图书馆典藏",贝贝·丹尼尔斯与本·莱昂——家庭电影 (1931)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02301482/02301482.mp4
+
+#EXTINF:1765 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00829954/00829954.gif" group-title="爆笑喜剧与国会图书馆典藏",诗节与对话 (1968)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00829954/00829954.mp4
+
+#EXTINF:1679 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01943024/01943024.gif" group-title="爆笑喜剧与国会图书馆典藏",一座城市决定…… (1956)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01943024/01943024.mp4
+
+#EXTINF:1175 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02464068/02464068.gif" group-title="爆笑喜剧与国会图书馆典藏",在郊区 (1957)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02464068/02464068.mp4
+
+#EXTINF:1075 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02527881/02527881.gif" group-title="爆笑喜剧与国会图书馆典藏",在Bad Milk，祝您一切顺利！ (1969)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02527881/02527881.mp4
+
+#EXTINF:144 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00008266/00008266.gif" group-title="太空宇宙与科学1080p",巴尔的摩影院向黑人观众播放的广告 (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00008266/00008266.mp4
+
+#EXTINF:725 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02024602/02024602.gif" group-title="太空宇宙与科学1080p",一个国家的十分之一：进步的游行 (1954)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02024602/02024602.mp4
+
+#EXTINF:349 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02339831/02339831.gif" group-title="太空宇宙与科学1080p",大卫·谢泼德——家庭录像 (1942)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02339831/02339831.mp4
+
+#EXTINF:689 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02585206/02585206.gif" group-title="太空宇宙与科学1080p",您最值得购买的牛肉产品 (1970)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02585206/02585206.mp4
+
+#EXTINF:1664 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02120412/02120412.gif" group-title="爆笑喜剧与国会图书馆典藏",美国农业 (1962)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02120412/02120412.mp4
+
+#EXTINF:3579 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00829948/00829948.gif" group-title="爆笑喜剧与国会图书馆典藏",三位美国诗人谈诗歌的创作与翻译 (1967)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00829948/00829948.mp4
+
+#EXTINF:247 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02029040/02029040.gif" group-title="太空宇宙与科学1080p",《Kinograms》第5021号——摘录：参议员队赢得世界大赛冠军 (1924)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02029040/02029040.mp4
+
+#EXTINF:457 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601437/2018601437.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年6月，第1期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601437/2018601437.mp4
+
+#EXTINF:297 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600169/2018600169.gif" group-title="太空宇宙与科学1080p",《全美新闻》——摘录。1942–1945年 (1942)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018600169/2018600169.mp4
+
+#EXTINF:879 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02504898/02504898.gif" group-title="太空宇宙与科学1080p",黄金岁月 (1960)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02504898/02504898.mp4
+
+#EXTINF:722 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01836502/01836502.gif" group-title="太空宇宙与科学1080p",心理健康：保持良好的心理状态 (1952)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01836502/01836502.mp4
+
+#EXTINF:1612 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531085/02531085.gif" group-title="爆笑喜剧与国会图书馆典藏",第二次世界大战彩色影像——美国和俄罗斯军队在易北河畔的托尔高会师 (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531085/02531085.mp4
+
+#EXTINF:946 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02505998/02505998.gif" group-title="爆笑喜剧与国会图书馆典藏",谁是老板？ (1950)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02505998/02505998.mp4
+
+#EXTINF:1763 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034107/02034107.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。不受欢迎的机制。 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034107/02034107.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02766151/02766151.gif" group-title="太空宇宙与科学1080p",帕斯新闻：“弗里斯科发生罢工骚乱！” (1934)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02766151/02766151.mp4
+
+#EXTINF:1772 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034103/02034103.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。诚实的人 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034103/02034103.mp4
+
+#EXTINF:1740 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034109/02034109.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。导览游 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034109/02034109.mp4
+
+#EXTINF:705 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02009885/02009885.gif" group-title="太空宇宙与科学1080p",一个国家的十分之一：艺术 (1954)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02009885/02009885.mp4
+
+#EXTINF:1769 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02036712/02036712.gif" group-title="爆笑喜剧与国会图书馆典藏",安吉尔：小小的白谎言 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02036712/02036712.mp4
+
+#EXTINF:1337 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02505977/02505977.gif" group-title="开源动画与独立短片",神奇的书架 (1952)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02505977/02505977.mp4
+
+#EXTINF:1405 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00526412/000526412.gif" group-title="爆笑喜剧与国会图书馆典藏",出售美国 (1938)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00526412/000526412.mp4
+
+#EXTINF:3107 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531110/02531110.gif" group-title="爆笑喜剧与国会图书馆典藏",第二次世界大战彩色影像——盟军部队在诺曼底登陆，并向法国西北部地区推进。 (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531110/02531110.mp4
+
+#EXTINF:594 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01912888/01912888.gif" group-title="太空宇宙与科学1080p",否认之日 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01912888/01912888.mp4
+
+#EXTINF:557 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00009258/00009258.gif" group-title="太空宇宙与科学1080p",我们去电影院吧。 (1948)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00009258/00009258.mp4
+
+#EXTINF:2713 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531062/02531062.gif" group-title="爆笑喜剧与国会图书馆典藏",第二次世界大战彩色影像——巴黎解放 (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531062/02531062.mp4
+
+#EXTINF:183 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02506937/02506937.gif" group-title="太空宇宙与科学1080p",绿洲 (1935)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02506937/02506937.mp4
+
+#EXTINF:1002 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02504892/02504892.gif" group-title="爆笑喜剧与国会图书馆典藏",这种清新脱俗的外观 (1959)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02504892/02504892.mp4
+
+#EXTINF:1165 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02506962/02506962.gif" group-title="爆笑喜剧与国会图书馆典藏",关于食物的思考 (1933)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02506962/02506962.mp4
+
+#EXTINF:1218 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034960/02034960.gif" group-title="爆笑喜剧与国会图书馆典藏",电影公告。第4号 (1943)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034960/02034960.mp4
+
+#EXTINF:2395 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531131/02531131.gif" group-title="爆笑喜剧与国会图书馆典藏",第二次世界大战时期的彩色影像——斯蒂文斯及 SPECOU 成员访问其他欧洲国家 (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531131/02531131.mp4
+
+#EXTINF:921 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02111502/02111502.gif" group-title="爆笑喜剧与国会图书馆典藏",我最近有没有告诉你，我爱着你？ (1958)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02111502/02111502.mp4
+
+#EXTINF:2393 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531189/02531189.gif" group-title="爆笑喜剧与国会图书馆典藏",第二次世界大战的彩色影像——斯蒂文斯和 SPECOU 在柏林；斯蒂文斯在诺曼底登陆日前的北非和埃及。 (1943)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531189/02531189.mp4
+
+#EXTINF:412 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601438/2018601438.gif" group-title="太空宇宙与科学1080p",《全美新闻》。[1945年7月，第3期] (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/2018601438/2018601438.mp4
+
+#EXTINF:1764 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01810154/01810154.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。法语课 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01810154/01810154.mp4
+
+#EXTINF:274 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531399/02531399.gif" group-title="太空宇宙与科学1080p",厨房是一种带有女性化特质的事物。 (1960)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531399/02531399.mp4
+
+#EXTINF:1759 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00829955/00829955.gif" group-title="爆笑喜剧与国会图书馆典藏",两位美国诗人 (1966)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00829955/00829955.mp4
+
+#EXTINF:1324 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02507026/02507026.gif" group-title="爆笑喜剧与国会图书馆典藏",猫的私生活 (1946)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02507026/02507026.mp4
+
+#EXTINF:1454 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531087/02531087.gif" group-title="爆笑喜剧与国会图书馆典藏",国会图书馆典藏电影：World War II color footage--American troops move through northwest France toward Paris (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531087/02531087.mp4
+
+#EXTINF:1614 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531063/02531063.gif" group-title="爆笑喜剧与国会图书馆典藏",国会图书馆典藏电影：World War II color footage--American troops in North Africa and Egypt (1943)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531063/02531063.mp4
+
+#EXTINF:1775 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02036715/02036715.gif" group-title="爆笑喜剧与国会图书馆典藏",安吉尔·豪斯的住客 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02036715/02036715.mp4
+
+#EXTINF:961 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02120158/02120158.gif" group-title="爆笑喜剧与国会图书馆典藏",海军预防性精神病学：初级军官的角色。第一部分 (1954)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02120158/02120158.mp4
+
+#EXTINF:1772 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034121/02034121.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。对朋友的承诺 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034121/02034121.mp4
+
+#EXTINF:1769 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01810152/01810152.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。保险单。 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01810152/01810152.mp4
+
+#EXTINF:273 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01278132/01278132.gif" group-title="太空宇宙与科学1080p",基于出生权——剪辑片段 (1921)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01278132/01278132.mp4
+
+#EXTINF:1183 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02506001/02506001.gif" group-title="爆笑喜剧与国会图书馆典藏",人们所渴望的事物 (1948)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02506001/02506001.mp4
+
+#EXTINF:1768 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034085/02034085.gif" group-title="爆笑喜剧与国会图书馆典藏",安吉尔。叫我妈妈吧。 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034085/02034085.mp4
+
+#EXTINF:3161 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01190585/01190585.gif" group-title="爆笑喜剧与国会图书馆典藏",好战的美国人 (1924)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01190585/01190585.mp4
+
+#EXTINF:3673 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00014118/00014118.gif" group-title="爆笑喜剧与国会图书馆典藏",同一种血 (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00014118/00014118.mp4
+
+#EXTINF:670 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00529105/00529105.gif" group-title="太空宇宙与科学1080p",广播和电视 (1940)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00529105/00529105.mp4
+
+#EXTINF:3744 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01999142/01999142.gif" group-title="爆笑喜剧与国会图书馆典藏",孤独的夜晚 (1954)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01999142/01999142.mp4
+
+#EXTINF:2756 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531124/02531124.gif" group-title="爆笑喜剧与国会图书馆典藏",第二次世界大战彩色影像——雷马根的 SPECOU 行动及多拉集中营 (1945)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531124/02531124.mp4
+
+#EXTINF:1482 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035377/02035377.gif" group-title="爆笑喜剧与国会图书馆典藏",年龄的阶段 (1950)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035377/02035377.mp4
+
+#EXTINF:1912 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02303155/02303155.gif" group-title="爆笑喜剧与国会图书馆典藏",已登记保管 (1960)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02303155/02303155.mp4
+
+#EXTINF:1769 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034119/02034119.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。婚礼。 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034119/02034119.mp4
+
+#EXTINF:572 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046871/00046871.gif" group-title="太空宇宙与科学1080p",《家族相册：描绘Tel E. Phone家族中的杰出后裔》 (1929)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046871/00046871.mp4
+
+#EXTINF:875 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00056792/00056792.gif" group-title="太空宇宙与科学1080p",关于脊髓灰质炎的特别报告 (1955)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00056792/00056792.mp4
+
+#EXTINF:3024 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531086/02531086.gif" group-title="爆笑喜剧与国会图书馆典藏",国会图书馆典藏电影：World War II color footage--American troops move through northeast France, Luxembourg, and Belgium to Germany (1944)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02531086/02531086.mp4
+
+#EXTINF:1774 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034117/02034117.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。慈悲之天使。 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034117/02034117.mp4
+
+#EXTINF:1889 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035380/02035380.gif" group-title="爆笑喜剧与国会图书馆典藏",愤怒的男孩 (1951)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035380/02035380.mp4
+
+#EXTINF:4097 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02311094/02311094.gif" group-title="爆笑喜剧与国会图书馆典藏",巴拿马以南 (1928)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02311094/02311094.mp4
+
+#EXTINF:2145 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035398/02035398.gif" group-title="爆笑喜剧与国会图书馆典藏",以健康的方式工作与娱乐 (1953)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035398/02035398.mp4
+
+#EXTINF:1765 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01856600/01856600.gif" group-title="爆笑喜剧与国会图书馆典藏",自由的时代 (1957)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01856600/01856600.mp4
+
+#EXTINF:2341 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00190894/00190894.gif" group-title="爆笑喜剧与国会图书馆典藏",萨顿路1104号 (1958)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00190894/00190894.mp4
+
+#EXTINF:614 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01850638/01850638.gif" group-title="太空宇宙与科学1080p",关于电影的事实 (1948)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01850638/01850638.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01185386/01185386.gif" group-title="太空宇宙与科学1080p",和平吧，小女孩——政治话题 (1964)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01185386/01185386.mp4
+
+#EXTINF:709 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01815888/01815888.gif" group-title="太空宇宙与科学1080p",你受欢迎吗？ (1947)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01815888/01815888.mp4
+
+#EXTINF:1769 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034111/02034111.gif" group-title="爆笑喜剧与国会图书馆典藏",安杰尔。这位小联盟中最年轻的球员。 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034111/02034111.mp4
+
+#EXTINF:2738 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02049825/02049825.gif" group-title="爆笑喜剧与国会图书馆典藏",鞭子的抽击 (1924)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02049825/02049825.mp4
+
+#EXTINF:1650 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035394/02035394.gif" group-title="爆笑喜剧与国会图书馆典藏",对儿童的担忧 (1951)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035394/02035394.mp4
+
+#EXTINF:1703 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035391/02035391.gif" group-title="爆笑喜剧与国会图书馆典藏",工作场所的溃疡 (1959)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035391/02035391.mp4
+
+#EXTINF:1768 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01810155/01810155.gif" group-title="爆笑喜剧与国会图书馆典藏",安吉尔。手机趣事 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01810155/01810155.mp4
+
+#EXTINF:570 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01839949/01839949.gif" group-title="太空宇宙与科学1080p",巫师的学徒 (1930)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01839949/01839949.mp4
+
+#EXTINF:519 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00010235/00010235.gif" group-title="太空宇宙与科学1080p",红鼻子驯鹿鲁道夫：蒙哥马利·沃德送上圣诞祝福 (1948)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00010235/00010235.mp4
+
+#EXTINF:607 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01844167/01844167.gif" group-title="太空宇宙与科学1080p",杜威的故事 (1948)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01844167/01844167.mp4
+
+#EXTINF:380 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00014923/00014923.gif" group-title="太空宇宙与科学1080p",尤比·布莱克演奏了他的《天鹅河幻想曲》。 (1923)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00014923/00014923.mp4
+
+#EXTINF:661 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01840194/01840194.gif" group-title="太空宇宙与科学1080p",祈愿健康与幸福 (1941)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01840194/01840194.mp4
+
+#EXTINF:3269 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01942389/01942389.gif" group-title="爆笑喜剧与国会图书馆典藏",活动小组治疗 (1950)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01942389/01942389.mp4
+
+#EXTINF:1035 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02300657/02300657.gif" group-title="爆笑喜剧与国会图书馆典藏",斯图尔特-沃纳公司为其1938年款冰箱制定了更为广泛的广告和促销计划。 (1937)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02300657/02300657.mp4
+
+#EXTINF:1769 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034766/02034766.gif" group-title="爆笑喜剧与国会图书馆典藏",国会图书馆典藏电影：Angel. The second marriage (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034766/02034766.mp4
+
+#EXTINF:929 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02298355/02298355.gif" group-title="爆笑喜剧与国会图书馆典藏",防弹！ (1937)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02298355/02298355.mp4
+
+#EXTINF:1180 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035386/02035386.gif" group-title="爆笑喜剧与国会图书馆典藏",精神病院 (1953)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035386/02035386.mp4
+
+#EXTINF:2003 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02459205/02459205.gif" group-title="爆笑喜剧与国会图书馆典藏",所以，这就是伊甸园。 (1925)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02459205/02459205.mp4
+
+#EXTINF:1768 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02343176/02343176.gif" group-title="爆笑喜剧与国会图书馆典藏",音乐的世界。乐器制造者 (1965)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02343176/02343176.mp4
+
+#EXTINF:627 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01863092/01863092.gif" group-title="太空宇宙与科学1080p",再见，罗奇先生。 (1955)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01863092/01863092.mp4
+
+#EXTINF:1768 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034116/02034116.gif" group-title="爆笑喜剧与国会图书馆典藏",天使。再见，年轻的恋人。 (1961)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02034116/02034116.mp4
+
+#EXTINF:1224 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02425281/02425281.gif" group-title="爆笑喜剧与国会图书馆典藏",工作中的愤怒：头痛开关的故事 (1956)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02425281/02425281.mp4
+
+#EXTINF:3438 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02340959/02340959.gif" group-title="爆笑喜剧与国会图书馆典藏",绝不放弃任何努力 (1924)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02340959/02340959.mp4
+
+#EXTINF:6183 tvg-logo="https://archive.org/services/img/cco_virus" group-title="悬疑推理与科幻惊悚",复活之日 Virus (1980 深作欣二执导小松左京南极末日科幻巨制 · 103分钟) (1980)
+https://archive.org/download/cco_virus/ccoPublicDomainVirus_512kb.mp4
+
+#EXTINF:5664 tvg-logo="https://archive.org/services/img/PrisonersOfTheLostUniverse1983" group-title="悬疑推理与科幻惊悚",《失落宇宙的囚徒》（1983年） (1950)
+https://archive.org/download/PrisonersOfTheLostUniverse1983/PrisonersOfTheLostUniverse1983_512kb.mp4
+
+#EXTINF:2400 tvg-logo="https://archive.org/services/img/Nosferatu_DVD_quality" group-title="悬疑推理与科幻惊悚",诺斯费拉图 Nosferatu (1922 茂瑙执导哥特奇幻影史经典) (1922)
+https://archive.org/download/Nosferatu_DVD_quality/nosferatu-1of5_512kb.mp4
+
+#EXTINF:3682 tvg-logo="https://archive.org/services/img/phantom_ship" group-title="悬疑推理与科幻惊悚",玛丽·塞勒斯特幽灵船之谜 The Phantom Ship (1936 贝拉·卢戈西航海悬疑长片) (1936)
+https://archive.org/download/phantom_ship/phantom_ship_512kb.mp4
+
+#EXTINF:3790 tvg-logo="https://archive.org/services/img/TheCorpseVanishes" group-title="悬疑推理与科幻惊悚",尸体消失了 (1942)
+https://archive.org/download/TheCorpseVanishes/TheCorpseVanishes_512kb.mp4
+
+#EXTINF:5922 tvg-logo="https://archive.org/services/img/20000LeaguesUndertheSea" group-title="悬疑推理与科幻惊悚",海底两万里 20,000 Leagues Under the Sea (1916 凡尔纳科幻原著水下实拍先驱长片) (1916)
+https://archive.org/download/20000LeaguesUndertheSea/20000_Leagues_Under_the_Sea_512kb.mp4
+
+#EXTINF:4085 tvg-logo="https://archive.org/services/img/lost_world" group-title="开源动画与独立短片",失落的世界 The Lost World (1925 柯南·道尔原著威利斯·奥布莱恩定格恐龙科幻鼻祖长片) (1925)
+https://archive.org/download/lost_world/lost_world_512kb.mp4
+
+#EXTINF:5173 tvg-logo="https://archive.org/services/img/AtomAgeVampire" group-title="悬疑推理与科幻惊悚",原子时代吸血鬼 (1960)
+https://archive.org/download/AtomAgeVampire/AtomAgeVampire_512kb.mp4
+
+#EXTINF:3797 tvg-logo="https://archive.org/services/img/TheIncrediblePetrifiedWorld" group-title="悬疑推理与科幻惊悚",不可思议的石化世界 (1957)
+https://archive.org/download/TheIncrediblePetrifiedWorld/TheIncrediblePetrifiedWorld_512kb.mp4
+
+#EXTINF:3928 tvg-logo="https://archive.org/services/img/ABucketofBlood" group-title="爆笑喜剧与国会图书馆典藏",一桶血色幽默 A Bucket of Blood (1959 罗杰·科曼波西米亚讽刺黑色喜剧) (1959)
+https://archive.org/download/ABucketofBlood/Bucket_1959_512kb.mp4
+
+#EXTINF:4941 tvg-logo="https://archive.org/services/img/CarnivalOfSouls1962" group-title="悬疑推理与科幻惊悚",灵魂狂欢节 Carnival of Souls (1962 迷离梦魇心理悬疑经典长片) (1962)
+https://archive.org/download/CarnivalOfSouls1962/Carnival_of_Souls.mp4
+
+#EXTINF:4431 tvg-logo="https://archive.org/services/img/HowAwfulAboutAllan" group-title="悬疑推理与科幻惊悚",艾伦究竟有多么糟糕 (1970)
+https://archive.org/download/HowAwfulAboutAllan/HowAwfulAboutAllan_512kb.mp4
+
+#EXTINF:4946 tvg-logo="https://archive.org/services/img/DoomsdayMachine1972" group-title="悬疑推理与科幻惊悚",《末日机器》（1972） (1950)
+https://archive.org/download/DoomsdayMachine1972/DoomsdayMachine1972_512kb.mp4
+
+#EXTINF:4483 tvg-logo="https://archive.org/services/img/The_House_On_Haunted_Hill" group-title="悬疑推理与科幻惊悚",古堡惊魂夜 House on Haunted Hill (1959 文森特·普莱斯古堡悬赏惊悚名片) (1959)
+https://archive.org/download/The_House_On_Haunted_Hill/The_House_On_Haunted_Hill_512kb.mp4
+
+#EXTINF:4127 tvg-logo="https://archive.org/services/img/TheGhoul" group-title="悬疑推理与科幻惊悚",鬼魂 (1933)
+https://archive.org/download/TheGhoul/TheGhoul_1933_512kb.mp4
+
+#EXTINF:3696 tvg-logo="https://archive.org/services/img/Bowery_at_Midnight" group-title="悬疑推理与科幻惊悚",午夜时分的鲍厄里街 (1942)
+https://archive.org/download/Bowery_at_Midnight/Bowery_at_Midnight_1942.mp4
+
+#EXTINF:3318 tvg-logo="https://archive.org/services/img/Reign_of_the_Fallen" group-title="悬疑推理与科幻惊悚",堕落者的统治 (2006)
+https://archive.org/download/Reign_of_the_Fallen/Reign_of_the_Fallen_sor3_512kb.mp4
+
+#EXTINF:4238 tvg-logo="https://archive.org/services/img/Bluebeard" group-title="悬疑推理与科幻惊悚",蓝胡子之谜 Bluebeard (1944 巴黎木偶师哥特悬疑黑色电影) (1944)
+https://archive.org/download/Bluebeard/Bluebeard_512kb.mp4
+
+#EXTINF:4882 tvg-logo="https://archive.org/services/img/TheGhostTrain" group-title="悬疑推理与科幻惊悚",幽灵列车 The Ghost Train (1941 雨夜孤站英伦悬疑推理经典长片) (1941)
+https://archive.org/download/TheGhostTrain/TheGhostTrain_512kb.mp4
+
+#EXTINF:6083 tvg-logo="https://archive.org/services/img/TheGolem_893" group-title="悬疑推理与科幻惊悚",泥人哥连出世记 The Golem (1920 德国表现主义奇幻影史教科书长片) (1920)
+https://archive.org/download/TheGolem_893/TheGolem_512kb.mp4
+
+#EXTINF:4158 tvg-logo="https://archive.org/services/img/rogues_tavern" group-title="悬疑推理与科幻惊悚",迷雾酒馆探案 Rogue's Tavern (1936 暴风雪山庄密室推理悬疑片) (1936)
+https://archive.org/download/rogues_tavern/rogues_tavern_512kb.mp4
+
+#EXTINF:3741 tvg-logo="https://archive.org/services/img/AttackOfTheGiantLeeches" group-title="悬疑推理与科幻惊悚",致命水蛭 (1959)
+https://archive.org/download/AttackOfTheGiantLeeches/AttackOfTheGiantLeeches_512kb.mp4
+
+#EXTINF:3283 tvg-logo="https://archive.org/services/img/daughter_of_horror" group-title="悬疑推理与科幻惊悚",恐怖之女 (1955)
+https://archive.org/download/daughter_of_horror/daughter_of_horror_512kb.mp4
+
+#EXTINF:4473 tvg-logo="https://archive.org/services/img/CreatureFromTheHauntedSea" group-title="悬疑推理与科幻惊悚",鬼海怪物 (1961)
+https://archive.org/download/CreatureFromTheHauntedSea/CreatureFromTheHauntedSea_512kb.mp4
+
+#EXTINF:4554 tvg-logo="https://archive.org/services/img/Horror_Hotel" group-title="悬疑推理与科幻惊悚",死城/恐怖酒店 (1960)
+https://archive.org/download/Horror_Hotel/Horror_Hotel_512kb.mp4
+
+#EXTINF:4646 tvg-logo="https://archive.org/services/img/charlie_chaplin_film_fest" group-title="爆笑喜剧与国会图书馆典藏",卓别林喜剧嘉年华精选长片集 Charlie Chaplin Festival (1938 经典连映版) (1938)
+https://archive.org/download/charlie_chaplin_film_fest/charlie_chaplin_film_fest_512kb.mp4
+
+#EXTINF:3061 tvg-logo="https://archive.org/services/img/DasKabinettdesDoktorCaligariTheCabinetofDrCaligari" group-title="悬疑推理与科幻惊悚",卡里加里博士的小屋 The Cabinet of Dr. Caligari (1920 悬疑反转鼻祖长片) (1920)
+https://archive.org/download/DasKabinettdesDoktorCaligariTheCabinetofDrCaligari/The_Cabinet_of_Dr._Caligari_512kb.mp4
+
+#EXTINF:5380 tvg-logo="https://archive.org/services/img/Grave_of_the_Vampire_movie" group-title="悬疑推理与科幻惊悚",吸血鬼之墓 (1974)
+https://archive.org/download/Grave_of_the_Vampire_movie/Grave-of-the-Vampire_512kb.mp4
+
+#EXTINF:3438 tvg-logo="https://archive.org/services/img/TheAmazingTransparentMan1960" group-title="悬疑推理与科幻惊悚",《神奇的透明人》（1960） (1950)
+https://archive.org/download/TheAmazingTransparentMan1960/the-amazing-transparent-man_512kb.mp4
+
+#EXTINF:4743 tvg-logo="https://archive.org/services/img/TheTerror" group-title="悬疑推理与科幻惊悚",恐怖 (1963)
+https://archive.org/download/TheTerror/TheTerror_512kb.mp4
+
+#EXTINF:4116 tvg-logo="https://archive.org/services/img/Fog_island_1945" group-title="悬疑推理与科幻惊悚",雾岛 (1945)
+https://archive.org/download/Fog_island_1945/Fog_Island_1945_512kb.mp4
+
+#EXTINF:5223 tvg-logo="https://archive.org/services/img/lastmanonearth-1964" group-title="悬疑推理与科幻惊悚",《地球上的最后一个人》高清版 (1950)
+https://archive.org/download/lastmanonearth-1964/lastmanonearth-1964.mp4
+
+#EXTINF:3920 tvg-logo="https://archive.org/services/img/white_zombie" group-title="悬疑推理与科幻惊悚",白僵尸 (1932)
+https://archive.org/download/white_zombie/white_zombie_512kb.mp4
+
+#EXTINF:5304 tvg-logo="https://archive.org/services/img/Dont_Look_in_theBasement" group-title="悬疑推理与科幻惊悚",别去地下室看。 (1950)
+https://archive.org/download/Dont_Look_in_theBasement/Dont_Look_in_the_Basement_512kb.mp4
+
+#EXTINF:4041 tvg-logo="https://archive.org/services/img/TheScreamingSkull" group-title="悬疑推理与科幻惊悚",尖叫的头骨 (1958)
+https://archive.org/download/TheScreamingSkull/TheScreamingSkull.mp4
+
+#EXTINF:5343 tvg-logo="https://archive.org/services/img/Cosmos_War_of_the_Planets" group-title="悬疑推理与科幻惊悚",《宇宙：行星之战》 (1977)
+https://archive.org/download/Cosmos_War_of_the_Planets/Cosmos_War_of_the_Planets_512kb.mp4
+
+#EXTINF:6772 tvg-logo="https://archive.org/services/img/Cyrano_DeBergerac" group-title="爆笑喜剧与国会图书馆典藏",大鼻子情圣 Cyrano de Bergerac (1950 奥斯卡最佳男主角古典浪漫剑侠经典) (1950)
+https://archive.org/download/Cyrano_DeBergerac/Cyrano_De_Bergerac_512kb.mp4
+
+#EXTINF:4201 tvg-logo="https://archive.org/services/img/tarzans_revenge" group-title="悬疑推理与科幻惊悚",《泰山的复仇》 (1938)
+https://archive.org/download/tarzans_revenge/tarzans_revenge_512kb.mp4
+
+#EXTINF:3754 tvg-logo="https://archive.org/services/img/TheMostDangerousGame" group-title="悬疑推理与科幻惊悚",最危险的游戏 The Most Dangerous Game (1932 荒岛生存猎杀悬疑惊悚片鼻祖) (1932)
+https://archive.org/download/TheMostDangerousGame/TheMostDangerousGame_512kb.mp4
+
+#EXTINF:5224 tvg-logo="https://archive.org/services/img/Horror_Express" group-title="悬疑推理与科幻惊悚",西伯利亚恐怖快车 Horror Express (1973 克里斯托弗·李与彼得·库欣列车科幻悬疑名片) (1973)
+https://archive.org/download/Horror_Express/Horror_Express_512kb.mp4
+
+#EXTINF:6295 tvg-logo="https://archive.org/services/img/JungleBook" group-title="开源动画与独立短片",奇幻森林 / 丛林之书 Jungle Book (1942 特艺彩色奇幻丛林冒险大片) (1942)
+https://archive.org/download/JungleBook/Jungle_Book_512kb.mp4
+
+#EXTINF:2400 tvg-logo="https://archive.org/services/img/3stooges" group-title="爆笑喜剧与国会图书馆典藏",活宝三人组爆笑喜剧剧场 Three Stooges Classic Comedies (1949)
+https://archive.org/download/3stooges/3stooges_NewMalice1_512kb.mp4
+
+#EXTINF:4078 tvg-logo="https://archive.org/services/img/TheFlyingDeuces" group-title="爆笑喜剧与国会图书馆典藏",飞行傻瓜 The Flying Deuces (1939 劳莱与哈台外籍军团爆笑喜剧长片) (1939)
+https://archive.org/download/TheFlyingDeuces/The_Flying_Deuces_512kb.mp4
+
+#EXTINF:2400 tvg-logo="https://archive.org/services/img/The_Pied_Piper_of_Hamelin" group-title="爆笑喜剧与国会图书馆典藏",哈默尔恩的吹笛人 The Pied Piper of Hamelin (1957 特艺彩色童话歌舞片) (1957)
+https://archive.org/download/The_Pied_Piper_of_Hamelin/pied_512kb.mp4
+
+#EXTINF:4255 tvg-logo="https://archive.org/services/img/Killers_from_space" group-title="悬疑推理与科幻惊悚",来自太空的杀手 (1954)
+https://archive.org/download/Killers_from_space/Killers_from_space_512kb.mp4
+
+#EXTINF:2400 tvg-logo="https://archive.org/services/img/Sita_Sings_the_Blues" group-title="开源动画与独立短片",希塔唱蓝调 Sita Sings the Blues (2008 柏林电影节获奖豆瓣高分独立神话音乐动画长片) (2008)
+https://archive.org/download/Sita_Sings_the_Blues/Sita_Sings_the_Blues_DVD_NTSC3.mp4
+
+#EXTINF:4567 tvg-logo="https://archive.org/services/img/Decay2012-TheLhcZombieFilmfullFilm" group-title="悬疑推理与科幻惊悚",《Decay》（2012）——LHC僵尸电影［完整版］ (2012)
+https://archive.org/download/Decay2012-TheLhcZombieFilmfullFilm/Decay_2012_Low.mp4
+
+#EXTINF:4827 tvg-logo="https://archive.org/services/img/CurseOfTheSwampCreature1966_742" group-title="悬疑推理与科幻惊悚",《沼泽生物的诅咒》（1966年） (1950)
+https://archive.org/download/CurseOfTheSwampCreature1966_742/CurseOfTheSwampCreature1966_512kb.mp4
+
+#EXTINF:5212 tvg-logo="https://archive.org/services/img/my_favorite_brunette" group-title="爆笑喜剧与国会图书馆典藏",我最爱的黑发女郎 My Favorite Brunette (1947 鲍勃·霍普爆笑侦探悬疑喜剧长片) (1947)
+https://archive.org/download/my_favorite_brunette/my_favorite_brunette_512kb.mp4
+
+#EXTINF:4216 tvg-logo="https://archive.org/services/img/new_adventures_of_tarzan" group-title="悬疑推理与科幻惊悚",《泰山的新冒险》 (1950)
+https://archive.org/download/new_adventures_of_tarzan/new_adventures_of_tarzan_512kb.mp4
+
+#EXTINF:4742 tvg-logo="https://archive.org/services/img/Quicksand_clear" group-title="悬疑推理与科幻惊悚",流沙深渊 Quicksand (1950 米奇·鲁尼主演经典黑色犯罪长片) (1950)
+https://archive.org/download/Quicksand_clear/Quicksand.mp4
+
+#EXTINF:5080 tvg-logo="https://archive.org/services/img/abraham_lincoln" group-title="悬疑推理与科幻惊悚",林肯传 Abraham Lincoln (1930 格里菲斯执导首部有声史诗传记长片) (1930)
+https://archive.org/download/abraham_lincoln/abraham_lincoln_512kb.mp4
+
+#EXTINF:4114 tvg-logo="https://archive.org/services/img/secret_weapon" group-title="悬疑推理与科幻惊悚",福尔摩斯与秘密武器 Sherlock Holmes and the Secret Weapon (1943 经典神探密码悬疑长片) (1943)
+https://archive.org/download/secret_weapon/secret_weapon_ipod_512kb.mp4
+
+#EXTINF:5566 tvg-logo="https://archive.org/services/img/little_princess" group-title="爆笑喜剧与国会图书馆典藏",小公主 The Little Princess (1939 秀兰·邓波儿首部特艺彩色温情经典长片) (1939)
+https://archive.org/download/little_princess/little_princess_512kb.mp4
+
+#EXTINF:4533 tvg-logo="https://archive.org/services/img/suddenly" group-title="悬疑推理与科幻惊悚",突然之间 Suddenly (1954 弗兰克·辛纳屈主演小镇车站危机悬疑长片) (1954)
+https://archive.org/download/suddenly/suddenly_512kb.mp4
+
+#EXTINF:6801 tvg-logo="https://archive.org/services/img/GreatExpectations1946" group-title="悬疑推理与科幻惊悚",远大前程 Great Expectations (1946 大卫·里恩执导奥斯卡大奖狄更斯名著巅峰改编) (1946)
+https://archive.org/download/GreatExpectations1946/GreatExpectations1946_512kb.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181231_Bennu_m13123_Orbit_Insertion/GSFC_20181231_Bennu_m13123_Orbit_Insertion~thumb.jpg" group-title="太空宇宙与科学1080p",单次轨道注入 (2018)
+https://images-assets.nasa.gov/video/GSFC_20181231_Bennu_m13123_Orbit_Insertion/GSFC_20181231_Bennu_m13123_Orbit_Insertion~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_Arrival_m12166_OSIRIS-REx/GSFC_20181203_Arrival_m12166_OSIRIS-REx~thumb.jpg" group-title="太空宇宙与科学1080p",Osiris-REx任务抵达贝努小行星 (2018)
+https://images-assets.nasa.gov/video/GSFC_20181203_Arrival_m12166_OSIRIS-REx/GSFC_20181203_Arrival_m12166_OSIRIS-REx~large.mp4
+
+#EXTINF:2400 tvg-logo="https://archive.org/services/img/CC_1916_10_02_ThePawnshop" group-title="爆笑喜剧与国会图书馆典藏",卓别林：当铺奇遇记 The Pawnshop (1916 查理·卓别林拆闹钟爆笑代表作) (1916)
+https://archive.org/download/CC_1916_10_02_ThePawnshop/CC_1916_10_02_ThePawnshop_512kb.mp4
+
+#EXTINF:7607 tvg-logo="https://archive.org/services/img/mclintok_widescreen" group-title="爆笑喜剧与国会图书馆典藏",驯妻记 McLintock! (1963 约翰·韦恩特艺彩色宽银幕西部爆笑喜剧大片) (1963)
+https://archive.org/download/mclintok_widescreen/McLintock_512kb.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181231_M13123_Bennu_Orbit_Insertion/GSFC_20181231_M13123_Bennu_Orbit_Insertion~thumb.jpg" group-title="太空宇宙与科学1080p",单次轨道注入 (2018)
+https://images-assets.nasa.gov/video/GSFC_20181231_M13123_Bennu_Orbit_Insertion/GSFC_20181231_M13123_Bennu_Orbit_Insertion~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_Design_m11825_OSIRIS-REx/GSFC_20181203_Design_m11825_OSIRIS-REx~thumb.jpg" group-title="太空宇宙与科学1080p",奥西里斯-REx任务设计：叙述式专题报道 (2018)
+https://images-assets.nasa.gov/video/GSFC_20181203_Design_m11825_OSIRIS-REx/GSFC_20181203_Design_m11825_OSIRIS-REx~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20210510_M13856_Web/GSFC_20210510_M13856_Web~thumb.jpg" group-title="太空宇宙与科学1080p",小行星贝努周围的网络 (2021)
+https://images-assets.nasa.gov/video/GSFC_20210510_M13856_Web/GSFC_20210510_M13856_Web~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20210510_M13854_BennuFarewell/GSFC_20210510_M13854_BennuFarewell~thumb.jpg" group-title="太空宇宙与科学1080p",告别本努小行星 (2021)
+https://images-assets.nasa.gov/video/GSFC_20210510_M13854_BennuFarewell/GSFC_20210510_M13854_BennuFarewell~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20210511_M13857_OREx_Imagery/GSFC_20210511_M13857_OREx_Imagery~thumb.jpg" group-title="太空宇宙与科学1080p",小行星贝努的成像观测 (2021)
+https://images-assets.nasa.gov/video/GSFC_20210511_M13857_OREx_Imagery/GSFC_20210511_M13857_OREx_Imagery~large.mp4
+
+#EXTINF:5784 tvg-logo="https://archive.org/services/img/AsYouLikeIt1936" group-title="爆笑喜剧与国会图书馆典藏",皆大欢喜 As You Like It (1936 劳伦斯·奥利弗主演莎士比亚浪漫喜剧) (1936)
+https://archive.org/download/AsYouLikeIt1936/AsYouLikeIt_512kb.mp4
+
+#EXTINF:4046 tvg-logo="https://archive.org/services/img/tarzan_and_the_green_goddess" group-title="悬疑推理与科幻惊悚",《泰山与绿女神》 (1938)
+https://archive.org/download/tarzan_and_the_green_goddess/tarzan_and_the_green_goddess_512kb.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20200226_M4795_BennuGlobal/GSFC_20200226_M4795_BennuGlobal~thumb.jpg" group-title="太空宇宙与科学1080p",小行星本努的全球模型 (2020)
+https://images-assets.nasa.gov/video/GSFC_20200226_M4795_BennuGlobal/GSFC_20200226_M4795_BennuGlobal~large.mp4
+
+#EXTINF:6578 tvg-logo="https://archive.org/services/img/impact" group-title="悬疑推理与科幻惊悚",致命冲击 Impact (1949 好莱坞黑色犯罪逆转悬疑长片) (1949)
+https://archive.org/download/impact/impact_512kb.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20210510_OSIRIS_Departure/GSFC_20210510_OSIRIS_Departure~thumb.jpg" group-title="太空宇宙与科学1080p",OSIRIS-REX探测器启程：向贝努小行星告别 (2021)
+https://images-assets.nasa.gov/video/GSFC_20210510_OSIRIS_Departure/GSFC_20210510_OSIRIS_Departure~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20200227_M13565_Nightingale/GSFC_20200227_M13565_Nightingale~thumb.jpg" group-title="太空宇宙与科学1080p",小行星贝努：选址夜莺站 (2020)
+https://images-assets.nasa.gov/video/GSFC_20200227_M13565_Nightingale/GSFC_20200227_M13565_Nightingale~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20201014_M13730_COT/GSFC_20201014_M13730_COT~thumb.jpg" group-title="太空宇宙与科学1080p",NASA的小行星“劫掠”行动：TAG面临的挑战 (2020)
+https://images-assets.nasa.gov/video/GSFC_20201014_M13730_COT/GSFC_20201014_M13730_COT~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20200921_M13707_VestaBennu/GSFC_20200921_M13707_VestaBennu~thumb.jpg" group-title="太空宇宙与科学1080p",在贝努小行星上发现了来自维斯塔的小行星陨石 (2020)
+https://images-assets.nasa.gov/video/GSFC_20200921_M13707_VestaBennu/GSFC_20200921_M13707_VestaBennu~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20200709_M13657_OREx_MSA/GSFC_20200709_M13657_OREx_MSA~thumb.jpg" group-title="太空宇宙与科学1080p",Osiris-REx：任务支持区 (2020)
+https://images-assets.nasa.gov/video/GSFC_20200709_M13657_OREx_MSA/GSFC_20200709_M13657_OREx_MSA~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20141118_M20220_BennuHalfRes83/GSFC_20141118_M20220_BennuHalfRes83~thumb.jpg" group-title="太空宇宙与科学1080p",本努的旅程 (2014)
+https://images-assets.nasa.gov/video/GSFC_20141118_M20220_BennuHalfRes83/GSFC_20141118_M20220_BennuHalfRes83~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20201019_M13740_BeauBierhaus/GSFC_20201019_M13740_BeauBierhaus~thumb.jpg" group-title="太空宇宙与科学1080p",Osiris-REx飞行操作——BeauBierhaus (2020)
+https://images-assets.nasa.gov/video/GSFC_20201019_M13740_BeauBierhaus/GSFC_20201019_M13740_BeauBierhaus~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~thumb.jpg" group-title="太空宇宙与科学1080p",为什么选择贝努？ (2018)
+https://images-assets.nasa.gov/video/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx/GSFC_20181203_WhyBennu_m13112_OSIRIS-REx~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20200709_M13657_OREx_SOC/GSFC_20200709_M13657_OREx_SOC~thumb.jpg" group-title="太空宇宙与科学1080p",NASA 深空探索：OSIRIS-REx: Science Operations Center (2020)
+https://images-assets.nasa.gov/video/GSFC_20200709_M13657_OREx_SOC/GSFC_20200709_M13657_OREx_SOC~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20201008_M13729_BennuTour/GSFC_20201008_M13729_BennuTour~thumb.jpg" group-title="太空宇宙与科学1080p",贝努小行星之旅 (2020)
+https://images-assets.nasa.gov/video/GSFC_20201008_M13729_BennuTour/GSFC_20201008_M13729_BennuTour~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20191202_M13428_BennuSurprises/GSFC_20191202_M13428_BennuSurprises~thumb.jpg" group-title="太空宇宙与科学1080p",贝努小行星带来的惊喜 (2019)
+https://images-assets.nasa.gov/video/GSFC_20191202_M13428_BennuSurprises/GSFC_20191202_M13428_BennuSurprises~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20201016_M13733_BennuIn360/GSFC_20201016_M13733_BennuIn360~thumb.jpg" group-title="太空宇宙与科学1080p",小行星贝努样本的360度全景视图 (2020)
+https://images-assets.nasa.gov/video/GSFC_20201016_M13733_BennuIn360/GSFC_20201016_M13733_BennuIn360~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/JPL-20241101-WHATSUf-0001-Whats_Up_November_2024cc/JPL-20241101-WHATSUf-0001-Whats_Up_November_2024cc~thumb.jpg" group-title="太空宇宙与科学1080p",NASA 星空观测指南：NASA提供的2024年11月观星建议 (2024)
+https://images-assets.nasa.gov/video/JPL-20241101-WHATSUf-0001-Whats_Up_November_2024cc/JPL-20241101-WHATSUf-0001-Whats_Up_November_2024cc~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20150630_OSIRIS_REx_m11910_Astro/GSFC_20150630_OSIRIS_REx_m11910_Astro~thumb.jpg" group-title="太空宇宙与科学1080p",在地球上研究小行星 (2015)
+https://images-assets.nasa.gov/video/GSFC_20150630_OSIRIS_REx_m11910_Astro/GSFC_20150630_OSIRIS_REx_m11910_Astro~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20180725_Parker_m12903_CoronalHeating_Short/GSFC_20180725_Parker_m12903_CoronalHeating_Short~thumb.jpg" group-title="太空宇宙与科学1080p",太阳那神秘且炽热的大气层 (2018)
+https://images-assets.nasa.gov/video/GSFC_20180725_Parker_m12903_CoronalHeating_Short/GSFC_20180725_Parker_m12903_CoronalHeating_Short~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/305_EffectsOfTheSolarWind/305_EffectsOfTheSolarWind~thumb.jpg" group-title="太空宇宙与科学1080p",NASA科学播客：太阳风的影响 (2019)
+https://images-assets.nasa.gov/video/305_EffectsOfTheSolarWind/305_EffectsOfTheSolarWind~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20141118_M20220_BennuLetterbox_h264/GSFC_20141118_M20220_BennuLetterbox_h264~thumb.jpg" group-title="太空宇宙与科学1080p",本努的旅程——信封 (2014)
+https://images-assets.nasa.gov/video/GSFC_20141118_M20220_BennuLetterbox_h264/GSFC_20141118_M20220_BennuLetterbox_h264~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20161003_MusicVideo_m12366/GSFC_20161003_MusicVideo_m12366~thumb.jpg" group-title="太空宇宙与科学1080p",《月球与更多》 (2016)
+https://images-assets.nasa.gov/video/GSFC_20161003_MusicVideo_m12366/GSFC_20161003_MusicVideo_m12366~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20171120_JSchmitt_m12705_Apollo17toLRO/GSFC_20171120_JSchmitt_m12705_Apollo17toLRO~thumb.jpg" group-title="太空宇宙与科学1080p",杰克·施密特：从阿波罗17号到 LRO (2017)
+https://images-assets.nasa.gov/video/GSFC_20171120_JSchmitt_m12705_Apollo17toLRO/GSFC_20171120_JSchmitt_m12705_Apollo17toLRO~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190712_M13207_Olivia/GSFC_20190712_M13207_Olivia~thumb.jpg" group-title="太空宇宙与科学1080p",奥利维亚·比莱特——洛克希德·马丁公司OSIRIS-REX航天器科学负责人 (2019)
+https://images-assets.nasa.gov/video/GSFC_20190712_M13207_Olivia/GSFC_20190712_M13207_Olivia~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20171006_LRO_m12739_100LunarDays_Pt1/GSFC_20171006_LRO_m12739_100LunarDays_Pt1~thumb.jpg" group-title="太空宇宙与科学1080p",100个 lunar 日——第一部分 (2017)
+https://images-assets.nasa.gov/video/GSFC_20171006_LRO_m12739_100LunarDays_Pt1/GSFC_20171006_LRO_m12739_100LunarDays_Pt1~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190715_HST_m13258_Moon/GSFC_20190715_HST_m13258_Moon~thumb.jpg" group-title="太空宇宙与科学1080p",哈勃望远镜与迈向月球的未来征程 (2019)
+https://images-assets.nasa.gov/video/GSFC_20190715_HST_m13258_Moon/GSFC_20190715_HST_m13258_Moon~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20171206_Parker_m12795_LaserTesting_BROLL/GSFC_20171206_Parker_m12795_LaserTesting_BROLL~thumb.jpg" group-title="太空宇宙与科学1080p",帕克太阳探测器：环境测试：B-Roll素材 (2017)
+https://images-assets.nasa.gov/video/GSFC_20171206_Parker_m12795_LaserTesting_BROLL/GSFC_20171206_Parker_m12795_LaserTesting_BROLL~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190207_LRO_m13144_Impacts/GSFC_20190207_LRO_m13144_Impacts~thumb.jpg" group-title="太空宇宙与科学1080p",月球之光揭示了地球的撞击历史 (2019)
+https://images-assets.nasa.gov/video/GSFC_20190207_LRO_m13144_Impacts/GSFC_20190207_LRO_m13144_Impacts~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Temp/GSFC_20110617_LRO_m10794_Temp~thumb.jpg" group-title="太空宇宙与科学1080p",LRO 的“占卜者”在月食期间测量月球温度 (2011)
+https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Temp/GSFC_20110617_LRO_m10794_Temp~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20150317_LRO_m11806_NewCrater/GSFC_20150317_LRO_m11806_NewCrater~thumb.jpg" group-title="太空宇宙与科学1080p",月球上的新陨石坑 (2015)
+https://images-assets.nasa.gov/video/GSFC_20150317_LRO_m11806_NewCrater/GSFC_20150317_LRO_m11806_NewCrater~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20191204_M13491_NSL/GSFC_20191204_M13491_NSL~thumb.jpg" group-title="太空宇宙与科学1080p",NASA科学直播：我们触碰太阳任务的新发现【第12集】 (2019)
+https://images-assets.nasa.gov/video/GSFC_20191204_M13491_NSL/GSFC_20191204_M13491_NSL~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Moonview/GSFC_20110617_LRO_m10794_Eclipse_Moonview~thumb.jpg" group-title="太空宇宙与科学1080p",LRO 的“占卜者”在月食期间测量月球温度：月球视图 (2011)
+https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Moonview/GSFC_20110617_LRO_m10794_Eclipse_Moonview~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20140204_OSIRIS-REx_m11435_TAGSAM/GSFC_20140204_OSIRIS-REx_m11435_TAGSAM~thumb.jpg" group-title="太空宇宙与科学1080p",与小行星玩“捉迷藏”游戏 (2014)
+https://images-assets.nasa.gov/video/GSFC_20140204_OSIRIS-REx_m11435_TAGSAM/GSFC_20140204_OSIRIS-REx_m11435_TAGSAM~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20080611_LRO_m10257_Return/GSFC_20080611_LRO_m10257_Return~thumb.jpg" group-title="太空宇宙与科学1080p",随 LRO 返回 (2008)
+https://images-assets.nasa.gov/video/GSFC_20080611_LRO_m10257_Return/GSFC_20080611_LRO_m10257_Return~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_closeup/GSFC_20110617_LRO_m10794_Eclipse_closeup~thumb.jpg" group-title="太空宇宙与科学1080p",LRO 的“占卜者”在月食期间测量月球温度：月食特写镜头 (2011)
+https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_closeup/GSFC_20110617_LRO_m10794_Eclipse_closeup~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20170921_Eclipse_m12715_Baseball/GSFC_20170921_Eclipse_m12715_Baseball~thumb.jpg" group-title="太空宇宙与科学1080p",棒球遭遇日食 (2017)
+https://images-assets.nasa.gov/video/GSFC_20170921_Eclipse_m12715_Baseball/GSFC_20170921_Eclipse_m12715_Baseball~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190227_ARTEMIS_m12589_MoonBubbles/GSFC_20190227_ARTEMIS_m12589_MoonBubbles~thumb.jpg" group-title="太空宇宙与科学1080p",月球上的磁泡揭示了“太阳灼伤”的证据 (2019)
+https://images-assets.nasa.gov/video/GSFC_20190227_ARTEMIS_m12589_MoonBubbles/GSFC_20190227_ARTEMIS_m12589_MoonBubbles~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~thumb.jpg" group-title="太空宇宙与科学1080p",在月球上的十年 (2019)
+https://images-assets.nasa.gov/video/GSFC_20190618_LRO_m13229_10Years/GSFC_20190618_LRO_m13229_10Years~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/ObserveTheMoon_16x9/ObserveTheMoon_16x9~thumb.jpg" group-title="太空宇宙与科学1080p",观察月亮 (2021)
+https://images-assets.nasa.gov/video/ObserveTheMoon_16x9/ObserveTheMoon_16x9~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Diviner/GSFC_20110617_LRO_m10794_Eclipse_Diviner~thumb.jpg" group-title="太空宇宙与科学1080p",LRO 的Diviner仪器在月食期间测量月球温度：Diviner (2011)
+https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Diviner/GSFC_20110617_LRO_m10794_Eclipse_Diviner~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260818-MH-JMT01-0001-Roman_Space_Telescope_Processing_at_PHSF-M21913/KSC-20260818-MH-JMT01-0001-Roman_Space_Telescope_Processing_at_PHSF-M21913~thumb.jpg" group-title="太空宇宙与科学1080p",PHSF 上的罗马空间望远镜数据处理工作 (2026)
+https://images-assets.nasa.gov/video/KSC-20260818-MH-JMT01-0001-Roman_Space_Telescope_Processing_at_PHSF-M21913/KSC-20260818-MH-JMT01-0001-Roman_Space_Telescope_Processing_at_PHSF-M21913~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20130306_Moons_m11218_Shadowed/GSFC_20130306_Moons_m11218_Shadowed~thumb.jpg" group-title="太空宇宙与科学1080p",月球的永久阴影区 (2013)
+https://images-assets.nasa.gov/video/GSFC_20130306_Moons_m11218_Shadowed/GSFC_20130306_Moons_m11218_Shadowed~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_1080p-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_1080p-M26246~thumb.jpg" group-title="太空宇宙与科学1080p",美国国家航空航天局南希·格蕾丝·罗曼空间望远镜现场发射报道——1080p (2026)
+https://images-assets.nasa.gov/video/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_1080p-M26246/KSC-20260830-VP-FMX01-0001-Roman_Space_Telescope_Live_Launch_Coverage_1080p-M26246~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Shadow/GSFC_20110617_LRO_m10794_Eclipse_Shadow~thumb.jpg" group-title="太空宇宙与科学1080p",LRO 的占卜师在月食期间测量月亮的温度：阴影线 (2011)
+https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Shadow/GSFC_20110617_LRO_m10794_Eclipse_Shadow~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20110315_LRO_m10146_PDS/GSFC_20110315_LRO_m10146_PDS~thumb.jpg" group-title="太空宇宙与科学1080p",LRO PDS发布版 (2011)
+https://images-assets.nasa.gov/video/GSFC_20110315_LRO_m10146_PDS/GSFC_20110315_LRO_m10146_PDS~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260824-MH-GSF01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249/KSC-20260824-MH-GSF01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249~thumb.jpg" group-title="太空宇宙与科学1080p",罗马空间望远镜从 PHSF 至LC 39A的运输过程 (2026)
+https://images-assets.nasa.gov/video/KSC-20260824-MH-GSF01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249/KSC-20260824-MH-GSF01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20140408_LRO_M11516_Lunar/GSFC_20140408_LRO_M11516_Lunar~thumb.jpg" group-title="太空宇宙与科学1080p",了解月食 (2014)
+https://images-assets.nasa.gov/video/GSFC_20140408_LRO_M11516_Lunar/GSFC_20140408_LRO_M11516_Lunar~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20080611_LRO_m10257_Return_short/GSFC_20080611_LRO_m10257_Return_short~thumb.jpg" group-title="太空宇宙与科学1080p",以 LRO 短位回吐 (2008)
+https://images-assets.nasa.gov/video/GSFC_20080611_LRO_m10257_Return_short/GSFC_20080611_LRO_m10257_Return_short~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-MH-SPX01-0001-Roman_Space_Telescope_Launch_ISO_Drone-4K-M26246/KSC-20260830-MH-SPX01-0001-Roman_Space_Telescope_Launch_ISO_Drone-4K-M26246~thumb.jpg" group-title="太空宇宙与科学1080p",美国国家航空航天局南希·格蕾丝·罗曼空间望远镜发射——无人机报道 (2026)
+https://images-assets.nasa.gov/video/KSC-20260830-MH-SPX01-0001-Roman_Space_Telescope_Launch_ISO_Drone-4K-M26246/KSC-20260830-MH-SPX01-0001-Roman_Space_Telescope_Launch_ISO_Drone-4K-M26246~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Librating_Moon/GSFC_20110617_LRO_m10794_Eclipse_Librating_Moon~thumb.jpg" group-title="太空宇宙与科学1080p",LRO 的“占卜者”在月食期间测量月球温度：月球的拉格朗日运动 (2011)
+https://images-assets.nasa.gov/video/GSFC_20110617_LRO_m10794_Eclipse_Librating_Moon/GSFC_20110617_LRO_m10794_Eclipse_Librating_Moon~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20140717_LROC_m11612_Lunar_Pit/GSFC_20140717_LROC_m11612_Lunar_Pit~thumb.jpg" group-title="太空宇宙与科学1080p",窥探月球坑洞 (2014)
+https://images-assets.nasa.gov/video/GSFC_20140717_LROC_m11612_Lunar_Pit/GSFC_20140717_LROC_m11612_Lunar_Pit~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260829-VP-FMX03-0001-NASA_Administrator_Flyby_Roman_Space_Telescope_LC_39A-4K-M26246/KSC-20260829-VP-FMX03-0001-NASA_Administrator_Flyby_Roman_Space_Telescope_LC_39A-4K-M26246~thumb.jpg" group-title="太空宇宙与科学1080p",美国国家航空航天局局长贾里德·艾萨克曼在罗马太空望远镜发射前飞越该望远镜所在地上空。 (2026)
+https://images-assets.nasa.gov/video/KSC-20260829-VP-FMX03-0001-NASA_Administrator_Flyby_Roman_Space_Telescope_LC_39A-4K-M26246/KSC-20260829-VP-FMX03-0001-NASA_Administrator_Flyby_Roman_Space_Telescope_LC_39A-4K-M26246~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/Moving_Roman_-_Propulsion4k/Moving_Roman_-_Propulsion4k~thumb.jpg" group-title="太空宇宙与科学1080p",移动罗马——Propulsion4k (2024)
+https://images-assets.nasa.gov/video/Moving_Roman_-_Propulsion4k/Moving_Roman_-_Propulsion4k~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20200520_NSL_Ep17/GSFC_20200520_NSL_Ep17~thumb.jpg" group-title="太空宇宙与科学1080p",NASA科学直播：拓展我们的宇宙视野 [第17集] (2020)
+https://images-assets.nasa.gov/video/GSFC_20200520_NSL_Ep17/GSFC_20200520_NSL_Ep17~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/NASAsRomanSpaceTelescopeSystemsAssemble_1080/NASAsRomanSpaceTelescopeSystemsAssemble_1080~thumb.jpg" group-title="太空宇宙与科学1080p",NAS：罗马空间望远镜系统正在组装中，编号为1080 (2024)
+https://images-assets.nasa.gov/video/NASAsRomanSpaceTelescopeSystemsAssemble_1080/NASAsRomanSpaceTelescopeSystemsAssemble_1080~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-MH-CSH01-0002-Roman_Space_Telescope_Launch_High_Speed_Footage/KSC-20260830-MH-CSH01-0002-Roman_Space_Telescope_Launch_High_Speed_Footage~thumb.jpg" group-title="太空宇宙与科学1080p",南希·格蕾丝·罗曼空间望远镜高速影像——旗帜发射镜头 (2026)
+https://images-assets.nasa.gov/video/KSC-20260830-MH-CSH01-0002-Roman_Space_Telescope_Launch_High_Speed_Footage/KSC-20260830-MH-CSH01-0002-Roman_Space_Telescope_Launch_High_Speed_Footage~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260824-MH-FMX01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249/KSC-20260824-MH-FMX01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249~thumb.jpg" group-title="太空宇宙与科学1080p",罗马空间望远镜从 PHSF 至LC 39A的运输过程 (2026)
+https://images-assets.nasa.gov/video/KSC-20260824-MH-FMX01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249/KSC-20260824-MH-FMX01-0001-Roman_Space_Telescope_Transport_PHSF_to_LC_39A-M26249~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260622-RV-FMX01_Roman_Arrival_Support_Timelapse-WON_M21344/KSC-20260622-RV-FMX01_Roman_Arrival_Support_Timelapse-WON_M21344~thumb.jpg" group-title="太空宇宙与科学1080p",罗马空间望远镜抵达（6月21日）卸载（6月22日）——延时摄影 (2026)
+https://images-assets.nasa.gov/video/KSC-20260622-RV-FMX01_Roman_Arrival_Support_Timelapse-WON_M21344/KSC-20260622-RV-FMX01_Roman_Arrival_Support_Timelapse-WON_M21344~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20181108_FERMI_m13042_Luck4K/GSFC_20181108_FERMI_m13042_Luck4K~thumb.jpg" group-title="太空宇宙与科学1080p",NASA费米任务揭示：好运往往眷顾那些有准备的人 (2018)
+https://images-assets.nasa.gov/video/GSFC_20181108_FERMI_m13042_Luck4K/GSFC_20181108_FERMI_m13042_Luck4K~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20140324_LROC_m11494_JGarvin/GSFC_20140324_LROC_m11494_JGarvin~thumb.jpg" group-title="太空宇宙与科学1080p",吉姆·加文精选“图片”—— LROC Images (2014)
+https://images-assets.nasa.gov/video/GSFC_20140324_LROC_m11494_JGarvin/GSFC_20140324_LROC_m11494_JGarvin~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/NASAsRomanSpaceTelescopeHardwareHighlightsSpring2024_1080/NASAsRomanSpaceTelescopeHardwareHighlightsSpring2024_1080~thumb.jpg" group-title="太空宇宙与科学1080p",NASA 深空探索：NASAsRomanSpaceTelescopeHardwareHighlightsSpring2024 1080 (2024)
+https://images-assets.nasa.gov/video/NASAsRomanSpaceTelescopeHardwareHighlightsSpring2024_1080/NASAsRomanSpaceTelescopeHardwareHighlightsSpring2024_1080~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20241004-MH-CSH01-0001-Europa_Clipper_Transport_to_Pad39A_PHSF-M9447/KSC-20241004-MH-CSH01-0001-Europa_Clipper_Transport_to_Pad39A_PHSF-M9447~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀运输 (2024)
+https://images-assets.nasa.gov/video/KSC-20241004-MH-CSH01-0001-Europa_Clipper_Transport_to_Pad39A_PHSF-M9447/KSC-20241004-MH-CSH01-0001-Europa_Clipper_Transport_to_Pad39A_PHSF-M9447~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20161025_Eclipse_m12412_Path/GSFC_20161025_Eclipse_m12412_Path~thumb.jpg" group-title="太空宇宙与科学1080p",追溯2017年日食的轨迹 (2016)
+https://images-assets.nasa.gov/video/GSFC_20161025_Eclipse_m12412_Path/GSFC_20161025_Eclipse_m12412_Path~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-MH-AJN01-0001-Roman_Space_Telescope_Isolated_Launch_and_Landing_Views-M26246/KSC-20260830-MH-AJN01-0001-Roman_Space_Telescope_Isolated_Launch_and_Landing_Views-M26246~thumb.jpg" group-title="太空宇宙与科学1080p",美国国家航空航天局南希·格蕾丝·罗曼空间望远镜的独立发射与着陆视图 (2026)
+https://images-assets.nasa.gov/video/KSC-20260830-MH-AJN01-0001-Roman_Space_Telescope_Isolated_Launch_and_Landing_Views-M26246/KSC-20260830-MH-AJN01-0001-Roman_Space_Telescope_Isolated_Launch_and_Landing_Views-M26246~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240306-MH-FMX01_Europa_Clipper_Solar_Wing_Deployment-WON_M5059/KSC-20240306-MH-FMX01_Europa_Clipper_Solar_Wing_Deployment-WON_M5059~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀号太阳能翼展开装置 (2024)
+https://images-assets.nasa.gov/video/KSC-20240306-MH-FMX01_Europa_Clipper_Solar_Wing_Deployment-WON_M5059/KSC-20240306-MH-FMX01_Europa_Clipper_Solar_Wing_Deployment-WON_M5059~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20241002-MH-KLS01-0002-Europa_Clipper_Encapsulation_PHSF-M9448/KSC-20241002-MH-KLS01-0002-Europa_Clipper_Encapsulation_PHSF-M9448~thumb.jpg" group-title="太空宇宙与科学1080p",美国国家航空航天局“欧罗巴剪辑器”封装任务 (2024)
+https://images-assets.nasa.gov/video/KSC-20241002-MH-KLS01-0002-Europa_Clipper_Encapsulation_PHSF-M9448/KSC-20241002-MH-KLS01-0002-Europa_Clipper_Encapsulation_PHSF-M9448~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240802-MH-GEB01-0001-Europa_Clipper_Solar_Array_Install_PHSF-M8368/KSC-20240802-MH-GEB01-0001-Europa_Clipper_Solar_Array_Install_PHSF-M8368~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀号太阳能阵列安装 (2024)
+https://images-assets.nasa.gov/video/KSC-20240802-MH-GEB01-0001-Europa_Clipper_Solar_Array_Install_PHSF-M8368/KSC-20240802-MH-GEB01-0001-Europa_Clipper_Solar_Array_Install_PHSF-M8368~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240524-MH-ILW01-0002-Europa_Clipper_Lift_and_Push_into_PHSF-M6668/KSC-20240524-MH-ILW01-0002-Europa_Clipper_Lift_and_Push_into_PHSF-M6668~thumb.jpg" group-title="太空宇宙与科学1080p",美国宇航局的“欧罗巴剪辑器”探测器在肯尼迪航天中心完成升空及推进进入 PHSF 轨道的准备。 (2024)
+https://images-assets.nasa.gov/video/KSC-20240524-MH-ILW01-0002-Europa_Clipper_Lift_and_Push_into_PHSF-M6668/KSC-20240524-MH-ILW01-0002-Europa_Clipper_Lift_and_Push_into_PHSF-M6668~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240815-MH-GEB01-0001-Europa_Clipper_Solar_Panel_Installation_and_Integration_Part_2-M8368/KSC-20240815-MH-GEB01-0001-Europa_Clipper_Solar_Panel_Installation_and_Integration_Part_2-M8368~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀太阳能阵列的安装与集成（第二部分） (2024)
+https://images-assets.nasa.gov/video/KSC-20240815-MH-GEB01-0001-Europa_Clipper_Solar_Panel_Installation_and_Integration_Part_2-M8368/KSC-20240815-MH-GEB01-0001-Europa_Clipper_Solar_Panel_Installation_and_Integration_Part_2-M8368~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20241014-MH-AJN01-0001-SpaceX_Europa_Clipper_Isolated_Launch_Views-M9336/KSC-20241014-MH-AJN01-0001-SpaceX_Europa_Clipper_Isolated_Launch_Views-M9336~thumb.jpg" group-title="太空宇宙与科学1080p",NASA的SpaceX“欧罗巴克利珀”探测器独立发射视图 (2024)
+https://images-assets.nasa.gov/video/KSC-20241014-MH-AJN01-0001-SpaceX_Europa_Clipper_Isolated_Launch_Views-M9336/KSC-20241014-MH-AJN01-0001-SpaceX_Europa_Clipper_Isolated_Launch_Views-M9336~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20260830-MH-CSH01-0001-Roman_Space_Telescope_Launch_High_Speed_Footage/KSC-20260830-MH-CSH01-0001-Roman_Space_Telescope_Launch_High_Speed_Footage~thumb.jpg" group-title="太空宇宙与科学1080p",南希·格蕾丝·罗曼空间望远镜高速视频 footage (2026)
+https://images-assets.nasa.gov/video/KSC-20260830-MH-CSH01-0001-Roman_Space_Telescope_Launch_High_Speed_Footage/KSC-20260830-MH-CSH01-0001-Roman_Space_Telescope_Launch_High_Speed_Footage~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/JPL-20231206-CLIPPRf-0001-Spacecraft_Makers_Episode_03/JPL-20231206-CLIPPRf-0001-Spacecraft_Makers_Episode_03~thumb.jpg" group-title="太空宇宙与科学1080p",航天器制造者：为NASA的“欧罗巴克利珀”号缝制毛毯 (2023)
+https://images-assets.nasa.gov/video/JPL-20231206-CLIPPRf-0001-Spacecraft_Makers_Episode_03/JPL-20231206-CLIPPRf-0001-Spacecraft_Makers_Episode_03~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20241014-VP-CDC01-0001-SpaceX_Europa_Clipper_Live_Launch_Coverage_4K/KSC-20241014-VP-CDC01-0001-SpaceX_Europa_Clipper_Live_Launch_Coverage_4K~thumb.jpg" group-title="太空宇宙与科学1080p",美国国家航空航天局与SpaceX合作的欧罗巴探测器“克利珀”号实时发射直播——4K画质 (2024)
+https://images-assets.nasa.gov/video/KSC-20241014-VP-CDC01-0001-SpaceX_Europa_Clipper_Live_Launch_Coverage_4K/KSC-20241014-VP-CDC01-0001-SpaceX_Europa_Clipper_Live_Launch_Coverage_4K~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20070917_GLAST_m10172_Promo/GSFC_20070917_GLAST_m10172_Promo~thumb.jpg" group-title="太空宇宙与科学1080p",GLAST 宣传视频 (2007)
+https://images-assets.nasa.gov/video/GSFC_20070917_GLAST_m10172_Promo/GSFC_20070917_GLAST_m10172_Promo~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240823-MH-CSH01-0001-Europa_Clipper_Second_Solar_Array_Work-M8663/KSC-20240823-MH-CSH01-0001-Europa_Clipper_Second_Solar_Array_Work-M8663~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀号第二组太阳能电池阵列收纳状态 (2024)
+https://images-assets.nasa.gov/video/KSC-20240823-MH-CSH01-0001-Europa_Clipper_Second_Solar_Array_Work-M8663/KSC-20240823-MH-CSH01-0001-Europa_Clipper_Second_Solar_Array_Work-M8663~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240823-VP-MWC01-001-EUROPA-CLIPPER-CAM-TIMELAPSE-M8789/KSC-20240823-VP-MWC01-001-EUROPA-CLIPPER-CAM-TIMELAPSE-M8789~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀号相机太阳能电池阵列安装延时摄影视频 (2024)
+https://images-assets.nasa.gov/video/KSC-20240823-VP-MWC01-001-EUROPA-CLIPPER-CAM-TIMELAPSE-M8789/KSC-20240823-VP-MWC01-001-EUROPA-CLIPPER-CAM-TIMELAPSE-M8789~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/JPL-20240411-CLIPPRf-0001-Europa_Clipper_Media_Day_Highlight_Reel/JPL-20240411-CLIPPRf-0001-Europa_Clipper_Media_Day_Highlight_Reel~thumb.jpg" group-title="太空宇宙与科学1080p",美国国家航空航天局邀请媒体观看“欧罗巴克利珀”航天器媒体宣传片。 (2024)
+https://images-assets.nasa.gov/video/JPL-20240411-CLIPPRf-0001-Europa_Clipper_Media_Day_Highlight_Reel/JPL-20240411-CLIPPRf-0001-Europa_Clipper_Media_Day_Highlight_Reel~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240821-MH-GEB01-0001-Europa_Clipper_Solar_Array_Deployment_PHSF-M8663/KSC-20240821-MH-GEB01-0001-Europa_Clipper_Solar_Array_Deployment_PHSF-M8663~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀号太阳能电池阵列部署 (2024)
+https://images-assets.nasa.gov/video/KSC-20240821-MH-GEB01-0001-Europa_Clipper_Solar_Array_Deployment_PHSF-M8663/KSC-20240821-MH-GEB01-0001-Europa_Clipper_Solar_Array_Deployment_PHSF-M8663~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240528-MH-FJM01-0001-Europa_Clipper_Spacecraft_Rotate_to_Vertical_Lift_and_Mate_to_Work_Stand-M6668/KSC-20240528-MH-FJM01-0001-Europa_Clipper_Spacecraft_Rotate_to_Vertical_Lift_and_Mate_to_Work_Stand-M6668~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀号航天器旋转至垂直位置，升空并对接至工作台。 (2024)
+https://images-assets.nasa.gov/video/KSC-20240528-MH-FJM01-0001-Europa_Clipper_Spacecraft_Rotate_to_Vertical_Lift_and_Mate_to_Work_Stand-M6668/KSC-20240528-MH-FJM01-0001-Europa_Clipper_Spacecraft_Rotate_to_Vertical_Lift_and_Mate_to_Work_Stand-M6668~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/2022-H1_V_EuropaClipper-4/2022-H1_V_EuropaClipper-4~thumb.jpg" group-title="太空宇宙与科学1080p",NASA 深空探索：2022-H1 V EuropaClipper-4 (2022)
+https://images-assets.nasa.gov/video/2022-H1_V_EuropaClipper-4/2022-H1_V_EuropaClipper-4~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/JPL-20240306-CLIPPRf-0001-Spacecraft_Makers_Episode_04_2160cc/JPL-20240306-CLIPPRf-0001-Spacecraft_Makers_Episode_04_2160cc~thumb.jpg" group-title="太空宇宙与科学1080p",航天器制造者：欧罗巴克利珀探测器的仪器集成 (2024)
+https://images-assets.nasa.gov/video/JPL-20240306-CLIPPRf-0001-Spacecraft_Makers_Episode_04_2160cc/JPL-20240306-CLIPPRf-0001-Spacecraft_Makers_Episode_04_2160cc~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/JPL-20220606-CLIPPRf-0001-Europa_Clipper_Main_Body_Arrival_JPL_2160/JPL-20220606-CLIPPRf-0001-Europa_Clipper_Main_Body_Arrival_JPL_2160~thumb.jpg" group-title="太空宇宙与科学1080p",NASA“欧罗巴克利珀”航天器的主体结构从APL抵达JPL (2022)
+https://images-assets.nasa.gov/video/JPL-20220606-CLIPPRf-0001-Europa_Clipper_Main_Body_Arrival_JPL_2160/JPL-20220606-CLIPPRf-0001-Europa_Clipper_Main_Body_Arrival_JPL_2160~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20130603_LEND_m11292_Water/GSFC_20130603_LEND_m11292_Water~thumb.jpg" group-title="太空宇宙与科学1080p",月球上的水 (2013)
+https://images-assets.nasa.gov/video/GSFC_20130603_LEND_m11292_Water/GSFC_20130603_LEND_m11292_Water~medium.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/KSC-20240523-MH-CSH01-0001-Europa_Clipper_Arrival_LLF-M6669/KSC-20240523-MH-CSH01-0001-Europa_Clipper_Arrival_LLF-M6669~thumb.jpg" group-title="太空宇宙与科学1080p",欧罗巴克利珀号抵达 (2024)
+https://images-assets.nasa.gov/video/KSC-20240523-MH-CSH01-0001-Europa_Clipper_Arrival_LLF-M6669/KSC-20240523-MH-CSH01-0001-Europa_Clipper_Arrival_LLF-M6669~large.mp4
+
+#EXTINF:210 tvg-logo="https://images-assets.nasa.gov/video/v1_Roque_MensajeenunaBotella/v1_Roque_MensajeenunaBotella~thumb.jpg" group-title="太空宇宙与科学1080p",瓶中之信：一首写在欧罗巴克利珀号航天器上的诗 (2023)
+https://images-assets.nasa.gov/video/v1_Roque_MensajeenunaBotella/v1_Roque_MensajeenunaBotella~large.mp4
