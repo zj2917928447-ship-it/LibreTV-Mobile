@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(6476);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(7058);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(118);
+    expect(seriesCount).toBeGreaterThanOrEqual(128);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -101,6 +101,14 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('福尔摩斯与秘密武器1080p').some((v) => v.slug === 'sherlock-holmes-secret-weapon-1954-baker-street-10ep')).toBe(true);
     expect(searchCuratedOpenVideos('飞侠哥顿1936太空歌剧').some((v) => v.slug === 'flash-gordon-1936-1955-space-opera-chronicles-10ep')).toBe(true);
     expect(searchCuratedOpenVideos('独行侠1949原版西部剧').some((v) => v.slug === 'lone-ranger-bonanza-western-legends-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('恋爱与义务1931阮玲玉').some((v) => v.slug === 'early-chinese-lianhua-golden-age-love-duty-daybreak-7ep')).toBe(true);
+    expect(searchCuratedOpenVideos('都市风光').some((v) => v.slug === 'archive-scenesofcitylife-dushifengguang')).toBe(true);
+    expect(searchCuratedOpenVideos('体育皇后').some((v) => v.slug === 'archive-queenofsports')).toBe(true);
+    expect(searchCuratedOpenVideos('白毛女').some((v) => v.slug === 'archive-the-white-haired-girl')).toBe(true);
+    expect(searchCuratedOpenVideos('首届奥斯卡最佳影片翼1927').some((v) => v.slug === 'first-oscar-wings-1927-hitchcock-lodger-silent-titans-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('弗兰克卡普拉群氓1941').some((v) => v.slug === 'capra-wellman-golden-classics-meet-john-doe-algiers-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('波士顿布莱基侠盗神探').some((v) => v.slug === 'boston-blackie-gentleman-sleuth-chronicles-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('隐形奇侠1958英伦科幻剧').some((v) => v.slug === 'invisible-man-1958-british-espionage-scifi-7ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });

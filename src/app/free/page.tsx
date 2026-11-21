@@ -54,32 +54,32 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
-      { label: '福尔摩斯1080p《秘密武器》与探案全集 (10部)', query: '福尔摩斯与秘密武器1080p', tag: '贝克街神探典藏' },
-      { label: '奥斯卡《亨利八世》《大鼻子情圣》 (8部)', query: '亨利八世的私生活1933', tag: '奥斯卡影帝名作' },
-      { label: '希区柯克《年轻与纯真》与铁塔追凶 (8部)', query: '希区柯克年轻与纯真1937', tag: '高分悬疑反转' },
-      { label: '《飞侠哥顿》太空歌剧10章全集', query: '飞侠哥顿1936太空歌剧', tag: '星球大战灵感源头' },
-      { label: '西部传奇《独行侠》与富贵山庄 (8部)', query: '独行侠1949原版西部剧', tag: '银弹游侠经典' },
-      { label: '律政逆转《冤案辩护人》10集连播', query: '冤案辩护人1959律政推理剧', tag: '绝境无罪翻案' },
+      { label: '联华七大华语国宝《恋爱与义务》《天明》 (7部)', query: '恋爱与义务1931阮玲玉', tag: '早期华语镇馆典藏' },
+      { label: '首届奥斯卡1080p《翼》与希区柯克《房客》 (8部)', query: '首届奥斯卡最佳影片翼1927', tag: '影史开山封神榜' },
+      { label: '卡普拉《群氓》、彩色《无事生非》与阿尔及尔 (8部)', query: '弗兰克卡普拉群氓1941', tag: '黄金巨星名导馆' },
+      { label: '福尔摩斯《绿衣女子》与《红屋惊魂》 (8部)', query: '福尔摩斯绿衣女子1945', tag: '高能悬疑黑色馆' },
+      { label: '侠盗神探《波士顿·布莱基探案全集》 (10部)', query: '波士顿布莱基侠盗神探', tag: '神偷侦探轻喜剧' },
+      { label: '英伦科幻谍战《隐形奇侠》7集全', query: '隐形奇侠1958英伦科幻剧', tag: '密室推理特工剧' },
     ],
   },
   {
     category: '即点即播大片',
     items: [
       { label: '铁扇公主 (1941 亚洲首部动画长片1080P)', query: '铁扇公主', tag: '1080P 国漫鼻祖' },
+      { label: '西塔唱蓝调 (柏林水晶熊奖1080P)', query: '西塔唱蓝调', tag: '1080P 开源动画长片' },
       { label: '辛特尔 (奇幻寻龙)', query: '辛特尔', tag: '720p 直连' },
       { label: '钢铁之泪 (科幻机甲)', query: '钢铁之泪', tag: '720p 直连' },
       { label: '活死人之夜 (95分钟完整版)', query: '活死人之夜', tag: 'HLS 直连' },
       { label: '巨兔邦尼 (60帧喜剧)', query: '大白兔', tag: '720p 直连' },
-      { label: '宇宙洗衣店', query: '宇宙洗衣店', tag: '获奖科幻动画' },
     ],
   },
   {
     category: '华语与世界名作',
     items: [
+      { label: '都市风光 (1935 袁牧之/赵丹首部音乐喜剧)', query: '都市风光', tag: '华语音乐喜剧鼻祖' },
+      { label: '体育皇后 (1934 孙瑜/黎莉莉青春名作)', query: '体育皇后', tag: '早期华语励志经典' },
+      { label: '白毛女 (1950 田华国际获奖经典)', query: '白毛女', tag: '1950华语代表作' },
       { label: '风云儿女 (1935 义勇军进行曲诞生片)', query: '风云儿女', tag: '华语史诗经典' },
-      { label: '夜半歌声 (1937 马徐维邦惊悚名作)', query: '夜半歌声', tag: '早期华语传奇' },
-      { label: '桃李劫 (1934 袁牧之毕业歌名片)', query: '桃李劫', tag: '有声电影先驱' },
-      { label: '姊妹花 (1934 胡蝶分饰两角)', query: '姊妹花', tag: '早期票房神话' },
       { label: '小城之春 (费穆)', query: '小城之春', tag: '华语百年榜首' },
       { label: '马路天使 (赵丹/周璇)', query: '马路天使', tag: '四季歌天涯歌女' },
     ],
@@ -605,6 +605,48 @@ const DOMESTIC_FREE_PLATFORMS = [
     category: '江南美学非遗',
     note: '国内直连 · 东方园林雅韵',
   },
+  {
+    name: '中国电影博物馆 · 百年华语电影史数字影音厅',
+    description: '全球最大国家级专业电影博物馆官方门户，呈现百年中国电影诞生发展纪实、译制片经典幕后与数字光影展。',
+    url: 'https://www.cnfm.org.cn/',
+    category: '百年影史典藏',
+    note: '国内直连 · 国家级电影殿堂',
+  },
+  {
+    name: '南京博物院 · 金陵千年国宝数字导览馆',
+    description: '三大国立博物馆之一官方数字展厅，超高清赏析竹林七贤砖印壁画、金缕玉衣与六朝江南文化纪录短片。',
+    url: 'https://www.njmuseum.com/',
+    category: '六朝金陵国宝',
+    note: '国内直连 · 超清文物视听',
+  },
+  {
+    name: '浙江省博物馆 · 富春山居与良渚玉器数字视听馆',
+    description: '浙博官方数字文化门户，呈现《富春山居图·剩山图》、五千年良渚玉琮王与江南越地古琴曲艺展演。',
+    url: 'https://www.zjmuseum.com.cn/',
+    category: '良渚山水国宝',
+    note: '国内直连 · 江南历史超清',
+  },
+  {
+    name: '中国丝绸博物馆 · 丝路霓裳与织造非遗影像馆',
+    description: '全球最大丝绸专业博物馆官方平台，展播汉唐织锦复原工艺、敦煌丝路服饰美学与非遗传承纪录短片。',
+    url: 'https://www.chinasilkmuseum.com/',
+    category: '丝路华服非遗',
+    note: '国内直连 · 东方织造美学',
+  },
+  {
+    name: '广东粤剧院 · 岭南粤剧名家全本大戏视听窗',
+    description: '国家级非遗粤剧官方艺术门户，汇聚《帝女花》《紫钗记》《白蛇传·情》名家唱段与舞台艺术纪录片。',
+    url: 'https://www.gdyjy.com/',
+    category: '粤剧名家舞台',
+    note: '国内直连 · 粤语戏曲超清',
+  },
+  {
+    name: '成都金沙遗址博物馆 · 太阳神鸟古蜀数字文化馆',
+    description: '金沙遗址官方数字视听平台，超高清揭秘太阳神鸟金饰、黄金面具考古发掘与三千年古蜀祭祀文明影像。',
+    url: 'https://www.jinshasitemuseum.com/',
+    category: '太阳神鸟考古',
+    note: '国内直连 · 古蜀传奇纪实',
+  },
 ];
 
 const OVERSEAS_FREE_PLATFORMS = [
@@ -937,7 +979,7 @@ export default function FreeResourcesPage() {
       if (!response.ok || data.code !== 1) throw new Error(data.msg || '免费资源搜索暂时不可用，请稍后重试。');
       setResults(data.list ?? []);
       if ((data.list ?? []).length === 0) {
-        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 74 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
+        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 80 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
       }
     } catch (cause) {
       setResults([]);
@@ -1038,7 +1080,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              6476+ 部 100% 实测直连大片与 118 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 74 大国内正版免费片库。
+              7058+ 部 100% 实测直连大片与 128 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 80 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -1047,7 +1089,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                10082台直播源 (.m3u)
+                10683台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -1062,7 +1104,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (10082+ 直连 / 165000+ 扩展)
+              免费电视直播 (10683+ 直连 / 170000+ 扩展)
             </Link>
             <button
               type="button"
