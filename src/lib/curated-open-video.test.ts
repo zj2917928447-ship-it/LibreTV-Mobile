@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(4015);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(4070);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -49,7 +49,7 @@ describe('curated-open-video', () => {
         }
       }
     }
-    expect(directCount).toBeGreaterThanOrEqual(3780);
+    expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
     expect(seriesCount).toBeGreaterThanOrEqual(68);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });

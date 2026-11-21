@@ -175,6 +175,29 @@ function normalizeAliasKey(value: string): string {
   return value.trim().toLowerCase().replace(/[\s\p{P}\p{S}]+/gu, '');
 }
 
+const COMMERCIAL_ONLY_TITLES = new Set([
+  '蜘蛛侠', '蜘蛛侠2', '蜘蛛侠3', '超凡蜘蛛侠', '超凡蜘蛛侠2',
+  '蜘蛛侠英雄归来', '蜘蛛侠英雄远征', '蜘蛛侠英雄无归', '蜘蛛侠平行宇宙', '蜘蛛侠纵横宇宙',
+  '钢铁侠', '蝙蝠侠', '复仇者联盟', '星际穿越', '盗梦空间', '泰坦尼克号', '黑客帝国',
+  '阿凡达', '哈利波特', '指环王', '星球大战', '变形金刚', '速度与激情', '碟中谍',
+  '侏罗纪公园', '终结者', '异形', '教父', '肖申克的救赎', '阿甘正传', '楚门的世界',
+  '当幸福来敲门', '绿皮书', '疯狂动物城', '寻梦环游记', '冰雪奇缘', '狮子王',
+  '功夫熊猫', '千与千寻', '龙猫', '天空之城',
+]);
+
+/** 判断搜索词是否为现代商业版权院线大片（避免把 PeerTube 几分钟的国外同人恶搞短片误标为正片） */
+export function isCommercialFranchiseQuery(query: string): boolean {
+  const norm = normalizeAliasKey(query);
+  if (!norm) return false;
+  if (COMMERCIAL_ONLY_TITLES.has(norm)) return true;
+  for (const entry of BILINGUAL_FILM_LEXICON) {
+    if (!COMMERCIAL_ONLY_TITLES.has(normalizeAliasKey(entry.zhTitle))) continue;
+    if (normalizeAliasKey(entry.enQuery) === norm) return true;
+    if (entry.aliases.some((a) => normalizeAliasKey(a) === norm)) return true;
+  }
+  return false;
+}
+
 /** Check whether a query already matches the offline static bilingual dictionary. */
 export function hasStaticOpenMediaAlias(query: string): boolean {
   return OPEN_MEDIA_QUERY_ALIASES.has(normalizeAliasKey(query));

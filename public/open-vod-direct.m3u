@@ -1756,8 +1756,20 @@ https://images-assets.nasa.gov/video/Mars%202020%20Perseverance%20Landing%20Cove
 #EXTINF:260 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~thumb.jpg" group-title="太空宇宙与科学1080p",哈勃望远镜：璀璨星云巡礼 (2019)
 https://images-assets.nasa.gov/video/GSFC_20190424_HST_m13189_Hubble29/GSFC_20190424_HST_m13189_Hubble29~mobile.mp4
 
+#EXTINF:4723 tvg-logo="https://archive.org/services/img/TheGeneralcompleteClearer1926SubEsp" group-title="爆笑喜剧与国会图书馆典藏",将军号 (巴斯特·基顿) (1926)
+https://archive.org/download/TheGeneralcompleteClearer1926SubEsp/TheGeneralSubEsp.mp4
+
 #EXTINF:5696 tvg-logo="https://spectra.video/lazy-static/thumbnails/089b5806-4203-400b-9733-aed27d86fb3c.png" group-title="悬疑推理与科幻惊悚",活死人之夜 (乔治·罗梅罗 95分钟完整版) (1968)
 https://spectra-prod.us-east-1.linodeobjects.com/streaming-playlistshls/2c36fea4-1bc3-484f-b765-fa97ddfd7233/926bcfde-198f-4f6e-b81d-451fec2baa09-master.m3u8
+
+#EXTINF:5520 tvg-logo="https://archive.org/services/img/his_girl_friday" group-title="爆笑喜剧与国会图书馆典藏",女友礼拜五 (加里·格兰特) (1940)
+https://archive.org/download/his_girl_friday/his_girl_friday_512kb.mp4
+
+#EXTINF:4500 tvg-logo="https://archive.org/services/img/house_on_haunted_hill_ipod" group-title="悬疑推理与科幻惊悚",猛鬼屋 / 古堡惊魂 (1959)
+https://archive.org/download/house_on_haunted_hill_ipod/house_on_haunted_hill_512kb.mp4
+
+#EXTINF:4380 tvg-logo="https://archive.org/services/img/princess_iron_fan" group-title="早期华语影史瑰宝",铁扇公主 (1941 亚洲首部动画长片) (1941)
+https://archive.org/download/princess_iron_fan/princess_iron_fan_512kb.mp4
 
 #EXTINF:6102 tvg-logo="https://kolektiva.media/lazy-static/thumbnails/f2f58d77-91a9-48a4-a427-d3f65c91a39e.jpg" group-title="悬疑推理与科幻惊悚",细细的蓝线 (1988 悬疑纪实神作 · 101分钟完整长片) (1988)
 https://kolektiva-media-s3.s3.bhs.io.cloud.ovh.net/streaming_playlists/hls/c5f732b7-4e4b-44d5-a523-7a9adeae970a/2f33741e-8dbf-4336-9f7a-6924dbf66d1d-master.m3u8
@@ -1818,6 +1830,18 @@ https://tilvids.com/static/web-videos/625f1597-8b6f-4ca3-88ab-9f39a9388491-480.m
 
 #EXTINF:258 tvg-logo="https://tilvids.com/lazy-static/thumbnails/3e910c55-7f02-440d-b6e8-fd3d456cf237.jpg" group-title="爆笑喜剧与国会图书馆典藏",梅尔·布鲁克斯：视觉喜剧节奏大师课 (2018)
 https://tilvids.com/static/web-videos/d58fde4d-22ee-42dc-8fef-a57bd10b6c1b-480.mp4
+
+#EXTINF:5640 tvg-logo="https://archive.org/services/img/Nosferatu_most_complete_version_93_mins." group-title="悬疑推理与科幻惊悚",诺斯费拉图 (茂瑙 1922 奇幻惊悚) (1922)
+https://archive.org/download/Nosferatu_most_complete_version_93_mins./Nosferatu_1922_Symphony_of_Horror_512kb.mp4
+
+#EXTINF:5700 tvg-logo="https://archive.org/services/img/TheStranger_0" group-title="悬疑推理与科幻惊悚",陌生人 (奥森·威尔斯 1946 悬疑经典) (1946)
+https://archive.org/download/TheStranger_0/The_Stranger_512kb.mp4
+
+#EXTINF:630 tvg-logo="https://archive.org/services/img/superman_1941" group-title="开源动画与独立短片",超人：疯狂科学家 (1941 派拉蒙传奇手绘动画) (1941)
+https://archive.org/download/superman_1941/superman_1941_512kb.mp4
+
+#EXTINF:10800 tvg-logo="https://archive.org/services/img/the_spring_river_flows_east-part1" group-title="早期华语影史瑰宝",一江春水向东流 (1947 华语史诗巨制) (1947)
+https://archive.org/download/the_spring_river_flows_east-part1/the_spring_river_flows_east-part1_512kb.mp4
 
 #EXTINF:1019 tvg-logo="https://video.blender.org/lazy-static/thumbnails/20e30370-6e80-4b08-9eb3-55c436221ed2.jpg" group-title="开源动画与独立短片",《奇点：油画风太空冒险》幕后制作纪录片 (2026)
 https://video.blender.org/object-storage/web_videos/ac5e33eb-983c-48cb-8705-d24bde192b50-1080.mp4
@@ -1882,6 +1906,33 @@ https://images-assets.nasa.gov/video/JPL-20210222-M2020f-0003a-M2020_Audio_A_002
 #EXTINF:240 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20130930_Titan_m11339_Propylene/GSFC_20130930_Titan_m11339_Propylene~thumb.jpg" group-title="太空宇宙与科学1080p",土卫六泰坦星：拥有甲烷海洋的橙色异星 (2013)
 https://images-assets.nasa.gov/video/GSFC_20130930_Titan_m11339_Propylene/GSFC_20130930_Titan_m11339_Propylene~medium.mp4
 
+#EXTINF:6120 tvg-logo="https://archive.org/services/img/ScarletStreet" group-title="悬疑推理与科幻惊悚",猩红街 (弗里茨·朗黑色电影杰作) (1945)
+https://archive.org/download/ScarletStreet/Scarlet_Street_512kb.mp4
+
+#EXTINF:5580 tvg-logo="https://archive.org/services/img/ThePhantomoftheOpera" group-title="悬疑推理与科幻惊悚",歌剧魅影 (1925 朗·钱尼影史哥特传奇) (1925)
+https://archive.org/download/ThePhantomoftheOpera/Phantom_of_the_Opera_512kb.mp4
+
+#EXTINF:1500 tvg-logo="https://archive.org/services/img/TheImmigrant1917" group-title="爆笑喜剧与国会图书馆典藏",移民 (卓别林国家影片登记部经典) (1917)
+https://archive.org/download/TheImmigrant1917/The%20Immigrant%20-%20%D0%98%D0%BC%D0%B8%D0%B3%D1%80%D0%B0%D0%BD%D1%82%D1%8A%D1%82%20(1917).mp4
+
+#EXTINF:7320 tvg-logo="https://archive.org/services/img/meet_john_doe" group-title="爆笑喜剧与国会图书馆典藏",约翰·朵伊 / 群氓 (弗兰克·卡普拉励志经典) (1941)
+https://archive.org/download/meet_john_doe/meet_john_doe_512kb.mp4
+
+#EXTINF:6780 tvg-logo="https://archive.org/services/img/cyrano_de_bergerac" group-title="爆笑喜剧与国会图书馆典藏",大鼻子情圣 (1950 奥斯卡影帝获奖名片) (1950)
+https://archive.org/download/cyrano_de_bergerac/cyrano_de_bergerac_512kb.mp4
+
+#EXTINF:5580 tvg-logo="https://archive.org/services/img/royal_wedding" group-title="爆笑喜剧与国会图书馆典藏",皇室婚礼 (弗雷德·阿斯泰尔天花板独舞神片) (1951)
+https://archive.org/download/royal_wedding/royal_wedding_512kb.mp4
+
+#EXTINF:7620 tvg-logo="https://archive.org/services/img/McLintock1963" group-title="爆笑喜剧与国会图书馆典藏",驯妻记 / 麦克林托克 (约翰·韦恩爆笑西部大片) (1963)
+https://archive.org/download/McLintock1963/McLintock-1963-.mp4
+
+#EXTINF:620 tvg-logo="https://archive.org/services/img/superman_the_mechanical_monsters" group-title="开源动画与独立短片",超人：大战机械巨怪 (宫崎骏《天空之城》致敬原型) (1941)
+https://archive.org/download/superman_the_mechanical_monsters/superman_the_mechanical_monsters_512kb.mp4
+
+#EXTINF:6780 tvg-logo="https://archive.org/services/img/crows-and-sparrows-chn" group-title="早期华语影史瑰宝",乌鸦与麻雀 (1949 赵丹/上官云珠/孙道临群像巅峰) (1949)
+https://archive.org/download/crows-and-sparrows-chn/Crows%20and%20Sparrows%20(1949)%20CHN%20Disk%20Kino%20Bluray.mp4
+
 #EXTINF:300 tvg-logo="https://images-assets.nasa.gov/video/12987-Worth_the_Wait/12987-Worth_the_Wait~thumb.jpg" group-title="太空宇宙与科学1080p",韦伯太空望远镜：二十年磨一剑 (2019)
 https://images-assets.nasa.gov/video/12987-Worth_the_Wait/12987-Worth_the_Wait~medium.mp4
 
@@ -1896,6 +1947,15 @@ https://images-assets.nasa.gov/video/GSFC_20190327_TESS_m13155_Voyager/GSFC_2019
 
 #EXTINF:900 tvg-logo="https://images-assets.nasa.gov/video/KSC-20190716-VP-CDC01-0001_Apollo_11_Launch_Reflections_at_Pad_39A-3224619/KSC-20190716-VP-CDC01-0001_Apollo_11_Launch_Reflections_at_Pad_39A-3224619~thumb.jpg" group-title="太空宇宙与科学1080p",重返39A发射台：阿波罗登月发射场纪实 (2019)
 https://images-assets.nasa.gov/video/KSC-20190716-VP-CDC01-0001_Apollo_11_Launch_Reflections_at_Pad_39A-3224619/KSC-20190716-VP-CDC01-0001_Apollo_11_Launch_Reflections_at_Pad_39A-3224619~medium.mp4
+
+#EXTINF:4320 tvg-logo="https://archive.org/services/img/dressed_to_kill" group-title="悬疑推理与科幻惊悚",福尔摩斯：杀手盛装 / 音乐盒密码 (巴兹尔·拉斯伯恩经典) (1946)
+https://archive.org/download/dressed_to_kill/dressed_to_kill_512kb.mp4
+
+#EXTINF:6000 tvg-logo="https://archive.org/services/img/TheRedHouse" group-title="悬疑推理与科幻惊悚",红屋悬疑 (爱德华·罗宾逊哥特心理惊悚名片) (1947)
+https://archive.org/download/TheRedHouse/The_Red_House_512kb.mp4
+
+#EXTINF:6000 tvg-logo="https://archive.org/services/img/angel_and_the_badman" group-title="爆笑喜剧与国会图书馆典藏",天使与恶汉 (约翰·韦恩温情西部侠义经典) (1947)
+https://archive.org/download/angel_and_the_badman/angel_and_the_badman_512kb.mp4
 
 #EXTINF:980 tvg-logo="https://cdn.eso.org/videos/videoframe/eso1312a.jpg" group-title="太空宇宙与科学1080p",《追寻宇宙起源：ALMA天文电影》1080p 官方长片 (2013)
 https://cdn.eso.org/videos/hd_1080p25_screen/eso1312a.mp4
@@ -2134,6 +2194,30 @@ https://cdn.eso.org/videos/medium_podcast/eso2610a.mp4
 #EXTINF:220 tvg-logo="https://cdn.eso.org/videos/videoframe/eso2604a.jpg" group-title="太空宇宙与科学1080p",双星同诞：直接拍到年轻恒星盘内两颗新生气态巨行星 (2026)
 https://cdn.eso.org/videos/medium_podcast/eso2604a.mp4
 
+#EXTINF:6240 tvg-logo="https://archive.org/services/img/the-blue-angel-1930" group-title="悬疑推理与科幻惊悚",蓝天使 (1930 玛琳·黛德丽一战成名影史传奇) (1930)
+https://archive.org/download/the-blue-angel-1930/The%20Blue%20Angel%201930.mp4
+
+#EXTINF:5520 tvg-logo="https://archive.org/services/img/morocco-1930" group-title="爆笑喜剧与国会图书馆典藏",摩洛哥 (1930 加里·库珀 & 玛琳·黛德丽四项奥斯卡提名) (1930)
+https://archive.org/download/morocco-1930/Morocco%20(1930).mp4
+
+#EXTINF:5820 tvg-logo="https://archive.org/services/img/murder-1930" group-title="悬疑推理与科幻惊悚",谋杀！(希区柯克 1930 陪审团密室推理名篇) (1930)
+https://archive.org/download/murder-1930/Murder!%20(1930).ia.mp4
+
+#EXTINF:5820 tvg-logo="https://archive.org/services/img/animal-crackers-1930" group-title="爆笑喜剧与国会图书馆典藏",兽性大发 / 动物饼干 (马克思兄弟无厘头喜剧巅峰) (1930)
+https://archive.org/download/animal-crackers-1930/Animal%20Crackers%201930.ia.mp4
+
+#EXTINF:6960 tvg-logo="https://archive.org/services/img/TheStrangeLoveOfMarthaIvers" group-title="悬疑推理与科幻惊悚",玛莎·伊弗斯的奇异爱情 (芭芭拉·斯坦威克 & 柯克·道格拉斯) (1946)
+https://archive.org/download/TheStrangeLoveOfMarthaIvers/TheStrangeLoveOfMarthaIversPresentedByMoviePowder_512kb.mp4
+
+#EXTINF:7200 tvg-logo="https://archive.org/services/img/penny_serenade" group-title="爆笑喜剧与国会图书馆典藏",断肠记 / 便士小夜曲 (加里·格兰特奥斯卡影帝提名催泪名片) (1941)
+https://archive.org/download/penny_serenade/penny_serenade_512kb.mp4
+
+#EXTINF:6060 tvg-logo="https://archive.org/services/img/angel_on_my_shoulder" group-title="爆笑喜剧与国会图书馆典藏",肩上天使 (保罗·穆尼奇幻黑色喜剧佳作) (1946)
+https://archive.org/download/angel_on_my_shoulder/angel_on_my_shoulder_512kb.mp4
+
+#EXTINF:4020 tvg-logo="https://archive.org/services/img/WhiteZombie" group-title="悬疑推理与科幻惊悚",白色丧尸 (1932 贝拉·卢戈西影史第一部丧尸长片) (1932)
+https://archive.org/download/WhiteZombie/White_Zombie_512kb.mp4
+
 #EXTINF:260 tvg-logo="https://cdn.eso.org/videos/videoframe/eso1737a.jpg" group-title="太空宇宙与科学1080p",奥陌陌（ʻOumuamua）：人类首次发现闯入太阳系的雪茄状星际天体 (2017)
 https://cdn.eso.org/videos/medium_podcast/eso1737a.mp4
 
@@ -2283,6 +2367,18 @@ https://images-assets.nasa.gov/video/GSFC_20211118_WEBB_Science_Instruments_Brie
 
 #EXTINF:320 tvg-logo="https://images-assets.nasa.gov/video/ksc_011706_nh_intro/ksc_011706_nh_intro~thumb.jpg" group-title="太空宇宙与科学1080p",新视野号启程奔赴冥王星：人类飞得最远的深空先锋纪实 (2006)
 https://images-assets.nasa.gov/video/ksc_011706_nh_intro/ksc_011706_nh_intro~mobile.mp4
+
+#EXTINF:6360 tvg-logo="https://archive.org/services/img/TheLostWorld1925" group-title="悬疑推理与科幻惊悚",失落的世界 (1925 柯南·道尔原著 ·《侏罗纪公园》恐龙特效老祖) (1925)
+https://archive.org/download/TheLostWorld1925/TheLostWorld1925_256.mp4
+
+#EXTINF:4920 tvg-logo="https://archive.org/services/img/ThePassionOfJoanOfArc1928" group-title="悬疑推理与科幻惊悚",圣女贞德蒙难记 (1928 德莱叶 · 影史最震撼特写表演神话) (1928)
+https://archive.org/download/ThePassionOfJoanOfArc1928/APaixoDeJoanaDarc1928.mp4
+
+#EXTINF:4500 tvg-logo="https://archive.org/services/img/BattleshipPotemkin" group-title="悬疑推理与科幻惊悚",战舰波将金号 (1925 爱森斯坦 · 敖德萨阶梯蒙太奇圣经) (1925)
+https://archive.org/download/BattleshipPotemkin/Battleship_Potemkin_512kb.mp4
+
+#EXTINF:8100 tvg-logo="https://archive.org/services/img/till_the_clouds_roll_by" group-title="爆笑喜剧与国会图书馆典藏",乱世欢歌 / 锦绣云裳 (1946 朱迪·加兰 & 辛纳屈米高梅全彩歌舞巨片) (1946)
+https://archive.org/download/till_the_clouds_roll_by/till_the_clouds_roll_by_512kb.mp4
 
 #EXTINF:972 tvg-logo="https://framatube.org/lazy-static/thumbnails/95ca80be-0811-4075-8631-ee85340eaca3.jpg" group-title="开源动画与独立短片",110号艺术家：涂鸦老机器人 (2017)
 https://aperi.tube/static/streaming-playlists/hls/6d7ac749-e863-4d9c-8a6a-50b516cb0647/6d7ac749-e863-4d9c-8a6a-50b516cb0647-720-fragmented.mp4
@@ -2536,6 +2632,18 @@ https://images-assets.nasa.gov/video/KSC-20211123-MH-AJW01-0001-SpaceX_DART_Isol
 #EXTINF:135 tvg-logo="https://images-assets.nasa.gov/video/GSFC_20180720_Parker_m12911_trailer.en_US/GSFC_20180720_Parker_m12911_trailer.en_US~thumb.jpg" group-title="太空宇宙与科学1080p",出征太阳：帕克太阳探测器电影级官方先导片 (2018)
 https://images-assets.nasa.gov/video/GSFC_20180720_Parker_m12911_trailer.en_US/GSFC_20180720_Parker_m12911_trailer.en_US~large.mp4
 
+#EXTINF:5580 tvg-logo="https://archive.org/services/img/spring-in-a-small-town-chn" group-title="早期华语影史瑰宝",小城之春 (1948 费穆执导 · 华语电影百年百大榜首神作) (1948)
+https://archive.org/download/spring-in-a-small-town-chn/Spring%20in%20a%20Small%20Town%20(1948)%20GBR%20BFI%20PAL%20DVD.mp4
+
+#EXTINF:5100 tvg-logo="https://archive.org/services/img/the.-goddess.-1934" group-title="早期华语影史瑰宝",神女 (1934 阮玲玉封神代表作 · 中国无声电影最高峰) (1934)
+https://archive.org/download/the.-goddess.-1934/The%20Goddess%20(1934)%2Fmp4%2FThe.Goddess.1934.ia.mp4
+
+#EXTINF:5400 tvg-logo="https://archive.org/services/img/song_of_the_fishermen" group-title="早期华语影史瑰宝",渔光曲 (1934 王人美主演 · 中国首部斩获国际电影节大奖影片) (1934)
+https://archive.org/download/song_of_the_fishermen/song_of_the_fishermen_512kb.mp4
+
+#EXTINF:4440 tvg-logo="https://archive.org/services/img/20250226_20250226_1013" group-title="早期华语影史瑰宝",三毛流浪记 (1949 张乐平漫画改编 · 王龙基主演华语喜剧经典) (1949)
+https://archive.org/download/20250226_20250226_1013/%E4%B8%89%E6%AF%9B%E6%B5%81%E6%B5%AA%E8%AE%B0.mp4
+
 #EXTINF:8271 tvg-logo="https://archive.org/services/img/Metropolis1927" group-title="悬疑推理与科幻惊悚",大都会 (1927 弗里茨·朗 138分钟完整修复直连版) (1927)
 https://peertube.uno/static/streaming-playlists/hls/dbd005c7-7ca5-40f9-89c3-779feca2a9e2/3831fe02-1396-4ed8-8752-8304e8db64f7-714-fragmented.mp4
 
@@ -2641,6 +2749,15 @@ https://cdn.esahubble.org/archives/videos/hd_1080p25_screen/heic0917b.mp4
 #EXTINF:95 tvg-logo="https://cdn.esahubble.org/archives/videos/videoframe/heic1917a.jpg" group-title="太空宇宙与科学1080p",土星北半球仲夏六边形极地风暴超清巡礼 (2019)
 https://cdn.esahubble.org/archives/videos/hd_1080p25_screen/heic1917a.mp4
 
+#EXTINF:6900 tvg-logo="https://archive.org/services/img/song-at-midnight-1937-webrip" group-title="早期华语影史瑰宝",夜半歌声 (1937 马徐维邦执导 · 中国首部哥特恐怖悬疑音乐大片) (1937)
+https://archive.org/download/song-at-midnight-1937-webrip/Song%20At%20Midnight%20(1937)%20webrip.ia.mp4
+
+#EXTINF:4560 tvg-logo="https://archive.org/services/img/gullivers_travels1939" group-title="开源动画与独立短片",格列佛游记 / 小人国历险记 (1939 弗莱舍兄弟全彩手绘动画长片) (1939)
+https://archive.org/download/gullivers_travels1939/gullivers_travels1939_512kb.mp4
+
+#EXTINF:4680 tvg-logo="https://archive.org/services/img/mr_bug_goes_to_town" group-title="开源动画与独立短片",虫虫进城记 / 昆虫总动员 (1941 弗莱舍工作室特艺彩色动画长片) (1941)
+https://archive.org/download/mr_bug_goes_to_town/mr_bug_goes_to_town.mp4
+
 #EXTINF:110 tvg-logo="https://cdn.esawebb.org/archives/videos/videoframe/weic2306a.jpg" group-title="太空宇宙与科学1080p",韦伯探索近邻旋涡星系气体尘埃骨架 (有声特辑) (2023)
 https://cdn.esawebb.org/archives/videos/hd_1080p25_screen/weic2306a.mp4
 
@@ -2718,6 +2835,15 @@ https://images-assets.nasa.gov/video/JPL-20241014-CLIPPRf-0002-Europa%20Launch%2
 
 #EXTINF:300 tvg-logo="https://images-assets.nasa.gov/video/Europa Clipper - NASA’s Mission to Jupiter's Ocean Moon - Mission Trailer/Europa Clipper - NASA’s Mission to Jupiter's Ocean Moon - Mission Trailer~thumb.jpg" group-title="太空宇宙与科学1080p",灵神星飞船总装工程师在线揭秘霍尔电推进黑科技 (2024)
 https://images-assets.nasa.gov/video/Europa%20Clipper%20-%20NASA%E2%80%99s%20Mission%20to%20Jupiter's%20Ocean%20Moon%20-%20Mission%20Trailer/Europa%20Clipper%20-%20NASA%E2%80%99s%20Mission%20to%20Jupiter's%20Ocean%20Moon%20-%20Mission%20Trailer~large.mp4
+
+#EXTINF:9300 tvg-logo="https://archive.org/services/img/TheThiefOfBagdad1924" group-title="开源动画与独立短片",月宫宝盒 / 巴格达大盗 (1924 一千零一夜飞毯神灯奇幻巨制) (1924)
+https://archive.org/download/TheThiefOfBagdad1924/TOB1924-512.mp4
+
+#EXTINF:4380 tvg-logo="https://archive.org/services/img/Vampyr1932" group-title="悬疑推理与科幻惊悚",吸血鬼 Vampyr (1932 卡尔·德莱叶梦幻迷雾超自然惊悚杰作) (1932)
+https://archive.org/download/Vampyr1932/NVEExport.mp4
+
+#EXTINF:6300 tvg-logo="https://archive.org/services/img/Haxan1922" group-title="悬疑推理与科幻惊悚",女巫：历代巫术奇谭 (1922 奇幻定格动画与古典版画视觉奇书) (1922)
+https://archive.org/download/Haxan1922/Haxan%20(1922).mp4
 
 #EXTINF:1260 tvg-logo="https://cdn.eso.org/videos/videoframe/sunstruck.jpg" group-title="太空宇宙与科学1080p",太阳冲击波：探索太阳诞生与未来命运 (球幕长片) (2022)
 https://cdn.eso.org/videos/dome_preview/sunstruck.mp4
@@ -2982,6 +3108,15 @@ https://images-assets.nasa.gov/video/JPL-20210520-M2020f-0001-Mars%20Report%20Ma
 
 #EXTINF:190 tvg-logo="https://images-assets.nasa.gov/video/JPL-20230208-MSLf-0001-Curiosity_Finds_New_Clues_to_Mars_Watery_Past/JPL-20230208-MSLf-0001-Curiosity_Finds_New_Clues_to_Mars_Watery_Past~thumb.jpg" group-title="太空宇宙与科学1080p",千层波浪岩惊现火星：好奇号发现迄今最清晰远古浅湖水波纹 (2023)
 https://images-assets.nasa.gov/video/JPL-20230208-MSLf-0001-Curiosity_Finds_New_Clues_to_Mars_Watery_Past/JPL-20230208-MSLf-0001-Curiosity_Finds_New_Clues_to_Mars_Watery_Past~large.mp4
+
+#EXTINF:5460 tvg-logo="https://archive.org/services/img/street_angel" group-title="早期华语影史瑰宝",马路天使 (1937 袁牧之执导 · 赵丹/周璇主演华语影史百大经典) (1937)
+https://archive.org/download/street_angel/street_angel_512kb.mp4
+
+#EXTINF:6420 tvg-logo="https://archive.org/services/img/shizijietou" group-title="早期华语影史瑰宝",十字街头 (1937 沈西苓执导 · 赵丹/白杨主演一墙之隔欢喜冤家喜剧) (1937)
+https://archive.org/download/shizijietou/crossroads_512kb.mp4
+
+#EXTINF:6240 tvg-logo="https://archive.org/services/img/the_big_road" group-title="早期华语影史瑰宝",大路 (1934 孙瑜编导 · 金焰/黎莉莉主演青春热血筑路诗篇) (1934)
+https://archive.org/download/the_big_road/the_big_road_512kb.mp4
 
 #EXTINF:125 tvg-logo="https://cdn.esahubble.org/archives/videos/videoframe/heic0114a.jpg" group-title="太空宇宙与科学1080p",星云NGC 2080的3D动画 (2023)
 https://cdn.esahubble.org/archives/videos/hd_1080p25_screen/heic0114a.mp4
@@ -5581,6 +5716,9 @@ https://images-assets.nasa.gov/video/GSFC_20150211_SDO_m11762_5Years/GSFC_201502
 #EXTINF:125 tvg-logo="https://images-assets.nasa.gov/video/KSC-20200407-MH-JPL01-0001-Mars_2020_Perseverance_Rover_Turnover_in_PHSF-3247923/KSC-20200407-MH-JPL01-0001-Mars_2020_Perseverance_Rover_Turnover_in_PHSF-3247923~thumb.jpg" group-title="太空宇宙与科学1080p",2020年3月“毅力号”火星车交接仪式 (2020)
 https://images-assets.nasa.gov/video/KSC-20200407-MH-JPL01-0001-Mars_2020_Perseverance_Rover_Turnover_in_PHSF-3247923/KSC-20200407-MH-JPL01-0001-Mars_2020_Perseverance_Rover_Turnover_in_PHSF-3247923~large.mp4
 
+#EXTINF:4560 tvg-logo="https://archive.org/services/img/Suddenly1954" group-title="悬疑推理与科幻惊悚",突然 (1954 弗兰克·辛纳屈颠覆出演冷峻狙击手 · 小镇火车站77分钟倒计时) (1954)
+https://archive.org/download/Suddenly1954/Suddenly_1954.mp4
+
 #EXTINF:81 tvg-logo="https://video.blender.org/lazy-static/thumbnails/4e67c427-2dd4-4d4f-9ba4-bdef6166e044.jpg" group-title="开源动画与独立短片",Blender 开源动画：OVERGROWN - Blender Feature Film (Teaser) (2026)
 https://video.blender.org/object-storage/web_videos/1384b344-977b-4b39-9004-2b04256210fe-1080.mp4
 
@@ -7356,6 +7494,9 @@ https://images-assets.nasa.gov/video/JPL-20220304-NASAs_Psyche_Spacecraft_Tests_
 
 #EXTINF:125 tvg-logo="https://images-assets.nasa.gov/video/KSC-20211122-VP-MMS01-SpaceX_DART_Prelaunch_News_Conference_WON_3291074/KSC-20211122-VP-MMS01-SpaceX_DART_Prelaunch_News_Conference_WON_3291074~thumb.jpg" group-title="太空宇宙与科学1080p",DART发射前新闻发布会 (2021)
 https://images-assets.nasa.gov/video/KSC-20211122-VP-MMS01-SpaceX_DART_Prelaunch_News_Conference_WON_3291074/KSC-20211122-VP-MMS01-SpaceX_DART_Prelaunch_News_Conference_WON_3291074~large.mp4
+
+#EXTINF:3720 tvg-logo="https://archive.org/services/img/FearAndDesire1953" group-title="悬疑推理与科幻惊悚",恐惧与欲望 (1952 电影大神斯坦利·库布里克24岁独立执导银幕长片处女作) (1952)
+https://archive.org/download/FearAndDesire1953/Fear%20and%20Desire%20(1953).mp4
 
 #EXTINF:125 tvg-logo="https://cdn.eso.org/videos/videoframe/eso2005b.jpg" group-title="太空宇宙与科学1080p",一颗“飞向”WASP-76的恒星——即WASP-76 b绕其运行的恒星。 (2022)
 https://cdn.eso.org/videos/hd_1080p25_screen/eso2005b.mp4
@@ -10029,6 +10170,9 @@ https://images-assets.nasa.gov/video/GSFC_20190627_TESS_m13223_L98-59c_Full_Rota
 
 #EXTINF:320 tvg-logo="https://images-assets.nasa.gov/video/JPL-20220801-WHATSUf-0001-Whats_Up_August_2022/JPL-20220801-WHATSUf-0001-Whats_Up_August_2022~thumb.jpg" group-title="太空宇宙与科学1080p",最新动态：NASA提供的2022年8月观星指南 (2022)
 https://images-assets.nasa.gov/video/JPL-20220801-WHATSUf-0001-Whats_Up_August_2022/JPL-20220801-WHATSUf-0001-Whats_Up_August_2022~large.mp4
+
+#EXTINF:5040 tvg-logo="https://archive.org/services/img/second_chorus" group-title="爆笑喜剧与国会图书馆典藏",第二副歌 (1940 舞王弗雷德·阿斯泰尔与宝莲·高黛爵士乐团爆笑爱情歌舞片) (1940)
+https://archive.org/download/second_chorus/second_chorus_512kb.mp4
 
 #EXTINF:839 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047539/00047539.gif" group-title="悬疑推理与科幻惊悚",蓄麦投机记 A Corner in Wheat (1909 格里菲斯平行蒙太奇教科书名作 · 直连) (1909)
 https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047539/00047539.mp4
@@ -12939,3 +13083,621 @@ https://images-assets.nasa.gov/video/jsc2022m000294_TheJourneyofArtemisI/jsc2022
 
 #EXTINF:130 tvg-logo="https://images-assets.nasa.gov/video/jsc2026m000094_Artemis-II_Moon_Watch-Emily_Kollin/jsc2026m000094_Artemis-II_Moon_Watch-Emily_Kollin~thumb.jpg" group-title="太空宇宙与科学1080p",“阿耳忒弥斯二号月球观测”——艾米丽·科林 (2026)
 https://images-assets.nasa.gov/video/jsc2026m000094_Artemis-II_Moon_Watch-Emily_Kollin/jsc2026m000094_Artemis-II_Moon_Watch-Emily_Kollin~large.mp4
+
+#EXTINF:5940 tvg-logo="https://archive.org/services/img/KansasCityConfidential1952" group-title="悬疑推理与科幻惊悚",堪萨斯城机密 Kansas City Confidential (1952 昆汀《落水狗》致敬蒙面劫案鼻祖) (1952)
+https://archive.org/download/KansasCityConfidential1952/Kansas%20City%20Confidential%20(1952).mp4
+
+#EXTINF:4740 tvg-logo="https://archive.org/services/img/AfricaScreams" group-title="爆笑喜剧与国会图书馆典藏",非洲惊魂爆笑记 Africa Screams (1949 阿博特与科斯特洛丛林寻宝爆笑喜剧) (1949)
+https://archive.org/download/AfricaScreams/Africa_Screams_512kb.mp4
+
+#EXTINF:113 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047180/00047180.gif" group-title="太空宇宙与科学1080p",移动式木板路上的全景风光 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047180/00047180.mp4
+
+#EXTINF:117 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02610275/02610275.gif" group-title="太空宇宙与科学1080p",信使男孩的失误 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02610275/02610275.mp4
+
+#EXTINF:125 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01809027/01809027.gif" group-title="太空宇宙与科学1080p",继续前进 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01809027/01809027.mp4
+
+#EXTINF:120 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047139/00047139.gif" group-title="太空宇宙与科学1080p",迷幻主义者与乡村情侣 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047139/00047139.mp4
+
+#EXTINF:110 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180208/00180208.gif" group-title="太空宇宙与科学1080p",下百老汇街 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180208/00180208.mp4
+
+#EXTINF:123 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047261/00047261.gif" group-title="太空宇宙与科学1080p",峡谷铁路全景图 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047261/00047261.mp4
+
+#EXTINF:146 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01847243/01847243.gif" group-title="太空宇宙与科学1080p",泛美博览会开幕式 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01847243/01847243.mp4
+
+#EXTINF:112 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02610398/02610398.gif" group-title="太空宇宙与科学1080p",神秘咖啡馆 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02610398/02610398.mp4
+
+#EXTINF:95 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046766/00046766.gif" group-title="太空宇宙与科学1080p",蒙特利尔消防局的跑步者 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046766/00046766.mp4
+
+#EXTINF:161 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00144690/00144690.gif" group-title="太空宇宙与科学1080p",纽约警方游行，1899年6月1日 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00144690/00144690.mp4
+
+#EXTINF:149 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02015841/02015841.gif" group-title="太空宇宙与科学1080p",纽约港警方巡逻艇抓获海盗 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02015841/02015841.mp4
+
+#EXTINF:106 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045929/00045929.gif" group-title="太空宇宙与科学1080p",海滩与悬崖屋全景 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045929/00045929.mp4
+
+#EXTINF:97 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045723/00045723.gif" group-title="太空宇宙与科学1080p",俄亥俄州坎顿市总统府的全景视图 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045723/00045723.mp4
+
+#EXTINF:152 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01202823/01202823.gif" group-title="太空宇宙与科学1080p",纽约市第104街弯道，高架铁路 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01202823/01202823.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01786734/01786734.gif" group-title="太空宇宙与科学1080p",国会图书馆典藏电影：Launching a stranded schooner from the docks (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01786734/01786734.mp4
+
+#EXTINF:163 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045644/00045644.gif" group-title="太空宇宙与科学1080p",从布鲁克林新城区经布鲁克林大桥前往纽约，第1号 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045644/00045644.mp4
+
+#EXTINF:1072 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017900/00017900.gif" group-title="爆笑喜剧与国会图书馆典藏",被困的野兽 (1912)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017900/00017900.mp4
+
+#EXTINF:136 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045690/00045690.gif" group-title="太空宇宙与科学1080p",总统视察在校学生 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045690/00045690.mp4
+
+#EXTINF:110 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01622201/01622201.gif" group-title="太空宇宙与科学1080p",康科迪亚广场的全景视图 [原文如此] (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01622201/01622201.mp4
+
+#EXTINF:161 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01194386/01194386.gif" group-title="太空宇宙与科学1080p",东河畔的滨水景观及布鲁克林大桥全景 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01194386/01194386.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800547/01800547.gif" group-title="太空宇宙与科学1080p",滨水区残骸全景图 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800547/01800547.mp4
+
+#EXTINF:104 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02610565/02610565.gif" group-title="太空宇宙与科学1080p",纽波特海军假战演习 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02610565/02610565.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800557/01800557.gif" group-title="太空宇宙与科学1080p",加尔维斯顿特雷蒙特酒店全景图 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800557/01800557.mp4
+
+#EXTINF:115 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047146/00047146.gif" group-title="太空宇宙与科学1080p",战场上的红十字救护车队 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047146/00047146.mp4
+
+#EXTINF:211 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060811/00060811.gif" group-title="太空宇宙与科学1080p",将冰块装载到汽车上，将其运过山脉，并将其装入船只。 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060811/00060811.mp4
+
+#EXTINF:107 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045674/00045674.gif" group-title="太空宇宙与科学1080p",塔夫山R.R.第3号 (1898)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045674/00045674.mp4
+
+#EXTINF:102 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045689/00045689.gif" group-title="太空宇宙与科学1080p",游行前的市场街 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045689/00045689.mp4
+
+#EXTINF:104 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046329/00046329.gif" group-title="太空宇宙与科学1080p",劳拉·康斯托克那只能戳破袋子的狗 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046329/00046329.mp4
+
+#EXTINF:97 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047142/00047142.gif" group-title="太空宇宙与科学1080p",海军学徒在历史悠久的“星座号”战舰上进行帆船操练。 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047142/00047142.mp4
+
+#EXTINF:150 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01847492/01847492.gif" group-title="太空宇宙与科学1080p",罗斯福总统在查尔斯顿博览会视察部队 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01847492/01847492.mp4
+
+#EXTINF:95 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01903988/01903988.gif" group-title="太空宇宙与科学1080p",莫德那个淘气的小弟弟 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01903988/01903988.mp4
+
+#EXTINF:148 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02015845/02015845.gif" group-title="太空宇宙与科学1080p",纽约州赖克岛全景图。 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02015845/02015845.mp4
+
+#EXTINF:186 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047136/00047136.gif" group-title="太空宇宙与科学1080p",爱与战争 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047136/00047136.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048490/00048490.gif" group-title="太空宇宙与科学1080p",海军陆战队游行，美国巡洋舰“布鲁克林”号 (1898)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048490/00048490.mp4
+
+#EXTINF:105 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045720/00045720.gif" group-title="太空宇宙与科学1080p",罗斯福总统在 Canton车站 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045720/00045720.mp4
+
+#EXTINF:147 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046354/00046354.gif" group-title="太空宇宙与科学1080p",特雷洛尔和马歇尔小姐是麦迪逊广场花园体操表演赛的获奖者。 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046354/00046354.mp4
+
+#EXTINF:134 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01856644/01856644.gif" group-title="太空宇宙与科学1080p",活生生的画面 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01856644/01856644.mp4
+
+#EXTINF:135 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047179/00047179.gif" group-title="太空宇宙与科学1080p",埃菲尔铁塔电梯上升场景 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047179/00047179.mp4
+
+#EXTINF:108 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831478/01831478.gif" group-title="太空宇宙与科学1080p",拍摄滑道：卢娜公园，康尼岛 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831478/01831478.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800615/01800615.gif" group-title="太空宇宙与科学1080p",鱼雷艇“莫里斯”号正在航行。 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800615/01800615.mp4
+
+#EXTINF:95 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045688/00045688.gif" group-title="太空宇宙与科学1080p",总统专用车 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045688/00045688.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02023938/02023938.gif" group-title="太空宇宙与科学1080p",地铁施工现场的凿岩钻机作业场景 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02023938/02023938.mp4
+
+#EXTINF:117 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00012527/00012527.gif" group-title="太空宇宙与科学1080p",朗布兰奇的救生行动 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00012527/00012527.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01997813/01997813.gif" group-title="太空宇宙与科学1080p",第71团，怀克夫营 (1898)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01997813/01997813.mp4
+
+#EXTINF:139 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048464/00048464.gif" group-title="太空宇宙与科学1080p",前往菲律宾的部队运输船 (1898)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048464/00048464.mp4
+
+#EXTINF:161 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01849979/01849979.gif" group-title="太空宇宙与科学1080p",巴法罗·比尔西部狂野表演的游行。第2号 (1898)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01849979/01849979.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046339/00046339.gif" group-title="太空宇宙与科学1080p",拉贾公主舞 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046339/00046339.mp4
+
+#EXTINF:97 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831455/01831455.gif" group-title="太空宇宙与科学1080p",纽约市倾倒码头 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831455/01831455.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800609/01800609.gif" group-title="太空宇宙与科学1080p",瑞士村庄，第2号 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800609/01800609.mp4
+
+#EXTINF:93 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048489/00048489.gif" group-title="太空宇宙与科学1080p",美国陆军第10步兵营第2连离开汽车 (1898)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048489/00048489.mp4
+
+#EXTINF:302 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045650/00045650.gif" group-title="太空宇宙与科学1080p",纽约消防局年度游行 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045650/00045650.mp4
+
+#EXTINF:91 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047163/00047163.gif" group-title="太空宇宙与科学1080p",乔什叔叔在一家阴森恐怖的酒店里 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047163/00047163.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060841/00060841.gif" group-title="太空宇宙与科学1080p",街道邮件车，美国邮政署 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060841/00060841.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01629085/01629085.gif" group-title="太空宇宙与科学1080p",弗拉特铁建筑全景图 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01629085/01629085.mp4
+
+#EXTINF:94 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046349/00046349.gif" group-title="太空宇宙与科学1080p",夜间的里脊肉 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046349/00046349.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060846/00060846.gif" group-title="太空宇宙与科学1080p",运输内部修订邮戳，美国邮政总局。 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060846/00060846.mp4
+
+#EXTINF:119 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01964773/01964773.gif" group-title="太空宇宙与科学1080p",在纽约中央公园乘坐雪橇游玩 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01964773/01964773.mp4
+
+#EXTINF:176 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01870131/01870131.gif" group-title="太空宇宙与科学1080p",哈德逊河上的汽车船赛 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01870131/01870131.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046347/00046347.gif" group-title="太空宇宙与科学1080p",“76年精神” (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046347/00046347.mp4
+
+#EXTINF:92 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01194391/01194391.gif" group-title="太空宇宙与科学1080p",纽约市第二十三街发生了什么？ (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01194391/01194391.mp4
+
+#EXTINF:114 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800591/01800591.gif" group-title="太空宇宙与科学1080p",巴黎世博会瑞士村场景 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01800591/01800591.mp4
+
+#EXTINF:131 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02030474/02030474.gif" group-title="太空宇宙与科学1080p",“Shamrock”号与“Erin”号航行 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02030474/02030474.mp4
+
+#EXTINF:98 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047157/00047157.gif" group-title="太空宇宙与科学1080p",桑塞特有限公司，南太平洋铁路公司 (1898)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047157/00047157.mp4
+
+#EXTINF:180 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060758/00060758.gif" group-title="太空宇宙与科学1080p",范德比尔特杯汽车赛 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060758/00060758.mp4
+
+#EXTINF:105 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02132169/02132169.gif" group-title="太空宇宙与科学1080p",蒸汽驳船“辛德瑞拉”号和渡船“辛辛那提”号 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02132169/02132169.mp4
+
+#EXTINF:315 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02611147/02611147.gif" group-title="太空宇宙与科学1080p",窃贼的“终身滑动装置” (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02611147/02611147.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046925/00046925.gif" group-title="太空宇宙与科学1080p",可怕的泰迪——灰熊之王 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046925/00046925.mp4
+
+#EXTINF:161 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046767/00046767.gif" group-title="太空宇宙与科学1080p",约克公爵在蒙特利尔和魁北克 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046767/00046767.mp4
+
+#EXTINF:145 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045645/00045645.gif" group-title="太空宇宙与科学1080p",经布鲁克林大桥从新布鲁克林前往纽约，第2号线路 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045645/00045645.mp4
+
+#EXTINF:117 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02000507/02000507.gif" group-title="太空宇宙与科学1080p",“Reliance”对阵“Shamrock III”，8月20日 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02000507/02000507.mp4
+
+#EXTINF:286 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047540/00047540.gif" group-title="太空宇宙与科学1080p",狗狗工厂 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047540/00047540.mp4
+
+#EXTINF:184 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048465/00048465.gif" group-title="太空宇宙与科学1080p",美国巡洋舰“奥林匹亚”号引领海军阅兵式 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048465/00048465.mp4
+
+#EXTINF:102 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064116/00064116.gif" group-title="太空宇宙与科学1080p",“豁免”消防员游行 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064116/00064116.mp4
+
+#EXTINF:178 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035580/02035580.gif" group-title="太空宇宙与科学1080p",小莉莲小姐 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02035580/02035580.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047161/00047161.gif" group-title="太空宇宙与科学1080p",在美国埃尔卡内伊战役中，美国步兵在“粗骑兵团”的支援下作战。 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047161/00047161.mp4
+
+#EXTINF:231 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01830281/01830281.gif" group-title="太空宇宙与科学1080p",圣路易斯世博会开幕式 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01830281/01830281.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047143/00047143.gif" group-title="太空宇宙与科学1080p",中国式游行 (1898)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047143/00047143.mp4
+
+#EXTINF:220 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02015842/02015842.gif" group-title="太空宇宙与科学1080p",纽约东河新桥正式通车 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02015842/02015842.mp4
+
+#EXTINF:106 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01202841/01202841.gif" group-title="太空宇宙与科学1080p",琼斯为何解雇了他的职员？ (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01202841/01202841.mp4
+
+#EXTINF:138 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047092/00047092.gif" group-title="太空宇宙与科学1080p",盟军舰队对大沽炮台的轰炸 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047092/00047092.mp4
+
+#EXTINF:293 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045683/00045683.gif" group-title="太空宇宙与科学1080p",全景图：旧金山联合广场 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045683/00045683.mp4
+
+#EXTINF:247 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045693/00045693.gif" group-title="太空宇宙与科学1080p",在圣佩德罗建造港口 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045693/00045693.mp4
+
+#EXTINF:277 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048499/00048499.gif" group-title="太空宇宙与科学1080p",德威伊海军上将率领陆上阅兵式，第2号 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048499/00048499.mp4
+
+#EXTINF:157 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01627552/01627552.gif" group-title="太空宇宙与科学1080p",纽约州布莱克韦尔岛全景图 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01627552/01627552.mp4
+
+#EXTINF:271 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01627549/01627549.gif" group-title="太空宇宙与科学1080p",皮里［及“罗斯福”号］从纽约启程 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01627549/01627549.mp4
+
+#EXTINF:329 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02010560/02010560.gif" group-title="太空宇宙与科学1080p",凯撒·威廉号游艇“Meteor”的命名仪式暨下水仪式 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02010560/02010560.mp4
+
+#EXTINF:253 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02015844/02015844.gif" group-title="太空宇宙与科学1080p",消防船“纽约人号”正在执行任务 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02015844/02015844.mp4
+
+#EXTINF:135 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00144819/00144819.gif" group-title="太空宇宙与科学1080p",乔什叔叔在电影放映厅 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00144819/00144819.mp4
+
+#EXTINF:165 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01870076/01870076.gif" group-title="太空宇宙与科学1080p",为纽约的一座基金会进行挖掘工程 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01870076/01870076.mp4
+
+#EXTINF:150 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045701/00045701.gif" group-title="太空宇宙与科学1080p",宾夕法尼亚州煤炭田的采矿作业 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045701/00045701.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046352/00046352.gif" group-title="太空宇宙与科学1080p",一场艰难的舞蹈 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046352/00046352.mp4
+
+#EXTINF:248 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00049224/00049224.gif" group-title="太空宇宙与科学1080p",希拉姆·克朗克的葬礼 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00049224/00049224.mp4
+
+#EXTINF:116 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01870067/01870067.gif" group-title="太空宇宙与科学1080p",纽约市焚烧厂中的废弃物分拣工作 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01870067/01870067.mp4
+
+#EXTINF:469 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064219/00064219.gif" group-title="太空宇宙与科学1080p",鸭绿江战役。第1–4号 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064219/00064219.mp4
+
+#EXTINF:154 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047164/00047164.gif" group-title="太空宇宙与科学1080p",乔希叔叔的噩梦 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047164/00047164.mp4
+
+#EXTINF:623 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00012700/00012700.gif" group-title="太空宇宙与科学1080p",吉布森女神 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00012700/00012700.mp4
+
+#EXTINF:150 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045930/00045930.gif" group-title="太空宇宙与科学1080p",旧金山灾难 (1906)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045930/00045930.mp4
+
+#EXTINF:151 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02000445/02000445.gif" group-title="太空宇宙与科学1080p",“Reliance”与“Shamrock III”在首场比赛中展开角逐并均获得起跑位置。 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02000445/02000445.mp4
+
+#EXTINF:186 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060842/00060842.gif" group-title="太空宇宙与科学1080p",游泳池，棕榈滩 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060842/00060842.mp4
+
+#EXTINF:210 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045713/00045713.gif" group-title="太空宇宙与科学1080p",麦金莱的葬礼队伍驶入坎顿（俄亥俄州）的韦斯特劳恩公墓 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045713/00045713.mp4
+
+#EXTINF:158 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01194385/01194385.gif" group-title="太空宇宙与科学1080p",纽约市“贫民区”鱼类市场 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01194385/01194385.mp4
+
+#EXTINF:157 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01925364/01925364.gif" group-title="太空宇宙与科学1080p",圣路易斯博览会花车游行 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01925364/01925364.mp4
+
+#EXTINF:369 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107419/00107419.gif" group-title="太空宇宙与科学1080p",两段回忆 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107419/00107419.mp4
+
+#EXTINF:974 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01850345/01850345.gif" group-title="爆笑喜剧与国会图书馆典藏",科马塔族，苏族人 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01850345/01850345.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060814/00060814.gif" group-title="太空宇宙与科学1080p",帕威塔克消防局 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060814/00060814.mp4
+
+#EXTINF:342 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047181/00047181.gif" group-title="太空宇宙与科学1080p",巴黎世博会全景图，摄于塞纳河畔 (1900)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047181/00047181.mp4
+
+#EXTINF:202 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060788/00060788.gif" group-title="太空宇宙与科学1080p",康尼岛海浪中嬉戏的儿童 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060788/00060788.mp4
+
+#EXTINF:330 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045652/00045652.gif" group-title="太空宇宙与科学1080p",开幕典礼，纽约地铁，1904年10月27日 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045652/00045652.mp4
+
+#EXTINF:214 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01870077/01870077.gif" group-title="太空宇宙与科学1080p",宾夕法尼亚州隧道开挖工程 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01870077/01870077.mp4
+
+#EXTINF:787 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046922/00046922.gif" group-title="太空宇宙与科学1080p",多莉的冒险之旅 (1908)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046922/00046922.mp4
+
+#EXTINF:376 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045719/00045719.gif" group-title="太空宇宙与科学1080p",麦金莱总统在华盛顿特区的葬礼送行队伍 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045719/00045719.mp4
+
+#EXTINF:138 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01627547/01627547.gif" group-title="太空宇宙与科学1080p",纽约时报大厦全景 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01627547/01627547.mp4
+
+#EXTINF:201 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045712/00045712.gif" group-title="太空宇宙与科学1080p",葬礼队伍离开俄亥俄州坎顿的总统府和教堂 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045712/00045712.mp4
+
+#EXTINF:212 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01912444/01912444.gif" group-title="太空宇宙与科学1080p",纽约市遭遇暴风雪 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01912444/01912444.mp4
+
+#EXTINF:242 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01836310/01836310.gif" group-title="太空宇宙与科学1080p",普林斯顿大学与耶鲁大学的橄榄球比赛 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01836310/01836310.mp4
+
+#EXTINF:215 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02611658/02611658.gif" group-title="太空宇宙与科学1080p",查尔斯顿博览会全景视图 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02611658/02611658.mp4
+
+#EXTINF:126 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045692/00045692.gif" group-title="太空宇宙与科学1080p",旧金山的场景。【第1号】 (1906)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045692/00045692.mp4
+
+#EXTINF:670 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01194185/01194185.gif" group-title="太空宇宙与科学1080p",一位法国贵族如何通过《纽约先驱报》的个人专栏找到了妻子 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01194185/01194185.mp4
+
+#EXTINF:191 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046926/00046926.gif" group-title="太空宇宙与科学1080p",罗斯福总统的七月初七日演说 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046926/00046926.mp4
+
+#EXTINF:204 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047029/00047029.gif" group-title="太空宇宙与科学1080p",加拿大步兵第2特种服务营——阅兵式 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047029/00047029.mp4
+
+#EXTINF:280 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045702/00045702.gif" group-title="太空宇宙与科学1080p",旧金山的场景。【第2号】 (1906)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045702/00045702.mp4
+
+#EXTINF:1455 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106920/00106920.gif" group-title="爆笑喜剧与国会图书馆典藏",莱娜与鹅群 (1912)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106920/00106920.mp4
+
+#EXTINF:276 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01588625/01588625.gif" group-title="太空宇宙与科学1080p",泛美博览会上的假战场景象 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01588625/01588625.mp4
+
+#EXTINF:172 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045679/00045679.gif" group-title="太空宇宙与科学1080p",金门全景图 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045679/00045679.mp4
+
+#EXTINF:218 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045654/00045654.gif" group-title="太空宇宙与科学1080p",纽约市的摩天大楼，从北河望去 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045654/00045654.mp4
+
+#EXTINF:183 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045931/00045931.gif" group-title="太空宇宙与科学1080p",一次前往加州伯克利的旅行 (1906)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045931/00045931.mp4
+
+#EXTINF:187 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060850/00060850.gif" group-title="太空宇宙与科学1080p",纽约市业余摔跤比赛 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060850/00060850.mp4
+
+#EXTINF:170 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048450/00048450.gif" group-title="太空宇宙与科学1080p",哈瓦那撤离行动中的部队 (1899)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00048450/00048450.mp4
+
+#EXTINF:235 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01814935/01814935.gif" group-title="太空宇宙与科学1080p",《白翼》评论版 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01814935/01814935.mp4
+
+#EXTINF:957 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106765/00106765.gif" group-title="爆笑喜剧与国会图书馆典藏",乡村医生 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106765/00106765.mp4
+
+#EXTINF:439 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060762/00060762.gif" group-title="太空宇宙与科学1080p",布鲁克林让分赛——1904年 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060762/00060762.mp4
+
+#EXTINF:963 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00052555/00052555.gif" group-title="爆笑喜剧与国会图书馆典藏",欧洲休息疗法 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00052555/00052555.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00528239/00528239.gif" group-title="太空宇宙与科学1080p",是什么让那家理发店失去了士气？ (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00528239/00528239.mp4
+
+#EXTINF:227 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045651/00045651.gif" group-title="太空宇宙与科学1080p",移民［即入境者］抵达埃利斯岛 (1906)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045651/00045651.mp4
+
+#EXTINF:439 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045718/00045718.gif" group-title="太空宇宙与科学1080p",麦金莱总统在纽约州布法罗举行的葬礼送葬队伍。 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045718/00045718.mp4
+
+#EXTINF:599 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047220/00047220.gif" group-title="太空宇宙与科学1080p",一条金项链 (1910)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047220/00047220.mp4
+
+#EXTINF:1038 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00044359/00044359.gif" group-title="爆笑喜剧与国会图书馆典藏",命运的转折 (1911)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00044359/00044359.mp4
+
+#EXTINF:209 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045687/00045687.gif" group-title="太空宇宙与科学1080p",乘坐汽车沿罗斯福游行路线行驶 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045687/00045687.mp4
+
+#EXTINF:683 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046313/00046313.gif" group-title="太空宇宙与科学1080p",各国之间的冲突 (1907)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046313/00046313.mp4
+
+#EXTINF:1076 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01837884/01837884.gif" group-title="爆笑喜剧与国会图书馆典藏",缅因州的伐木活动 (1906)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01837884/01837884.mp4
+
+#EXTINF:1011 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107067/00107067.gif" group-title="爆笑喜剧与国会图书馆典藏",阴郁海面上的白色条纹 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107067/00107067.mp4
+
+#EXTINF:854 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00000725/00000725.gif" group-title="太空宇宙与科学1080p",失踪的孩子 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00000725/00000725.mp4
+
+#EXTINF:1120 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106940/00106940.gif" group-title="爆笑喜剧与国会图书馆典藏",那道降临的光 (1909)
+https://tile.loc.gov/storage-services/media/blogs/navcc/light_that_came_768x432_800.mp4
+
+#EXTINF:643 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045939/00045939.gif" group-title="太空宇宙与科学1080p",梅布尔和法蒂在加利福尼亚州旧金山观看世界博览会。 (1915)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00045939/00045939.mp4
+
+#EXTINF:168 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047265/00047265.gif" group-title="太空宇宙与科学1080p",重量级冠军国际赛事——斯奎尔斯对阵伯恩斯，加利福尼亚州奥申维尤，1907年7月4日 (1907)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047265/00047265.mp4
+
+#EXTINF:417 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106782/00106782.gif" group-title="太空宇宙与科学1080p",他的职责 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106782/00106782.mp4
+
+#EXTINF:719 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017931/00017931.gif" group-title="太空宇宙与科学1080p",孤独的别墅 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017931/00017931.mp4
+
+#EXTINF:641 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02612215/02612215.gif" group-title="太空宇宙与科学1080p",小火车抢劫案 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02612215/02612215.mp4
+
+#EXTINF:486 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106768/00106768.gif" group-title="太空宇宙与科学1080p",褪色的百合花 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00106768/00106768.mp4
+
+#EXTINF:666 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00016849/00016849.gif" group-title="太空宇宙与科学1080p",《杰克与豆茎》 (1902)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00016849/00016849.mp4
+
+#EXTINF:465 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02611489/02611489.gif" group-title="太空宇宙与科学1080p",疯狂追逐 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02611489/02611489.mp4
+
+#EXTINF:743 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831480/01831480.gif" group-title="太空宇宙与科学1080p",鲁比和曼迪在康尼岛 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01831480/01831480.mp4
+
+#EXTINF:1451 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064188/00064188.gif" group-title="爆笑喜剧与国会图书馆典藏",《汤姆叔叔的小屋》，或《奴隶制时代》 (1903)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064188/00064188.mp4
+
+#EXTINF:486 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060838/00060838.gif" group-title="太空宇宙与科学1080p",马萨诸塞州皮茨菲尔德社会气球飞行活动 (1906)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00060838/00060838.mp4
+
+#EXTINF:1098 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046755/00046755.gif" group-title="爆笑喜剧与国会图书馆典藏",驯服悍妇 (1908)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046755/00046755.mp4
+
+#EXTINF:760 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02303116/02303116.gif" group-title="太空宇宙与科学1080p",翻过山丘，前往贫民之家 (1908)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02303116/02303116.mp4
+
+#EXTINF:3424 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01869790/01869790.gif" group-title="爆笑喜剧与国会图书馆典藏",格劳斯塔克的贝弗利 (1914)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01869790/01869790.mp4
+
+#EXTINF:436 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064021/00064021.gif" group-title="太空宇宙与科学1080p",新罕布什尔州朴茨茅斯的和平使节 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064021/00064021.mp4
+
+#EXTINF:541 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01914966/01914966.gif" group-title="太空宇宙与科学1080p",一对乡下粗人夫妇在县集市上 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01914966/01914966.mp4
+
+#EXTINF:1046 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01991700/01991700.gif" group-title="爆笑喜剧与国会图书馆典藏",新婚夫妇 (1910)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01991700/01991700.mp4
+
+#EXTINF:1011 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107287/00107287.gif" group-title="爆笑喜剧与国会图书馆典藏",奴隶 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107287/00107287.mp4
+
+#EXTINF:698 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00154625/00154625.gif" group-title="太空宇宙与科学1080p",泛美博览会之旅 (1901)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00154625/00154625.mp4
+
+#EXTINF:767 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107086/00107086.gif" group-title="太空宇宙与科学1080p",穆格西成了英雄。 (1910)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107086/00107086.mp4
+
+#EXTINF:2295 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02029893/02029893.gif" group-title="爆笑喜剧与国会图书馆典藏",玛丽阿姨的青春再现 (1914)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02029893/02029893.mp4
+
+#EXTINF:568 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01847242/01847242.gif" group-title="太空宇宙与科学1080p",场景与事件：日俄和平会议，新罕布什尔州朴次茅斯。 (1905)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01847242/01847242.mp4
+
+#EXTINF:493 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017833/00017833.gif" group-title="太空宇宙与科学1080p",当我们还是十几岁的时候 (1910)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017833/00017833.mp4
+
+#EXTINF:153 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047655/00047655.gif" group-title="太空宇宙与科学1080p",【巴斯特的狗来救援了】 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047655/00047655.mp4
+
+#EXTINF:588 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046709/00046709.gif" group-title="太空宇宙与科学1080p",棒球慢动作画面——贝比·鲁斯如何击出本垒打 (1926)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00046709/00046709.mp4
+
+#EXTINF:666 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00144800/00144800.gif" group-title="太空宇宙与科学1080p",纽约的摩天大楼 (1906)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00144800/00144800.mp4
+
+#EXTINF:950 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107174/00107174.gif" group-title="爆笑喜剧与国会图书馆典藏",这条项链 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107174/00107174.mp4
+
+#EXTINF:1039 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00013955/00013955.gif" group-title="爆笑喜剧与国会图书馆典藏",穿过浪花 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00013955/00013955.mp4
+
+#EXTINF:390 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107080/00107080.gif" group-title="太空宇宙与科学1080p",五月与十二月 (1910)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107080/00107080.mp4
+
+#EXTINF:1060 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00000017/00000017.gif" group-title="爆笑喜剧与国会图书馆典藏",安布罗斯的高耸位置 (1915)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00000017/00000017.mp4
+
+#EXTINF:451 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064382/00064382.gif" group-title="太空宇宙与科学1080p",圣迭戈博览会一瞥 (1915)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00064382/00064382.mp4
+
+#EXTINF:958 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017929/00017929.gif" group-title="爆笑喜剧与国会图书馆典藏",伊奥拉的承诺 (1912)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017929/00017929.mp4
+
+#EXTINF:3310 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01897538/01897538.gif" group-title="爆笑喜剧与国会图书馆典藏",身穿黑衣的女性 (1914)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01897538/01897538.mp4
+
+#EXTINF:379 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00108027/00108027.gif" group-title="太空宇宙与科学1080p",你急什么呢？ (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00108027/00108027.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02774273/02774273.gif" group-title="太空宇宙与科学1080p",[男子拳击] (1891)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02774273/02774273.mp4
+
+#EXTINF:991 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00015246/00015246.gif" group-title="爆笑喜剧与国会图书馆典藏",安布罗斯暴躁的脾气 (1915)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00015246/00015246.mp4
+
+#EXTINF:658 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107204/00107204.gif" group-title="太空宇宙与科学1080p",桃篮帽 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107204/00107204.mp4
+
+#EXTINF:988 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00013268/00013268.gif" group-title="爆笑喜剧与国会图书馆典藏",梅贝尔和法蒂的洗衣日 (1915)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00013268/00013268.mp4
+
+#EXTINF:693 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00052537/00052537.gif" group-title="太空宇宙与科学1080p",雕塑家的噩梦 (1908)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00052537/00052537.mp4
+
+#EXTINF:966 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00089794/00089794.gif" group-title="爆笑喜剧与国会图书馆典藏",红衣主教的阴谋 (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00089794/00089794.mp4
+
+#EXTINF:287 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107196/00107196.gif" group-title="太空宇宙与科学1080p",哦，叔叔！ (1909)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00107196/00107196.mp4
+
+#EXTINF:119 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047652/00047652.gif" group-title="太空宇宙与科学1080p",巴斯特在特价商品柜台为妈妈腾出位置。 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047652/00047652.mp4
+
+#EXTINF:2010 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01633137/01633137.gif" group-title="爆笑喜剧与国会图书馆典藏",煤炭的故事 (1920)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01633137/01633137.mp4
+
+#EXTINF:90 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00183873/00183873.gif" group-title="太空宇宙与科学1080p",孤独的渔夫 (1896)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00183873/00183873.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00179915/00179915.gif" group-title="太空宇宙与科学1080p",卡门西塔 (1894)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00179915/00179915.mp4
+
+#EXTINF:136 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01816474/01816474.gif" group-title="太空宇宙与科学1080p",格兰特兰·赖斯的体育摄影作品。【贝比·鲁斯训练场景——作者不详】 (1929)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/01816474/01816474.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180344/00180344.gif" group-title="太空宇宙与科学1080p",艾米·穆勒 (1896)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180344/00180344.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00211296/00211296.gif" group-title="太空宇宙与科学1080p",【拉科塔草舞】 (1894)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00211296/00211296.mp4
+
+#EXTINF:983 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017827/00017827.gif" group-title="爆笑喜剧与国会图书馆典藏",登山者的荣誉 (1916)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00017827/00017827.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00183875/00183875.gif" group-title="太空宇宙与科学1080p",帕西克瀑布 (1896)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00183875/00183875.mp4
+
+#EXTINF:101 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047653/00047653.gif" group-title="太空宇宙与科学1080p",【布斯特对那个流浪汉的报复】 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047653/00047653.mp4
+
+#EXTINF:100 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047651/00047651.gif" group-title="太空宇宙与科学1080p",巴斯特和那个家伙 (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047651/00047651.mp4
+
+#EXTINF:4334 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047566/00047566.gif" group-title="爆笑喜剧与国会图书馆典藏",贝图利亚的朱迪丝 (1913)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047566/00047566.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00212632/00212632.gif" group-title="太空宇宙与科学1080p",来自上方的美国式坠落，美国式侧向运动 (1896)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00212632/00212632.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180346/00180346.gif" group-title="太空宇宙与科学1080p",晨间沐浴 (1896)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180346/00180346.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180345/00180345.gif" group-title="太空宇宙与科学1080p",带式钻孔机 (1894)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180345/00180345.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00179351/00179351.gif" group-title="太空宇宙与科学1080p",哈吉·谢里夫 (1894)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00179351/00179351.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00183877/00183877.gif" group-title="太空宇宙与科学1080p",拍摄滑道场景 (1896)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00183877/00183877.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02774267/02774267.gif" group-title="太空宇宙与科学1080p",[迪克森问候语] (1891)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/02774267/02774267.mp4
+
+#EXTINF:103 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047650/00047650.gif" group-title="太空宇宙与科学1080p",[巴斯特和蒂吉让一名气球商被迫停业] (1904)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00047650/00047650.mp4
+
+#EXTINF:360 tvg-logo="https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180329/00180329.gif" group-title="太空宇宙与科学1080p",路易斯·马蒂内蒂 (1894)
+https://tile.loc.gov/storage-services/service/mbrs/ntscrm/00180329/00180329.mp4

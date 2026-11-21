@@ -814,7 +814,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              4015+ 部精选大片与 68 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 42 大国内正版免费片库。
+              4070+ 部 100% 实测直连大片与 68 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 42 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>

@@ -207,12 +207,19 @@ async function searchBangumiFallback(query: string, signal: AbortSignal): Promis
     if (!Array.isArray(items)) return null;
 
     const results: CatalogSearchResult[] = [];
+    const cjkQueryChars = [...new Set((query.match(/[\u3400-\u9fff]/gu) ?? []))];
     for (const entry of items) {
       const id = Number(entry?.id);
       const zhTitle = cleanText(entry?.name_cn, 200);
       const rawName = cleanText(entry?.name, 200);
       const title = zhTitle || rawName;
       if (!Number.isSafeInteger(id) || id <= 0 || !title) continue;
+      if (cjkQueryChars.length >= 2) {
+        const hay = `${zhTitle} ${rawName}`;
+        const overlap = cjkQueryChars.filter((ch) => hay.includes(ch)).length;
+        const minOverlap = Math.min(2, cjkQueryChars.length);
+        if (overlap < minOverlap) continue;
+      }
 
       const releaseDate = cleanText(entry?.date, 20);
       const year = releaseDate.match(/^\d{4}/)?.[0];

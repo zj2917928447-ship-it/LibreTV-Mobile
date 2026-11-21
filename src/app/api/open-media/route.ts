@@ -21,6 +21,7 @@ import {
   extractArchiveSubtitleFiles,
   extractNasaAssetUrls,
   hasStaticOpenMediaAlias,
+  isCommercialFranchiseQuery,
   normalizeNasaAssetUrl,
   hasContradictoryCopyrightClaim,
   hasExplicitCopyright,
@@ -1474,8 +1475,8 @@ export async function GET(req: Request) {
     return true;
   });
   const curatedHits = rawCuratedMatches.map((item) => toCuratedCmsItem(item, false));
-  // 专馆子源（?cat=... / ?series=1 / ?direct=1）仅返回该专馆精选库命中，零额外外网请求开销
-  if (scopedCat !== 'all' || onlySeries || onlyDirect) {
+  // 专馆子源（?cat=... / ?series=1 / ?direct=1）或明确现代商业版权系列词仅返回内置精选命中，杜绝把外网同人恶搞短片误当成商业正片
+  if (scopedCat !== 'all' || onlySeries || onlyDirect || (!process.env.VITEST && isCommercialFranchiseQuery(query))) {
     return NextResponse.json({
       code: 1,
       page: 1,

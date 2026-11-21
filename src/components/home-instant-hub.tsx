@@ -74,29 +74,30 @@ function PosterItem({
  * 首页首屏资源直达中心：
  * 支持首屏直接按分类切换与「换一批」浏览内置免费高清放映厅，并一键直达超清直播与多仓订阅导入。
  */
-export function HomeInstantHub() {
+export function HomeInstantHub({ expanded = false }: { expanded?: boolean } = {}) {
   const imageProxyMode = useAppStore((s) => s.imageProxyMode);
   const customImageProxy = useAppStore((s) => s.customImageProxy);
   const [category, setCategory] = useState<OpenBrowseCategory>('all');
   const [batchOffset, setBatchOffset] = useState(0);
+  const fetchLimit = expanded ? 144 : 72;
 
   const browseQuery = useQuery({
-    queryKey: ['home-open-cinema-preview', category],
+    queryKey: ['home-open-cinema-preview', category, fetchLimit],
     queryFn: async ({ signal }) => {
       const res = await fetch(
-        `/api/open-media?ac=browse&category=${encodeURIComponent(category)}&pg=1&limit=72&compact=1`,
+        `/api/open-media?ac=browse&category=${encodeURIComponent(category)}&pg=1&limit=${fetchLimit}&compact=1`,
         { signal }
       );
-      if (!res.ok) return { list: [] as BrowseCardItem[], total: 4015 };
+      if (!res.ok) return { list: [] as BrowseCardItem[], total: 4070 };
       const data = (await res.json()) as { list?: BrowseCardItem[]; total?: number };
-      return { list: data.list ?? [], total: data.total ?? (data.list?.length || 4015) };
+      return { list: data.list ?? [], total: data.total ?? (data.list?.length || 4070) };
     },
     staleTime: 600_000,
   });
 
   const allItems = browseQuery.data?.list ?? [];
   const totalCatalogCount = browseQuery.data?.total ?? allItems.length;
-  const pageSize = 12;
+  const pageSize = expanded ? 36 : 12;
   const safeOffset = allItems.length > 0 ? batchOffset % allItems.length : 0;
   const featured =
     allItems.length <= pageSize
@@ -115,7 +116,7 @@ export function HomeInstantHub() {
         >
           <div className="min-w-0">
             <div className="text-sm font-semibold text-content">内置免费高清影院</div>
-            <div className="text-xs text-muted truncate mt-0.5">4015+ 部精选与68部连播剧集 · 万部馆藏分页看</div>
+            <div className="text-xs text-muted truncate mt-0.5">4070+ 部直连名片与68部连播剧集 · 点开即播</div>
           </div>
           <span className="shrink-0 rounded-full bg-accent/15 p-2 text-accent">
             <Icon name="bolt" className="w-4 h-4" />

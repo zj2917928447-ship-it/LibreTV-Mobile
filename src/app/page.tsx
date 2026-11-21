@@ -16,7 +16,6 @@ import type { SearchResultItem, SourceSearchOutcome } from '@/lib/types';
 import { SearchHistoryDropdown, useSearchHistory } from '@/components/search-history';
 import { cn, formatDisableTtl, validateSourceUrl } from '@/lib/utils';
 import { useToast } from '@/components/toast';
-import { EmptyState } from '@/components/states';
 import { Icon } from '@/components/icon';
 import { SiteFooter } from '@/components/site-footer';
 import { createSearchIntent } from '@/lib/search-intent';
@@ -392,76 +391,104 @@ function HomeContent() {
               </>
             ) : isSearching ? (
               <ResultsSkeleton />
-            ) : (catalogQuery.data?.list?.length ?? 0) > 0 || catalogQuery.isFetching ? (
-              <div className="rounded-xl border border-line bg-chip/60 px-4 py-3 flex flex-wrap items-center justify-between gap-2.5">
-                <div className="text-xs text-muted leading-relaxed">
-                  当前已启用的点播源未收录「<span className="text-content font-medium">{urlQuery}</span>」（商业院线正片不在公版开放库中）· 已在下方匹配中文影视资料与国内平台直达入口
-                </div>
-                <div className="flex flex-wrap items-center gap-2 shrink-0">
-                  <button
-                    type="button"
-                    className="btn-primary btn-sm"
-                    onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
-                  >
-                    <Icon name="plus" className="w-3.5 h-3.5" />
-                    导入 TVBox 多仓 / 片源
-                  </button>
-                  <Link href="/free" className="btn-ghost btn-sm text-accent">
-                    免费高清影院
-                  </Link>
-                </div>
-              </div>
             ) : (
-              <EmptyState
-                icon="search"
-                title="点播源暂未命中"
-                description="可在设置中导入你拥有或获授权使用的 TVBox 多仓 / 苹果 CMS 订阅源，或前往免费影院观看公版与开源大片"
-                className="!py-10"
-                action={
-                  <div className="flex flex-wrap items-center justify-center gap-2">
+              <div className="space-y-5">
+                <div className="rounded-xl border border-line bg-chip/60 px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
+                  <div className="text-xs text-muted leading-relaxed">
+                    软件内置免费库（4070+ 部无版权公版/开源大片）未包含商业版权片「
+                    <span className="text-content font-medium">{urlQuery}</span>
+                    」· 如需在本软件内直接搜索播放商业院线片，请点击右侧导入自用 TVBox 多仓 / 苹果 CMS 采集源；下方为你准备了点开即在本软件内直接播放的精选大片：
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 shrink-0">
                     <button
                       type="button"
                       className="btn-primary btn-sm"
                       onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
                     >
                       <Icon name="plus" className="w-3.5 h-3.5" />
-                      导入 TVBox 多仓 / 订阅源
+                      导入 TVBox 多仓 / 苹果 CMS 片源
                     </button>
                     <Link href="/free" className="btn-ghost btn-sm text-accent">
-                      浏览免费高清影院
+                      进入免费高清影院
                     </Link>
                   </div>
-                }
-              />
+                </div>
+
+                <HomeInstantHub />
+              </div>
             )}
 
-            <CatalogResults
-              query={urlQuery}
-              response={catalogQuery.data}
-              providers={catalogProvidersQuery.data}
-              directItems={list}
-              loading={catalogQuery.isFetching && !catalogQuery.data}
-              providersLoading={catalogProvidersQuery.isFetching && !catalogProvidersQuery.data}
-              error={catalogQuery.error instanceof Error ? catalogQuery.error.message : undefined}
-              providersError={catalogProvidersQuery.error instanceof Error ? catalogProvidersQuery.error.message : undefined}
-              onSearchKeyword={(kw) => {
-                setInput(kw);
-                runSearch(kw);
-              }}
-            />
+            {list.length > 0 ? (
+              <CatalogResults
+                query={urlQuery}
+                response={catalogQuery.data}
+                providers={catalogProvidersQuery.data}
+                directItems={list}
+                loading={catalogQuery.isFetching && !catalogQuery.data}
+                providersLoading={catalogProvidersQuery.isFetching && !catalogProvidersQuery.data}
+                error={catalogQuery.error instanceof Error ? catalogQuery.error.message : undefined}
+                providersError={catalogProvidersQuery.error instanceof Error ? catalogProvidersQuery.error.message : undefined}
+                onSearchKeyword={(kw) => {
+                  setInput(kw);
+                  runSearch(kw);
+                }}
+              />
+            ) : (catalogQuery.data?.list?.length ?? 0) > 0 ? (
+              <details className="mt-4 rounded-xl border border-line bg-surface px-4 py-3">
+                <summary className="cursor-pointer text-xs text-muted hover:text-content select-none">
+                  查看「{urlQuery}」剧情简介与外部平台参考（注：外部平台非本软件内直接播放）
+                </summary>
+                <div className="pt-2">
+                  <CatalogResults
+                    query={urlQuery}
+                    response={catalogQuery.data}
+                    providers={catalogProvidersQuery.data}
+                    directItems={list}
+                    loading={false}
+                    providersLoading={catalogProvidersQuery.isFetching && !catalogProvidersQuery.data}
+                    error={catalogQuery.error instanceof Error ? catalogQuery.error.message : undefined}
+                    providersError={catalogProvidersQuery.error instanceof Error ? catalogProvidersQuery.error.message : undefined}
+                    onSearchKeyword={(kw) => {
+                      setInput(kw);
+                      runSearch(kw);
+                    }}
+                  />
+                </div>
+              </details>
+            ) : null}
           </section>
         )}
 
-        {/* 首页内置直连影院与推荐（有搜索时隐藏） */}
+        {/* 首页内置直连影院与推荐：未导入外部商业采集源时，首页只展示 100% 本软件内点开即播的内置大片，杜绝出现点进去“0条结果”的空卡片 */}
         {!urlQuery && (
           <>
-            <HomeInstantHub />
-            <RecommendSection
-              onPick={(title) => {
-                setInput(title);
-                runSearch(title);
-              }}
-            />
+            {(() => {
+              const hasExternalVodSource = [...customAPIs, ...envSources].some((s) => {
+                if (!s?.url) return false;
+                try {
+                  const u = new URL(
+                    s.url,
+                    typeof window !== 'undefined' ? window.location.origin : 'https://app.example'
+                  );
+                  return u.pathname !== '/api/open-media';
+                } catch {
+                  return false;
+                }
+              });
+              return hasExternalVodSource ? (
+                <>
+                  <HomeInstantHub />
+                  <RecommendSection
+                    onPick={(title) => {
+                      setInput(title);
+                      runSearch(title);
+                    }}
+                  />
+                </>
+              ) : (
+                <HomeInstantHub expanded />
+              );
+            })()}
           </>
         )}
       </main>

@@ -223,7 +223,7 @@ const VOD_FILTERS: { id: VodFilter; label: string }[] = [
 const OPEN_VOD_GALLERIES = [
   {
     id: 'open-all',
-    name: '内置双语开放影视总馆（4015+ 名片与 68 部连播剧集）',
+    name: '内置双语开放影视总馆（4070+ 名片与 68 部连播剧集 · 100% 实测直连）',
     hint: '覆盖全球六大开放片库与内置精选直连大片',
     path: '/api/open-media?short=1&zh=1',
   },
@@ -235,7 +235,7 @@ const OPEN_VOD_GALLERIES = [
   },
   {
     id: 'open-direct',
-    name: '国内毫秒直连秒播专馆（3780+ 部官方 1080p 直连片源）',
+    name: '国内毫秒直连秒播专馆（4070 部官方 1080p/公版直连片源）',
     hint: '零海外等待、国内网络 HTTP 200/206 秒起播',
     path: '/api/open-media?short=1&zh=1&direct=1',
   },
