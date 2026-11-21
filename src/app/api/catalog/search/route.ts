@@ -10,8 +10,8 @@ const TMDB_API_BASE = 'https://api.themoviedb.org/3';
 const DOUBAN_MOBILE_SEARCH = 'https://m.douban.com/rexxar/api/v2/search/subjects';
 const BANGUMI_V0_SEARCH = 'https://api.bgm.tv/v0/search/subjects';
 const TMDB_TIMEOUT_MS = 8_000;
-const DOUBAN_TIMEOUT_MS = 3_500;
-const BANGUMI_TIMEOUT_MS = 5_000;
+const DOUBAN_TIMEOUT_MS = 1_300;
+const BANGUMI_TIMEOUT_MS = 3_800;
 const SEARCH_LIMIT = 10;
 const SEARCH_CACHE_TTL = 10 * 60 * 1000;
 

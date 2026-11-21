@@ -10,22 +10,73 @@ import { useAppStore, hydrateLiveProbeResults } from '@/lib/store';
 import { api, STATUS_QUERY_KEY } from '@/lib/client-api';
 import { applyEnvPresets } from '@/lib/subscription-sync';
 
-const STARTER_PACK_SEEDED_KEY = 'libretv-starter-pack-v16';
+const STARTER_PACK_SEEDED_KEY = 'libretv-starter-pack-v17';
+
+function healBuiltInOpenMediaSources() {
+  if (typeof window === 'undefined') return;
+  const origin = window.location.origin;
+  if (!origin || !/^https?:\/\//i.test(origin)) return;
+
+  const targetOpenUrl = `${origin}/api/open-media?short=1&zh=1`;
+  const state = useAppStore.getState();
+
+  // 1) 自动解除内置同源 /api/open-media 因旧版超时留下的停用惩罚，并自动升级旧版裸 /api/open-media 地址
+  let customChanged = false;
+  const upgradedCustom = state.customAPIs.map((item) => {
+    if (typeof item.url === 'string' && item.url.startsWith(`${origin}/api/open-media`)) {
+      if (state.sourceHealth[item.key]) {
+        state.clearSourceHealth(item.key);
+      }
+      if (!item.url.includes('short=1') || !item.url.includes('zh=1')) {
+        customChanged = true;
+        return {
+          ...item,
+          name: '内置双语开放影视库（4015+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / ESO）',
+          url: targetOpenUrl,
+        };
+      }
+    }
+    return item;
+  });
+  for (const envItem of state.envSources) {
+    if (typeof envItem.url === 'string' && envItem.url.startsWith(`${origin}/api/open-media`) && state.sourceHealth[envItem.key]) {
+      state.clearSourceHealth(envItem.key);
+    }
+  }
+  if (customChanged) {
+    useAppStore.setState({ customAPIs: upgradedCustom });
+  }
+}
 
 function seedStarterResourcesOnce() {
   if (typeof window === 'undefined') return;
+  const origin = window.location.origin;
+  if (!origin || !/^https?:\/\//i.test(origin)) return;
+
+  let firstTimeV17 = false;
   try {
-    if (localStorage.getItem(STARTER_PACK_SEEDED_KEY) === '1') return;
-    localStorage.setItem(STARTER_PACK_SEEDED_KEY, '1');
+    if (localStorage.getItem(STARTER_PACK_SEEDED_KEY) !== '1') {
+      localStorage.setItem(STARTER_PACK_SEEDED_KEY, '1');
+      firstTimeV17 = true;
+    }
   } catch {
     return;
   }
-  const origin = window.location.origin;
-  if (!origin || !/^https?:\/\//i.test(origin)) return;
+  if (!firstTimeV17) return;
+
   const state = useAppStore.getState();
+  // 强制让旧手机上的同源预置订阅立即重刷最新 v16 open-media-sources.json（免等 24 小时周期）
+  const targetSubUrl = `${origin}/open-media-sources.json`;
+  if (state.subscriptions.some((s) => s.url === targetSubUrl)) {
+    useAppStore.setState({
+      subscriptions: state.subscriptions.map((s) =>
+        s.url === targetSubUrl ? { ...s, lastSync: undefined, failStreak: 0 } : s
+      ),
+    });
+  }
   if (state.customAPIs.length === 0 && state.envSources.length === 0) {
     state.addCustomApi({
-      name: '内置双语开放影视库（公版经典 + 开源动画 + 太空纪实）',
+      name: '内置双语开放影视库（4015+ 公版经典 + 开源动画 + 太空纪实）',
       url: `${origin}/api/open-media?short=1&zh=1`,
       detail: origin,
     });
@@ -33,7 +84,7 @@ function seedStarterResourcesOnce() {
   if (state.liveSubscriptions.length === 0 && state.liveEnvSources.length === 0) {
     state.addLiveSubscription(
       `${origin}/open-live-channels.m3u`,
-      '内置精选直连高清台（华语卫视 / 电影 / 动漫 / 纪实）'
+      '内置双阶实测超清直播（5994 台卫视 / 电影 / 动漫 / 纪实）'
     );
   }
 }
@@ -61,6 +112,8 @@ export function Providers({ children }: { children: ReactNode }) {
     // 避免 setEnvSources/setLiveEnvSources 的勾选合并发生在 rehydrate 之前被覆盖
     Promise.resolve(useAppStore.persist.rehydrate())
       .then(() => {
+        healBuiltInOpenMediaSources();
+        seedStarterResourcesOnce();
         // 测活缓存从 IndexedDB 恢复（并顺带搬迁旧 localStorage 快照里的存量），
         // 与下方 /api/status 拉取互不依赖，失败静默
         void hydrateLiveProbeResults();
@@ -73,10 +126,10 @@ export function Providers({ children }: { children: ReactNode }) {
         // 预置订阅要经鉴权接口拉取，首屏这次可能发生在登录之前而 401 静默失败；
         // 登录成功后由 AuthProvider 再调一次 applyEnvPresets 补齐（函数幂等）
         if (d) await applyEnvPresets(d);
-        seedStarterResourcesOnce();
+        healBuiltInOpenMediaSources();
       })
       .catch(() => {
-        seedStarterResourcesOnce();
+        healBuiltInOpenMediaSources();
       });
   }, [queryClient]);
 

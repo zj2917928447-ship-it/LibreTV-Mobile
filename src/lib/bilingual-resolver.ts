@@ -89,7 +89,7 @@ export async function resolveDynamicBilingualMeta(query: string): Promise<Dynami
     searchUrl.searchParams.set('count', '5');
 
     const searchData = await fetchUpstreamJson<DoubanSubjectSearchPayload>(searchUrl.href, {
-      timeoutMs: 2_500,
+      timeoutMs: 1_300,
       retries: 0,
       headers: {
         'User-Agent': MOBILE_UA,
@@ -111,7 +111,7 @@ export async function resolveDynamicBilingualMeta(query: string): Promise<Dynami
     const detail = await fetchUpstreamJson<DoubanSubjectDetailPayload>(
       `${DOUBAN_DETAIL_BASE}/${kind}/${id}`,
       {
-        timeoutMs: 2_500,
+        timeoutMs: 1_300,
         retries: 0,
         headers: {
           'User-Agent': MOBILE_UA,

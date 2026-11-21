@@ -648,9 +648,7 @@ export default function FreeResourcesPage() {
     setBrowseHasMore(true);
     setBrowseLoading(true);
     try {
-      const response = await fetch(`/api/open-media?ac=browse&category=${encodeURIComponent(cat)}&pg=1`, {
-        cache: 'no-store',
-      });
+      const response = await fetch(`/api/open-media?ac=browse&category=${encodeURIComponent(cat)}&pg=1&compact=1`);
       const data = (await response.json()) as FreeMediaResponse;
       if (response.ok && data.code === 1) {
         setBrowseItems(data.list ?? []);

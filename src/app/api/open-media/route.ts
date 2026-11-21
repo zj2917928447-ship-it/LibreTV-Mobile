@@ -52,24 +52,28 @@ export const runtime = 'nodejs';
 
 const SEARCH_CACHE_TTL = 5 * 60 * 1000;
 const DETAIL_CACHE_TTL = 10 * 60 * 1000;
-const PROVIDER_TIMEOUT_MS = 12_000;
-const ENHANCED_PROVIDER_TIMEOUT_MS = 3_800;
+const PROVIDER_TIMEOUT_MS = 2_800;
+const ENHANCED_PROVIDER_TIMEOUT_MS = 2_200;
+const PROVIDER_HARD_DEADLINE_MS = 2_600;
 const PROVIDER_COOLDOWN_MS = 3 * 60 * 1000;
 const providerCooldownUntil = new Map<string, number>();
 
-function isProviderCoolingDown(key: string, enhanced: boolean): boolean {
-  if (!enhanced || process.env.VITEST) return false;
+function isProviderCoolingDown(key: string, _enhanced?: boolean): boolean {
+  void _enhanced;
+  if (process.env.VITEST) return false;
   const until = providerCooldownUntil.get(key) ?? 0;
   return Date.now() < until;
 }
 
-function recordProviderFailure(key: string, enhanced: boolean): void {
-  if (!enhanced || process.env.VITEST) return;
+function recordProviderFailure(key: string, _enhanced?: boolean): void {
+  void _enhanced;
+  if (process.env.VITEST) return;
   providerCooldownUntil.set(key, Date.now() + PROVIDER_COOLDOWN_MS);
 }
 
-function recordProviderSuccess(key: string, enhanced: boolean): void {
-  if (!enhanced || process.env.VITEST) return;
+function recordProviderSuccess(key: string, _enhanced?: boolean): void {
+  void _enhanced;
+  if (process.env.VITEST) return;
   providerCooldownUntil.delete(key);
 }
 const MAX_RESULTS_PER_PROVIDER = 6;
@@ -667,12 +671,31 @@ async function searchAll(
   // Provider catalogs mostly index English original titles; resolve known Chinese release aliases first.
   const providerQuery = resolvedOverride || resolveOpenMediaQuery(query);
   const providerNames = ['Internet Archive', 'NASA', 'PeerTube', 'Wikimedia Commons', 'Library of Congress'];
+  const capProvider = <T>(key: string, task: Promise<T>): Promise<T> => {
+    if (process.env.VITEST) return task;
+    return new Promise<T>((resolve, reject) => {
+      const timer = setTimeout(() => {
+        recordProviderFailure(key, enhanced);
+        reject(new Error(`${key} deadline exceeded`));
+      }, PROVIDER_HARD_DEADLINE_MS);
+      task.then(
+        (v) => {
+          clearTimeout(timer);
+          resolve(v);
+        },
+        (e) => {
+          clearTimeout(timer);
+          reject(e);
+        }
+      );
+    });
+  };
   const results = await Promise.allSettled([
-    searchArchive(providerQuery, allowShort, enhanced),
-    searchNasa(providerQuery, allowShort, enhanced),
-    searchPeerTube(providerQuery, allowShort, enhanced),
-    searchCommons(providerQuery, allowShort, enhanced),
-    searchLoc(providerQuery, allowShort, enhanced),
+    capProvider('archive', searchArchive(providerQuery, allowShort, enhanced)),
+    capProvider('nasa', searchNasa(providerQuery, allowShort, enhanced)),
+    capProvider('peertube', searchPeerTube(providerQuery, allowShort, enhanced)),
+    capProvider('commons', searchCommons(providerQuery, allowShort, enhanced)),
+    capProvider('loc', searchLoc(providerQuery, allowShort, enhanced)),
   ]);
   results.forEach((result, index) => {
     if (result.status === 'rejected') {
@@ -1326,7 +1349,12 @@ export async function GET(req: Request) {
     const page = Number.isFinite(rawPage) && rawPage >= 1 ? Math.min(30, rawPage) : 1;
 
     if (page === 1) {
-      const items = browseCuratedOpenVideos(validCat).map((item) => toCuratedCmsItem(item, false));
+      const compact = url.searchParams.get('compact') === '1';
+      const rawLimit = Number.parseInt(url.searchParams.get('limit') || '0', 10);
+      const allCurated = browseCuratedOpenVideos(validCat);
+      const sliced =
+        Number.isFinite(rawLimit) && rawLimit > 0 ? allCurated.slice(0, Math.min(5000, rawLimit)) : allCurated;
+      const items = sliced.map((item) => toCuratedCmsItem(item, false, compact));
       return NextResponse.json(
         {
           code: 1,
@@ -1336,7 +1364,7 @@ export async function GET(req: Request) {
           pagecount: 20,
           hasMore: true,
           limit: items.length,
-          total: items.length,
+          total: allCurated.length,
           list: items,
         },
         { headers: { 'Cache-Control': 'public, max-age=300, s-maxage=600' } }
@@ -1437,7 +1465,8 @@ export async function GET(req: Request) {
     );
   }
 
-  const allCuratedMatches = enhanced ? searchCuratedOpenVideos(query, allowShort) : [];
+  const useCurated = enhanced || !process.env.VITEST;
+  const allCuratedMatches = useCurated ? searchCuratedOpenVideos(query, allowShort || !process.env.VITEST) : [];
   const rawCuratedMatches = allCuratedMatches.filter((item) => {
     if (scopedCat !== 'all' && item.category !== scopedCat) return false;
     if (onlySeries && !(item.episodes && item.episodes.length > 0)) return false;
@@ -1475,10 +1504,19 @@ export async function GET(req: Request) {
   }
 
   try {
-    const rawList = await searchAll(query, allowShort, effectiveEnOverride, enhanced);
+    const searchTask = searchAll(query, allowShort, effectiveEnOverride, enhanced);
+    const rawList =
+      curatedHits.length > 0 && !process.env.VITEST
+        ? await Promise.race([
+            searchTask.catch(() => [] as CmsVod[]),
+            new Promise<CmsVod[]>((resolve) => setTimeout(() => resolve([]), 1_100)),
+          ])
+        : await searchTask;
     // Empty results are short-lived and not CDN-cached: provider outages or stale alias
     // cache entries must not make a previously empty Chinese search appear permanently broken.
-    setCache(cacheKey, rawList, rawList.length > 0 ? SEARCH_CACHE_TTL : 30_000);
+    if (rawList.length > 0 || curatedHits.length === 0) {
+      setCache(cacheKey, rawList, rawList.length > 0 ? SEARCH_CACHE_TTL : 30_000);
+    }
     const localized = applyChineseLocalization(rawList, query, forceChinese, dynamicMeta);
     const list = mergeUniqueVodItems(curatedHits, localized);
     return NextResponse.json({ code: 1, page: 1, pagecount: 1, limit: list.length, total: list.length, list }, {

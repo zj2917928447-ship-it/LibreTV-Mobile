@@ -83,15 +83,19 @@ export function HomeInstantHub() {
   const browseQuery = useQuery({
     queryKey: ['home-open-cinema-preview', category],
     queryFn: async ({ signal }) => {
-      const res = await fetch(`/api/open-media?ac=browse&category=${encodeURIComponent(category)}&pg=1`, { signal });
-      if (!res.ok) return [];
-      const data = (await res.json()) as { list?: BrowseCardItem[] };
-      return data.list ?? [];
+      const res = await fetch(
+        `/api/open-media?ac=browse&category=${encodeURIComponent(category)}&pg=1&limit=72&compact=1`,
+        { signal }
+      );
+      if (!res.ok) return { list: [] as BrowseCardItem[], total: 4015 };
+      const data = (await res.json()) as { list?: BrowseCardItem[]; total?: number };
+      return { list: data.list ?? [], total: data.total ?? (data.list?.length || 4015) };
     },
     staleTime: 600_000,
   });
 
-  const allItems = browseQuery.data ?? [];
+  const allItems = browseQuery.data?.list ?? [];
+  const totalCatalogCount = browseQuery.data?.total ?? allItems.length;
   const pageSize = 12;
   const safeOffset = allItems.length > 0 ? batchOffset % allItems.length : 0;
   const featured =
@@ -161,7 +165,7 @@ export function HomeInstantHub() {
                 </button>
               )}
               <Link href="/free" className="text-accent hover:underline">
-                查看全部 {allItems.length}+ 部与在线馆藏 →
+                查看全部 {totalCatalogCount}+ 部与在线馆藏 →
               </Link>
             </div>
           </div>

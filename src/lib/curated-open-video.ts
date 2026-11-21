@@ -56936,7 +56936,7 @@ export const CURATED_OPEN_VIDEOS: readonly CuratedOpenVideo[] = [
   },
 ];
 
-export function toCuratedCmsItem(item: CuratedOpenVideo, includePlayUrl = false) {
+export function toCuratedCmsItem(item: CuratedOpenVideo, includePlayUrl = false, compact = false) {
   const vodId = encodeCuratedVideoVodId(item);
   const durationLabel = formatMediaDuration(item.durationSeconds);
   const hasEpisodes = Boolean(item.episodes && item.episodes.length > 0);
@@ -56963,18 +56963,22 @@ export function toCuratedCmsItem(item: CuratedOpenVideo, includePlayUrl = false)
 
   return {
     vod_id: vodId,
-    vod_name: `${item.zhTitle} / ${item.enTitle}`,
+    vod_name: compact ? item.zhTitle : `${item.zhTitle} / ${item.enTitle}`,
     vod_pic: item.poster,
-    type_name: `${item.sourceLabel} · ${item.licenceLabel}`,
+    type_name: compact ? item.sourceLabel : `${item.sourceLabel} · ${item.licenceLabel}`,
     vod_year: item.year,
     vod_remarks: remarksLabel,
     vod_direct: isDirect,
-    vod_content: [
-      `中文导览：${item.summary}`,
-      `英文原名：${item.enTitle} (${item.year})`,
-      hasEpisodes && item.episodes!.length > 1 ? `剧集规格：共 ${item.episodes!.length} 集连续播放` : `片长：${durationLabel}`,
-      `授权说明：${item.licenceLabel}`,
-    ].join('\n'),
+    ...(compact && !includePlayUrl
+      ? {}
+      : {
+          vod_content: [
+            `中文导览：${item.summary}`,
+            `英文原名：${item.enTitle} (${item.year})`,
+            hasEpisodes && item.episodes!.length > 1 ? `剧集规格：共 ${item.episodes!.length} 集连续播放` : `片长：${durationLabel}`,
+            `授权说明：${item.licenceLabel}`,
+          ].join('\n'),
+        }),
     ...(includePlayUrl && playUrlPayload && playFromPayload
       ? {
           vod_play_from: playFromPayload,

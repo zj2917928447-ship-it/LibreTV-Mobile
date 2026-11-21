@@ -245,8 +245,8 @@ function LiveContent() {
       <Header showSearch />
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-4">
         <div className="mb-3 flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-          <span className="shrink-0 text-faint font-medium">一键频道库 (40包)：</span>
-          {PUBLIC_LIVE_PACKS.map((pack) => {
+          <span className="shrink-0 text-faint font-medium">精选快捷包 (共{PUBLIC_LIVE_PACKS.length}包)：</span>
+          {PUBLIC_LIVE_PACKS.slice(0, 24).map((pack) => {
             const origin = typeof window !== 'undefined' ? window.location.origin : '';
             const packUrl = origin ? resolvePublicLivePackUrl(pack, origin) : pack.urlOrPath;
             const active = liveSelectedUrls.includes(packUrl);
