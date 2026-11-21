@@ -10,7 +10,7 @@ import { useAppStore, hydrateLiveProbeResults } from '@/lib/store';
 import { api, STATUS_QUERY_KEY } from '@/lib/client-api';
 import { applyEnvPresets } from '@/lib/subscription-sync';
 
-const STARTER_PACK_SEEDED_KEY = 'libretv-starter-pack-v24';
+const STARTER_PACK_SEEDED_KEY = 'libretv-starter-pack-v25';
 
 function healBuiltInOpenMediaSources() {
   if (typeof window === 'undefined') return;
@@ -31,7 +31,7 @@ function healBuiltInOpenMediaSources() {
         customChanged = true;
         return {
           ...item,
-          name: '内置双语开放影视库（7058+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / ESO）',
+          name: '内置双语开放影视库（7625+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / ESO）',
           url: targetOpenUrl,
         };
       }
@@ -76,7 +76,7 @@ function seedStarterResourcesOnce() {
   }
   if (state.customAPIs.length === 0 && state.envSources.length === 0) {
     state.addCustomApi({
-      name: '内置双语开放影视库（7058+ 公版经典 + 开源动画 + 太空纪实）',
+      name: '内置双语开放影视库（7625+ 公版经典 + 开源动画 + 太空纪实）',
       url: `${origin}/api/open-media?short=1&zh=1`,
       detail: origin,
     });
@@ -84,7 +84,7 @@ function seedStarterResourcesOnce() {
   if (state.liveSubscriptions.length === 0 && state.liveEnvSources.length === 0) {
     state.addLiveSubscription(
       `${origin}/open-live-channels.m3u`,
-      '内置双阶实测超清直播（10683 台卫视 / 电影 / 动漫 / 纪实）'
+      '内置双阶实测超清直播（10831 台卫视 / 电影 / 动漫 / 纪实）'
     );
   }
 }

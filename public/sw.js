@@ -1,5 +1,5 @@
 /* Conservative PWA cache: never cache API responses or media streams. */
-const CACHE_NAME = 'libretv-static-v26';
+const CACHE_NAME = 'libretv-static-v27';
 const PRECACHE = [
   '/offline.html',
   '/icons/icon-192.png',

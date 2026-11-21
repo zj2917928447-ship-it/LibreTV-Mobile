@@ -54,12 +54,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
-      { label: '联华七大华语国宝《恋爱与义务》《天明》 (7部)', query: '恋爱与义务1931阮玲玉', tag: '早期华语镇馆典藏' },
+      { label: '华语殿堂《我这一辈子》《丽人行》《浪淘沙》 (8部)', query: '我这一辈子1950石挥', tag: '早期华语镇馆典藏' },
+      { label: '国宝孤本《盘丝洞1927》《红侠》《皇帝梦》 (8部)', query: '盘丝洞1927西游记默片', tag: '神怪武侠与国漫先驱' },
+      { label: '弗莱舍《超人》国语配音全集 (9集)', query: '超人1941国语配音版', tag: '全中文国语配音' },
+      { label: '名导悬疑《M就是凶手》与库布里克首作 (8部)', query: 'M就是凶手1931高清修复', tag: '大师720p修复馆' },
+      { label: 'NASA阿波罗7–17号登月16mm原片 (8部)', query: '阿波罗11号登月16mm原片', tag: '宇航员第一视角胶片' },
       { label: '首届奥斯卡1080p《翼》与希区柯克《房客》 (8部)', query: '首届奥斯卡最佳影片翼1927', tag: '影史开山封神榜' },
-      { label: '卡普拉《群氓》、彩色《无事生非》与阿尔及尔 (8部)', query: '弗兰克卡普拉群氓1941', tag: '黄金巨星名导馆' },
-      { label: '福尔摩斯《绿衣女子》与《红屋惊魂》 (8部)', query: '福尔摩斯绿衣女子1945', tag: '高能悬疑黑色馆' },
-      { label: '侠盗神探《波士顿·布莱基探案全集》 (10部)', query: '波士顿布莱基侠盗神探', tag: '神偷侦探轻喜剧' },
-      { label: '英伦科幻谍战《隐形奇侠》7集全', query: '隐形奇侠1958英伦科幻剧', tag: '密室推理特工剧' },
     ],
   },
   {
@@ -76,10 +76,10 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '华语与世界名作',
     items: [
-      { label: '都市风光 (1935 袁牧之/赵丹首部音乐喜剧)', query: '都市风光', tag: '华语音乐喜剧鼻祖' },
-      { label: '体育皇后 (1934 孙瑜/黎莉莉青春名作)', query: '体育皇后', tag: '早期华语励志经典' },
-      { label: '白毛女 (1950 田华国际获奖经典)', query: '白毛女', tag: '1950华语代表作' },
-      { label: '风云儿女 (1935 义勇军进行曲诞生片)', query: '风云儿女', tag: '华语史诗经典' },
+      { label: '我这一辈子 (1950 老舍原著/石挥神作)', query: '我这一辈子', tag: '华语百年经典' },
+      { label: '丽人行 (1949 上官云珠/赵丹)', query: '丽人行', tag: '昆仑影业名作' },
+      { label: '红楼梦 (1944 周璇/王丹凤)', query: '红楼梦', tag: '古典名著唱段版' },
+      { label: '都市风光 (1935 袁牧之/赵丹音乐喜剧)', query: '都市风光', tag: '华语音乐喜剧鼻祖' },
       { label: '小城之春 (费穆)', query: '小城之春', tag: '华语百年榜首' },
       { label: '马路天使 (赵丹/周璇)', query: '马路天使', tag: '四季歌天涯歌女' },
     ],
@@ -647,6 +647,48 @@ const DOMESTIC_FREE_PLATFORMS = [
     category: '太阳神鸟考古',
     note: '国内直连 · 古蜀传奇纪实',
   },
+  {
+    name: '河南博物院 · 贾湖骨笛华夏古乐与中原国宝馆',
+    description: '河南博物院官方数字平台，展播九千年贾湖骨笛与编钟古乐复原演奏会、莲鹤方壶与中原文明纪录片。',
+    url: 'https://www.chnmus.net/',
+    category: '中原古乐国宝',
+    note: '国内直连 · 华夏正声实录',
+  },
+  {
+    name: '辽宁省博物馆 · 簪花仕女传世书画数字展厅',
+    description: '新中国第一座博物馆官方门户，超清赏析《簪花仕女图》《瑞鹤图》、红山玉龙与辽河文明导览影像。',
+    url: 'https://www.lnmuseum.com.cn/',
+    category: '传世唐宋书画',
+    note: '国内直连 · 国宝级超清赏析',
+  },
+  {
+    name: '山东博物馆 · 海岱齐鲁青铜与简牍数字视听馆',
+    description: '鲁博官方数字文化门户，呈现亚醜钺青铜重器、银雀山《孙子兵法》竹简与齐鲁礼乐文化专题片。',
+    url: 'https://www.sdmuseum.com/',
+    category: '齐鲁礼乐国宝',
+    note: '国内直连 · 历史人文超清',
+  },
+  {
+    name: '重庆中国三峡博物馆 · 巴渝山水与三峡人文影像馆',
+    description: '国家级大馆官方数字平台，汇聚长江三峡水下碑林白鹤梁、巴蜀青铜文化与川江号子非遗纪录片。',
+    url: 'https://www.3gmuseum.cn/',
+    category: '三峡巴渝人文',
+    note: '国内直连 · 壮美长江纪实',
+  },
+  {
+    name: '良渚博物院 · 实证中华五千年文明数字文化馆',
+    description: '世界文化遗产良渚古城官方视听平台，超清还原五千年前水利工程、反山王陵玉器与先民稻作文明。',
+    url: 'https://www.lzmuseum.cn/',
+    category: '五千年良渚玉魂',
+    note: '国内直连 · 世界遗产导览',
+  },
+  {
+    name: '北方昆曲剧院 · 百戏之祖昆曲全本牡丹亭视听窗',
+    description: '人类非遗昆曲国家级剧院官方门户，展演《牡丹亭》《长生殿》《西厢记》名家折子戏与昆曲艺术讲堂。',
+    url: 'http://www.chncpa-kunqu.com/',
+    category: '昆曲水磨雅韵',
+    note: '国内直连 · 传统戏曲美育',
+  },
 ];
 
 const OVERSEAS_FREE_PLATFORMS = [
@@ -1080,7 +1122,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              7058+ 部 100% 实测直连大片与 128 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 80 大国内正版免费片库。
+              7625+ 部 100% 实测直连大片与 140 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 86 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -1089,7 +1131,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                10683台直播源 (.m3u)
+                10831台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -1104,7 +1146,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (10683+ 直连 / 170000+ 扩展)
+              免费电视直播 (10831+ 直连 / 175000+ 扩展)
             </Link>
             <button
               type="button"
@@ -1559,7 +1601,7 @@ export default function FreeResourcesPage() {
 
         <section className="mb-8">
           <div className="mb-3">
-            <h2 className="text-lg font-semibold text-content">国内四十六大正版免费影视专区（全中文 · 免代理直达）</h2>
+            <h2 className="text-lg font-semibold text-content">国内八十六大正版免费影视专区（全中文 · 免代理直达）</h2>
             <p className="text-sm text-muted mt-1">
               精选国内无需订阅 VIP 会员即可观看的正版免费电影、电视剧与纪录片官方片库，全部自带中文配音或中文字幕。
             </p>

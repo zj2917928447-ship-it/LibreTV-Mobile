@@ -1,6 +1,336 @@
 #EXTM3U
 #PLAYLIST:自由影视 · 内置直连超清点播片单（支持 PotPlayer / VLC / Kodi / IINA / TVBox 直接打开点播）
 
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="多集连播剧集 · 早期华语殿堂传世名作第一辑：石挥《我这一辈子》、上官云珠《丽人行》、吴永刚《浪淘沙》、阮玲玉《国风》、周璇《红楼梦》、胡蝶《女儿经》(8部连播)",第01部 · 传世神作：《我这一辈子 1950》老舍原著·石挥自导自演半世纪沧桑巨作
+https://archive.org/download/this_life_of_mine/this_life_of_mine.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="多集连播剧集 · 早期华语殿堂传世名作第一辑：石挥《我这一辈子》、上官云珠《丽人行》、吴永刚《浪淘沙》、阮玲玉《国风》、周璇《红楼梦》、胡蝶《女儿经》(8部连播)",第02部 · 昆仑经典：《丽人行 1949》田汉编剧·上官云珠与黄宗英赵丹同台飙戏
+https://archive.org/download/threegirls/threegirls.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="多集连播剧集 · 早期华语殿堂传世名作第一辑：石挥《我这一辈子》、上官云珠《丽人行》、吴永刚《浪淘沙》、阮玲玉《国风》、周璇《红楼梦》、胡蝶《女儿经》(8部连播)",第03部 · 蓝光修复：《浪淘沙 1936》神女导演吴永刚与影帝金焰荒岛人性寓言
+https://archive.org/download/waves-washing-the-sand-1936/Waves%20Wash%20The%20Sand%20(1936)%20CHN%20Disk%20Kino%20Bluray.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="多集连播剧集 · 早期华语殿堂传世名作第一辑：石挥《我这一辈子》、上官云珠《丽人行》、吴永刚《浪淘沙》、阮玲玉《国风》、周璇《红楼梦》、胡蝶《女儿经》(8部连播)",第04部 · 西湖悲歌：《船家女 1935》沈西苓编导·徐来主演江南写实名篇
+https://archive.org/download/theboatmansdaughter/theboatmansdaughter.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="多集连播剧集 · 早期华语殿堂传世名作第一辑：石挥《我这一辈子》、上官云珠《丽人行》、吴永刚《浪淘沙》、阮玲玉《国风》、周璇《红楼梦》、胡蝶《女儿经》(8部连播)",第05部 · 女神绝唱：《国风 1935》阮玲玉生前最后一部公映电影与黎莉莉双姝辉映
+https://archive.org/download/NationalCustoms/nationalcustoms.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="多集连播剧集 · 早期华语殿堂传世名作第一辑：石挥《我这一辈子》、上官云珠《丽人行》、吴永刚《浪淘沙》、阮玲玉《国风》、周璇《红楼梦》、胡蝶《女儿经》(8部连播)",第06部 · 古典名著：《红楼梦 1944》周璇饰林黛玉·王丹凤饰薛宝钗经典唱段版
+https://archive.org/download/dreamred/dreamredchamber.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="多集连播剧集 · 早期华语殿堂传世名作第一辑：石挥《我这一辈子》、上官云珠《丽人行》、吴永刚《浪淘沙》、阮玲玉《国风》、周璇《红楼梦》、胡蝶《女儿经》(8部连播)",第07部 · 全明星巨制：《女儿经 1934》胡蝶领衔·张石川程步高等九大导演联合执导
+https://archive.org/download/biblegirls/bibleforgirls.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="多集连播剧集 · 早期华语殿堂传世名作第一辑：石挥《我这一辈子》、上官云珠《丽人行》、吴永刚《浪淘沙》、阮玲玉《国风》、周璇《红楼梦》、胡蝶《女儿经》(8部连播)",第08部 · 海派喜剧：《还乡日记 1947》张骏祥执导·白杨与耿震演绎上海抢房笑料
+https://archive.org/download/diaryhomecome/diaryofahomecoming.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/caveof-1" group-title="多集连播剧集 · 早期华语武侠神怪孤本与国漫先驱典藏：《盘丝洞 1927》《红侠 1929》《荒江女侠》《一串珍珠》与中国首部木偶片《皇帝梦》(8部连播)",第01部 · 西游记孤本：《盘丝洞 1927》但杜宇执导·殷明珠主演海外重现国宝默片
+https://archive.org/download/caveof-1/CAVEOF~1.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/caveof-1" group-title="多集连播剧集 · 早期华语武侠神怪孤本与国漫先驱典藏：《盘丝洞 1927》《红侠 1929》《荒江女侠》《一串珍珠》与中国首部木偶片《皇帝梦》(8部连播)",第02部 · 武侠鼻祖：《红侠 1929》范雪朋主演中国现存最早完整武侠动作长片
+https://archive.org/download/red-heroine-1929/Red%20Heroine%20(1929).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/caveof-1" group-title="多集连播剧集 · 早期华语武侠神怪孤本与国漫先驱典藏：《盘丝洞 1927》《红侠 1929》《荒江女侠》《一串珍珠》与中国首部木偶片《皇帝梦》(8部连播)",第03部 · 江湖传奇：《荒江女侠 1930》徐琴芳主演三十年代武侠连台本代表作
+https://archive.org/download/huangjiang-nuxia_1930/huangjiang-nuxia_1930.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/caveof-1" group-title="多集连播剧集 · 早期华语武侠神怪孤本与国漫先驱典藏：《盘丝洞 1927》《红侠 1929》《荒江女侠》《一串珍珠》与中国首部木偶片《皇帝梦》(8部连播)",第04部 · 民国项链：《一串珍珠 1926》长城画片公司现存经典社会写实默片
+https://archive.org/download/1926-the-pearl-necklace/1926-The_Pearl_Necklace.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/caveof-1" group-title="多集连播剧集 · 早期华语武侠神怪孤本与国漫先驱典藏：《盘丝洞 1927》《红侠 1929》《荒江女侠》《一串珍珠》与中国首部木偶片《皇帝梦》(8部连播)",第05部 · 联华摩登：《粉红色的梦 1932》蔡楚生执导·阮玲玉与黎莉莉同框出演
+https://archive.org/download/1932pinkdream/1932-PinkDream%E7%B2%89%E7%B4%85%E8%89%B2%E7%9A%84%E5%A4%A2.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/caveof-1" group-title="多集连播剧集 · 早期华语武侠神怪孤本与国漫先驱典藏：《盘丝洞 1927》《红侠 1929》《荒江女侠》《一串珍珠》与中国首部木偶片《皇帝梦》(8部连播)",第06部 · 催泪经典：《母性之光 1933》卜万苍执导·黎灼灼与金焰感人母爱名作
+https://archive.org/download/1933TheLightOfMaternalInstinct/1933-TheLightOfMaternalInstinct%E6%AF%8D%E6%80%A7%E4%B9%8B%E5%85%89.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/caveof-1" group-title="多集连播剧集 · 早期华语武侠神怪孤本与国漫先驱典藏：《盘丝洞 1927》《红侠 1929》《荒江女侠》《一串珍珠》与中国首部木偶片《皇帝梦》(8部连播)",第07部 · 国漫开山：《皇帝梦 1947》陈波儿编导中国电影史上第一部木偶动画片
+https://archive.org/download/huangdi-meng-the-emperors-dream/Huangdi%20Meng%20(The%20Emperor's%20Dream).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/caveof-1" group-title="多集连播剧集 · 早期华语武侠神怪孤本与国漫先驱典藏：《盘丝洞 1927》《红侠 1929》《荒江女侠》《一串珍珠》与中国首部木偶片《皇帝梦》(8部连播)",第08部 · 手绘经典：《瓮中捉鳖 1948》东北电影制片厂早期二维卡通代表作
+https://archive.org/download/wengzhong-zhuobie-capturing-the-turtle-in-a-jar/Wengzhong%20Zhuobie%20(Capturing%20The%20Turtle%20In%20A%20Jar).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第01集 · 国语配音：《疯狂科学家》激光射线塔危机（1941 首集）
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20The%20Mad%20Scientist%20(1941%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第02集 · 国语配音：《机械巨兽》银行飞行机器人大劫案
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20The%20Mechanical%20Monsters%20(1941%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第03集 · 国语配音：《十亿美金黄金专列》失控列车极速营救
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20Billion%20Dollar%20Limited%20(1942%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第04集 · 国语配音：《北极冰封恐龙》史前霸王龙苏醒大闹都市
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20The%20Arctic%20Giant%20(1942%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第05集 · 国语配音：《子弹飞车党》高速撞击飞船攻防战
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20The%20Bulleteers%20(1942%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第06集 · 国语配音：《磁力天文望远镜》彗星引力撞地球危机
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20The%20Magnetic%20Telescope%20(1942%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第07集 · 国语配音：《毁灭兵工厂》露易丝卧底军火厂历险
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20Destruction%2C%20Inc.%20(1942%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第08集 · 国语配音：《木乃伊复活之谜》博物馆古埃及法老密室
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20The%20Mummy%20Strikes%20(1943%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/superman-1941-43-chinese-dub" group-title="多集连播剧集 · 弗莱舍《超人》1941–1943 彩色公版动画全集（中文国语配音版 · 9集完整连播）",第09集 · 国语配音：《丛林战鼓》深入秘境捣毁秘密电台
+https://archive.org/download/superman-1941-43-chinese-dub/Superman%20-%20Jungle%20Drums%20(1943%2C%20Chinese%20dub).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="多集连播剧集 · 世界名导悬疑与黑色幽默殿堂：弗里茨·朗 720p 修复《M 就是凶手》、希区柯克《富贵浮云》、库布里克处女作《恐惧与欲望》、密室鼻祖《第九位客人》与费雯·丽双经典 (8部连播)",第01部 · 720p修复神作：弗里茨·朗《M 就是凶手 1931》彼得·洛演技封神连环追凶鼻祖
+https://archive.org/download/fritz-langs-m-1931-restored-movie-720p-hd/fritz%20lang's%20m-1931-restored%20movie-720p-hd.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="多集连播剧集 · 世界名导悬疑与黑色幽默殿堂：弗里茨·朗 720p 修复《M 就是凶手》、希区柯克《富贵浮云》、库布里克处女作《恐惧与欲望》、密室鼻祖《第九位客人》与费雯·丽双经典 (8部连播)",第02部 · 大师起点：斯坦利·库布里克《恐惧与欲望 1953》24岁独立执导银幕处女作
+https://archive.org/download/FearAndDesire1953_201808/Fear%20and%20Desire%20(1953).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="多集连播剧集 · 世界名导悬疑与黑色幽默殿堂：弗里茨·朗 720p 修复《M 就是凶手》、希区柯克《富贵浮云》、库布里克处女作《恐惧与欲望》、密室鼻祖《第九位客人》与费雯·丽双经典 (8部连播)",第03部 · 希区柯克名作：《富贵浮云 1931》意外暴富年轻夫妇环球邮轮惊魂奇遇
+https://archive.org/download/RichAndStrange_923/RichAndStrange.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="多集连播剧集 · 世界名导悬疑与黑色幽默殿堂：弗里茨·朗 720p 修复《M 就是凶手》、希区柯克《富贵浮云》、库布里克处女作《恐惧与欲望》、密室鼻祖《第九位客人》与费雯·丽双经典 (8部连播)",第04部 · 暴风雪山庄鼻祖：《第九位客人 1934》高压电网封闭顶层公寓八人神秘淘汰局
+https://archive.org/download/THENINTHGUESTVideoQualityUpgrade/THE%20NINTH%20GUEST%20video%20quality%20upgrade.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="多集连播剧集 · 世界名导悬疑与黑色幽默殿堂：弗里茨·朗 720p 修复《M 就是凶手》、希区柯克《富贵浮云》、库布里克处女作《恐惧与欲望》、密室鼻祖《第九位客人》与费雯·丽双经典 (8部连播)",第05部 · 黑色侦探喜剧：《俏佳人 1947》鲍勃·霍普误当私家侦探智斗彼得·洛
+https://archive.org/download/MyFavoriteBrunette1947/MyFavoriteBrunette1947.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="多集连播剧集 · 世界名导悬疑与黑色幽默殿堂：弗里茨·朗 720p 修复《M 就是凶手》、希区柯克《富贵浮云》、库布里克处女作《恐惧与欲望》、密室鼻祖《第九位客人》与费雯·丽双经典 (8部连播)",第06部 · 奥斯卡提名：《托珀归来 1941》古堡机关密道幽灵少女携手侦破悬案
+https://archive.org/download/TopperReturns_201409/Topper%20Returns.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="多集连播剧集 · 世界名导悬疑与黑色幽默殿堂：弗里茨·朗 720p 修复《M 就是凶手》、希区柯克《富贵浮云》、库布里克处女作《恐惧与欲望》、密室鼻祖《第九位客人》与费雯·丽双经典 (8部连播)",第07部 · 费雯丽名作：《伦敦人行道 1938》费雯·丽与奥斯卡影帝查尔斯·劳顿街头成名曲
+https://archive.org/download/St.MartinsLane/St.MartinsLane.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="多集连播剧集 · 世界名导悬疑与黑色幽默殿堂：弗里茨·朗 720p 修复《M 就是凶手》、希区柯克《富贵浮云》、库布里克处女作《恐惧与欲望》、密室鼻祖《第九位客人》与费雯·丽双经典 (8部连播)",第08部 · 英伦讽刺喜剧：《茶杯风波 1937》费雯·丽与雷克斯·哈里森浪漫幽默佳作
+https://archive.org/download/StormInATeacupVideoQualityUpgrade/StormInATeacupVideoQualityUpgrade.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第01部 · 格里菲斯杰作：《残花泪 1919》莉莲·吉许与理查德·巴塞尔梅斯伦敦雾夜绝唱
+https://archive.org/download/Broken.Blossoms/Broken_Blossoms_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第02部 · 影史十二佳片：《大地 1930》亚历山大·杜辅仁科诗意蒙太奇巅峰巨制
+https://archive.org/download/1930-earth/1930-Earth.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第03部 · 小津现存首作：《青春之日 1929》小津安二郎雪山滑雪场大学生幽默恋曲
+https://archive.org/download/1929-days-of-youth/1929-Days_of_Youth.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第04部 · 小津校园喜剧：《我落第了，但…… 1930》轻松诙谐的毕业季人生百态
+https://archive.org/download/1930-i-flunked-but.../1930-I%20Flunked%2C%20But.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第05部 · 犯罪悬疑鼻祖：《方托马斯一：断头台阴影下 1913》千面大盗传奇开篇
+https://archive.org/download/1913fantomas1alombredelaguillotine/1913-Fant%C3%B4mas_1-%C3%80_l'ombre_de_la_guillotine.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第06部 · 犯罪悬疑续章：《方托马斯二：朱夫智斗方托马斯 1913》巴黎快车惊险对决
+https://archive.org/download/1913juvecontrefantomas/1913-Juve_contre_Fantomas.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第07部 · 犯罪悬疑高潮：《方托马斯三：杀人的死者 1913》离奇指纹迷局
+https://archive.org/download/1913-le-mort-qui-tue/1913-Le_Mort_qui_tue.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第08部 · 蝙蝠侠灵感源头：《蝙蝠 1926》暴风雨古宅黑衣飞贼配乐修复版
+https://archive.org/download/TheBat1926WithSoundtrack/TheBat1926WithSoundtrack_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="多集连播剧集 · 世界无声电影大师圣殿：格里菲斯《残花泪 1919》、杜辅仁科《大地 1930》、小津安二郎早期青春喜剧双片、费雅德《方托马斯三部曲》与《蝙蝠 1926》(9部连播)",第09部 · 千面人代表作：《惩罚 1920》默片传奇巨星朗·钱尼惊人演技神作
+https://archive.org/download/ThePenalty/The_Penalty_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第01集 · 彩色双卷巨制：《大力水手大战阿里巴巴四十大盗 1937》立体背景台技术代表作
+https://archive.org/download/PopeyeTheSailorMeetsAliBabasFortyThieves/PopeyeAliBabaRestored_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第02集 · 国家影片登记部典藏：《贝蒂娃娃版白雪公主 1933》卡布·卡洛威爵士歌舞神作
+https://archive.org/download/SnowWhiteWithBettyBoop1933/BettyBoopSnowWhite1933.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第03集 · 唯一彩色童话：《可怜的灰姑娘 1934》贝蒂娃娃红发特艺彩色梦幻舞会
+https://archive.org/download/bb_poor_cinderella/bb_poor_cinderella_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第04集 · 影史首秀纪念：《眩晕餐盘 1930》贝蒂娃娃首次登上大银幕的历史性短片
+https://archive.org/download/BettyBoopDizzyDishes1930/DizzyDishes_mpeg4.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第05集 · 超现实脑洞神作：《比姆博秘密结社入会记 1931》机关迷宫奇幻历险
+https://archive.org/download/BettyBoopBimbosInitiation1931/BimbosInitiation_mpeg4.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第06集 · 幽灵爵士喜剧：《神秘摩西 1930》午夜闹鬼木屋爆笑狂想
+https://archive.org/download/BettyBoopMysteriousMose1930/MysteriousMose_mpeg4.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第07集 · 玩具总动员先声：《木偶兵进行曲》玩具工厂午夜盛装大巡游
+https://archive.org/download/bb_parade_of_the_wooden_soldiers/bb_parade_of_the_wooden_soldiers_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第08集 · 夏威夷风情：《热带竹岛》路易斯·阿姆斯特朗与皇家夏威夷乐团配乐
+https://archive.org/download/bb_bamboo_isle/bb_bamboo_isle_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第09集 · 奇幻占卜记：《手相占卜奇遇 1932》水晶球里的未来幻象
+https://archive.org/download/Betty_Boop_Is_My_Palm_Read_1932/Betty_Boop_Is_My_Palm_Read_1932_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="多集连播剧集 · 弗莱舍黄金动画珍宝馆：大力水手彩色长篇《大战阿里巴巴四十大盗》与贝蒂娃娃殿堂级短片集（《白雪公主 1933》《灰姑娘彩色版》《神秘摩西》等 10集连播）",第10集 · 菜园保卫战：《大力水手与偷菠菜地鼠 1954》爆笑田园对决
+https://archive.org/download/Popeye_Gopher_Spinach_1954/Popeye_Gopher_Spinach_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第01集 · 影史里程碑：《琴弦狂想曲 1930》乌布·伊沃克斯执导世界首部彩色有声卡通
+https://archive.org/download/Fiddlesticks1930UbIwerks/Fiddlesticks%201930%20%20Ub%20Iwerks.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第02集 · 好莱坞奇遇：《菲力猫闯好莱坞 1923》偶遇卓别林与本·特平动画分身
+https://archive.org/download/FelixTheCatFelixInHollywood1923/Felix%20the%20Cat%20%20Felix%20in%20Hollywood%20(1923).mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第03集 · 童话漫游记：《菲力猫仙境奇遇 1923》把思考问号变成天梯爬上云端
+https://archive.org/download/FelixTheCat-FelixInFairyland1923/FelixTheCat-1923-FelixInFairyland_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第04集 · 进化论脑洞：《菲力猫替达尔文找证据 1923》跨越海洋的奇想冒险
+https://archive.org/download/FelixTheCat-DoublesForDarwin1923/FelixTheCat-1923-FelixDoublesForDarwin_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第05集 · 春日野餐记：《菲力猫四月迷踪 1930》有声时代经典配乐版
+https://archive.org/download/FelixAprilMaze/felix_april_maze_instr_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第06集 · 带娃大作战：《菲力猫看娃记 1922》早期无声卡通幽默代表作
+https://archive.org/download/FelixTheCat-FelixMindsTheKid1922/FelixTheCat-1922-FelixMindsTheKid_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第07集 · 爆笑拳击赛：《飞拳争霸 1930》乌布·伊沃克斯动物拳台滑稽大战
+https://archive.org/download/FlyingFists1930UbIwerks/Flying%20Fists%201930%20%20Ub%20Iwerks.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第08集 · 跳跳蛙经典：《孤儿小威利 1930》跳跳蛙有声音乐喜剧
+https://archive.org/download/LittleOrphanWillie1930FlipTheFrogSoundCartoon/Little%20Orphan%20Willie%201930%20Flip%20The%20Frog%20Sound%20Cartoon.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第09集 · 伊索寓言动画：《玩具城童话 1931》凡·伯伦工作室音乐奇幻短片
+https://archive.org/download/aesopsFablesAToytownTaleByVanBeurenStudios/VanBeuren_AesopsFable_AToytownTale.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="多集连播剧集 · 世界动画开山双杰：1920年代《菲力猫闯好莱坞》无声卡通经典与乌布·伊沃克斯影史首部双色有声动画《琴弦狂想曲 Fiddlesticks》(10集连播)",第10集 · 友善小幽灵：《卡斯帕与三只小猪 1952》派拉蒙著名公版彩色卡通
+https://archive.org/download/CasperPigABoo1952/Casper%20Pig-A-Boo%20-%201952.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="多集连播剧集 · NASA 阿波罗 7–17 号登月舱内 16mm 胶片实拍全纪实珍藏馆：阿波罗11号91分钟登月原片、阿波罗17号103分钟月球车巡视与土星五号发射特写 (8部连播)",第01部 · 人类首登月球：《阿波罗11号 16mm 舱内与月面实拍全片》91分钟第一视角原片
+https://archive.org/download/Apollo1116mmOnboardFilm/apollo11_6_1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="多集连播剧集 · NASA 阿波罗 7–17 号登月舱内 16mm 胶片实拍全纪实珍藏馆：阿波罗11号91分钟登月原片、阿波罗17号103分钟月球车巡视与土星五号发射特写 (8部连播)",第02部 · 最后登月壮举：《阿波罗17号 16mm 实拍全片》103分钟月球车驰骋陶拉斯-利特罗峡谷
+https://archive.org/download/Apollo1716mmonboardfilm/apollo17_13_1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="多集连播剧集 · NASA 阿波罗 7–17 号登月舱内 16mm 胶片实拍全纪实珍藏馆：阿波罗11号91分钟登月原片、阿波罗17号103分钟月球车巡视与土星五号发射特写 (8部连播)",第03部 · 月球高地科考：《阿波罗15与16号 16mm 舱内实拍》95分钟哈德利月溪探险
+https://archive.org/download/Apollo15And1616mmOnboardFilm/apollo15_10_1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="多集连播剧集 · NASA 阿波罗 7–17 号登月舱内 16mm 胶片实拍全纪实珍藏馆：阿波罗11号91分钟登月原片、阿波罗17号103分钟月球车巡视与土星五号发射特写 (8部连播)",第04部 · 风暴洋精准着陆：《阿波罗12号 16mm 舱内全纪录》86分钟月面寻访勘测者3号
+https://archive.org/download/Apollo1216mmOnboardFilm/apollo12_7_1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="多集连播剧集 · NASA 阿波罗 7–17 号登月舱内 16mm 胶片实拍全纪实珍藏馆：阿波罗11号91分钟登月原片、阿波罗17号103分钟月球车巡视与土星五号发射特写 (8部连播)",第05部 · 奇迹生还纪实：《阿波罗12与13号 16mm 胶片合集》78分钟深空实拍珍贵画面
+https://archive.org/download/Apollo12And1316mmOnboardFilm/apollo12_8_1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="多集连播剧集 · NASA 阿波罗 7–17 号登月舱内 16mm 胶片实拍全纪实珍藏馆：阿波罗11号91分钟登月原片、阿波罗17号103分钟月球车巡视与土星五号发射特写 (8部连播)",第06部 · 登月总彩排：《阿波罗10号 16mm 绕月实拍》55分钟距月面15公里低空掠过
+https://archive.org/download/Apollo1016mmOnboardFilm1/apollo10_5_1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="多集连播剧集 · NASA 阿波罗 7–17 号登月舱内 16mm 胶片实拍全纪实珍藏馆：阿波罗11号91分钟登月原片、阿波罗17号103分钟月球车巡视与土星五号发射特写 (8部连播)",第07部 · 地出诞生地：《阿波罗7号与8号 16mm 胶片》49分钟人类首次飞往月球轨道
+https://archive.org/download/Apollo07And0816mmOnboardFilm/apollo07_2_1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="多集连播剧集 · NASA 阿波罗 7–17 号登月舱内 16mm 胶片实拍全纪实珍藏馆：阿波罗11号91分钟登月原片、阿波罗17号103分钟月球车巡视与土星五号发射特写 (8部连播)",第08部 · 雷霆万钧：《土星五号火箭发射台 16mm 高速摄影机实录》46分钟烈焰特写
+https://archive.org/download/APOLLO16MMLAUNCHVIEWS/apollo_14_1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第01集 · 81分钟官方巨制：《航天飞机三十年史诗》星际迷航柯克舰长威廉·夏特纳深情旁白
+https://archive.org/download/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第02集 · NASA 360 HD：《沙漠之鼠外星地表模拟实验》新一代登月车与宇航服极限测试
+https://archive.org/download/NASA_360_14_HD/NASA_360_14_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第03集 · NASA 360 HD：《未来航空新纪元》超低音爆概念客机与绿色电动飞行器
+https://archive.org/download/NASA_360_15_HD/NASA_360_15_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第04集 · NASA 360 HD：《走进千家万户的太空科技》从记忆海绵到手机CMOS传感器的诞生
+https://archive.org/download/NASA_360_12_HD/NASA_360_12_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第05集 · NASA 360 HD：《太空感官超载挑战》失重环境下宇航员视觉与平衡训练
+https://archive.org/download/NASA_360_13_HD/NASA_360_13_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第06集 · NASA 360 HD：《深空探测前沿》行星际导航与新一代空间推进器
+https://archive.org/download/NASA_360_17_HD/NASA_360_17_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第07集 · NASA 360 HD：《重返月球工程解码》运载火箭制造与复合材料革命
+https://archive.org/download/NASA_360_program1_HD/NASA_360_program1_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第08集 · NASA 360 HD：《极地与火星机器人科考》自主探测车与生命迹象搜寻
+https://archive.org/download/NASA_360_program2_HD/NASA_360_program2_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第09集 · NASA 360 HD：《地球气候遥感天眼》卫星星座全天候监测大气与洋流
+https://archive.org/download/NASA_360_program4_HD/NASA_360_program4_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="多集连播剧集 · NASA 航天飞机 30 周年官方纪录长片（威廉·夏特纳旁白）与《NASA 360》前沿航天工程超清全集 (10集连播)",第10集 · NASA 360 HD：《深空通信网与天体生物学》聆听太阳系边缘探测器信号
+https://archive.org/download/NASA_360_program6_HD/NASA_360_program6_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第01集 · 火星探索专题：《三十分钟飞向火星》揭秘火星着陆器气囊缓冲与地表勘探
+https://archive.org/download/30MinutesToMars/30%20Minutes%20to%20Mars_Part%202_Rev%20A_web.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第02集 · 商业载人里程碑：《SpaceX 龙飞船 DM-1 脱离国际空间站》轨道分离高清实拍
+https://archive.org/download/SpaceX_DM1_Departure-Footage/ISS-Downlink-Video_DRAGON-UNDOCKING_DL-1_2019_067_0731.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第03集 · 逐舱沉浸导览：《漫游国际空间站》跟随宇航员飞越实验舱与穹顶舱
+https://archive.org/download/TourTheInternationalSpaceStation/finckeHD_compress1_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第04集 · 720p轨道壮景：《国际空间站外部全景与地球弧线》太阳翼掠过蔚蓝海洋
+https://archive.org/download/ISSVideoResourceExteriorViews720p/ISS%20Video%20Resource_ExteriorViews_720p.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第05集 · 720p失重日常：《空间站宇航员生活实录》太空锻炼、睡眠与科学实验
+https://archive.org/download/ISSVideoResourceLifeOnStation720p/ISS%20Video%20Resource_LifeOnStation_720p.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第06集 · 太空美食揭秘：《国际空间站宇航员吃什么》失重厨房烹饪与补给
+https://archive.org/download/NASA_Space_Operations_Launch_Services_Clip15_HD/NASA_Space_Operations_Launch_Services_Clip15_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第07集 · 深空蓝图：《从地球、月球迈向火星》载人深空探测三步走架构
+https://archive.org/download/ConstellationEarthMoonMars/Constellation_Earth_Moon_Mars_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第08集 · 极致推力：《航天飞机主发动机点火测试 HD》液氢液氧烈焰喷流解析
+https://archive.org/download/NASA_Launchpad_SSMEs_HD/NASA_Launchpad_SSMEs_HD_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第09集 · 天体力学：《日食与月食的轨道奥秘 HD》NASA 卫星视角观测日全食
+https://archive.org/download/NASA_Launchpad_Eclipse_HD/NASA_Launchpad_Eclipse_HD.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="多集连播剧集 · NASA《三十分钟飞向火星》、龙飞船空间站撤离实拍与国际空间站轨道生活超清漫游 (10集连播)",第10集 · 月球基地工程：《如何在月球建造发电站》极昼太阳能与储能方案
+https://archive.org/download/RealWorldLunarPowerPlant/Rw47lunarpowerOc.ia.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第01集 · 《全科医生的日与夜》昼夜奔波守护社区病患的温情与抉择
+https://archive.org/download/MEDIC_General_Practitioner/MEDIC_General_Practitioner_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第02集 · 《黑暗一闪之后》突发失明急症抢救与重见光明的希望
+https://archive.org/download/MEDIC_Flash_Of_Darkness/MEDIC_Flash_Of_Darkness_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第03集 · 《冲破心灵高墙》用前沿医学与耐心唤醒沉默重症患者
+https://archive.org/download/MEDIC_Break_Through/MEDIC_Break_Through_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第04集 · 《追寻病因真相的人》病理科医生抽丝剥茧锁定罕见感染源
+https://archive.org/download/MEDIC_Who_Search_for_Truth/MEDIC_Who_Search_for_Truth_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第05集 · 《值得活下去的时光》危重手术台上的分秒必争
+https://archive.org/download/MEDIC_Time_To_Be_Alive/MEDIC_Time_To_Be_Alive_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第06集 · 《永不言弃的怪杰医生》挑战高难度外科禁区挽救生命
+https://archive.org/download/MEDIC_Dr_Impossible/MEDIC_Dr_Impossible_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第07集 · 《暴风雨中的少年》恶劣天气下紧急开辟生命救援通道
+https://archive.org/download/MEDIC_Boy_In_The_Storm/MEDIC_Boy_In_The_Storm_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第08集 · 《与勇者同行》陪伴年轻病患跨越术后康复难关
+https://archive.org/download/MEDIC_Walk_With_Lions/MEDIC_Walk_With_Lions_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第09集 · 《恐惧之杯》破解疑难急症背后的心理与生理双重症结
+https://archive.org/download/Medic--Glass_of_Fear/Medic_210--Glass_of_Fear.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="多集连播剧集 · 五十年代 NBC 纪实医疗开山名剧《仁心医者 Medic》（理查德·布恩主演 · 洛杉矶医学会真实病例改编 · 10集连播）",第10集 · 《醒在春暖花开时》漫长治疗后迎来生命复苏的感人终章
+https://archive.org/download/Medic--Awake_to_Spring/Medic_221--Awake_to_Spring.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第01集 · 警徽背后：《天价伪造护照案》跨国追踪精密假证集团幕后主脑
+https://archive.org/download/ManBehindTheBadgeTheCaseOfThePricelessPassport/ManBehindTheBadge-theCaseOfThePricelessPassport_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第02集 · 警徽背后：《反破坏特别行动》粉碎针对关键基础设施的潜伏破坏
+https://archive.org/download/ManBehindTheBadge-caseOfOperationSabotage/ManBehindTheBadge-caseOfOperationSabotage_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第03集 · 警徽背后：《头号重案追踪》从微量物证还原扑朔迷离的真相
+https://archive.org/download/TheManBehindTheBadgeTheCaseOfTheCapitalCrime/ManBehindTheBadge-caseOfTheCapitalCrime_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第04集 · 州警巡逻队：《保险箱大盗》奥斯卡影帝马修斯队长设卡围捕流窜悍匪
+https://archive.org/download/SAFECRACKER/SAFECRACKER.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第05集 · 州警巡逻队：《完美秘书迷案》公路无线电布控智破商业窃密案
+https://archive.org/download/EFFICENCYSECRETARY/EFFICENCY%20SECRETARY.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第06集 · 奥齐与哈丽雅特：《周末公路赛乌龙》全家总动员啼笑皆非的比赛日
+https://archive.org/download/OZZIE_AND_HARRIET_ep_Road_Race/OZZIE_AND_HARRIET_ep_Road_Race_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第07集 · 奥齐与哈丽雅特：《打碎的玻璃窗》父子俩手忙脚乱修窗户越帮越忙
+https://archive.org/download/Ozzie-Harriet_The_Window_Pane/02-04_The_Window_Pane.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第08集 · 奥齐与哈丽雅特：《大卫装大人抽烟斗》成长中的温馨家庭幽默
+https://archive.org/download/Ozzie-Harriet--Davids_Pipe/02-03_Davids_Pipe.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第09集 · 莱利的生活：《爱心爆棚动物迷》把奇葩宠物领回家闹翻客厅
+https://archive.org/download/life_of_riley_-_2x02_-_riley_the_animal_lover/life_of_riley_-_2x02_-_riley_the_animal_lover_agk_512kb.mp4
+
+#EXTINF:-1 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="多集连播剧集 · 五十年代警探档案与美式家庭喜剧双精选：《警徽背后》《州警巡逻队》硬核破案与《奥齐与哈丽雅特》《莱利一家》欢乐日常 (10集连播)",第10集 · 莱利的生活：《升任副经理白日梦》职场晋升引发的连环搞笑误会
+https://archive.org/download/S1E06-Life_Of_Riley-11_08_1949_-_Assistant_Manager/S1E06-Life_Of_Riley-11_08_1949-Assistant_Manager_512kb.mp4
+
 #EXTINF:-1 tvg-logo="https://archive.org/services/img/love-and-duty-1931_202507" group-title="多集连播剧集 · 早期华语联华黄金年代镇馆七大名片：阮玲玉《恋爱与义务》《一剪梅》、黎莉莉《天明》《体育皇后》与《都市风光》《白毛女》 (7部连播)",第01部 · 《恋爱与义务》1931卜万苍执导阮玲玉金焰主演联华镇馆巨作 (152分钟)
 https://archive.org/download/love-and-duty-1931_202507/Love%20and%20Duty%20(1931).mp4
 
@@ -23991,3 +24321,1668 @@ https://archive.org/download/TheBlindMan/TheBlindman.mp4
 
 #EXTINF:3434 tvg-logo="https://archive.org/services/img/MollyO1921" group-title="爆笑喜剧与国会图书馆典藏",莫莉·O（1921） (1948)
 https://archive.org/download/MollyO1921/Molly-O.mp4
+
+#EXTINF:6507 tvg-logo="https://archive.org/services/img/this_life_of_mine" group-title="早期华语影史瑰宝",我这一辈子（1950 石挥自导自演传世杰作） (1950)
+https://archive.org/download/this_life_of_mine/this_life_of_mine.mp4
+
+#EXTINF:6140 tvg-logo="https://archive.org/services/img/threegirls" group-title="早期华语影史瑰宝",丽人行（1949 上官云珠·黄宗英·赵丹） (1949)
+https://archive.org/download/threegirls/threegirls.mp4
+
+#EXTINF:4315 tvg-logo="https://archive.org/services/img/waves-washing-the-sand-1936" group-title="早期华语影史瑰宝",浪淘沙（1936 吴永刚执导·金焰主演修复版） (1936)
+https://archive.org/download/waves-washing-the-sand-1936/Waves%20Wash%20The%20Sand%20(1936)%20CHN%20Disk%20Kino%20Bluray.mp4
+
+#EXTINF:6074 tvg-logo="https://archive.org/services/img/theboatmansdaughter" group-title="早期华语影史瑰宝",船家女（1935 沈西苓执导·徐来主演） (1935)
+https://archive.org/download/theboatmansdaughter/theboatmansdaughter.mp4
+
+#EXTINF:9513 tvg-logo="https://archive.org/services/img/biblegirls" group-title="早期华语影史瑰宝",女儿经（1934 胡蝶主演·明星九大导演联袂） (1934)
+https://archive.org/download/biblegirls/bibleforgirls.mp4
+
+#EXTINF:5640 tvg-logo="https://archive.org/services/img/NationalCustoms" group-title="早期华语影史瑰宝",国风（1935 阮玲玉·黎莉莉联袂主演） (1935)
+https://archive.org/download/NationalCustoms/nationalcustoms.mp4
+
+#EXTINF:4968 tvg-logo="https://archive.org/services/img/Cosmeticsofmarket" group-title="早期华语影史瑰宝",脂粉市场（1933 夏衍编剧·胡蝶主演） (1933)
+https://archive.org/download/Cosmeticsofmarket/cosmeticsofmarket.mp4
+
+#EXTINF:5529 tvg-logo="https://archive.org/services/img/1933TheLightOfMaternalInstinct" group-title="早期华语影史瑰宝",母性之光（1933 卜万苍执导·黎灼灼·金焰） (1933)
+https://archive.org/download/1933TheLightOfMaternalInstinct/1933-TheLightOfMaternalInstinct%E6%AF%8D%E6%80%A7%E4%B9%8B%E5%85%89.mp4
+
+#EXTINF:5008 tvg-logo="https://archive.org/services/img/1932pinkdream" group-title="早期华语影史瑰宝",粉红色的梦（1932 蔡楚生执导·阮玲玉·黎莉莉） (1932)
+https://archive.org/download/1932pinkdream/1932-PinkDream%E7%B2%89%E7%B4%85%E8%89%B2%E7%9A%84%E5%A4%A2.mp4
+
+#EXTINF:7470 tvg-logo="https://archive.org/services/img/dreamred" group-title="早期华语影史瑰宝",红楼梦（1944 周璇·袁美云·王丹凤） (1944)
+https://archive.org/download/dreamred/dreamredchamber.mp4
+
+#EXTINF:5726 tvg-logo="https://archive.org/services/img/empresswu" group-title="早期华语影史瑰宝",武则天（1939 顾兰君主演古装宫闱经典） (1939)
+https://archive.org/download/empresswu/empresswuchehtien.mp4
+
+#EXTINF:6738 tvg-logo="https://archive.org/services/img/diaryhomecome" group-title="早期华语影史瑰宝",还乡日记（1947 张骏祥执导·白杨·耿震） (1947)
+https://archive.org/download/diaryhomecome/diaryofahomecoming.mp4
+
+#EXTINF:6294 tvg-logo="https://archive.org/services/img/youthonthemarch" group-title="早期华语影史瑰宝",青年进行曲（1937 史东山执导·田汉编剧） (1937)
+https://archive.org/download/youthonthemarch/youthonthemarch.mp4
+
+#EXTINF:3630 tvg-logo="https://archive.org/services/img/caveof-1" group-title="早期华语影史瑰宝",盘丝洞（1927 但杜宇执导·西游记神怪默片孤本） (1927)
+https://archive.org/download/caveof-1/CAVEOF~1.mp4
+
+#EXTINF:5684 tvg-logo="https://archive.org/services/img/red-heroine-1929" group-title="早期华语影史瑰宝",红侠（1929 中国现存最早完整武侠默片） (1929)
+https://archive.org/download/red-heroine-1929/Red%20Heroine%20(1929).mp4
+
+#EXTINF:4659 tvg-logo="https://archive.org/services/img/huangjiang-nuxia_1930" group-title="早期华语影史瑰宝",荒江女侠（1930 徐琴芳主演早期武侠名作） (1930)
+https://archive.org/download/huangjiang-nuxia_1930/huangjiang-nuxia_1930.mp4
+
+#EXTINF:6093 tvg-logo="https://archive.org/services/img/1926-the-pearl-necklace" group-title="早期华语影史瑰宝",一串珍珠（1926 长城画片公司无声长片珍本） (1926)
+https://archive.org/download/1926-the-pearl-necklace/1926-The_Pearl_Necklace.mp4
+
+#EXTINF:4541 tvg-logo="https://archive.org/services/img/anorphan" group-title="早期华语影史瑰宝",雪中孤雏（1929 早期华语无声电影珍本） (1929)
+https://archive.org/download/anorphan/anorphan.mp4
+
+#EXTINF:4273 tvg-logo="https://archive.org/services/img/poordaddy" group-title="早期华语影史瑰宝",儿子英雄（1929 早期华语家庭喜剧默片） (1929)
+https://archive.org/download/poordaddy/PoorDaddy_512kb.mp4
+
+#EXTINF:3687 tvg-logo="https://archive.org/services/img/1929DontChangeYourHusband" group-title="早期华语影史瑰宝",情海重吻（1929 谢云卿执导都市情感默片） (1929)
+https://archive.org/download/1929DontChangeYourHusband/1929-Dont_Change_Your_Husband%E6%83%85%E6%B5%B7%E9%87%8D%E5%90%BB.mp4
+
+#EXTINF:4199 tvg-logo="https://archive.org/services/img/1932fateintearsandlaughter" group-title="早期华语影史瑰宝",啼笑因缘（1932 张恨水原著·胡蝶主演珍贵残本） (1932)
+https://archive.org/download/1932fateintearsandlaughter/1932-FateInTearsAndLaughter%E5%95%BC%E7%AC%91%E5%9B%A0%E7%B7%A3.mp4
+
+#EXTINF:1617 tvg-logo="https://archive.org/services/img/1929TheValiantGirlNicknamedWhiteRose" group-title="早期华语影史瑰宝",女侠白玫瑰（1929 早期武侠默片珍本） (1929)
+https://archive.org/download/1929TheValiantGirlNicknamedWhiteRose/1929-The%20Valiant%20Girl%20Nicknamed%20White%20Rose%E5%A5%B3%E4%BE%A0%E7%99%BD%E7%8E%AB%E7%91%B0.mp4
+
+#EXTINF:2496 tvg-logo="https://archive.org/services/img/greedyneighbors_201808" group-title="早期华语影史瑰宝",恶邻（1933 早期上海市民喜剧短片） (1933)
+https://archive.org/download/greedyneighbors_201808/greedyneighbors.mp4
+
+#EXTINF:464 tvg-logo="https://archive.org/services/img/huangdi-meng-the-emperors-dream" group-title="早期华语影史瑰宝",皇帝梦（1947 中国第一部木偶动画片） (1947)
+https://archive.org/download/huangdi-meng-the-emperors-dream/Huangdi%20Meng%20(The%20Emperor's%20Dream).mp4
+
+#EXTINF:403 tvg-logo="https://archive.org/services/img/wengzhong-zhuobie-capturing-the-turtle-in-a-jar" group-title="早期华语影史瑰宝",瓮中捉鳖（1948 东北电影制片厂早期手绘动画） (1948)
+https://archive.org/download/wengzhong-zhuobie-capturing-the-turtle-in-a-jar/Wengzhong%20Zhuobie%20(Capturing%20The%20Turtle%20In%20A%20Jar).mp4
+
+#EXTINF:6168 tvg-logo="https://archive.org/services/img/1929-days-of-youth" group-title="爆笑喜剧与国会图书馆典藏",小津安二郎：青春之日 / 学生罗曼史（1929） (1929)
+https://archive.org/download/1929-days-of-youth/1929-Days_of_Youth.mp4
+
+#EXTINF:3891 tvg-logo="https://archive.org/services/img/1930-i-flunked-but..." group-title="爆笑喜剧与国会图书馆典藏",小津安二郎：我落第了，但……（1930） (1930)
+https://archive.org/download/1930-i-flunked-but.../1930-I%20Flunked%2C%20But.mp4
+
+#EXTINF:832 tvg-logo="https://archive.org/services/img/1929-a-straightforward-boy" group-title="爆笑喜剧与国会图书馆典藏",小津安二郎：突贯小僧（1929 喜剧短片） (1929)
+https://archive.org/download/1929-a-straightforward-boy/1929-A_Straightforward_Boy.mp4
+
+#EXTINF:4681 tvg-logo="https://archive.org/services/img/1930-earth" group-title="悬疑推理与科幻惊悚",大地（1930 杜辅仁科诗意蒙太奇影史巨作） (1930)
+https://archive.org/download/1930-earth/1930-Earth.mp4
+
+#EXTINF:3185 tvg-logo="https://archive.org/services/img/1913fantomas1alombredelaguillotine" group-title="悬疑推理与科幻惊悚",方托马斯第一部：断头台阴影下（1913 路易·费雅德） (1913)
+https://archive.org/download/1913fantomas1alombredelaguillotine/1913-Fant%C3%B4mas_1-%C3%80_l'ombre_de_la_guillotine.mp4
+
+#EXTINF:3627 tvg-logo="https://archive.org/services/img/1913juvecontrefantomas" group-title="悬疑推理与科幻惊悚",方托马斯第二部：朱夫智斗方托马斯（1913 路易·费雅德） (1913)
+https://archive.org/download/1913juvecontrefantomas/1913-Juve_contre_Fantomas.mp4
+
+#EXTINF:5347 tvg-logo="https://archive.org/services/img/1913-le-mort-qui-tue" group-title="悬疑推理与科幻惊悚",方托马斯第三部：杀人的死者（1913 路易·费雅德） (1913)
+https://archive.org/download/1913-le-mort-qui-tue/1913-Le_Mort_qui_tue.mp4
+
+#EXTINF:2868 tvg-logo="https://archive.org/services/img/1916-shoes" group-title="悬疑推理与科幻惊悚",一双新鞋（1916 洛伊斯·韦伯美国国家影片登记部经典） (1916)
+https://archive.org/download/1916-shoes/1916-Shoes.mp4
+
+#EXTINF:3705 tvg-logo="https://archive.org/services/img/1921SEVENYEARSBADLUCKSilent" group-title="爆笑喜剧与国会图书馆典藏",倒霉七年（1921 麦克斯·林戴经典镜子戏喜剧长片） (1921)
+https://archive.org/download/1921SEVENYEARSBADLUCKSilent/1921-SEVEN%20YEARS%20BAD%20LUCK-silent.mp4
+
+#EXTINF:395 tvg-logo="https://archive.org/services/img/Betty_Boop_Is_My_Palm_Read_1932" group-title="开源动画与独立短片",贝蒂·布普：我的手掌占卜结果如何？ (1932)
+https://archive.org/download/Betty_Boop_Is_My_Palm_Read_1932/Betty_Boop_Is_My_Palm_Read_1932_512kb.mp4
+
+#EXTINF:497 tvg-logo="https://archive.org/services/img/FelixTheCat-FelixMindsTheKid1922" group-title="开源动画与独立短片",费利克斯猫——《费利克斯提醒孩子》（1922年） (1948)
+https://archive.org/download/FelixTheCat-FelixMindsTheKid1922/FelixTheCat-1922-FelixMindsTheKid_512kb.mp4
+
+#EXTINF:370 tvg-logo="https://archive.org/services/img/bb_musical_mountaineers" group-title="开源动画与独立短片",贝蒂·布普：音乐登山者 (1939)
+https://archive.org/download/bb_musical_mountaineers/bb_musical_mountaineers_512kb.mp4
+
+#EXTINF:452 tvg-logo="https://archive.org/services/img/bb_morning_noon_and_night" group-title="开源动画与独立短片",贝蒂·布普：晨间、午后与夜间 (1933)
+https://archive.org/download/bb_morning_noon_and_night/bb_morning_noon_and_night_512kb.mp4
+
+#EXTINF:372 tvg-logo="https://archive.org/services/img/bb_the_impractical_joker" group-title="开源动画与独立短片",贝蒂·布普：不切实际的杰克逊 (1937)
+https://archive.org/download/bb_the_impractical_joker/bb_the_impractical_joker_512kb.mp4
+
+#EXTINF:361 tvg-logo="https://archive.org/services/img/popeyethesailor-publicdomain" group-title="开源动画与独立短片",所有属于公有领域的《水手波派》短片 (1934)
+https://archive.org/download/popeyethesailor-publicdomain/I'm%20In%20The%20Army%20Now%20(1936%2C%20Redrawn%20and%20Colorized).mp4
+
+#EXTINF:369 tvg-logo="https://archive.org/services/img/bb_house_cleaning_blues" group-title="开源动画与独立短片",贝蒂·布普：家务清洁的烦恼 (1937)
+https://archive.org/download/bb_house_cleaning_blues/bb_house_cleaning_blues_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/PopeyetheSailorVolume3" group-title="开源动画与独立短片",《大力水手：20世纪40年代第三卷动画片》 (1948)
+https://archive.org/download/PopeyetheSailorVolume3/883929692507_Title_02_01.mp4
+
+#EXTINF:549 tvg-logo="https://archive.org/services/img/FelixTheCat-FelixInFairyland1923" group-title="开源动画与独立短片",费利克斯猫——《费利克斯在仙境》（1923年） (1948)
+https://archive.org/download/FelixTheCat-FelixInFairyland1923/FelixTheCat-1923-FelixInFairyland_512kb.mp4
+
+#EXTINF:621 tvg-logo="https://archive.org/services/img/bb_poor_cinderella" group-title="开源动画与独立短片",贝蒂娃娃：可怜的灰姑娘（1934 唯一特艺彩色童话篇） (1934)
+https://archive.org/download/bb_poor_cinderella/bb_poor_cinderella_512kb.mp4
+
+#EXTINF:480 tvg-logo="https://archive.org/services/img/bb_parade_of_the_wooden_soldiers" group-title="开源动画与独立短片",贝蒂·布普：木制士兵游行 (1933)
+https://archive.org/download/bb_parade_of_the_wooden_soldiers/bb_parade_of_the_wooden_soldiers_512kb.mp4
+
+#EXTINF:487 tvg-logo="https://archive.org/services/img/bb_bamboo_isle" group-title="开源动画与独立短片",贝蒂·布普：竹岛 (1932)
+https://archive.org/download/bb_bamboo_isle/bb_bamboo_isle_512kb.mp4
+
+#EXTINF:387 tvg-logo="https://archive.org/services/img/Popeye_Gopher_Spinach_1954" group-title="开源动画与独立短片",大力水手：地鼠菠菜 (1954)
+https://archive.org/download/Popeye_Gopher_Spinach_1954/Popeye_Gopher_Spinach_512kb.mp4
+
+#EXTINF:335 tvg-logo="https://archive.org/services/img/Betty_Boop_More_Pep_1936" group-title="开源动画与独立短片",贝蒂·布普：更多活力 (1936)
+https://archive.org/download/Betty_Boop_More_Pep_1936/Betty_Boop_More_Pep_1936_512kb.mp4
+
+#EXTINF:417 tvg-logo="https://archive.org/services/img/Betty_Boop_A_Song_a_Day_1936" group-title="开源动画与独立短片",贝蒂·布普：每日一首歌 (1936)
+https://archive.org/download/Betty_Boop_A_Song_a_Day_1936/Betty_Boop_A_Song_a_Day_1936_512kb.mp4
+
+#EXTINF:541 tvg-logo="https://archive.org/services/img/FelixAprilMaze" group-title="开源动画与独立短片",费利克斯猫——四月迷宫 (1930)
+https://archive.org/download/FelixAprilMaze/felix_april_maze_instr_512kb.mp4
+
+#EXTINF:1036 tvg-logo="https://archive.org/services/img/PopeyeTheSailorMeetsAliBabasFortyThieves" group-title="开源动画与独立短片",大力水手大战阿里巴巴四十大盗（1937 弗莱舍特艺彩色长篇） (1937)
+https://archive.org/download/PopeyeTheSailorMeetsAliBabasFortyThieves/PopeyeAliBabaRestored_512kb.mp4
+
+#EXTINF:361 tvg-logo="https://archive.org/services/img/popeye-pubdomain" group-title="开源动画与独立短片",《大力水手》公共领域藏品集 (1948)
+https://archive.org/download/popeye-pubdomain/A_Haul_in_One.mp4
+
+#EXTINF:317 tvg-logo="https://archive.org/services/img/casper-the-friendly-ghost-the-complete-collection-1950-59" group-title="开源动画与独立短片",《友善鬼魂卡斯珀》——完整合集（1950–1959年） (1948)
+https://archive.org/download/casper-the-friendly-ghost-the-complete-collection-1950-59/Casper%20-%20Casper's%20Birthday%20Party%20(1959).mp4
+
+#EXTINF:378 tvg-logo="https://archive.org/services/img/popeye-the-sailor-the-complete-series" group-title="开源动画与独立短片",《大力水手：完整系列（1933–1957）》（大致处于创作进行中） (1933)
+https://archive.org/download/popeye-the-sailor-the-complete-series/1957e01-Nearlyweds%20(HD%2C%20BLU-RAY).mp4
+
+#EXTINF:424 tvg-logo="https://archive.org/services/img/SnowWhiteWithBettyBoop1933" group-title="开源动画与独立短片",贝蒂娃娃版白雪公主（1933 美国国家影片登记部典藏动画） (1933)
+https://archive.org/download/SnowWhiteWithBettyBoop1933/BettyBoopSnowWhite1933.mp4
+
+#EXTINF:198 tvg-logo="https://archive.org/services/img/FelixTheCat-FelixGetsBroadcasted1923" group-title="开源动画与独立短片",《费利克斯猫——费利克斯的广播演出》（1923年） (1948)
+https://archive.org/download/FelixTheCat-FelixGetsBroadcasted1923/FelixTheCat-1923-FelixGetsBroadcasted_512kb.mp4
+
+#EXTINF:573 tvg-logo="https://archive.org/services/img/FelixTheCat-DoublesForDarwin1923" group-title="开源动画与独立短片",费利克斯猫——《达尔文的双生子》（1923年） (1948)
+https://archive.org/download/FelixTheCat-DoublesForDarwin1923/FelixTheCat-1923-FelixDoublesForDarwin_512kb.mp4
+
+#EXTINF:486 tvg-logo="https://archive.org/services/img/BettyBoopBarnacleBill1930" group-title="开源动画与独立短片",贝蒂·布普：《藤壶比尔》（1930年） (1948)
+https://archive.org/download/BettyBoopBarnacleBill1930/BarnacleBill_mpeg4.mp4
+
+#EXTINF:370 tvg-logo="https://archive.org/services/img/BettyBoopDizzyDishes1930" group-title="开源动画与独立短片",贝蒂·布普：《眩晕的盘子》（1930年） (1948)
+https://archive.org/download/BettyBoopDizzyDishes1930/DizzyDishes_mpeg4.mp4
+
+#EXTINF:397 tvg-logo="https://archive.org/services/img/max_fleischer_news_sketches" group-title="开源动画与独立短片",马克斯·弗莱舍新闻速写 (1944)
+https://archive.org/download/max_fleischer_news_sketches/max_fleischer_news_sketches_512kb.mp4
+
+#EXTINF:451 tvg-logo="https://archive.org/services/img/little-lulu-the-complete-collection-1943-48" group-title="开源动画与独立短片",《小露露——完整合集（1943—1948）》 (1948)
+https://archive.org/download/little-lulu-the-complete-collection-1943-48/1944-06-30%20-%20Lucky%20Lulu.ia.mp4
+
+#EXTINF:357 tvg-logo="https://archive.org/services/img/LittleOrphanWillie1930FlipTheFrogSoundCartoon" group-title="开源动画与独立短片",《小孤儿威利》1930年翻转青蛙声动画片 (1930)
+https://archive.org/download/LittleOrphanWillie1930FlipTheFrogSoundCartoon/Little%20Orphan%20Willie%201930%20Flip%20The%20Frog%20Sound%20Cartoon.mp4
+
+#EXTINF:384 tvg-logo="https://archive.org/services/img/PopeyetheSailor19431945" group-title="开源动画与独立短片",《水手波派：20世纪40年代第一卷动画片》 (1943)
+https://archive.org/download/PopeyetheSailor19431945/888574774998_Title11.mp4
+
+#EXTINF:360 tvg-logo="https://archive.org/services/img/BettyBoopTheBumBandit1931" group-title="开源动画与独立短片",贝蒂·布普：流浪强盗（1931年） (1948)
+https://archive.org/download/BettyBoopTheBumBandit1931/TheBumBandit_mpeg4.mp4
+
+#EXTINF:466 tvg-logo="https://archive.org/services/img/aesopsFablesAToytownTaleByVanBeurenStudios" group-title="开源动画与独立短片",《玩具小镇的故事：伊索寓言》，范·布伦工作室出品（1931年） (1948)
+https://archive.org/download/aesopsFablesAToytownTaleByVanBeurenStudios/VanBeuren_AesopsFable_AToytownTale.mp4
+
+#EXTINF:542 tvg-logo="https://archive.org/services/img/bb_stop_that_noise" group-title="开源动画与独立短片",贝蒂·布普：别再发出那种噪音了 (1935)
+https://archive.org/download/bb_stop_that_noise/bb_stop_that_noise_512kb.mp4
+
+#EXTINF:476 tvg-logo="https://archive.org/services/img/FelixTheCatFelixInHollywood1923" group-title="开源动画与独立短片",《费利克斯猫：费利克斯在好莱坞》（1923年） (1948)
+https://archive.org/download/FelixTheCatFelixInHollywood1923/Felix%20the%20Cat%20%20Felix%20in%20Hollywood%20(1923).mp4
+
+#EXTINF:391 tvg-logo="https://archive.org/services/img/BettyBoopBimbosInitiation1931" group-title="开源动画与独立短片",贝蒂·布普：比姆博的入会仪式（1931年） (1948)
+https://archive.org/download/BettyBoopBimbosInitiation1931/BimbosInitiation_mpeg4.mp4
+
+#EXTINF:376 tvg-logo="https://archive.org/services/img/BettyBoopAnyLittleGirlThatsANiceLittleGirl" group-title="开源动画与独立短片",贝蒂·布普：任何一位乖巧的小女孩。 (1948)
+https://archive.org/download/BettyBoopAnyLittleGirlThatsANiceLittleGirl/AnyLittleGirlThatsANiceLittleGirl_mpeg4.mp4
+
+#EXTINF:389 tvg-logo="https://archive.org/services/img/willie-whopper-by-ub-iwerks" group-title="开源动画与独立短片",乌布·伊沃克斯创作的《威利·沃珀》 (1948)
+https://archive.org/download/willie-whopper-by-ub-iwerks/Willie%20Whopper%20-%20Play%20Ball%20(1933).mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/PopeyetheSailor19461947" group-title="开源动画与独立短片",《大力水手：20世纪40年代第二卷动画片》 (1946)
+https://archive.org/download/PopeyetheSailor19461947/883929685936_Title_02_01.mp4
+
+#EXTINF:3364 tvg-logo="https://archive.org/services/img/casper-the-ghost-and-friends" group-title="开源动画与独立短片",卡斯珀：幽灵与朋友们 (1989)
+https://archive.org/download/casper-the-ghost-and-friends/Casper%20the%20Ghost%20%26%20Friends.mp4
+
+#EXTINF:394 tvg-logo="https://archive.org/services/img/BettyBoop_201807" group-title="开源动画与独立短片",贝蒂·布普：《贝蒂在布兰德兰》（1933年） (1933)
+https://archive.org/download/BettyBoop_201807/Betty%20Boop.mp4
+
+#EXTINF:2510 tvg-logo="https://archive.org/services/img/PopeyeVolume1" group-title="开源动画与独立短片",《大力水手》（1937年） (1937)
+https://archive.org/download/PopeyeVolume1/Popeye%20Volume%201.mp4
+
+#EXTINF:411 tvg-logo="https://archive.org/services/img/flip-the-frog-ub-iwerks-1930-33" group-title="开源动画与独立短片",《翻转青蛙》——11集合集（1930—1933年） (1948)
+https://archive.org/download/flip-the-frog-ub-iwerks-1930-33/Laughing%20Gas%20(1931)%20Flip%20the%20Frog.ia.mp4
+
+#EXTINF:370 tvg-logo="https://archive.org/services/img/BettyBoopMysteriousMose1930" group-title="开源动画与独立短片",贝蒂·布普：神秘的莫斯（1930年） (1948)
+https://archive.org/download/BettyBoopMysteriousMose1930/MysteriousMose_mpeg4.mp4
+
+#EXTINF:255 tvg-logo="https://archive.org/services/img/FelixTheCat_631" group-title="开源动画与独立短片",费利克斯猫 (1948)
+https://archive.org/download/FelixTheCat_631/FelixTheCat-1919-FelineFollies_silent.mp4
+
+#EXTINF:14315 tvg-logo="https://archive.org/services/img/popeye-33-cartoon-classics-4-hours_202205" group-title="开源动画与独立短片",PD Popeye 33部动画经典作品，时长4小时 (1948)
+https://archive.org/download/popeye-33-cartoon-classics-4-hours_202205/Popeye_%2033%20Cartoon%20Classics%20-%204%20Hours.ia.mp4
+
+#EXTINF:389 tvg-logo="https://archive.org/services/img/BettyBoopInHaHaHa" group-title="开源动画与独立短片",《哈！哈！哈！》中的贝蒂·布普 (1934)
+https://archive.org/download/BettyBoopInHaHaHa/Betty_Boop_and_Ko_Ko_-_Ha_Ha_Ha_512kb.mp4
+
+#EXTINF:336 tvg-logo="https://archive.org/services/img/popeye-the-sailor-shorts" group-title="开源动画与独立短片",《大力水手》短片集 (1948)
+https://archive.org/download/popeye-the-sailor-shorts/Popeye.the.Sailor.VOL.2.1080p%2FVOL.2.E04.Be.Kind.To.Aminals.1080p.mp4
+
+#EXTINF:377 tvg-logo="https://archive.org/services/img/CasperPigABoo1952" group-title="开源动画与独立短片",卡斯珀·皮格·阿·布 1952年 (1948)
+https://archive.org/download/CasperPigABoo1952/Casper%20Pig-A-Boo%20-%201952.mp4
+
+#EXTINF:2632 tvg-logo="https://archive.org/services/img/POPEYETheSailor_201810" group-title="开源动画与独立短片",《大力水手：水手》（1930年） (1948)
+https://archive.org/download/POPEYETheSailor_201810/POPEYE%2C%20the%20sailor.mp4
+
+#EXTINF:372 tvg-logo="https://archive.org/services/img/dom-24572-mightymouse" group-title="开源动画与独立短片",太空飞鼠 (2009)
+https://archive.org/download/dom-24572-mightymouse/mighty_mouse_wolf_wolf.mp4
+
+#EXTINF:394 tvg-logo="https://archive.org/services/img/max-fleischers-gabby-the-complete-collection-1940-41" group-title="开源动画与独立短片",马克斯·弗莱舍的《加比》——全集（1940—1941年） (1948)
+https://archive.org/download/max-fleischers-gabby-the-complete-collection-1940-41/Gabby%20-%20Two%20for%20the%20Zoo%20(1941).mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/BettyBoopLiveActionStarringBonniePoeEddieBorden" group-title="开源动画与独立短片",《贝蒂·布普》（实拍版），由邦妮·波和埃迪·博登主演 (1948)
+https://archive.org/download/BettyBoopLiveActionStarringBonniePoeEddieBorden/SilentLoveEnding_xvid_mpeg4_512kb.mp4
+
+#EXTINF:135 tvg-logo="https://archive.org/services/img/felix-the-cat-1919" group-title="开源动画与独立短片",费利克斯猫 (1919)
+https://archive.org/download/felix-the-cat-1919/Felix%20the%20Cat%2F1958%2FFelix%20The%20Cat%20-%20S1958E104%20-%20The%20Golden%20Nugget.mp4
+
+#EXTINF:419 tvg-logo="https://archive.org/services/img/BettyBoopJackAndTheBeanstalk1931_248" group-title="开源动画与独立短片",贝蒂·布普：《杰克与豆茎》（1931年） (1948)
+https://archive.org/download/BettyBoopJackAndTheBeanstalk1931_248/JackAndTheBeanstalk_mpeg4.mp4
+
+#EXTINF:422 tvg-logo="https://archive.org/services/img/littlelulu-publicdomain" group-title="开源动画与独立短片",所有属于公有领域的《小露露》短片 (1946)
+https://archive.org/download/littlelulu-publicdomain/Loose%20in%20a%20Caboose%20(1947).ia.mp4
+
+#EXTINF:371 tvg-logo="https://archive.org/services/img/Fiddlesticks1930UbIwerks" group-title="开源动画与独立短片",琴弦狂想曲（1930 乌布·伊沃克斯影史首部双色有声动画） (1930)
+https://archive.org/download/Fiddlesticks1930UbIwerks/Fiddlesticks%201930%20%20Ub%20Iwerks.mp4
+
+#EXTINF:138 tvg-logo="https://archive.org/services/img/PartiallyRestoredVideoEventsFromTheApollo11Mission" group-title="太空宇宙与科学1080p",部分修复的视频：阿波罗11号任务中的各项事件 (2009)
+https://archive.org/download/PartiallyRestoredVideoEventsFromTheApollo11Mission/Apollo_11_Intro_H264_720p_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/Expedition49ResourceReel" group-title="太空宇宙与科学1080p",第49次探险任务资源卷轴 (2022)
+https://archive.org/download/Expedition49ResourceReel/DL-1_2016_314_1004_441476.mp4
+
+#EXTINF:393 tvg-logo="https://archive.org/services/img/FlyingFists1930UbIwerks" group-title="开源动画与独立短片",《飞翔的拳头》1930年，乌布·伊沃克斯 (1930)
+https://archive.org/download/FlyingFists1930UbIwerks/Flying%20Fists%201930%20%20Ub%20Iwerks.mp4
+
+#EXTINF:766 tvg-logo="https://archive.org/services/img/MercurygeminiapolloOverview" group-title="太空宇宙与科学1080p",水星/双子座/阿波罗概览 (2022)
+https://archive.org/download/MercurygeminiapolloOverview/Jsc1030rMercury_gemini_apolloOverview_512kb.mp4
+
+#EXTINF:4843 tvg-logo="https://archive.org/services/img/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g" group-title="太空宇宙与科学1080p",NASA 航天飞机三十年官方纪念纪录长片（威廉·夏特纳旁白 · 81分钟） (2011)
+https://archive.org/download/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g/the-space-shuttle-narrated-by-william-shatner-SvaG0xDdP8g.mp4
+
+#EXTINF:394 tvg-logo="https://archive.org/services/img/PopeyeCookinWithGags_201605" group-title="开源动画与独立短片",波比·库金与笑料相伴 (2014)
+https://archive.org/download/PopeyeCookinWithGags_201605/Popeye%20Cookin'%20with%20Gags.mp4
+
+#EXTINF:441 tvg-logo="https://archive.org/services/img/AresQuarterlyProgressReport11" group-title="太空宇宙与科学1080p",阿瑞斯季度进展报告第11期 (2009)
+https://archive.org/download/AresQuarterlyProgressReport11/QPR11_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/ShuttleMirHistory" group-title="太空宇宙与科学1080p",“和平号”空间站航天飞机历史 (2022)
+https://archive.org/download/ShuttleMirHistory/V-146_Space%20Station%20History%20(Meet%20Me%20at%20the%20Station)_XDCAM.mp4
+
+#EXTINF:841 tvg-logo="https://archive.org/services/img/ManInSpace" group-title="太空宇宙与科学1080p",太空中的人类 (2022)
+https://archive.org/download/ManInSpace/Jsc716Man_in_space_512kb.mp4
+
+#EXTINF:168 tvg-logo="https://archive.org/services/img/VideoFiles2011" group-title="太空宇宙与科学1080p",2011年视频文件 (2022)
+https://archive.org/download/VideoFiles2011/VF_111222_TimeLapseComet_mi.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/AstronautTrainingAtGoddardSpaceFlightCenter" group-title="太空宇宙与科学1080p",戈达德太空飞行中心的宇航员训练 (2009)
+https://archive.org/download/AstronautTrainingAtGoddardSpaceFlightCenter/G08-038HD-Crew_Fam2-MPEG4-h264.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/Expedition46ResourceReel" group-title="太空宇宙与科学1080p",第46次探险任务资源卷轴 (2022)
+https://archive.org/download/Expedition46ResourceReel/Moment-with-Malenchenko_04.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/ActionCameraVideos" group-title="太空宇宙与科学1080p",动作相机视频 (2022)
+https://archive.org/download/ActionCameraVideos/EVA-40_Thomas-Pesquet_March-2017_GOPR0019.MP4
+
+#EXTINF:199 tvg-logo="https://archive.org/services/img/nasa_eclips_mp4" group-title="太空宇宙与科学1080p",位于 eClips MP4 中 (2009)
+https://archive.org/download/nasa_eclips_mp4/OW_JASON2_oc_512kb.mp4
+
+#EXTINF:273 tvg-logo="https://archive.org/services/img/Ares_Quarterly_Progress_Reports" group-title="太空宇宙与科学1080p",阿瑞斯季度进展报告 (2022)
+https://archive.org/download/Ares_Quarterly_Progress_Reports/QPR8_512kb.mp4
+
+#EXTINF:1472 tvg-logo="https://archive.org/services/img/NASA_360_17_HD" group-title="太空宇宙与科学1080p",NASA 深空探索：NASA 360 17 HD (2022)
+https://archive.org/download/NASA_360_17_HD/NASA_360_17_HD_512kb.mp4
+
+#EXTINF:186 tvg-logo="https://archive.org/services/img/Ares1-xTestRocketLaunches" group-title="太空宇宙与科学1080p",阿瑞斯1-X测试火箭成功发射 (2009)
+https://archive.org/download/Ares1-xTestRocketLaunches/ksc_102909_aresIx_launch_1080_512kb.mp4
+
+#EXTINF:1557 tvg-logo="https://archive.org/services/img/30MinutesToMars" group-title="太空宇宙与科学1080p",《火星之旅：30分钟》 (2022)
+https://archive.org/download/30MinutesToMars/30%20Minutes%20to%20Mars_Part%202_Rev%20A_web.mp4
+
+#EXTINF:1471 tvg-logo="https://archive.org/services/img/NASA_360_15_HD" group-title="太空宇宙与科学1080p",NASA 360：NASA与航空业的未来NASA 360：NASA与航空业的未来 (2022)
+https://archive.org/download/NASA_360_15_HD/NASA_360_15_HD_512kb.mp4
+
+#EXTINF:141 tvg-logo="https://archive.org/services/img/NasaSciFiles-SimulatedEpidemic" group-title="太空宇宙与科学1080p",NASA科学档案——模拟流行病 (2003)
+https://archive.org/download/NasaSciFiles-SimulatedEpidemic/NASASF-SimulatedEpidemic_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/NASATimeLapseVideos" group-title="太空宇宙与科学1080p",NASA时间推移视频 (2022)
+https://archive.org/download/NASATimeLapseVideos/jsc2015m000146.mp4
+
+#EXTINF:1852 tvg-logo="https://archive.org/services/img/APOLLO_16MM_ONBOARD_SELECT_VIEWS_long" group-title="太空宇宙与科学1080p",APOLLO 16MM 航行中的精选画面：来自 HDTV 转移的镜头——APOLLO 202 至 17（长版） (2004)
+https://archive.org/download/APOLLO_16MM_ONBOARD_SELECT_VIEWS_long/VTS_01_1_512Kb.mp4
+
+#EXTINF:142 tvg-logo="https://archive.org/services/img/VideoFiles2012" group-title="太空宇宙与科学1080p",2012年视频文件 (2022)
+https://archive.org/download/VideoFiles2012/VF_121011_Robotic_Exoskeleton_Master.mp4
+
+#EXTINF:316 tvg-logo="https://archive.org/services/img/AresQuarterlyReport0016" group-title="太空宇宙与科学1080p",阿瑞斯季度报告0016 (2022)
+https://archive.org/download/AresQuarterlyReport0016/QPR16_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/NASA-Orion-Resource-Reel" group-title="太空宇宙与科学1080p",NASA“猎户座”资源卷轴 (2022)
+https://archive.org/download/NASA-Orion-Resource-Reel/Ascent-Abort-2-1080.ia.mp4
+
+#EXTINF:2955 tvg-logo="https://archive.org/services/img/Apollo07And0816mmOnboardFilm" group-title="太空宇宙与科学1080p",阿波罗07号和08号搭载的16毫米机载胶片 (1968)
+https://archive.org/download/Apollo07And0816mmOnboardFilm/apollo07_2_1_512kb.mp4
+
+#EXTINF:267 tvg-logo="https://archive.org/services/img/ISSVideoResourceExteriorViews720p" group-title="太空宇宙与科学1080p",ISS视频资源：外部景观视图，720p分辨率 (2013)
+https://archive.org/download/ISSVideoResourceExteriorViews720p/ISS%20Video%20Resource_ExteriorViews_720p.mp4
+
+#EXTINF:3296 tvg-logo="https://archive.org/services/img/Apollo1016mmOnboardFilm1" group-title="太空宇宙与科学1080p",阿波罗 10 16MM 航天器搭载影片1 (1969)
+https://archive.org/download/Apollo1016mmOnboardFilm1/apollo10_5_1_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/NasasOrionSpacecraft-MediaB-roll" group-title="太空宇宙与科学1080p",美国国家航空航天局“猎户座”航天器——媒体B-roll视频素材 (2022)
+https://archive.org/download/NasasOrionSpacecraft-MediaB-roll/ORR_DropTest_August2011.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/Expedition47ResourceReel" group-title="太空宇宙与科学1080p",第47次远征任务资源卷轴 (2022)
+https://archive.org/download/Expedition47ResourceReel/Animation_Soyuz_Launch_350060.mp4
+
+#EXTINF:6165 tvg-logo="https://archive.org/services/img/Apollo1716mmonboardfilm" group-title="太空宇宙与科学1080p",NASA 阿波罗17号月球车科考 16mm 实拍全片（103分钟） (1972)
+https://archive.org/download/Apollo1716mmonboardfilm/apollo17_13_1_512kb.mp4
+
+#EXTINF:647 tvg-logo="https://archive.org/services/img/APOLLO_16MM_ONBOARD_SELECT_VIEWS" group-title="太空宇宙与科学1080p",APOLLO 16MM 在轨选定视图来自 HDTV 转移段：APOLLO 202 至 17（发射/在轨阶段） (2006)
+https://archive.org/download/APOLLO_16MM_ONBOARD_SELECT_VIEWS/VTS_01_1_512Kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/ksc_080707_118_launch_1080i.wmv" group-title="太空宇宙与科学1080p",STS-118发射任务 (2008)
+https://archive.org/download/ksc_080707_118_launch_1080i.wmv/ksc_080707_118_launch_1080i.mp4
+
+#EXTINF:1540 tvg-logo="https://archive.org/services/img/Astronaut-Candidate-Training-B-Roll" group-title="太空宇宙与科学1080p",宇航员候选人培训-B卷录像 (2022)
+https://archive.org/download/Astronaut-Candidate-Training-B-Roll/Astronaut-Candidate-Training-B-Roll_MP4.ia.mp4
+
+#EXTINF:4659 tvg-logo="https://archive.org/services/img/Apollo12And1316mmOnboardFilm" group-title="太空宇宙与科学1080p",阿波罗12号和13号搭载的16毫米机载胶片 (1970)
+https://archive.org/download/Apollo12And1316mmOnboardFilm/apollo12_8_1_512kb.mp4
+
+#EXTINF:436 tvg-logo="https://archive.org/services/img/NASA_Launchpad_Eclipse_HD" group-title="太空宇宙与科学1080p",Launchpad：日食 (2022)
+https://archive.org/download/NASA_Launchpad_Eclipse_HD/NASA_Launchpad_Eclipse_HD.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/Expedition50ResourceReel01" group-title="太空宇宙与科学1080p",第50次探险任务资源卷轴 (2022)
+https://archive.org/download/Expedition50ResourceReel01/HD-DL-1_2016_344_1124_451290.mp4
+
+#EXTINF:1117 tvg-logo="https://archive.org/services/img/Ares3YearProgressVideo" group-title="太空宇宙与科学1080p",阿瑞斯3年进展视频 (2008)
+https://archive.org/download/Ares3YearProgressVideo/3YearProgressVideo_512kb.mp4
+
+#EXTINF:298 tvg-logo="https://archive.org/services/img/GMM-10481" group-title="太空宇宙与科学1080p",感受气候变化带来的刺痛 (2009)
+https://archive.org/download/GMM-10481/Honeybee_youtube_512kb.mp4
+
+#EXTINF:1313 tvg-logo="https://archive.org/services/img/Jsc-500Apollo8-goForTli.wmv" group-title="太空宇宙与科学1080p",JSC-500 阿波罗8号——前往 TLI .wmv (1969)
+https://archive.org/download/Jsc-500Apollo8-goForTli.wmv/Jsc-500Apollo8-goForTli_512kb.mp4
+
+#EXTINF:2085 tvg-logo="https://archive.org/services/img/John-F-Kennedy_Speech_Rice-Stadium" group-title="太空宇宙与科学1080p",约翰·F·肯尼迪演讲——赖斯体育场 (2022)
+https://archive.org/download/John-F-Kennedy_Speech_Rice-Stadium/JFK%20Adress%20at%20Rice%20University_720p.mp4
+
+#EXTINF:414 tvg-logo="https://archive.org/services/img/OrbitsAndKeplersLaws" group-title="太空宇宙与科学1080p",理解太阳系动力学：轨道与开普勒定律 (2008)
+https://archive.org/download/OrbitsAndKeplersLaws/Keplers_Laws_fullscreen_512kb.mp4
+
+#EXTINF:5131 tvg-logo="https://archive.org/services/img/Apollo1216mmOnboardFilm" group-title="太空宇宙与科学1080p",APOLLO 12 16MM 航行影片 (1969)
+https://archive.org/download/Apollo1216mmOnboardFilm/apollo12_7_1_512kb.mp4
+
+#EXTINF:694 tvg-logo="https://archive.org/services/img/SpaceX_DM1_Departure-Footage" group-title="太空宇宙与科学1080p",SpaceX DM-1发射过程视频 (2022)
+https://archive.org/download/SpaceX_DM1_Departure-Footage/ISS-Downlink-Video_DRAGON-UNDOCKING_DL-1_2019_067_0731.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/nasaames-uhYO8IOtXZo" group-title="太空宇宙与科学1080p",索菲亚飞行望远镜访问NASA艾姆斯研究中心 (2011)
+https://archive.org/download/nasaames-uhYO8IOtXZo/nasaames-uhYO8IOtXZo.mp4
+
+#EXTINF:169 tvg-logo="https://archive.org/services/img/DiscoveryFlyaroundOfInternationalSpaceStation" group-title="太空宇宙与科学1080p",国际空间站的Discovery绕飞观测 (2009)
+https://archive.org/download/DiscoveryFlyaroundOfInternationalSpaceStation/STS_119_HD_ISS_FLyaround_Sped_Up_512kb.mp4
+
+#EXTINF:138 tvg-logo="https://archive.org/services/img/Apollo0616mmOnboardFilm1" group-title="太空宇宙与科学1080p",阿波罗 06 16MM 航天器搭载影片1 (1968)
+https://archive.org/download/Apollo0616mmOnboardFilm1/apollo6_1_1_512kb.mp4
+
+#EXTINF:806 tvg-logo="https://archive.org/services/img/ConstellationEarthMoonMars" group-title="太空宇宙与科学1080p",星座：地球、月球、火星 (2009)
+https://archive.org/download/ConstellationEarthMoonMars/Constellation_Earth_Moon_Mars_512kb.mp4
+
+#EXTINF:170 tvg-logo="https://archive.org/services/img/Expedition48ResourceReel" group-title="太空宇宙与科学1080p",第48次探险任务资源卷轴 (2022)
+https://archive.org/download/Expedition48ResourceReel/Road-to-IDA_411526.ia.mp4
+
+#EXTINF:184 tvg-logo="https://archive.org/services/img/HSF-mov-moon" group-title="太空宇宙与科学1080p",月亮 (2003)
+https://archive.org/download/HSF-mov-moon/moon_512kb.mp4
+
+#EXTINF:350 tvg-logo="https://archive.org/services/img/Red_Skelton_Archive_20190312" group-title="悬疑推理与科幻惊悚",雷德·斯凯尔顿收藏集 (1948)
+https://archive.org/download/Red_Skelton_Archive_20190312/Extras%2FRed%20Skeltons%20Pledge%20of%20Allegiance.mp4
+
+#EXTINF:304 tvg-logo="https://archive.org/services/img/ISSVideoResourceLifeOnStation720p" group-title="太空宇宙与科学1080p",国际空间站视频资源：《空间站上的生活》，720p分辨率 (2013)
+https://archive.org/download/ISSVideoResourceLifeOnStation720p/ISS%20Video%20Resource_LifeOnStation_720p.mp4
+
+#EXTINF:1785 tvg-logo="https://archive.org/services/img/Apollo0616mmOnboardFilm2" group-title="太空宇宙与科学1080p",APOLLO 06 16MM 航行影片 2 (1968)
+https://archive.org/download/Apollo0616mmOnboardFilm2/apollo06_1_2_512kb.mp4
+
+#EXTINF:1608 tvg-logo="https://archive.org/services/img/red_NBC_No_Guest" group-title="悬疑推理与科幻惊悚",雷德·斯凯尔顿，NBC，无嘉宾 (1948)
+https://archive.org/download/red_NBC_No_Guest/red_NBC_No_Guest_512kb.mp4
+
+#EXTINF:217 tvg-logo="https://archive.org/services/img/CX_Mission_Short3b_HDweb.wmv" group-title="太空宇宙与科学1080p",动画片：《飞向月球》 (2008)
+https://archive.org/download/CX_Mission_Short3b_HDweb.wmv/CX_Mission_Short3b_HDweb_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/nasaames-kc4PuQ6tzKo" group-title="太空宇宙与科学1080p",开普勒探测器发现太阳系外首批类地行星 (2011)
+https://archive.org/download/nasaames-kc4PuQ6tzKo/nasaames-kc4PuQ6tzKo.mp4
+
+#EXTINF:1597 tvg-logo="https://archive.org/services/img/DuffysTavernTvShow" group-title="悬疑推理与科幻惊悚",《达菲酒馆》电视节目 (1948)
+https://archive.org/download/DuffysTavernTvShow/DuffysTavern_512kb.mp4
+
+#EXTINF:602 tvg-logo="https://archive.org/services/img/TourTheInternationalSpaceStation" group-title="太空宇宙与科学1080p",游览国际空间站 (2009)
+https://archive.org/download/TourTheInternationalSpaceStation/finckeHD_compress1_512kb.mp4
+
+#EXTINF:338 tvg-logo="https://archive.org/services/img/RealWorldKeepingTheInternationalSpaceStationInOrbit" group-title="太空宇宙与科学1080p",现实世界：维持国际空间站的轨道运行 (2010)
+https://archive.org/download/RealWorldKeepingTheInternationalSpaceStationInOrbit/Rw44spacestationFixOc.ia.mp4
+
+#EXTINF:1559 tvg-logo="https://archive.org/services/img/MEDIC_Break_Through" group-title="悬疑推理与科幻惊悚",“Medic”突破铁栏 (1955)
+https://archive.org/download/MEDIC_Break_Through/MEDIC_Break_Through_512kb.mp4
+
+#EXTINF:4100 tvg-logo="https://archive.org/services/img/waterfront_lady" group-title="悬疑推理与科幻惊悚",滨水女郎 (1935)
+https://archive.org/download/waterfront_lady/waterfront_lady_512kb.mp4
+
+#EXTINF:1605 tvg-logo="https://archive.org/services/img/Rocky_King_4" group-title="悬疑推理与科幻惊悚",《摇滚之王，侦探》——谋杀仅需一分钟 (1948)
+https://archive.org/download/Rocky_King_4/OneMinuteForMurder_512kb.mp4
+
+#EXTINF:1555 tvg-logo="https://archive.org/services/img/MEDIC_Who_Search_for_Truth" group-title="悬疑推理与科幻惊悚",“寻真相的医者” (1956)
+https://archive.org/download/MEDIC_Who_Search_for_Truth/MEDIC_Who_Search_for_Truth_512kb.mp4
+
+#EXTINF:1553 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeCaseOfTheDyingPast" group-title="悬疑推理与科幻惊悚",徽章背后的男人：《垂死的过去》案 (1948)
+https://archive.org/download/ManBehindTheBadgeCaseOfTheDyingPast/ManBehindTheBadge-theCaseOfTheDyingPast_512kb.mp4
+
+#EXTINF:1554 tvg-logo="https://archive.org/services/img/TheManBehindTheBadgeTheCaseOfTheHuntedHobo" group-title="悬疑推理与科幻惊悚",徽章背后的那个人：被追捕的流浪汉之案 (1948)
+https://archive.org/download/TheManBehindTheBadgeTheCaseOfTheHuntedHobo/ManBehindTheBadge_theCaseOfTheHuntedHobo_512kb.mp4
+
+#EXTINF:1554 tvg-logo="https://archive.org/services/img/MEDIC_My_Brother_Joe" group-title="悬疑推理与科幻惊悚",《我的兄弟乔：医者》 (1954)
+https://archive.org/download/MEDIC_My_Brother_Joe/MEDIC_My_Brother_Joe_512kb.mp4
+
+#EXTINF:1498 tvg-logo="https://archive.org/services/img/SkyKing_490" group-title="悬疑推理与科幻惊悚",天空之王 (1948)
+https://archive.org/download/SkyKing_490/SkyKing2.mp4
+
+#EXTINF:1568 tvg-logo="https://archive.org/services/img/MEDIC_The_Wild_Intruder" group-title="悬疑推理与科幻惊悚",《“Medic”：野性入侵者》 (1954)
+https://archive.org/download/MEDIC_The_Wild_Intruder/MEDIC_The_Wild_Intruder_512kb.mp4
+
+#EXTINF:1554 tvg-logo="https://archive.org/services/img/MEDIC_Boy_In_The_Storm" group-title="悬疑推理与科幻惊悚",《风暴中的“医疗员”男孩》 (1955)
+https://archive.org/download/MEDIC_Boy_In_The_Storm/MEDIC_Boy_In_The_Storm_512kb.mp4
+
+#EXTINF:1556 tvg-logo="https://archive.org/services/img/MEDIC_Walk_With_Lions" group-title="悬疑推理与科幻惊悚",“Medic”与狮子队同行之旅 (1955)
+https://archive.org/download/MEDIC_Walk_With_Lions/MEDIC_Walk_With_Lions_512kb.mp4
+
+#EXTINF:1522 tvg-logo="https://archive.org/services/img/MEDIC_General_Practitioner" group-title="悬疑推理与科幻惊悚",“Medic”全科医生 (1955)
+https://archive.org/download/MEDIC_General_Practitioner/MEDIC_General_Practitioner_512kb.mp4
+
+#EXTINF:1558 tvg-logo="https://archive.org/services/img/MEDIC_Time_To_Be_Alive" group-title="悬疑推理与科幻惊悚",《“Medic”：活着的时刻》 (1955)
+https://archive.org/download/MEDIC_Time_To_Be_Alive/MEDIC_Time_To_Be_Alive_512kb.mp4
+
+#EXTINF:1551 tvg-logo="https://archive.org/services/img/ManBehindTheBadgeTheCaseOfThePricelessPassport" group-title="悬疑推理与科幻惊悚",徽章背后的男人：无价护照案 (1948)
+https://archive.org/download/ManBehindTheBadgeTheCaseOfThePricelessPassport/ManBehindTheBadge-theCaseOfThePricelessPassport_512kb.mp4
+
+#EXTINF:1563 tvg-logo="https://archive.org/services/img/MEDIC_Dr_Impossible" group-title="悬疑推理与科幻惊悚",“医疗专家”不可能博士 (1955)
+https://archive.org/download/MEDIC_Dr_Impossible/MEDIC_Dr_Impossible_512kb.mp4
+
+#EXTINF:1553 tvg-logo="https://archive.org/services/img/MEDIC_Never_Comes_Sunday" group-title="悬疑推理与科幻惊悚",《Medic》从未在周日播出 (1955)
+https://archive.org/download/MEDIC_Never_Comes_Sunday/MEDIC_Never_Comes_Sunday_512kb.mp4
+
+#EXTINF:1558 tvg-logo="https://archive.org/services/img/ManBehindTheBadge-caseOfOperationSabotage" group-title="悬疑推理与科幻惊悚",徽章背后的男人——“破坏行动”案 (1948)
+https://archive.org/download/ManBehindTheBadge-caseOfOperationSabotage/ManBehindTheBadge-caseOfOperationSabotage_512kb.mp4
+
+#EXTINF:1557 tvg-logo="https://archive.org/services/img/MEDIC_Til_the_Song_Is_Done_-_Til_The_Dance_Is_Gone" group-title="悬疑推理与科幻惊悚",《Medic》：直到歌曲结束，直到舞蹈消散 (1955)
+https://archive.org/download/MEDIC_Til_the_Song_Is_Done_-_Til_The_Dance_Is_Gone/MEDIC_Til_the_Song_Is_Done_-_Til_The_Dance_Is_Gone_512kb.mp4
+
+#EXTINF:1372 tvg-logo="https://archive.org/services/img/Medic--Awake_to_Spring" group-title="悬疑推理与科幻惊悚",《医者：觉醒之春》 (1956)
+https://archive.org/download/Medic--Awake_to_Spring/Medic_221--Awake_to_Spring.mp4
+
+#EXTINF:1497 tvg-logo="https://archive.org/services/img/MEDIC_Flash_Of_Darkness" group-title="悬疑推理与科幻惊悚",《“Medic”：黑暗闪现》 (1955)
+https://archive.org/download/MEDIC_Flash_Of_Darkness/MEDIC_Flash_Of_Darkness_512kb.mp4
+
+#EXTINF:1594 tvg-logo="https://archive.org/services/img/RockyKingDeathHasDarkHands" group-title="悬疑推理与科幻惊悚",罗基·金：死亡之手暗黑而冰冷 (1948)
+https://archive.org/download/RockyKingDeathHasDarkHands/RockyKing-deathHasDarkHands_512kb.mp4
+
+#EXTINF:1499 tvg-logo="https://archive.org/services/img/TheManBehindTheBadge-theCaseOfTheHotStock" group-title="悬疑推理与科幻惊悚",徽章背后的那个人——热门股票案 (1948)
+https://archive.org/download/TheManBehindTheBadge-theCaseOfTheHotStock/TheManBehindTheBadge-theCaseOfTheHotStock_512kb.mp4
+
+#EXTINF:1507 tvg-logo="https://archive.org/services/img/Medic--Glass_of_Fear" group-title="悬疑推理与科幻惊悚",《Medic：恐惧之杯》 (1955)
+https://archive.org/download/Medic--Glass_of_Fear/Medic_210--Glass_of_Fear.mp4
+
+#EXTINF:1553 tvg-logo="https://archive.org/services/img/TheManBehindTheBadgeTheCaseOfTheCapitalCrime" group-title="悬疑推理与科幻惊悚",徽章背后的那个人：首都罪案案 (1948)
+https://archive.org/download/TheManBehindTheBadgeTheCaseOfTheCapitalCrime/ManBehindTheBadge-caseOfTheCapitalCrime_512kb.mp4
+
+#EXTINF:1562 tvg-logo="https://archive.org/services/img/DangerousAssignmentEpisode9ThePatAndMikeStory1952Replaced" group-title="悬疑推理与科幻惊悚",《危险任务》第9集：帕特与迈克的故事（1952年） (1952)
+https://archive.org/download/DangerousAssignmentEpisode9ThePatAndMikeStory1952Replaced/Dangerous%20Assignment%20Episode%2012%20The%20Italian%20Movie%20Story%20(1952)%20Replaced.mp4
+
+#EXTINF:1492 tvg-logo="https://archive.org/services/img/Medic--When_Mama_Says_Jump" group-title="悬疑推理与科幻惊悚",《当妈妈说“跳”时》 (1955)
+https://archive.org/download/Medic--When_Mama_Says_Jump/Medic_207--When_Mama_Says_Jump.mp4
+
+#EXTINF:858 tvg-logo="https://archive.org/services/img/RoutineStops1962" group-title="悬疑推理与科幻惊悚",1962年加利福尼亚州公路巡逻队训练影片《例行拦截》 (1962)
+https://archive.org/download/RoutineStops1962/RoutineStops1962.mp4
+
+#EXTINF:1559 tvg-logo="https://archive.org/services/img/DangerousAssignmentTheArcheologicalStory" group-title="悬疑推理与科幻惊悚",危险的任务——考古故事 (1948)
+https://archive.org/download/DangerousAssignmentTheArcheologicalStory/Dangerous%20Assignment%20%20-%20The%20Archeological%20Story.mp4
+
+#EXTINF:239 tvg-logo="https://archive.org/services/img/RadioRobotsWaterfrontBlues" group-title="悬疑推理与科幻惊悚",无线电机器人：滨水区蓝调音乐 (1948)
+https://archive.org/download/RadioRobotsWaterfrontBlues/RadioRobotsWaterfrontBlues.mp4
+
+#EXTINF:1576 tvg-logo="https://archive.org/services/img/SAFECRACKER" group-title="悬疑推理与科幻惊悚",公路巡逻安全破解器 (1948)
+https://archive.org/download/SAFECRACKER/SAFECRACKER.mp4
+
+#EXTINF:1576 tvg-logo="https://archive.org/services/img/EFFICENCYSECRETARY" group-title="悬疑推理与科幻惊悚",公路巡逻效率秘书 (1948)
+https://archive.org/download/EFFICENCYSECRETARY/EFFICENCY%20SECRETARY.mp4
+
+#EXTINF:1554 tvg-logo="https://archive.org/services/img/550403TheJackBennyProgramE05e14YouBetYourLife" group-title="爆笑喜剧与国会图书馆典藏",55 04 03《杰克·贝尼节目》E 05e 14《你赌上你的生命》 (1955)
+https://archive.org/download/550403TheJackBennyProgramE05e14YouBetYourLife/55-04-03%20%20The%20Jack%20Benny%20Program%20%20e05e14%20%20You%20Bet%20Your%20Life.mp4
+
+#EXTINF:1481 tvg-logo="https://archive.org/services/img/Rocky_King--Return_for_Death" group-title="悬疑推理与科幻惊悚",《罗基·金，侦探：死而复生》 (1954)
+https://archive.org/download/Rocky_King--Return_for_Death/RockyKing536_Return_for_Death.mp4
+
+#EXTINF:1561 tvg-logo="https://archive.org/services/img/DangerousAssignmentTheAlienSmugglerStory" group-title="悬疑推理与科幻惊悚",危险的任务：《外星走私者》故事 (1948)
+https://archive.org/download/DangerousAssignmentTheAlienSmugglerStory/Dangerous%20Assignment%20-%20The%20Alien%20Smuggler%20Story.mp4
+
+#EXTINF:1572 tvg-logo="https://archive.org/services/img/1.HYPOBANDIT" group-title="悬疑推理与科幻惊悚",公路巡逻假币劫匪 (1948)
+https://archive.org/download/1.HYPOBANDIT/1.%20%20HYPO%20BANDIT.mp4
+
+#EXTINF:1590 tvg-logo="https://archive.org/services/img/Lbines-RetroVisionTheaterPresentsMedicWithRichardBoone808" group-title="悬疑推理与科幻惊悚",RetroVision剧院呈献理查德·布恩主演的《Medic》 (1948)
+https://archive.org/download/Lbines-RetroVisionTheaterPresentsMedicWithRichardBoone808/Lbines-RetroVisionTheaterPresentsMedicWithRichardBoone808_512kb.mp4
+
+#EXTINF:1554 tvg-logo="https://archive.org/services/img/Lbines-RetroVisionTheaterPresentsMedicStaringRichardBoone531" group-title="悬疑推理与科幻惊悚",RetroVision剧院呈献《Medic》，主演理查德·布恩 (1948)
+https://archive.org/download/Lbines-RetroVisionTheaterPresentsMedicStaringRichardBoone531/Lbines-RetroVisionTheaterPresentsMedicStaringRichardBoone531_512kb.mp4
+
+#EXTINF:188 tvg-logo="https://archive.org/services/img/CaroleLandisGrouchoMarx" group-title="悬疑推理与科幻惊悚",《沙漠》《大草原》（卡罗尔·兰迪斯、格劳乔·马克思） (1943)
+https://archive.org/download/CaroleLandisGrouchoMarx/Carole%20Landis%20Groucho%20Marx.mp4
+
+#EXTINF:1717 tvg-logo="https://archive.org/services/img/YouBetYourLifeSecretWordSkin" group-title="悬疑推理与科幻惊悚",《你赌上你的生命！》，秘密Word皮肤 (1948)
+https://archive.org/download/YouBetYourLifeSecretWordSkin/You%20Bet%20Your%20Life!%20%2C%20Secret%20word%20%20Skin.mp4
+
+#EXTINF:560 tvg-logo="https://archive.org/services/img/gov.dod.dimoc.20510" group-title="悬疑推理与科幻惊悚",德国MP公路巡逻队 (1953)
+https://archive.org/download/gov.dod.dimoc.20510/gov.dod.dimoc.20510_512kb.mp4
+
+#EXTINF:1485 tvg-logo="https://archive.org/services/img/Rocky_King--In_the_Bag" group-title="悬疑推理与科幻惊悚",罗基·金，侦探：《袋中》（1954） (1954)
+https://archive.org/download/Rocky_King--In_the_Bag/RockyKing547_In_the_Bag.mp4
+
+#EXTINF:609 tvg-logo="https://archive.org/services/img/de-oldify-new-york-manhattan-waterfront-1080p-s-ai-1937" group-title="悬疑推理与科幻惊悚",1937年纽约曼哈顿滨水区彩色照片 (1937)
+https://archive.org/download/de-oldify-new-york-manhattan-waterfront-1080p-s-ai-1937/DeOldify%20-%20New%20York%2C%20Manhattan%20Waterfront%20%5B1080p%23S%20AI%5D%20(1937).ia.mp4
+
+#EXTINF:4129 tvg-logo="https://archive.org/services/img/CarOfDreams1935" group-title="悬疑推理与科幻惊悚",《梦想之车》（1935） (1948)
+https://archive.org/download/CarOfDreams1935/CarOfDreams1935_512kb.mp4
+
+#EXTINF:6183 tvg-logo="https://archive.org/services/img/LetterofIntroduction" group-title="悬疑推理与科幻惊悚",介绍信 (1938)
+https://archive.org/download/LetterofIntroduction/LetterofIntroduction.mp4
+
+#EXTINF:4010 tvg-logo="https://archive.org/services/img/Reet_Petite_and_Gone" group-title="悬疑推理与科幻惊悚",《Reet、Petite和Gone》 (1947)
+https://archive.org/download/Reet_Petite_and_Gone/Reet_Petite_and_Gone_512kb.mp4
+
+#EXTINF:4032 tvg-logo="https://archive.org/services/img/THENINTHGUESTVideoQualityUpgrade" group-title="悬疑推理与科幻惊悚",第九位客人（1934 密室淘汰推理悬疑鼻祖） (1934)
+https://archive.org/download/THENINTHGUESTVideoQualityUpgrade/THE%20NINTH%20GUEST%20video%20quality%20upgrade.mp4
+
+#EXTINF:852 tvg-logo="https://archive.org/services/img/Fallout_582" group-title="悬疑推理与科幻惊悚",放射尘 (1948)
+https://archive.org/download/Fallout_582/Fallout_512kb.mp4
+
+#EXTINF:398 tvg-logo="https://archive.org/services/img/LcrinDuRaja" group-title="悬疑推理与科幻惊悚",拉贾的花环 (1906)
+https://archive.org/download/LcrinDuRaja/GastonVelleLecrinDuRaja1906TheKingsCasket-EffectsBySegundoDeChomon_512kb.mp4
+
+#EXTINF:4099 tvg-logo="https://archive.org/services/img/lying_lips" group-title="悬疑推理与科幻惊悚",谎言之唇 (1939)
+https://archive.org/download/lying_lips/lying_lips.mp4
+
+#EXTINF:4447 tvg-logo="https://archive.org/services/img/BelaLugosiMeetsaBrooklynGorilla_201508" group-title="悬疑推理与科幻惊悚",贝拉·卢戈西遇见布鲁克林的大猩猩 (1948)
+https://archive.org/download/BelaLugosiMeetsaBrooklynGorilla_201508/BelaLugosiMeetsaBrooklynGorilla.mp4
+
+#EXTINF:3740 tvg-logo="https://archive.org/services/img/sos_your_aunt_emma" group-title="悬疑推理与科幻惊悚",你的艾玛阿姨也是如此 (1942)
+https://archive.org/download/sos_your_aunt_emma/sos_your_aunt_emma_512kb.mp4
+
+#EXTINF:2980 tvg-logo="https://archive.org/services/img/undercover_agent_ipod" group-title="悬疑推理与科幻惊悚",卧底特工 (1939)
+https://archive.org/download/undercover_agent_ipod/undercover_agent_512kb.mp4
+
+#EXTINF:4709 tvg-logo="https://archive.org/services/img/TheYesterdayMachine1963_201510" group-title="悬疑推理与科幻惊悚",《昨日机器》 (1948)
+https://archive.org/download/TheYesterdayMachine1963_201510/TheYesterdayMachine1963.mp4
+
+#EXTINF:1696 tvg-logo="https://archive.org/services/img/Samogonshiki" group-title="悬疑推理与科幻惊悚",公版经典：Samogonshiki (1948)
+https://archive.org/download/Samogonshiki/Pes.Barbos.Samogonshiki.by.DW_512kb.mp4
+
+#EXTINF:3173 tvg-logo="https://archive.org/services/img/SittingontheMoon" group-title="悬疑推理与科幻惊悚",坐在月球上 (1936)
+https://archive.org/download/SittingontheMoon/SittingontheMoon_512kb.mp4
+
+#EXTINF:3386 tvg-logo="https://archive.org/services/img/border_venegance" group-title="悬疑推理与科幻惊悚",边境复仇 (1935)
+https://archive.org/download/border_venegance/border_venegance_512kb.mp4
+
+#EXTINF:3188 tvg-logo="https://archive.org/services/img/Arizona_Kid_1939" group-title="悬疑推理与科幻惊悚",亚利桑那小子 (1939)
+https://archive.org/download/Arizona_Kid_1939/Arizona_Kid_1939.mp4
+
+#EXTINF:3058 tvg-logo="https://archive.org/services/img/RangeDefenders" group-title="悬疑推理与科幻惊悚",范围守护者 (1937)
+https://archive.org/download/RangeDefenders/RangeDefenders_512kb.mp4
+
+#EXTINF:3596 tvg-logo="https://archive.org/services/img/IdahoKid" group-title="悬疑推理与科幻惊悚",爱达荷小孩 (1948)
+https://archive.org/download/IdahoKid/Idaho%20Kid.mp4
+
+#EXTINF:4935 tvg-logo="https://archive.org/services/img/LieutenantKizhe_0" group-title="悬疑推理与科幻惊悚",基泽中尉 (1934)
+https://archive.org/download/LieutenantKizhe_0/Lieutenant_Kizhe_English_subtitles_512kb.mp4
+
+#EXTINF:3985 tvg-logo="https://archive.org/services/img/Murder_at_Midnight_1931" group-title="悬疑推理与科幻惊悚",午夜谋杀案 (1931)
+https://archive.org/download/Murder_at_Midnight_1931/Murder_at_Midnight_1931_512kb.mp4
+
+#EXTINF:3176 tvg-logo="https://archive.org/services/img/Hollywood_Stadium_Mystery_1938" group-title="悬疑推理与科幻惊悚",好莱坞体育场之谜 (1938)
+https://archive.org/download/Hollywood_Stadium_Mystery_1938/Hollywood_Stadium_Mystery_512kb.mp4
+
+#EXTINF:3905 tvg-logo="https://archive.org/services/img/Murder_in_the_Museum" group-title="悬疑推理与科幻惊悚",博物馆里的谋杀案 (1934)
+https://archive.org/download/Murder_in_the_Museum/Murder_in_the_Museum_512kb.mp4
+
+#EXTINF:4244 tvg-logo="https://archive.org/services/img/TheLostMissile" group-title="悬疑推理与科幻惊悚",失踪的导弹 (1948)
+https://archive.org/download/TheLostMissile/The%20Lost%20Missile.mp4
+
+#EXTINF:4295 tvg-logo="https://archive.org/services/img/ThePhantomBroadcast" group-title="悬疑推理与科幻惊悚",《幽灵广播》 (1948)
+https://archive.org/download/ThePhantomBroadcast/ThePhantomBroadcast.mp4
+
+#EXTINF:1220 tvg-logo="https://archive.org/services/img/ToTheShoresOfIwoJima" group-title="悬疑推理与科幻惊悚",致我武岛之岸 (1948)
+https://archive.org/download/ToTheShoresOfIwoJima/ToTheShoresOfIwoJima_512kb.mp4
+
+#EXTINF:4998 tvg-logo="https://archive.org/services/img/RichAndStrange_923" group-title="悬疑推理与科幻惊悚",富贵浮云（1931 希区柯克执导浪漫惊险名作） (1931)
+https://archive.org/download/RichAndStrange_923/RichAndStrange.mp4
+
+#EXTINF:2584 tvg-logo="https://archive.org/services/img/Niagara-Falls_1941" group-title="悬疑推理与科幻惊悚",尼亚加拉瀑布 (1941)
+https://archive.org/download/Niagara-Falls_1941/Niagara_Falls_512kb.mp4
+
+#EXTINF:3298 tvg-logo="https://archive.org/services/img/BulldogDrummondsRevenge_38" group-title="悬疑推理与科幻惊悚",《布洛德格·德拉蒙德的复仇》 (1937)
+https://archive.org/download/BulldogDrummondsRevenge_38/Bulldog_Drummonds_Revenge_512kb.mp4
+
+#EXTINF:4090 tvg-logo="https://archive.org/services/img/swing-1938" group-title="悬疑推理与科幻惊悚",摇摆起来！ (1938)
+https://archive.org/download/swing-1938/Swing.mp4
+
+#EXTINF:4063 tvg-logo="https://archive.org/services/img/BellsofRosarita" group-title="悬疑推理与科幻惊悚",罗萨里塔的钟声 (1945)
+https://archive.org/download/BellsofRosarita/BellsofRosarita_512kb.mp4
+
+#EXTINF:3400 tvg-logo="https://archive.org/services/img/code_of_the_cactus" group-title="悬疑推理与科幻惊悚",仙人掌法典 (1939)
+https://archive.org/download/code_of_the_cactus/code_of_the_cactus_512kb.mp4
+
+#EXTINF:3284 tvg-logo="https://archive.org/services/img/middleton_family_at_the_worlds_fair" group-title="悬疑推理与科幻惊悚",纽约世博会上的米德尔顿家族 (1939)
+https://archive.org/download/middleton_family_at_the_worlds_fair/128%2Fmatwf_128.mp4
+
+#EXTINF:832 tvg-logo="https://archive.org/services/img/ACornerInWheat" group-title="悬疑推理与科幻惊悚",麦田的一隅 (1948)
+https://archive.org/download/ACornerInWheat/CornerInWheat_512kb.mp4
+
+#EXTINF:5198 tvg-logo="https://archive.org/services/img/NeverWaveAtAWAC" group-title="悬疑推理与科幻惊悚",切勿向WAC挥手致意 (1953)
+https://archive.org/download/NeverWaveAtAWAC/NeverWaveAtaWAC.mp4
+
+#EXTINF:5781 tvg-logo="https://archive.org/services/img/PhantomOfTheOperaSmall" group-title="悬疑推理与科幻惊悚",《歌剧魅影》（原声带） (2016)
+https://archive.org/download/PhantomOfTheOperaSmall/Phantom%20of%20the%20Opera%20Small.mp4
+
+#EXTINF:3366 tvg-logo="https://archive.org/services/img/Tangled_Destinies_1932" group-title="悬疑推理与科幻惊悚",纠缠的命运 (1932)
+https://archive.org/download/Tangled_Destinies_1932/Tangled_Destinies_1932_512kb.mp4
+
+#EXTINF:3242 tvg-logo="https://archive.org/services/img/dude_bandit" group-title="悬疑推理与科幻惊悚",坏蛋小子 (1933)
+https://archive.org/download/dude_bandit/dude_bandit_512kb.mp4
+
+#EXTINF:3150 tvg-logo="https://archive.org/services/img/MysteryRanch" group-title="悬疑推理与科幻惊悚",神秘牧场 (1948)
+https://archive.org/download/MysteryRanch/Mystery-Ranch-1934-04-12_1.mp4
+
+#EXTINF:3520 tvg-logo="https://archive.org/services/img/RustlersHideout" group-title="悬疑推理与科幻惊悚",盗贼的藏身之处 (1945)
+https://archive.org/download/RustlersHideout/RustlersHideout.mp4
+
+#EXTINF:448 tvg-logo="https://archive.org/services/img/LeVoleurInvisible" group-title="悬疑推理与科幻惊悚",《隐形窃贼》 (1909)
+https://archive.org/download/LeVoleurInvisible/1909SegundoDeChomnLeVoleurInvisibletheInvisiibleThief.mp4
+
+#EXTINF:3390 tvg-logo="https://archive.org/services/img/BattleofGreed" group-title="悬疑推理与科幻惊悚",贪婪之战 (1937)
+https://archive.org/download/BattleofGreed/BattleofGreed.mp4
+
+#EXTINF:4604 tvg-logo="https://archive.org/services/img/FiveMinutestoLove" group-title="悬疑推理与科幻惊悚",五分钟的爱 (1963)
+https://archive.org/download/FiveMinutestoLove/FiveMinutestoLove_512kb.mp4
+
+#EXTINF:3931 tvg-logo="https://archive.org/services/img/The.Racketeer" group-title="悬疑推理与科幻惊悚",敲诈勒索者 (1929)
+https://archive.org/download/The.Racketeer/The.Racketeer_512kb.mp4
+
+#EXTINF:4358 tvg-logo="https://archive.org/services/img/SquawMan" group-title="悬疑推理与科幻惊悚",红妻白夫 (1914)
+https://archive.org/download/SquawMan/Squaw%20Man.mp4
+
+#EXTINF:3372 tvg-logo="https://archive.org/services/img/go_getem_haines" group-title="悬疑推理与科幻惊悚",去拿下它们，海恩斯！ (1936)
+https://archive.org/download/go_getem_haines/go_getem_haines_512kb.mp4
+
+#EXTINF:4337 tvg-logo="https://archive.org/services/img/QueenoftheYukon" group-title="悬疑推理与科幻惊悚",育空女王 (1940)
+https://archive.org/download/QueenoftheYukon/QueenoftheYukon_512kb.mp4
+
+#EXTINF:3736 tvg-logo="https://archive.org/services/img/DowntheWyomingTrail" group-title="悬疑推理与科幻惊悚",沿怀俄明小径前行 (1939)
+https://archive.org/download/DowntheWyomingTrail/DowntheWyomingTrail.mp4
+
+#EXTINF:3416 tvg-logo="https://archive.org/services/img/BulldogDrummondComesBack" group-title="悬疑推理与科幻惊悚",斗牛犬德拉蒙德回来了 (1937)
+https://archive.org/download/BulldogDrummondComesBack/Bulldog_Comes_Back_1937_512kb.mp4
+
+#EXTINF:3097 tvg-logo="https://archive.org/services/img/AliceofWonderlandinParis" group-title="悬疑推理与科幻惊悚",巴黎的《爱丽丝梦游仙境》 (1966)
+https://archive.org/download/AliceofWonderlandinParis/AliceofWonderlandinParis_512kb.mp4
+
+#EXTINF:4874 tvg-logo="https://archive.org/services/img/MutinyInOuterSpace_201901" group-title="悬疑推理与科幻惊悚",外太空的叛乱 (1948)
+https://archive.org/download/MutinyInOuterSpace_201901/Mutiny%20in%20Outer%20Space.mp4
+
+#EXTINF:3099 tvg-logo="https://archive.org/services/img/TheCrazyRay" group-title="悬疑推理与科幻惊悚",《疯狂之光》 (1948)
+https://archive.org/download/TheCrazyRay/TheCrazyRay_512kb.mp4
+
+#EXTINF:4312 tvg-logo="https://archive.org/services/img/BeesInParadise" group-title="悬疑推理与科幻惊悚",天堂中的蜜蜂 (1944)
+https://archive.org/download/BeesInParadise/BeesInParadise_512kb.mp4
+
+#EXTINF:4164 tvg-logo="https://archive.org/services/img/DelinquentDoughters" group-title="悬疑推理与科幻惊悚",违纪的女儿们 (1944)
+https://archive.org/download/DelinquentDoughters/DelinquentDaughters_512kb.mp4
+
+#EXTINF:3202 tvg-logo="https://archive.org/services/img/TheSanAntonioKid-BillElliott1944" group-title="悬疑推理与科幻惊悚",《圣安东尼奥小子》——比尔·埃利奥特（1944年） (1948)
+https://archive.org/download/TheSanAntonioKid-BillElliott1944/RedRyderInSanAntonioKid-WildBillElliott1944_512kb.mp4
+
+#EXTINF:5716 tvg-logo="https://archive.org/services/img/Sunny_" group-title="悬疑推理与科幻惊悚",和煦的 (1941)
+https://archive.org/download/Sunny_/Sunny_512kb.mp4
+
+#EXTINF:6382 tvg-logo="https://archive.org/services/img/Www.VDyoutube.comMartinLuther1953Full1080pHD" group-title="悬疑推理与科幻惊悚",马丁·路德（1953年） (1953)
+https://archive.org/download/Www.VDyoutube.comMartinLuther1953Full1080pHD/%5Bwww.VDyoutube.com%5D-Martin%20Luther%20(1953)%20Full%201080p%20HD.mp4
+
+#EXTINF:3048 tvg-logo="https://archive.org/services/img/irish_luck" group-title="悬疑推理与科幻惊悚",爱尔兰好运 (1939)
+https://archive.org/download/irish_luck/irish_luck_512kb.mp4
+
+#EXTINF:5470 tvg-logo="https://archive.org/services/img/ThePenalty" group-title="悬疑推理与科幻惊悚",惩罚（1920 朗·钱尼主演无声犯罪经典） (1920)
+https://archive.org/download/ThePenalty/The_Penalty_512kb.mp4
+
+#EXTINF:3499 tvg-logo="https://archive.org/services/img/TombstoneCanyon" group-title="悬疑推理与科幻惊悚",汤布斯通峡谷 (1932)
+https://archive.org/download/TombstoneCanyon/TombstoneCanyon_512kb.mp4
+
+#EXTINF:3863 tvg-logo="https://archive.org/services/img/TheBlackDoll" group-title="悬疑推理与科幻惊悚",黑人玩偶 (1948)
+https://archive.org/download/TheBlackDoll/The%20Black%20Doll.mp4
+
+#EXTINF:3629 tvg-logo="https://archive.org/services/img/that_gang_of_mine" group-title="悬疑推理与科幻惊悚",我的那伙人 (1948)
+https://archive.org/download/that_gang_of_mine/that_gang_of_mine_512kb.mp4
+
+#EXTINF:3225 tvg-logo="https://archive.org/services/img/rip_roarin_buckaroo" group-title="悬疑推理与科幻惊悚",《咆哮的巴卡拉罗》 (1936)
+https://archive.org/download/rip_roarin_buckaroo/rip_roarin_buckaroo_512kb.mp4
+
+#EXTINF:5134 tvg-logo="https://archive.org/services/img/TheBat1926WithSoundtrack" group-title="悬疑推理与科幻惊悚",蝙蝠（1926 启发蝙蝠侠诞生的古宅密室悬疑片） (1926)
+https://archive.org/download/TheBat1926WithSoundtrack/TheBat1926WithSoundtrack_512kb.mp4
+
+#EXTINF:3933 tvg-logo="https://archive.org/services/img/TheMedicineMan1930" group-title="悬疑推理与科幻惊悚",《药剂师》（1930年） (1948)
+https://archive.org/download/TheMedicineMan1930/TheMedicineMan1930_512kb.mp4
+
+#EXTINF:6248 tvg-logo="https://archive.org/services/img/TheWayToTheStars" group-title="悬疑推理与科幻惊悚",通往星辰之路（1945 迈克尔·雷德格雷夫英国空战经典） (1945)
+https://archive.org/download/TheWayToTheStars/TheWayToTheStars.mp4
+
+#EXTINF:6095 tvg-logo="https://archive.org/services/img/LittleLordFauntleroy1936JohnCromwellfullMovieHD" group-title="爆笑喜剧与国会图书馆典藏",小公子方特罗伊（1936 约翰·克伦威尔执导高清修复版） (1936)
+https://archive.org/download/LittleLordFauntleroy1936JohnCromwellfullMovieHD/Little%20Lord%20Fauntleroy%20(1936)%20-%20John%20Cromwell%20(full%20movie%20HD).mp4
+
+#EXTINF:2806 tvg-logo="https://archive.org/services/img/marked_for_murder" group-title="悬疑推理与科幻惊悚",标记为谋杀案 (1948)
+https://archive.org/download/marked_for_murder/marked_for_murder_512kb.mp4
+
+#EXTINF:258 tvg-logo="https://archive.org/services/img/LeCake-walkInfernal" group-title="悬疑推理与科幻惊悚",地狱式蛋糕漫步 (1903)
+https://archive.org/download/LeCake-walkInfernal/1903GeorgesMlisLeCake-walkInfernal.mp4
+
+#EXTINF:3509 tvg-logo="https://archive.org/services/img/tough_to_handle_ipod" group-title="悬疑推理与科幻惊悚",《难以应对——又名《百老汇拾荒者》》 (1937)
+https://archive.org/download/tough_to_handle_ipod/tough_to_handle_512kb.mp4
+
+#EXTINF:4408 tvg-logo="https://archive.org/services/img/InvasionUsa" group-title="悬疑推理与科幻惊悚",入侵美利坚 (1948)
+https://archive.org/download/InvasionUsa/InvasionUsa.mp4
+
+#EXTINF:5695 tvg-logo="https://archive.org/services/img/TheBlackRebels1960" group-title="悬疑推理与科幻惊悚",《黑人反叛者》（1960年） (1948)
+https://archive.org/download/TheBlackRebels1960/TheBlackRebels1960_512kb.mp4
+
+#EXTINF:4026 tvg-logo="https://archive.org/services/img/they_meet_again" group-title="悬疑推理与科幻惊悚",他们再次相遇 (1941)
+https://archive.org/download/they_meet_again/they_meet_again_512kb.mp4
+
+#EXTINF:5647 tvg-logo="https://archive.org/services/img/king_arthur_was_a_gentleman_1942" group-title="悬疑推理与科幻惊悚",亚瑟王是一位绅士 (1942)
+https://archive.org/download/king_arthur_was_a_gentleman_1942/KingArthurWasaGentleman_512kb.mp4
+
+#EXTINF:3529 tvg-logo="https://archive.org/services/img/sky_patrol" group-title="悬疑推理与科幻惊悚",天空巡逻队 (1939)
+https://archive.org/download/sky_patrol/sky_patrol_512kb.mp4
+
+#EXTINF:3465 tvg-logo="https://archive.org/services/img/gang_bullets_ipod" group-title="悬疑推理与科幻惊悚",帮派子弹 (1938)
+https://archive.org/download/gang_bullets_ipod/gang_bullets_512kb.mp4
+
+#EXTINF:3481 tvg-logo="https://archive.org/services/img/BulldogDrummondInAfrica1938" group-title="悬疑推理与科幻惊悚",斗牛犬德拉蒙德非洲历险记（1938 侦探冒险片） (1938)
+https://archive.org/download/BulldogDrummondInAfrica1938/Bulldog_Drummond_in_Africa_38_512kb.mp4
+
+#EXTINF:1481 tvg-logo="https://archive.org/services/img/CharlieChaplinsTheRink" group-title="爆笑喜剧与国会图书馆典藏",查理·卓别林的《冰场》 (1948)
+https://archive.org/download/CharlieChaplinsTheRink/TheRink1916H264.mp4
+
+#EXTINF:4513 tvg-logo="https://archive.org/services/img/TheDukeisTops" group-title="悬疑推理与科幻惊悚",公爵排名第一 (1938)
+https://archive.org/download/TheDukeisTops/TheDukeisTops_512kb.mp4
+
+#EXTINF:5619 tvg-logo="https://archive.org/services/img/TheRiseOfCatherineTheGreatVideoQualityUpgrade" group-title="悬疑推理与科幻惊悚",叶卡捷琳娜大帝的崛起（1934 小道格拉斯·范朋克历史巨制） (1934)
+https://archive.org/download/TheRiseOfCatherineTheGreatVideoQualityUpgrade/TheRiseOfCatherineTheGreatVideoQualityUpgrade.mp4
+
+#EXTINF:2575 tvg-logo="https://archive.org/services/img/the_last_three" group-title="悬疑推理与科幻惊悚",《最后三人》 (1942)
+https://archive.org/download/the_last_three/the_last_three_512kb.mp4
+
+#EXTINF:3700 tvg-logo="https://archive.org/services/img/TheMidnightGirl" group-title="悬疑推理与科幻惊悚",《午夜女孩》 (1925)
+https://archive.org/download/TheMidnightGirl/TheMidnightGirl_512kb.mp4
+
+#EXTINF:4628 tvg-logo="https://archive.org/services/img/womantowoman_204" group-title="悬疑推理与科幻惊悚",女人对女人 (1929)
+https://archive.org/download/womantowoman_204/Woman-to-Woman-1929.mp4
+
+#EXTINF:4119 tvg-logo="https://archive.org/services/img/sexton_blake_sexton_hooded_terror" group-title="悬疑推理与科幻惊悚",塞克斯顿·布莱克与兜帽恐怖分子 (1938)
+https://archive.org/download/sexton_blake_sexton_hooded_terror/Sexton_Blake_and_Hooded_Terror.mp4
+
+#EXTINF:4213 tvg-logo="https://archive.org/services/img/ExileExpressupgraded_901" group-title="悬疑推理与科幻惊悚",《流亡特快》（升级版） (1948)
+https://archive.org/download/ExileExpressupgraded_901/EXILE_EXPRESS_720.mp4
+
+#EXTINF:5546 tvg-logo="https://archive.org/services/img/TargetForToday1944VideoAudioUpgrade" group-title="悬疑推理与科幻惊悚",今日目标：升级1944年的视频与音频内容 (1948)
+https://archive.org/download/TargetForToday1944VideoAudioUpgrade/TargetForToday1944VideoAudioUpgrade.mp4
+
+#EXTINF:4044 tvg-logo="https://archive.org/services/img/miracle_kid" group-title="悬疑推理与科幻惊悚",《奇迹儿童》 (1941)
+https://archive.org/download/miracle_kid/the_miracle_kid_512kb.mp4
+
+#EXTINF:3526 tvg-logo="https://archive.org/services/img/bride_for_henry" group-title="悬疑推理与科幻惊悚",亨利的新娘 (1937)
+https://archive.org/download/bride_for_henry/bride_for_henry_512kb.mp4
+
+#EXTINF:2482 tvg-logo="https://archive.org/services/img/Magic_Cloak_of_Oz_1914" group-title="悬疑推理与科幻惊悚",奥兹的魔法斗篷 (1914)
+https://archive.org/download/Magic_Cloak_of_Oz_1914/MagicCloakOfOZ_512kb.mp4
+
+#EXTINF:3597 tvg-logo="https://archive.org/services/img/big_show-off" group-title="悬疑推理与科幻惊悚",《大炫技》 (1945)
+https://archive.org/download/big_show-off/big_show-off_512kb.mp4
+
+#EXTINF:3853 tvg-logo="https://archive.org/services/img/FalsePretenses" group-title="悬疑推理与科幻惊悚",虚假借口 (1948)
+https://archive.org/download/FalsePretenses/False-Pretenses-1935_1.mp4
+
+#EXTINF:3209 tvg-logo="https://archive.org/services/img/StageCoachtoDenver" group-title="悬疑推理与科幻惊悚",前往丹佛的马车之旅 (1946)
+https://archive.org/download/StageCoachtoDenver/StagecoachtoDenver_512kb.mp4
+
+#EXTINF:4229 tvg-logo="https://archive.org/services/img/HeadlessHorseman" group-title="悬疑推理与科幻惊悚",无头骑士 (1948)
+https://archive.org/download/HeadlessHorseman/HeadlessHorseman.mp4
+
+#EXTINF:3419 tvg-logo="https://archive.org/services/img/MurderwithMusic" group-title="悬疑推理与科幻惊悚",音乐伴奏下的谋杀案 (1941)
+https://archive.org/download/MurderwithMusic/MurderwithMusic_512kb.mp4
+
+#EXTINF:3493 tvg-logo="https://archive.org/services/img/RidersOfTheFrontier" group-title="悬疑推理与科幻惊悚",边疆骑士 (1948)
+https://archive.org/download/RidersOfTheFrontier/RidersOfTheFrontier.mp4
+
+#EXTINF:3167 tvg-logo="https://archive.org/services/img/FrontierPonyExpress" group-title="悬疑推理与科幻惊悚",前沿小马快递服务 (1939)
+https://archive.org/download/FrontierPonyExpress/FrontierPonyExpress_512kb.mp4
+
+#EXTINF:3188 tvg-logo="https://archive.org/services/img/JimHanveyDetective1937" group-title="悬疑推理与科幻惊悚",公版经典：Jim Hanvey, Detective (1937) (1948)
+https://archive.org/download/JimHanveyDetective1937/JimHanveyDetective1937_512kb.mp4
+
+#EXTINF:180 tvg-logo="https://archive.org/services/img/Magic_Roses" group-title="悬疑推理与科幻惊悚",魔法玫瑰 (1906)
+https://archive.org/download/Magic_Roses/Magic_Roses.mp4
+
+#EXTINF:5798 tvg-logo="https://archive.org/services/img/GuestInTheHouse1944_573" group-title="悬疑推理与科幻惊悚",屋中来客（1944 安妮·巴克斯特心理悬疑黑色名作） (1944)
+https://archive.org/download/GuestInTheHouse1944_573/GuestInTheHouse1944_512kb.mp4
+
+#EXTINF:3472 tvg-logo="https://archive.org/services/img/caryl_of_the_mountains_ipod" group-title="悬疑推理与科幻惊悚",山之卡莉尔 (1936)
+https://archive.org/download/caryl_of_the_mountains_ipod/caryl_of_the_mountains_512kb.mp4
+
+#EXTINF:4325 tvg-logo="https://archive.org/services/img/payoff" group-title="悬疑推理与科幻惊悚",《收获》 (1942)
+https://archive.org/download/payoff/payoff_512kb.mp4
+
+#EXTINF:664 tvg-logo="https://archive.org/services/img/TheHole" group-title="悬疑推理与科幻惊悚",神秘洞穴 (1962)
+https://archive.org/download/TheHole/TheHole_512kb.mp4
+
+#EXTINF:3936 tvg-logo="https://archive.org/services/img/ForcedLanding1941" group-title="悬疑推理与科幻惊悚",1941年迫降事件 (1941)
+https://archive.org/download/ForcedLanding1941/Forced-Landing-1941.mp4
+
+#EXTINF:3856 tvg-logo="https://archive.org/services/img/SubmarineBase" group-title="悬疑推理与科幻惊悚",潜艇基地 (1943)
+https://archive.org/download/SubmarineBase/SubmarineBase_512kb.mp4
+
+#EXTINF:4177 tvg-logo="https://archive.org/services/img/RimOfTheCanyon" group-title="悬疑推理与科幻惊悚",峡谷边缘 (1949)
+https://archive.org/download/RimOfTheCanyon/RimOfTheCanyon_512kb.mp4
+
+#EXTINF:3810 tvg-logo="https://archive.org/services/img/TheDudeRanger" group-title="悬疑推理与科幻惊悚",《呆萌护林员》 (1934)
+https://archive.org/download/TheDudeRanger/TheDudeRanger.mp4
+
+#EXTINF:4233 tvg-logo="https://archive.org/services/img/panters_claw_ipod" group-title="悬疑推理与科幻惊悚",《黑豹之爪》 (1942)
+https://archive.org/download/panters_claw_ipod/panthers_claw_512kb.mp4
+
+#EXTINF:3317 tvg-logo="https://archive.org/services/img/Round-UpTimeinTexas" group-title="悬疑推理与科幻惊悚",德克萨斯州的围猎时节到了 (1937)
+https://archive.org/download/Round-UpTimeinTexas/Round-UpTimeinTexas_512kb.mp4
+
+#EXTINF:3715 tvg-logo="https://archive.org/services/img/Mystery_Man_1935" group-title="悬疑推理与科幻惊悚",神秘男子 (1935)
+https://archive.org/download/Mystery_Man_1935/Mystery_Man.mp4
+
+#EXTINF:3780 tvg-logo="https://archive.org/services/img/TheStudioMurderMystery" group-title="悬疑推理与科幻惊悚",《工作室谋杀之谜》 (1948)
+https://archive.org/download/TheStudioMurderMystery/The%20Studio%20Murder%20Mystery.mp4
+
+#EXTINF:3595 tvg-logo="https://archive.org/services/img/outlaws_of_boulder_pass_1942" group-title="悬疑推理与科幻惊悚",博尔德山口的亡命之徒 (1942)
+https://archive.org/download/outlaws_of_boulder_pass_1942/outlaws_of_boulder_pass_512kb.mp4
+
+#EXTINF:3110 tvg-logo="https://archive.org/services/img/WhoKilledDocRobbin_773" group-title="悬疑推理与科幻惊悚",谁杀死了罗宾医生？ (1948)
+https://archive.org/download/WhoKilledDocRobbin_773/WhoKilledDocR_512kb.mp4
+
+#EXTINF:843 tvg-logo="https://archive.org/services/img/InTheParktinted" group-title="悬疑推理与科幻惊悚",在公园里［着色的 (1915)
+https://archive.org/download/InTheParktinted/InThePark_512kb.mp4
+
+#EXTINF:4852 tvg-logo="https://archive.org/services/img/Three_Steps_North_1951" group-title="悬疑推理与科幻惊悚",向北走三步 (1951)
+https://archive.org/download/Three_Steps_North_1951/Three_Steps_North_512kb.mp4
+
+#EXTINF:2936 tvg-logo="https://archive.org/services/img/SkyHigh1922" group-title="悬疑推理与科幻惊悚",《天空之高》（1922年） (1948)
+https://archive.org/download/SkyHigh1922/SkyHigh1922_512kb.mp4
+
+#EXTINF:3786 tvg-logo="https://archive.org/services/img/Shadows_on_the_Stairs_1941" group-title="悬疑推理与科幻惊悚",楼梯上的阴影 (1941)
+https://archive.org/download/Shadows_on_the_Stairs_1941/Shadows_on_the_Stairs_1941.mp4
+
+#EXTINF:3187 tvg-logo="https://archive.org/services/img/romance_on_the_run" group-title="悬疑推理与科幻惊悚",《逃亡中的浪漫》 (1938)
+https://archive.org/download/romance_on_the_run/romance_on_the_run_512kb.mp4
+
+#EXTINF:8005 tvg-logo="https://archive.org/services/img/all.-quiet.-on.-the.-western.-front.-1930" group-title="悬疑推理与科幻惊悚",西线无战事（1930 奥斯卡最佳影片反战史诗巨作） (1930)
+https://archive.org/download/all.-quiet.-on.-the.-western.-front.-1930/All%20Quiet%20On%20The%20Western%20Front%20(1930)%2FAll.Quiet.On.The.Western.Front.1930.mp4
+
+#EXTINF:4555 tvg-logo="https://archive.org/services/img/TheMistressOfAtlantis" group-title="悬疑推理与科幻惊悚",亚特兰蒂斯的女主人 (1948)
+https://archive.org/download/TheMistressOfAtlantis/TheMistressOfAtlantis.mp4
+
+#EXTINF:5006 tvg-logo="https://archive.org/services/img/HaldaneOfTheSecretService" group-title="悬疑推理与科幻惊悚",特勤局的哈兰德 (1923)
+https://archive.org/download/HaldaneOfTheSecretService/HaldaneOfTheSecretService.mp4
+
+#EXTINF:1954 tvg-logo="https://archive.org/services/img/naacp_south_carolina" group-title="悬疑推理与科幻惊悚",南卡罗来纳州教育不平等状况研究 (1936)
+https://archive.org/download/naacp_south_carolina/naacp_south_carolina_512kb.mp4
+
+#EXTINF:3970 tvg-logo="https://archive.org/services/img/UcanDairelerIstanbuldaflyingSaucersOverIstanbul" group-title="悬疑推理与科幻惊悚",伊斯坦布尔的飞碟（Flying Saucers Over Istanbul）（英文字幕） (1955)
+https://archive.org/download/UcanDairelerIstanbuldaflyingSaucersOverIstanbul/UcanDairelerIstanbulda.mp4
+
+#EXTINF:4221 tvg-logo="https://archive.org/services/img/beggars_in_ermine" group-title="悬疑推理与科幻惊悚",身着貂皮服饰的乞丐 (1934)
+https://archive.org/download/beggars_in_ermine/beggars_in_ermine_512kb.mp4
+
+#EXTINF:5302 tvg-logo="https://archive.org/services/img/TopperReturns_201409" group-title="爆笑喜剧与国会图书馆典藏",托珀归来（1941 琼·布朗德尔·奥斯卡提名悬疑喜剧） (1941)
+https://archive.org/download/TopperReturns_201409/Topper%20Returns.mp4
+
+#EXTINF:3924 tvg-logo="https://archive.org/services/img/BombsOverBurma" group-title="悬疑推理与科幻惊悚",缅甸上空的炸弹 (1942)
+https://archive.org/download/BombsOverBurma/BombsOverBurma_512kb.mp4
+
+#EXTINF:1209 tvg-logo="https://archive.org/services/img/TheGayNighties" group-title="悬疑推理与科幻惊悚",《同性恋之夜》 (1933)
+https://archive.org/download/TheGayNighties/TheGayNighties_512kb.mp4
+
+#EXTINF:4007 tvg-logo="https://archive.org/services/img/EveningsForSale1932Restored" group-title="悬疑推理与科幻惊悚",《待售的夜晚》1932年修复版 (1948)
+https://archive.org/download/EveningsForSale1932Restored/Evenings%20for%20Sale%201932%20restored.mp4
+
+#EXTINF:3535 tvg-logo="https://archive.org/services/img/Amateur_Crook_1937" group-title="悬疑推理与科幻惊悚",业余骗子 (1937)
+https://archive.org/download/Amateur_Crook_1937/Amateur_Crook_1937.mp4
+
+#EXTINF:5166 tvg-logo="https://archive.org/services/img/OutpostInMorocco" group-title="悬疑推理与科幻惊悚",摩洛哥的前哨站 (1949)
+https://archive.org/download/OutpostInMorocco/OutpostInMorocco.mp4
+
+#EXTINF:3258 tvg-logo="https://archive.org/services/img/DesertGold" group-title="悬疑推理与科幻惊悚",沙漠之金 (1936)
+https://archive.org/download/DesertGold/DesertGold_512kb.mp4
+
+#EXTINF:4077 tvg-logo="https://archive.org/services/img/ForeverEngland" group-title="悬疑推理与科幻惊悚",永远属于英格兰 (1948)
+https://archive.org/download/ForeverEngland/Forever%20England.mp4
+
+#EXTINF:5008 tvg-logo="https://archive.org/services/img/Inspector_Hornleigh_Goes_to_It" group-title="悬疑推理与科幻惊悚",霍恩莱警探着手处理此事 (1941)
+https://archive.org/download/Inspector_Hornleigh_Goes_to_It/Inspector_Hornleigh_Goes_to_It_512kb.mp4
+
+#EXTINF:3321 tvg-logo="https://archive.org/services/img/Heading_Home" group-title="悬疑推理与科幻惊悚",返回首页 (1920)
+https://archive.org/download/Heading_Home/HeadingHome-BabeRuth1920_512kb.mp4
+
+#EXTINF:5241 tvg-logo="https://archive.org/services/img/MyFavoriteBrunette1947" group-title="爆笑喜剧与国会图书馆典藏",俏佳人（1947 鲍勃·霍普·多萝西·拉莫尔侦探喜剧） (1947)
+https://archive.org/download/MyFavoriteBrunette1947/MyFavoriteBrunette1947.mp4
+
+#EXTINF:871 tvg-logo="https://archive.org/services/img/DayOfTheKillerTornadoes" group-title="悬疑推理与科幻惊悚",杀手龙卷风之日 (1948)
+https://archive.org/download/DayOfTheKillerTornadoes/DayOfTheKillerTornados_512kb.mp4
+
+#EXTINF:4158 tvg-logo="https://archive.org/services/img/The_Rogues_Tavern" group-title="悬疑推理与科幻惊悚",亡命之徒酒馆 (1936)
+https://archive.org/download/The_Rogues_Tavern/The_Rogues_Tavern_512kb.mp4
+
+#EXTINF:4138 tvg-logo="https://archive.org/services/img/Shed_No_Tears_1948" group-title="悬疑推理与科幻惊悚",不要流泪 (1948)
+https://archive.org/download/Shed_No_Tears_1948/Shed_No_Tears.mp4
+
+#EXTINF:3369 tvg-logo="https://archive.org/services/img/KingOfTheCowboys" group-title="悬疑推理与科幻惊悚",牛仔之王 (1943)
+https://archive.org/download/KingOfTheCowboys/KingOfTheCowboys_512kb.mp4
+
+#EXTINF:1237 tvg-logo="https://archive.org/services/img/TheHauntedHouse" group-title="悬疑推理与科幻惊悚",深入阴宅 (1921)
+https://archive.org/download/TheHauntedHouse/TheHauntedHouse_512kb.mp4
+
+#EXTINF:4265 tvg-logo="https://archive.org/services/img/ShadowOfChinatown" group-title="悬疑推理与科幻惊悚",唐人街的阴影 (1948)
+https://archive.org/download/ShadowOfChinatown/BelaLugosiShadowOfChinatownFullMovie.mp4
+
+#EXTINF:3560 tvg-logo="https://archive.org/services/img/BlondeSavage" group-title="悬疑推理与科幻惊悚",金发野性女 (1948)
+https://archive.org/download/BlondeSavage/BlondeSavage.mp4
+
+#EXTINF:3171 tvg-logo="https://archive.org/services/img/TheTriggerTrio" group-title="悬疑推理与科幻惊悚",触发三重奏 (1937)
+https://archive.org/download/TheTriggerTrio/TheTriggerTrio_512kb.mp4
+
+#EXTINF:4107 tvg-logo="https://archive.org/services/img/TheKidStakes" group-title="悬疑推理与科幻惊悚",儿童锦标赛 (1927)
+https://archive.org/download/TheKidStakes/Kid_Stakes1927_512kb.mp4
+
+#EXTINF:3869 tvg-logo="https://archive.org/services/img/Scared_Stiff" group-title="悬疑推理与科幻惊悚",惊恐万分（恐惧之宝） (1945)
+https://archive.org/download/Scared_Stiff/ScaredStiff_512kb.mp4
+
+#EXTINF:4297 tvg-logo="https://archive.org/services/img/TheLostZeppelin1929ConwayTearleVirginiaValliRicardoCortezDukeMartin" group-title="悬疑推理与科幻惊悚",《失踪的齐柏林飞艇》（1929年），康威·蒂尔、弗吉尼亚·瓦利、里卡多·科尔特斯、杜克·马丁主演 (1929)
+https://archive.org/download/TheLostZeppelin1929ConwayTearleVirginiaValliRicardoCortezDukeMartin/LostZepp.mp4
+
+#EXTINF:3679 tvg-logo="https://archive.org/services/img/WithoutHonor" group-title="悬疑推理与科幻惊悚",无荣誉 (1932)
+https://archive.org/download/WithoutHonor/WithoutHonor_512kb.mp4
+
+#EXTINF:3917 tvg-logo="https://archive.org/services/img/TheBuckskinLady" group-title="悬疑推理与科幻惊悚",《鹿皮女》 (1957)
+https://archive.org/download/TheBuckskinLady/TheBuckskinLady_512kb.mp4
+
+#EXTINF:3727 tvg-logo="https://archive.org/services/img/TheSeaLion" group-title="悬疑推理与科幻惊悚",海狮 (1921)
+https://archive.org/download/TheSeaLion/TheSeaLion_512kb.mp4
+
+#EXTINF:3082 tvg-logo="https://archive.org/services/img/DangerValley" group-title="悬疑推理与科幻惊悚",危险谷 (1937)
+https://archive.org/download/DangerValley/DangerValley_512kb.mp4
+
+#EXTINF:4837 tvg-logo="https://archive.org/services/img/FightingCaravans1931GaryCooper_201512" group-title="悬疑推理与科幻惊悚",《战斗车队》（1931年），加里·库珀主演 (1931)
+https://archive.org/download/FightingCaravans1931GaryCooper_201512/Fighting%20Caravans%20(1931)%20Gary%20Cooper.mp4
+
+#EXTINF:3933 tvg-logo="https://archive.org/services/img/Suds_1920" group-title="悬疑推理与科幻惊悚",肥皂泡沫 (1920)
+https://archive.org/download/Suds_1920/Suds_512kb.mp4
+
+#EXTINF:3251 tvg-logo="https://archive.org/services/img/LetsGetTough" group-title="悬疑推理与科幻惊悚",让我们变得坚强起来 (1942)
+https://archive.org/download/LetsGetTough/LetsGetTough.mp4
+
+#EXTINF:5451 tvg-logo="https://archive.org/services/img/GoodTimeGirl" group-title="悬疑推理与科幻惊悚",《美好时光的女孩》 (1948)
+https://archive.org/download/GoodTimeGirl/GoodTimeGirl_512kb.mp4
+
+#EXTINF:792 tvg-logo="https://archive.org/services/img/RediscoverynasaScienceSeries" group-title="悬疑推理与科幻惊悚",重新发现（NASA科学系列） (1948)
+https://archive.org/download/RediscoverynasaScienceSeries/Rediscovery-FloodBelow_512kb.mp4
+
+#EXTINF:2584 tvg-logo="https://archive.org/services/img/TheFrankSinatraTimexShow" group-title="悬疑推理与科幻惊悚",弗兰克·辛纳屈Timex演出 (1951)
+https://archive.org/download/TheFrankSinatraTimexShow/With-Dagmar_JuneHutton_JoeyBushkin_512kb.mp4
+
+#EXTINF:684 tvg-logo="https://archive.org/services/img/KimbarOfTheJungle1949" group-title="悬疑推理与科幻惊悚",《丛林的 KIMBAR 》（1949年） (1948)
+https://archive.org/download/KimbarOfTheJungle1949/SteveReevesInKimbarOfTheJungle1949Complete_512kb.mp4
+
+#EXTINF:3346 tvg-logo="https://archive.org/services/img/roaring_roads" group-title="悬疑推理与科幻惊悚",轰鸣之路 (1935)
+https://archive.org/download/roaring_roads/roaring_roads_512kb.mp4
+
+#EXTINF:3164 tvg-logo="https://archive.org/services/img/TheMandarinMystery_8" group-title="悬疑推理与科幻惊悚",《普通话之谜》 (1948)
+https://archive.org/download/TheMandarinMystery_8/ElleryQueenTheMandarinMystery1936.mp4
+
+#EXTINF:3576 tvg-logo="https://archive.org/services/img/DetectiveKittyOday" group-title="悬疑推理与科幻惊悚",侦探凯蒂·奥戴 (1948)
+https://archive.org/download/DetectiveKittyOday/DetectiveKittyOday.mp4
+
+#EXTINF:634 tvg-logo="https://archive.org/services/img/BetweenShowers" group-title="悬疑推理与科幻惊悚",阵雨之间 (1914)
+https://archive.org/download/BetweenShowers/CharlieChaplinBetween.Showers.1914_512kb.mp4
+
+#EXTINF:4002 tvg-logo="https://archive.org/services/img/TheNutFarm" group-title="悬疑推理与科幻惊悚",坚果农场 (1935)
+https://archive.org/download/TheNutFarm/TheNutFarm_512kb.mp4
+
+#EXTINF:3901 tvg-logo="https://archive.org/services/img/Melody_for_Three_movie" group-title="悬疑推理与科幻惊悚",三重旋律 (1941)
+https://archive.org/download/Melody_for_Three_movie/Melody_for_Three_512kb.mp4
+
+#EXTINF:3686 tvg-logo="https://archive.org/services/img/Midnight_Warning_1932" group-title="悬疑推理与科幻惊悚",午夜警报 (1932)
+https://archive.org/download/Midnight_Warning_1932/Midnight_Warning_1932.mp4
+
+#EXTINF:5329 tvg-logo="https://archive.org/services/img/Broken.Blossoms" group-title="悬疑推理与科幻惊悚",残花泪（1919 格里菲斯执导·莉莲·吉许催泪神作） (1919)
+https://archive.org/download/Broken.Blossoms/Broken_Blossoms_512kb.mp4
+
+#EXTINF:3988 tvg-logo="https://archive.org/services/img/TheVillainStillPursuedHer1940" group-title="悬疑推理与科幻惊悚",《恶棍仍在追捕她》（1940年） (1948)
+https://archive.org/download/TheVillainStillPursuedHer1940/TheVillainStillPursuedHer1940_512kb.mp4
+
+#EXTINF:3546 tvg-logo="https://archive.org/services/img/TheWildRide_755" group-title="悬疑推理与科幻惊悚",《狂野之旅》 (1948)
+https://archive.org/download/TheWildRide_755/JackNicholsonInTheWildRide1960.mp4
+
+#EXTINF:5729 tvg-logo="https://archive.org/services/img/TheAstralFactor" group-title="悬疑推理与科幻惊悚",无形的陌生人 (1948)
+https://archive.org/download/TheAstralFactor/TheAstralFactor.mp4
+
+#EXTINF:3914 tvg-logo="https://archive.org/services/img/DesertPhantom" group-title="悬疑推理与科幻惊悚",沙漠幻影 (1948)
+https://archive.org/download/DesertPhantom/DesertPhantom_512kb.mp4
+
+#EXTINF:3279 tvg-logo="https://archive.org/services/img/WildHorsePhantom" group-title="悬疑推理与科幻惊悚",野马幽灵 (1944)
+https://archive.org/download/WildHorsePhantom/WildHorsePhantom_512kb.mp4
+
+#EXTINF:3601 tvg-logo="https://archive.org/services/img/TheShadowofSilkLennox" group-title="悬疑推理与科幻惊悚",《丝绸莱诺克斯的阴影》 (1935)
+https://archive.org/download/TheShadowofSilkLennox/TheShadowofSilkLennox_512kb.mp4
+
+#EXTINF:3523 tvg-logo="https://archive.org/services/img/The_Cheat" group-title="悬疑推理与科幻惊悚",欺骗（1915 西塞·B·德米尔执导·早川雪洲成名作） (1915)
+https://archive.org/download/The_Cheat/The_Cheat_512kb.mp4
+
+#EXTINF:3937 tvg-logo="https://archive.org/services/img/RemedyForRiches" group-title="悬疑推理与科幻惊悚",克里斯蒂安博士——财富良方 (1940)
+https://archive.org/download/RemedyForRiches/RemedyForRiches.mp4
+
+#EXTINF:3286 tvg-logo="https://archive.org/services/img/feud_maker" group-title="悬疑推理与科幻惊悚",《纷争制造者》 (1938)
+https://archive.org/download/feud_maker/feud_maker_512kb.mp4
+
+#EXTINF:4440 tvg-logo="https://archive.org/services/img/Silks_And_Saddles" group-title="悬疑推理与科幻惊悚",丝绸与马鞍 (1921)
+https://archive.org/download/Silks_And_Saddles/SilksAndSaddles.mp4
+
+#EXTINF:3520 tvg-logo="https://archive.org/services/img/SingCowboySing" group-title="悬疑推理与科幻惊悚",唱吧，牛仔，唱吧 (1937)
+https://archive.org/download/SingCowboySing/SingCowboySing_512kb.mp4
+
+#EXTINF:3607 tvg-logo="https://archive.org/services/img/trouble_at_melody_mesa" group-title="悬疑推理与科幻惊悚",梅洛迪梅萨的麻烦事 (1948)
+https://archive.org/download/trouble_at_melody_mesa/trouble_at_melody_mesa_512kb.mp4
+
+#EXTINF:3604 tvg-logo="https://archive.org/services/img/LawOfTheSea_181" group-title="悬疑推理与科幻惊悚",《海洋法》 (1948)
+https://archive.org/download/LawOfTheSea_181/Law-of-the-Sea-1932-01-20.mp4
+
+#EXTINF:3395 tvg-logo="https://archive.org/services/img/CattleStampede" group-title="悬疑推理与科幻惊悚",牛群冲撞事件 (1943)
+https://archive.org/download/CattleStampede/CattleStampede_512kb.mp4
+
+#EXTINF:5661 tvg-logo="https://archive.org/services/img/Struggle_482" group-title="悬疑推理与科幻惊悚",奋斗 (1948)
+https://archive.org/download/Struggle_482/StruggleDivx_512kb.mp4
+
+#EXTINF:5133 tvg-logo="https://archive.org/services/img/BusterKeatonsShorts2" group-title="悬疑推理与科幻惊悚",巴斯特·基顿短片2 (1926)
+https://archive.org/download/BusterKeatonsShorts2/BKS2.mp4
+
+#EXTINF:3167 tvg-logo="https://archive.org/services/img/Rhythm_in_the_Clouds" group-title="悬疑推理与科幻惊悚",云中的韵律 (1937)
+https://archive.org/download/Rhythm_in_the_Clouds/RhythmintheClouds_512kb.mp4
+
+#EXTINF:3098 tvg-logo="https://archive.org/services/img/BroadwaytoCheyenne" group-title="悬疑推理与科幻惊悚",从百老汇到谢耶恩 (1932)
+https://archive.org/download/BroadwaytoCheyenne/BroadwaytoCheyenne_512kb.mp4
+
+#EXTINF:4572 tvg-logo="https://archive.org/services/img/Monsoon_" group-title="悬疑推理与科幻惊悚",季风 (1943)
+https://archive.org/download/Monsoon_/Monsoon.mp4
+
+#EXTINF:3665 tvg-logo="https://archive.org/services/img/TheGngsAllThere" group-title="悬疑推理与科幻惊悚",帮派成员全都来了 (1941)
+https://archive.org/download/TheGngsAllThere/TheGngsAllThere_512kb.mp4
+
+#EXTINF:1231 tvg-logo="https://archive.org/services/img/TheHighSign" group-title="悬疑推理与科幻惊悚",高位信号 (1948)
+https://archive.org/download/TheHighSign/TheHighSign_512kb.mp4
+
+#EXTINF:3484 tvg-logo="https://archive.org/services/img/ALawmanIsBorn" group-title="悬疑推理与科幻惊悚",一名执法者诞生了 (1937)
+https://archive.org/download/ALawmanIsBorn/ALawmanIsBorn_512kb.mp4
+
+#EXTINF:6581 tvg-logo="https://archive.org/services/img/fritz-langs-m-1931-restored-movie-720p-hd" group-title="悬疑推理与科幻惊悚",M 就是凶手（1931 弗里茨·朗执导·720p高清修复版） (1931)
+https://archive.org/download/fritz-langs-m-1931-restored-movie-720p-hd/fritz%20lang's%20m-1931-restored%20movie-720p-hd.mp4
+
+#EXTINF:5541 tvg-logo="https://archive.org/services/img/APlaceOfOnesOwn" group-title="悬疑推理与科幻惊悚",一席之地 (1948)
+https://archive.org/download/APlaceOfOnesOwn/APlaceOfOnesOwn.mp4
+
+#EXTINF:3588 tvg-logo="https://archive.org/services/img/oldoverlandtrail" group-title="悬疑推理与科幻惊悚",旧奥弗兰德小径 (1948)
+https://archive.org/download/oldoverlandtrail/Old%20Overland%20Trail.mp4
+
+#EXTINF:3453 tvg-logo="https://archive.org/services/img/TheMontanaKid" group-title="悬疑推理与科幻惊悚",《蒙大拿小子》 (1931)
+https://archive.org/download/TheMontanaKid/TheMontanaKid.mp4
+
+#EXTINF:4403 tvg-logo="https://archive.org/services/img/SongofFreedom" group-title="悬疑推理与科幻惊悚",自由之歌 (1936)
+https://archive.org/download/SongofFreedom/SongofFreedom_512kb.mp4
+
+#EXTINF:5172 tvg-logo="https://archive.org/services/img/StormInATeacupVideoQualityUpgrade" group-title="爆笑喜剧与国会图书馆典藏",茶杯风波（1937 费雯·丽·雷克斯·哈里森浪漫喜剧） (1937)
+https://archive.org/download/StormInATeacupVideoQualityUpgrade/StormInATeacupVideoQualityUpgrade.mp4
+
+#EXTINF:4260 tvg-logo="https://archive.org/services/img/Miss_Lulu_Bett" group-title="悬疑推理与科幻惊悚",露露·贝特小姐 (1921)
+https://archive.org/download/Miss_Lulu_Bett/Miss_Lulu_Bett_512kb.mp4
+
+#EXTINF:4486 tvg-logo="https://archive.org/services/img/BroadwayLimited" group-title="悬疑推理与科幻惊悚",百老汇有限公司 (1941)
+https://archive.org/download/BroadwayLimited/Broadway_Limited_512kb.mp4
+
+#EXTINF:3339 tvg-logo="https://archive.org/services/img/LightsOfOldSantaFe1944" group-title="悬疑推理与科幻惊悚",《旧圣菲的灯火》（1944年） (1948)
+https://archive.org/download/LightsOfOldSantaFe1944/LightsOfOldSantaFe1944_512kb.mp4
+
+#EXTINF:3300 tvg-logo="https://archive.org/services/img/Beware_" group-title="悬疑推理与科幻惊悚",当心 (1946)
+https://archive.org/download/Beware_/Beware_512kb.mp4
+
+#EXTINF:6138 tvg-logo="https://archive.org/services/img/Mother_883" group-title="悬疑推理与科幻惊悚",母亲 (1948)
+https://archive.org/download/Mother_883/mother_512kb.mp4
+
+#EXTINF:3178 tvg-logo="https://archive.org/services/img/Larceny_on_the_Air_1937" group-title="悬疑推理与科幻惊悚",空中盗窃案 (1937)
+https://archive.org/download/Larceny_on_the_Air_1937/Larceny_on_the_Air_1937_512kb.mp4
+
+#EXTINF:3766 tvg-logo="https://archive.org/services/img/TheOklahomaCyclone" group-title="悬疑推理与科幻惊悚",俄克拉荷马龙卷风 (1930)
+https://archive.org/download/TheOklahomaCyclone/TheOklahomaCyclone_512kb.mp4
+
+#EXTINF:3556 tvg-logo="https://archive.org/services/img/TheInvisibleKiller" group-title="悬疑推理与科幻惊悚",隐形杀手 (1939)
+https://archive.org/download/TheInvisibleKiller/TheInvisibleKiller.mp4
+
+#EXTINF:4570 tvg-logo="https://archive.org/services/img/ParisBound1929AnnHardingFredricMarchCarmelitaGeraghtyLeslieFenton" group-title="悬疑推理与科幻惊悚",《巴黎之行》1929年，安·哈丁、弗雷德里克·马奇、卡梅利塔·格拉加蒂、莱斯利·芬顿主演 (1929)
+https://archive.org/download/ParisBound1929AnnHardingFredricMarchCarmelitaGeraghtyLeslieFenton/Paris.Bound.1929.VHSRip.XviD-SS.mp4
+
+#EXTINF:6188 tvg-logo="https://archive.org/services/img/FannyByGaslight" group-title="悬疑推理与科幻惊悚",《煤气灯下的芳妮》 (1948)
+https://archive.org/download/FannyByGaslight/Fanny%20by%20Gaslight.mp4
+
+#EXTINF:4008 tvg-logo="https://archive.org/services/img/TheKingMurder1932" group-title="悬疑推理与科幻惊悚",《国王谋杀案》1932年 (1932)
+https://archive.org/download/TheKingMurder1932/The-King-Murder-1932.mp4
+
+#EXTINF:3829 tvg-logo="https://archive.org/services/img/InOldSantaFe" group-title="悬疑推理与科幻惊悚",在旧圣菲 (1934)
+https://archive.org/download/InOldSantaFe/InOldSantaFe.mp4
+
+#EXTINF:3412 tvg-logo="https://archive.org/services/img/Postal_Inspector_1936" group-title="悬疑推理与科幻惊悚",邮政监察员 (1936)
+https://archive.org/download/Postal_Inspector_1936/Postal_Inspector_1936_512kb.mp4
+
+#EXTINF:3219 tvg-logo="https://archive.org/services/img/lightning_canson_rides_again" group-title="悬疑推理与科幻惊悚",莱特宁·卡森再度出战 (1938)
+https://archive.org/download/lightning_canson_rides_again/lightning_canson_rides_again_512kb.mp4
+
+#EXTINF:3168 tvg-logo="https://archive.org/services/img/Jesse_James_at_Bay_1941" group-title="悬疑推理与科幻惊悚",杰西·詹姆斯陷于困境 (1941)
+https://archive.org/download/Jesse_James_at_Bay_1941/Jesse_James_at_Bay_512kb.mp4
+
+#EXTINF:3187 tvg-logo="https://archive.org/services/img/RidinDownTheCanyon1942" group-title="悬疑推理与科幻惊悚",《在峡谷中驰骋》（1942年） (1948)
+https://archive.org/download/RidinDownTheCanyon1942/RidinDownTheCanyon1942.mp4
+
+#EXTINF:3186 tvg-logo="https://archive.org/services/img/SunsetontheDesert" group-title="悬疑推理与科幻惊悚",沙漠上的日落 (1942)
+https://archive.org/download/SunsetontheDesert/SunsetontheDesert.mp4
+
+#EXTINF:5375 tvg-logo="https://archive.org/services/img/MessiahOfEvil_20150902" group-title="悬疑推理与科幻惊悚",邪恶的弥赛亚 (1948)
+https://archive.org/download/MessiahOfEvil_20150902/Messiah_of_Evil.mp4
+
+#EXTINF:310 tvg-logo="https://archive.org/services/img/LeThtrelectriqueDeBob" group-title="悬疑推理与科幻惊悚",鲍布的电动剧院 (1948)
+https://archive.org/download/LeThtrelectriqueDeBob/1909SegundoDeChomnLeThtrelectriqueDeBobbobsElectricTheatre.mp4
+
+#EXTINF:3360 tvg-logo="https://archive.org/services/img/RollinPlains" group-title="悬疑推理与科幻惊悚",滚动平原 (1938)
+https://archive.org/download/RollinPlains/RollinPlains_512kb.mp4
+
+#EXTINF:4839 tvg-logo="https://archive.org/services/img/Curse_of_the_Swamp_Creature" group-title="悬疑推理与科幻惊悚",沼泽生物的诅咒 (1966)
+https://archive.org/download/Curse_of_the_Swamp_Creature/CurseoftheSwampCreature_512kb.mp4
+
+#EXTINF:3400 tvg-logo="https://archive.org/services/img/son_of_the_renegade" group-title="悬疑推理与科幻惊悚",叛逆者的儿子 (1942)
+https://archive.org/download/son_of_the_renegade/son_of_the_renegade_512kb.mp4
+
+#EXTINF:160 tvg-logo="https://archive.org/services/img/Beautiful_Clothes" group-title="悬疑推理与科幻惊悚",美丽服饰（让女孩们更加美丽） (1942)
+https://archive.org/download/Beautiful_Clothes/Beautiful_Clothes.mp4
+
+#EXTINF:4840 tvg-logo="https://archive.org/services/img/almost990" group-title="悬疑推理与科幻惊悚",... 几乎 (1948)
+https://archive.org/download/almost990/Almost.mp4
+
+#EXTINF:3647 tvg-logo="https://archive.org/services/img/PhantomRancher" group-title="悬疑推理与科幻惊悚",幻影牧场主 (1940)
+https://archive.org/download/PhantomRancher/PhantomRancher.mp4
+
+#EXTINF:3176 tvg-logo="https://archive.org/services/img/trail_riders" group-title="悬疑推理与科幻惊悚",越野骑行者 (1942)
+https://archive.org/download/trail_riders/trail_riders_512kb.mp4
+
+#EXTINF:3577 tvg-logo="https://archive.org/services/img/westerncyclone" group-title="悬疑推理与科幻惊悚",西部气旋 (1943)
+https://archive.org/download/westerncyclone/WesternCyclone_512kb.mp4
+
+#EXTINF:3624 tvg-logo="https://archive.org/services/img/LuckyTerror" group-title="悬疑推理与科幻惊悚",幸运恐怖 (1936)
+https://archive.org/download/LuckyTerror/LuckyTerror.mp4
+
+#EXTINF:5137 tvg-logo="https://archive.org/services/img/St.MartinsLane" group-title="爆笑喜剧与国会图书馆典藏",伦敦人行道（1938 费雯·丽·查尔斯·劳顿主演） (1938)
+https://archive.org/download/St.MartinsLane/St.MartinsLane.mp4
+
+#EXTINF:4230 tvg-logo="https://archive.org/services/img/ThePay-Off" group-title="悬疑推理与科幻惊悚",回报 (1930)
+https://archive.org/download/ThePay-Off/ThePay-Off_512kb.mp4
+
+#EXTINF:4108 tvg-logo="https://archive.org/services/img/desirable_lady" group-title="悬疑推理与科幻惊悚",令人向往的女士 (1944)
+https://archive.org/download/desirable_lady/desirable_lady_512kb.mp4
+
+#EXTINF:3764 tvg-logo="https://archive.org/services/img/NightOfTerror" group-title="悬疑推理与科幻惊悚",恐怖夜 (1948)
+https://archive.org/download/NightOfTerror/Night%20of%20Terror.mp4
+
+#EXTINF:1034 tvg-logo="https://archive.org/services/img/HisWeddingNight" group-title="悬疑推理与科幻惊悚",新婚之夜 (1948)
+https://archive.org/download/HisWeddingNight/HisWeddingNight_512kb.mp4
+
+#EXTINF:3407 tvg-logo="https://archive.org/services/img/midnight_phantom" group-title="悬疑推理与科幻惊悚",午夜幽灵 (1935)
+https://archive.org/download/midnight_phantom/midnight_phantom.mp4
+
+#EXTINF:3005 tvg-logo="https://archive.org/services/img/ThePurpleVigilantes" group-title="悬疑推理与科幻惊悚",紫色义警 (1938)
+https://archive.org/download/ThePurpleVigilantes/ThePurpleVigilantes.mp4
+
+#EXTINF:3635 tvg-logo="https://archive.org/services/img/Murder_in_the_Clouds_1934" group-title="悬疑推理与科幻惊悚",云端谋杀案 (1934)
+https://archive.org/download/Murder_in_the_Clouds_1934/Murder_in_the_Clouds_512kb.mp4
+
+#EXTINF:2293 tvg-logo="https://archive.org/services/img/LaSourianteMadameBeudet" group-title="悬疑推理与科幻惊悚",微笑的贝德夫人 (1922)
+https://archive.org/download/LaSourianteMadameBeudet/LaSourianteMadameBeudet.mp4
+
+#EXTINF:5902 tvg-logo="https://archive.org/services/img/TheBelovedRogue" group-title="爆笑喜剧与国会图书馆典藏",侠盗诗人维庸（1927 约翰·巴里摩尔古典剑侠巨制） (1927)
+https://archive.org/download/TheBelovedRogue/TheBelovedRogue_512kb.mp4
+
+#EXTINF:3791 tvg-logo="https://archive.org/services/img/murder_on_lenox_ave1941" group-title="悬疑推理与科幻惊悚",《伦诺克斯大道谋杀案》 (1941)
+https://archive.org/download/murder_on_lenox_ave1941/murder_on_lenox_ave1941_512kb.mp4
+
+#EXTINF:4122 tvg-logo="https://archive.org/services/img/Corspiracy" group-title="悬疑推理与科幻惊悚",阴谋 (1948)
+https://archive.org/download/Corspiracy/Corspiracy.mp4
+
+#EXTINF:1624 tvg-logo="https://archive.org/services/img/ADayCalledx" group-title="悬疑推理与科幻惊悚",一个名为“X”的日子 (1948)
+https://archive.org/download/ADayCalledx/DayCalledX_512kb.mp4
+
+#EXTINF:3929 tvg-logo="https://archive.org/services/img/BucketOfBlood720p1959" group-title="爆笑喜剧与国会图书馆典藏",一桶血（1959 罗杰·科曼黑色幽默经典 720p） (1959)
+https://archive.org/download/BucketOfBlood720p1959/bucketofblood720p.mp4
+
+#EXTINF:3693 tvg-logo="https://archive.org/services/img/FearAndDesire1953_201808" group-title="悬疑推理与科幻惊悚",恐惧与欲望（1953 斯坦利·库布里克长片处女作） (1953)
+https://archive.org/download/FearAndDesire1953_201808/Fear%20and%20Desire%20(1953).mp4
+
+#EXTINF:3244 tvg-logo="https://archive.org/services/img/MurderByTelevision1935" group-title="悬疑推理与科幻惊悚",《电视谋杀案》（1935年） (1948)
+https://archive.org/download/MurderByTelevision1935/MurderbytelevisiTitle3_512kb.mp4
+
+#EXTINF:3135 tvg-logo="https://archive.org/services/img/SheriffofSageValley" group-title="悬疑推理与科幻惊悚",萨奇谷警长 (1942)
+https://archive.org/download/SheriffofSageValley/SheriffofSageValley_512kb.mp4
+
+#EXTINF:3369 tvg-logo="https://archive.org/services/img/Inner_Circle_1946" group-title="悬疑推理与科幻惊悚",内圈 (1946)
+https://archive.org/download/Inner_Circle_1946/Inner_Circle_512kb.mp4
+
+#EXTINF:5089 tvg-logo="https://archive.org/services/img/MoulinRouge1928OlgaTschechowaEveGrayJeanBradinGeorgesTreville" group-title="爆笑喜剧与国会图书馆典藏",红磨坊（1928 杜邦执导巴黎歌舞默片经典） (1928)
+https://archive.org/download/MoulinRouge1928OlgaTschechowaEveGrayJeanBradinGeorgesTreville/MoulinRouge1928.mp4
+
+#EXTINF:3219 tvg-logo="https://archive.org/services/img/LawMen" group-title="悬疑推理与科幻惊悚",法律之士 (1944)
+https://archive.org/download/LawMen/LawMen_512kb.mp4
+
+#EXTINF:3111 tvg-logo="https://archive.org/services/img/RidersoftheSage" group-title="悬疑推理与科幻惊悚",圣者的骑士们 (1939)
+https://archive.org/download/RidersoftheSage/RidersoftheSage.mp4
+
+#EXTINF:756 tvg-logo="https://archive.org/services/img/AnArcadianMaid_179" group-title="悬疑推理与科幻惊悚",一个田园少女 (1948)
+https://archive.org/download/AnArcadianMaid_179/AnArcadianMaid_512kb.mp4
+
+#EXTINF:4012 tvg-logo="https://archive.org/services/img/CareerGirl" group-title="悬疑推理与科幻惊悚",职场女性 (1944)
+https://archive.org/download/CareerGirl/CareerGirl.mp4
+
+#EXTINF:3937 tvg-logo="https://archive.org/services/img/MakeaMillion" group-title="悬疑推理与科幻惊悚",赚取一百万 (1935)
+https://archive.org/download/MakeaMillion/MakeaMillion.mp4
+
+#EXTINF:301 tvg-logo="https://archive.org/services/img/nasa_eclips_022309" group-title="太空宇宙与科学1080p",属于eClips视频系列 (2009)
+https://archive.org/download/nasa_eclips_022309/LP_Ares_1X_OC_512kb.mp4
+
+#EXTINF:4046 tvg-logo="https://archive.org/services/img/SepiaCinderella" group-title="悬疑推理与科幻惊悚",塞皮亚版灰姑娘 (1947)
+https://archive.org/download/SepiaCinderella/SepiaCinderella.mp4
+
+#EXTINF:5456 tvg-logo="https://archive.org/services/img/Apollo1116mmOnboardFilm" group-title="太空宇宙与科学1080p",NASA 阿波罗11号登月舱内与月面 16mm 实拍全片（91分钟） (1969)
+https://archive.org/download/Apollo1116mmOnboardFilm/apollo11_6_1_512kb.mp4
+
+#EXTINF:3150 tvg-logo="https://archive.org/services/img/Robbery_Under_Arms" group-title="悬疑推理与科幻惊悚",持械抢劫 (1920)
+https://archive.org/download/Robbery_Under_Arms/Robbery_Under_Arms_512kb.mp4
+
+#EXTINF:2919 tvg-logo="https://archive.org/services/img/fighting_deputy" group-title="悬疑推理与科幻惊悚",斗殴副警员 (1937)
+https://archive.org/download/fighting_deputy/fighting_deputy_512kb.mp4
+
+#EXTINF:239 tvg-logo="https://archive.org/services/img/nasa_eclips_12302008" group-title="太空宇宙与科学1080p",位于埃克利普斯 (2008)
+https://archive.org/download/nasa_eclips_12302008/OWGRUB.mp4
+
+#EXTINF:5363 tvg-logo="https://archive.org/services/img/TeenageWolfpack" group-title="悬疑推理与科幻惊悚",少年犯 (1948)
+https://archive.org/download/TeenageWolfpack/TeenageWolfpack1956_512kb.mp4
+
+#EXTINF:4376 tvg-logo="https://archive.org/services/img/WaterlooRoad_201812" group-title="悬疑推理与科幻惊悚",滑铁卢路 (1948)
+https://archive.org/download/WaterlooRoad_201812/Waterloo%20Road.mp4
+
+#EXTINF:199 tvg-logo="https://archive.org/services/img/nasa_eclips_120808" group-title="太空宇宙与科学1080p",属于eClips视频系列 (2022)
+https://archive.org/download/nasa_eclips_120808/OW-JASON2_oc_512kb.mp4
+
+#EXTINF:187 tvg-logo="https://archive.org/services/img/MSFC-0601215" group-title="太空宇宙与科学1080p",国际空间站（ISS）上液体层流的演示实验 (2003)
+https://archive.org/download/MSFC-0601215/0601215.mp4
+
+#EXTINF:204 tvg-logo="https://archive.org/services/img/NasaSciFiles-TheScientificMethod" group-title="太空宇宙与科学1080p",NASA SCI文件——科学方法 (2001)
+https://archive.org/download/NasaSciFiles-TheScientificMethod/NASAWF-TheScientificMethod_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/NasaSciFiles-BodySystems" group-title="太空宇宙与科学1080p",NASA科学档案——身体系统 (2003)
+https://archive.org/download/NasaSciFiles-BodySystems/NASASF-BodySystems.mp4
+
+#EXTINF:180 tvg-logo="https://archive.org/services/img/nasa_eclips_02022009" group-title="太空宇宙与科学1080p",来自 eClips，日期：2009年2月02日 (2009)
+https://archive.org/download/nasa_eclips_02022009/RW_ARES_oc_512kb.mp4
+
+#EXTINF:249 tvg-logo="https://archive.org/services/img/nasa_eclips_081009" group-title="太空宇宙与科学1080p",我们的世界：阿雷西博——地球上最大的射电望远镜 (2009)
+https://archive.org/download/nasa_eclips_081009/OW43_RockCycle_512kb.mp4
+
+#EXTINF:5351 tvg-logo="https://archive.org/services/img/werewolf_of_washington_201511" group-title="悬疑推理与科幻惊悚",《华盛顿的狼人》 (1948)
+https://archive.org/download/werewolf_of_washington_201511/werewolf_of_washington.mp4
+
+#EXTINF:3784 tvg-logo="https://archive.org/services/img/FlirtingWithDanger" group-title="悬疑推理与科幻惊悚",在危险边缘徘徊 (1948)
+https://archive.org/download/FlirtingWithDanger/FlirtingWithDanger-1934.mp4
+
+#EXTINF:274 tvg-logo="https://archive.org/services/img/nasa_eclips_022709" group-title="太空宇宙与科学1080p",位于eClips视频中 (2009)
+https://archive.org/download/nasa_eclips_022709/RW_LRO_Resources_oc_512kb.mp4
+
+#EXTINF:1469 tvg-logo="https://archive.org/services/img/NASA_360_program1_HD" group-title="太空宇宙与科学1080p",NASA 360 第1集 (2008)
+https://archive.org/download/NASA_360_program1_HD/NASA_360_program1_HD_512kb.mp4
+
+#EXTINF:193 tvg-logo="https://archive.org/services/img/NasaSciFiles-CellsTissuesOrgansAndSystems" group-title="太空宇宙与科学1080p",NASA SCI文件——细胞、组织、器官及系统 (2003)
+https://archive.org/download/NasaSciFiles-CellsTissuesOrgansAndSystems/NASASF-CellsTissuesOrgansAndSystems_512kb.mp4
+
+#EXTINF:794 tvg-logo="https://archive.org/services/img/NasaSciFiles-ReproductionMigrationAndBasicNeeds" group-title="太空宇宙与科学1080p",NASA SCI文件——繁殖、迁徙与基本需求 (2005)
+https://archive.org/download/NasaSciFiles-ReproductionMigrationAndBasicNeeds/NASASF-ReproductionMigrationAndBasicNeeds_512kb.mp4
+
+#EXTINF:268 tvg-logo="https://archive.org/services/img/nasa_eclips_01162009" group-title="太空宇宙与科学1080p",NASA 深空探索：NASA eClips (2022)
+https://archive.org/download/nasa_eclips_01162009/RW_ISRU.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/NASA-Ultra-High-Definition" group-title="太空宇宙与科学1080p",美国国家航空航天局超高清 (2022)
+https://archive.org/download/NASA-Ultra-High-Definition/47%20Hatch%20opening.ia.mp4
+
+#EXTINF:333 tvg-logo="https://archive.org/services/img/nasa_eclips_110209" group-title="太空宇宙与科学1080p",太空操作 (2009)
+https://archive.org/download/nasa_eclips_110209/RW42_SubRip_512kb.mp4
+
+#EXTINF:310 tvg-logo="https://archive.org/services/img/nasa_eclips_100909" group-title="太空宇宙与科学1080p",NASA eClips视频 (2009)
+https://archive.org/download/nasa_eclips_100909/NASA41_Launchpad_Venus_Transit.mp4
+
+#EXTINF:213 tvg-logo="https://archive.org/services/img/nasa_eclips_040709" group-title="太空宇宙与科学1080p",位于eClips视频库中 (2009)
+https://archive.org/download/nasa_eclips_040709/IBEX_SD_512kb.mp4
+
+#EXTINF:400 tvg-logo="https://archive.org/services/img/nasa_eclips_060809" group-title="太空宇宙与科学1080p",NASA 深空探索：NASA eClips (2009)
+https://archive.org/download/nasa_eclips_060809/OW33_clean_ff_512kb.mp4
+
+#EXTINF:293 tvg-logo="https://archive.org/services/img/nasa_eclips_052609" group-title="太空宇宙与科学1080p",“我们的世界：流体转移”与“我们的世界：利用凤凰号着陆器探索火星” (2009)
+https://archive.org/download/nasa_eclips_052609/OW31InvestigatingMars.mp4
+
+#EXTINF:307 tvg-logo="https://archive.org/services/img/Nasa_eClips_video" group-title="太空宇宙与科学1080p",位于eClips视频中 (2008)
+https://archive.org/download/Nasa_eClips_video/OW-ATHLETE_oc_512kb.mp4
+
+#EXTINF:390 tvg-logo="https://archive.org/services/img/nasa_eclips_101909" group-title="太空宇宙与科学1080p",NASA eClips视频系列 (2009)
+https://archive.org/download/nasa_eclips_101909/NASA_Launchpad_Cryogenics_Science_512kb.mp4
+
+#EXTINF:5702 tvg-logo="https://archive.org/services/img/Apollo15And1616mmOnboardFilm" group-title="太空宇宙与科学1080p",APOLLO 15 16MM 航行影片 (1971)
+https://archive.org/download/Apollo15And1616mmOnboardFilm/apollo15_10_1_512kb.mp4
+
+#EXTINF:278 tvg-logo="https://archive.org/services/img/nasa_eclips_02062009" group-title="太空宇宙与科学1080p",位于eClips (2009)
+https://archive.org/download/nasa_eclips_02062009/RW_STS126_oc_512kb.mp4
+
+#EXTINF:1472 tvg-logo="https://archive.org/services/img/NASA_360_12_HD" group-title="太空宇宙与科学1080p",NASA 360：NASA走进您的家中 (2022)
+https://archive.org/download/NASA_360_12_HD/NASA_360_12_HD_512kb.mp4
+
+#EXTINF:389 tvg-logo="https://archive.org/services/img/RealWorldLunarPowerPlant" group-title="太空宇宙与科学1080p",现实世界：月球发电站 (2022)
+https://archive.org/download/RealWorldLunarPowerPlant/Rw47lunarpowerOc.ia.mp4
+
+#EXTINF:282 tvg-logo="https://archive.org/services/img/nasa_eclips_052809" group-title="太空宇宙与科学1080p",位于eClips视频库中 (2009)
+https://archive.org/download/nasa_eclips_052809/OW21Chandra_512kb.mp4
+
+#EXTINF:1472 tvg-logo="https://archive.org/services/img/NASA_360_program2_HD" group-title="太空宇宙与科学1080p",NASA 360 第2集 (2008)
+https://archive.org/download/NASA_360_program2_HD/NASA_360_program2_HD_512kb.mp4
+
+#EXTINF:439 tvg-logo="https://archive.org/services/img/NASA_eClips_Our_World_Communication_HD" group-title="太空宇宙与科学1080p",NASA eClips《我们的世界》通信高清视频 (2010)
+https://archive.org/download/NASA_eClips_Our_World_Communication_HD/NASA_eClips_Our_World_Communication_HD_512kb.mp4
+
+#EXTINF:322 tvg-logo="https://archive.org/services/img/nasa_360" group-title="太空宇宙与科学1080p",NASA eClips视频系列第360集 (2008)
+https://archive.org/download/nasa_360/OW_LunarExcavation_OC_512kb.mp4
+
+#EXTINF:333 tvg-logo="https://archive.org/services/img/OurWorldWindTunnelsInAction" group-title="太空宇宙与科学1080p",我们的世界：风洞在实际运行中的场景 (2010)
+https://archive.org/download/OurWorldWindTunnelsInAction/OW47WindTunnels0317.ia.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/NasaWhyFiles-HistoryOfElectricity" group-title="太空宇宙与科学1080p",NASA“为什么？”文件——电力历史 (2002)
+https://archive.org/download/NasaWhyFiles-HistoryOfElectricity/NASAWF-HistoryOfElectricity.mp4
+
+#EXTINF:408 tvg-logo="https://archive.org/services/img/nasa_eclips_01222009" group-title="太空宇宙与科学1080p",NASA 深空探索：NASA eClips (2022)
+https://archive.org/download/nasa_eclips_01222009/NASA_Launchpad_LIDAR_HD_512kb.mp4
+
+#EXTINF:348 tvg-logo="https://archive.org/services/img/nasa_eclips_082109" group-title="太空宇宙与科学1080p",NASA eClips视频系列 (2009)
+https://archive.org/download/nasa_eclips_082109/32NASA_Launchpad_Apollo_11.mp4
+
+#EXTINF:1471 tvg-logo="https://archive.org/services/img/NASA_360_program_7_HD" group-title="太空宇宙与科学1080p",NASA 360项目第7集 HD版 (2022)
+https://archive.org/download/NASA_360_program_7_HD/NASA_360_program_7_HD_512kb.mp4
+
+#EXTINF:199 tvg-logo="https://archive.org/services/img/NASA_eclips" group-title="太空宇宙与科学1080p",NASA eClips视频系列 (2008)
+https://archive.org/download/NASA_eclips/OW-CERES_oc_512kb.mp4
+
+#EXTINF:1472 tvg-logo="https://archive.org/services/img/NASA_360_program4_HD" group-title="太空宇宙与科学1080p",NASA 360 第4集 (2008)
+https://archive.org/download/NASA_360_program4_HD/NASA_360_program4_HD_512kb.mp4
+
+#EXTINF:260 tvg-logo="https://archive.org/services/img/NASA_eClips_Real_World_Longitude_Time_Zones_HD" group-title="太空宇宙与科学1080p",NASA eClips：现实世界经度与时区高清视频 (2022)
+https://archive.org/download/NASA_eClips_Real_World_Longitude_Time_Zones_HD/NASA_eClips_Real_World_Longitude_Time_Zones_HD_512kb.mp4
+
+#EXTINF:312 tvg-logo="https://archive.org/services/img/nasa_eclips_073109" group-title="太空宇宙与科学1080p",属于eClips视频系列 (2022)
+https://archive.org/download/nasa_eclips_073109/OW35_LunarRock_Clean_512kb.mp4
+
+#EXTINF:419 tvg-logo="https://archive.org/services/img/OurWorldJournalingInSpace" group-title="太空宇宙与科学1080p",我们的世界：在太空中写日记 (2010)
+https://archive.org/download/OurWorldJournalingInSpace/Ow44jornalingOc.ia.mp4
+
+#EXTINF:409 tvg-logo="https://archive.org/services/img/RealWorldCalculatingShuttleLaunchWindows" group-title="太空宇宙与科学1080p",现实世界：航天飞机发射窗口的计算 (2022)
+https://archive.org/download/RealWorldCalculatingShuttleLaunchWindows/Rw40windowOc.ia.mp4
+
+#EXTINF:241 tvg-logo="https://archive.org/services/img/nasa_eclips_032709" group-title="太空宇宙与科学1080p",NASA 深空探索：NASA eClips (2022)
+https://archive.org/download/nasa_eclips_032709/OW_ATRAIN_oc_ff_512kb.mp4
+
+#EXTINF:1472 tvg-logo="https://archive.org/services/img/NASA_360_program6_HD" group-title="太空宇宙与科学1080p",NASA 360 第6集 (2022)
+https://archive.org/download/NASA_360_program6_HD/NASA_360_program6_HD_512kb.mp4
+
+#EXTINF:1470 tvg-logo="https://archive.org/services/img/NASA_360_program5_HD" group-title="太空宇宙与科学1080p",NASA 360 第5集 (2022)
+https://archive.org/download/NASA_360_program5_HD/NASA_360_program5_HD_512kb.mp4
+
+#EXTINF:383 tvg-logo="https://archive.org/services/img/nasa_eclips_091109" group-title="太空宇宙与科学1080p",现实世界：重金属音乐的启示 (2009)
+https://archive.org/download/nasa_eclips_091109/RwAresWelding_512kb.mp4
+
+#EXTINF:408 tvg-logo="https://archive.org/services/img/sts125vehicle13" group-title="太空宇宙与科学1080p",哈勃空间望远镜硬件已装载至亚特兰蒂斯号航天飞机的有效载荷舱内 (2008)
+https://archive.org/download/sts125vehicle13/125_92608_payloadintgbay_512kb.mp4
+
+#EXTINF:265 tvg-logo="https://archive.org/services/img/nasa_eclips_071009" group-title="太空宇宙与科学1080p",NASA日食观测任务 (2022)
+https://archive.org/download/nasa_eclips_071009/NASA_Launchpad_Observatories_Part_2_HD.mp4
+
+#EXTINF:397 tvg-logo="https://archive.org/services/img/nasa_eclips_091509" group-title="太空宇宙与科学1080p",NASA 深空探索：NASA eClips LCROSS (2022)
+https://archive.org/download/nasa_eclips_091509/LCROSS_MV_HD_512kb.mp4
+
+#EXTINF:347 tvg-logo="https://archive.org/services/img/OurWorldHoneybees_686" group-title="太空宇宙与科学1080p",我们的世界：蜜蜂 (2022)
+https://archive.org/download/OurWorldHoneybees_686/Ow39honeybeesOc.ia.mp4
+
+#EXTINF:366 tvg-logo="https://archive.org/services/img/OurWorldCareersAtNasa-MoreThanJustAstronauts" group-title="太空宇宙与科学1080p",我们的世界：NASA的职业机会——不仅仅是宇航员！ (2022)
+https://archive.org/download/OurWorldCareersAtNasa-MoreThanJustAstronauts/OW38ScienceCareers.mp4
+
+#EXTINF:330 tvg-logo="https://archive.org/services/img/nasa_eclips_062309" group-title="太空宇宙与科学1080p",NASA eClips视频系列 (2022)
+https://archive.org/download/nasa_eclips_062309/RWLightningRod_clean_ff_512kb.mp4
+
+#EXTINF:381 tvg-logo="https://archive.org/services/img/OurWorldGravityInSpace" group-title="太空宇宙与科学1080p",我们的世界：太空中重力的作用 (2010)
+https://archive.org/download/OurWorldGravityInSpace/Ow48gravityoc-mpeg4ForNasa-skv.mp4
+
+#EXTINF:421 tvg-logo="https://archive.org/services/img/OurWorldPlantsInSpace" group-title="太空宇宙与科学1080p",我们的世界：太空中的植物 (2022)
+https://archive.org/download/OurWorldPlantsInSpace/NASA_eClips_Our_World_Plants_cropped_Medium.mp4
+
+#EXTINF:317 tvg-logo="https://archive.org/services/img/NASA_Launchpad_SSMEs_HD" group-title="太空宇宙与科学1080p",航天飞机主发动机（SSMEs）的点火 (2022)
+https://archive.org/download/NASA_Launchpad_SSMEs_HD/NASA_Launchpad_SSMEs_HD_512kb.mp4
+
+#EXTINF:1472 tvg-logo="https://archive.org/services/img/NASA_360_14_HD" group-title="太空宇宙与科学1080p",NASA 360：沙漠老鼠与类比测试 (2022)
+https://archive.org/download/NASA_360_14_HD/NASA_360_14_HD_512kb.mp4
+
+#EXTINF:243 tvg-logo="https://archive.org/services/img/NasaSciFiles-ScientificMethod-dataCollectionAndVariables" group-title="太空宇宙与科学1080p",NASA SCI文件——科学方法：数据收集与变量 (2000)
+https://archive.org/download/NasaSciFiles-ScientificMethod-dataCollectionAndVariables/NASAWF-ScientificMethod-DataCollectionAndVariables_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/nasa_flv" group-title="太空宇宙与科学1080p",NASA eClips视频系列 (2008)
+https://archive.org/download/nasa_flv/NASA_Space_Operations_Launch_Services_Clip17_HD_512kb.mp4
+
+#EXTINF:397 tvg-logo="https://archive.org/services/img/NASA_eclips_021309" group-title="太空宇宙与科学1080p",美国国家航空航天局日食观测 (2022)
+https://archive.org/download/NASA_eclips_021309/NASA_Launchpad_LCROSS_MV_HD_512kb.mp4
+
+#EXTINF:1472 tvg-logo="https://archive.org/services/img/NASA_360_13_HD" group-title="太空宇宙与科学1080p",NASA 360：感官过载 (2022)
+https://archive.org/download/NASA_360_13_HD/NASA_360_13_HD_512kb.mp4
+
+#EXTINF:302 tvg-logo="https://archive.org/services/img/NASA_eClips_Real_World_Time_In_Space_HD" group-title="太空宇宙与科学1080p",NASA eClips：《太空中的真实时间——高清版》 (2010)
+https://archive.org/download/NASA_eClips_Real_World_Time_In_Space_HD/NASA_eClips_Real_World_Time_In_Space_HD_512kb.mp4
+
+#EXTINF:256 tvg-logo="https://archive.org/services/img/OurWorldSnowflakes" group-title="太空宇宙与科学1080p",我们的世界：雪花 (2010)
+https://archive.org/download/OurWorldSnowflakes/Ow37snowflakesoc-mpeg4ForNasa-skv.mp4
+
+#EXTINF:2730 tvg-logo="https://archive.org/services/img/APOLLO16MMLAUNCHVIEWS" group-title="太空宇宙与科学1080p",APOLLO 16 MM 发布视图 (1968)
+https://archive.org/download/APOLLO16MMLAUNCHVIEWS/apollo_14_1_512kb.mp4
+
+#EXTINF:374 tvg-logo="https://archive.org/services/img/NasaLaunchpadBiofeedback" group-title="太空宇宙与科学1080p",NASA发射台：生物反馈 (2022)
+https://archive.org/download/NasaLaunchpadBiofeedback/NASA_Launchpad_Biofeedback_cropped_medium.mp4
+
+#EXTINF:472 tvg-logo="https://archive.org/services/img/RealWorldTheSilentAirliner" group-title="太空宇宙与科学1080p",现实世界：静音客机 (2010)
+https://archive.org/download/RealWorldTheSilentAirliner/Ow41sleepingClean.mp4
+
+#EXTINF:350 tvg-logo="https://archive.org/services/img/NASA_Launchpad_Earth_Systems_HD" group-title="太空宇宙与科学1080p",NASA发射台地球系统高清视频 (2010)
+https://archive.org/download/NASA_Launchpad_Earth_Systems_HD/NASA_Launchpad_Earth_Systems_HD_512kb.mp4
+
+#EXTINF:404 tvg-logo="https://archive.org/services/img/OurWorldNasaAtJamestown_206" group-title="太空宇宙与科学1080p",我们的世界：NASA在詹姆斯敦 (2022)
+https://archive.org/download/OurWorldNasaAtJamestown_206/Ow27jamestownClean.mp4
+
+#EXTINF:542 tvg-logo="https://archive.org/services/img/NASA_Space_Operations_Launch_Services_Clip15_HD" group-title="太空宇宙与科学1080p",国际空间站上的食物 (2008)
+https://archive.org/download/NASA_Space_Operations_Launch_Services_Clip15_HD/NASA_Space_Operations_Launch_Services_Clip15_HD_512kb.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/One-Year-Crew_Resource-Reel" group-title="太空宇宙与科学1080p",一年期机组资源卷轴 (2022)
+https://archive.org/download/One-Year-Crew_Resource-Reel/Expedition-44-Crew-News-Conference_Scott-Photography_Jan-15-2015.mp4
+
+#EXTINF:486 tvg-logo="https://archive.org/services/img/RealWorldNasaAndTheChesapeakeBay" group-title="太空宇宙与科学1080p",现实世界：美国国家航空航天局与切萨皮克湾 (2010)
+https://archive.org/download/RealWorldNasaAndTheChesapeakeBay/RwthechesapeakeOc-mpeg4ForNasa.ia.mp4
+
+#EXTINF:460 tvg-logo="https://archive.org/services/img/RealWorldAnalogTestingInExtremeEnvironmentsneemo" group-title="太空宇宙与科学1080p",现实世界：极端环境下的模拟测试（NEEMO） (2010)
+https://archive.org/download/RealWorldAnalogTestingInExtremeEnvironmentsneemo/Rw51neemoClean.mp4
+
+#EXTINF:120 tvg-logo="https://archive.org/services/img/SpaceToGround" group-title="太空宇宙与科学1080p",从太空到地面 (2022)
+https://archive.org/download/SpaceToGround/jsc2018m000009_Space-to-Ground_209_180126.ia.mp4
+
+#EXTINF:336 tvg-logo="https://archive.org/services/img/ISSVideoResourceEarthViews720p" group-title="太空宇宙与科学1080p",国际空间站视频资源：地球景观视图，720p (2013)
+https://archive.org/download/ISSVideoResourceEarthViews720p/ISS%20Video%20Resource_Earth_Views_720p.mp4
+
+#EXTINF:3478 tvg-logo="https://archive.org/services/img/dvd-6906-the-red-skelton-hour-1962-12-11" group-title="悬疑推理与科幻惊悚",DVD-6906 ——《红斯凯尔顿小时》——1962年12月11日 (1962)
+https://archive.org/download/dvd-6906-the-red-skelton-hour-1962-12-11/dvd-6906-the-red-skelton-hour-1962-12-112.mp4
+
+#EXTINF:1764 tvg-logo="https://archive.org/services/img/TheAdventuresOfOzzieHarriet_199" group-title="爆笑喜剧与国会图书馆典藏",《奥齐与哈丽雅特的冒险故事》 (1948)
+https://archive.org/download/TheAdventuresOfOzzieHarriet_199/050R_THE_LADDER_512kb.mp4
+
+#EXTINF:1506 tvg-logo="https://archive.org/services/img/life_of_riley_-_2x02_-_riley_the_animal_lover" group-title="爆笑喜剧与国会图书馆典藏",莱利：动物爱好者 (1948)
+https://archive.org/download/life_of_riley_-_2x02_-_riley_the_animal_lover/life_of_riley_-_2x02_-_riley_the_animal_lover_agk_512kb.mp4
+
+#EXTINF:1469 tvg-logo="https://archive.org/services/img/Cisco_Kid_-_The_Old_Bum" group-title="爆笑喜剧与国会图书馆典藏",老流浪汉 (1948)
+https://archive.org/download/Cisco_Kid_-_The_Old_Bum/Cisco_Kid_-_The_Old_Bum_512kb.mp4
+
+#EXTINF:1489 tvg-logo="https://archive.org/services/img/THE_BUCCANEERS_Captain_Dan_Tempest" group-title="爆笑喜剧与国会图书馆典藏",“海盗队”队长丹·坦佩斯特 (1956)
+https://archive.org/download/THE_BUCCANEERS_Captain_Dan_Tempest/THE_BUCCANEERS_Captain_Dan_Tempest_512kb.mp4
+
+#EXTINF:1545 tvg-logo="https://archive.org/services/img/Meet_Corliss_Archer_6" group-title="爆笑喜剧与国会图书馆典藏",《认识科尔利斯·阿彻》——《四十岁》（1954） (1954)
+https://archive.org/download/Meet_Corliss_Archer_6/Corliss_6_512kb.mp4
+
+#EXTINF:1770 tvg-logo="https://archive.org/services/img/Jack_Benny_-_Jam_Session" group-title="爆笑喜剧与国会图书馆典藏",即兴演奏会 (1948)
+https://archive.org/download/Jack_Benny_-_Jam_Session/Jack_Benny_-_Jam_Session_512kb.mp4
+
+#EXTINF:1494 tvg-logo="https://archive.org/services/img/PublicDefenderTheBigRace" group-title="爆笑喜剧与国会图书馆典藏",公设辩护人：这场重大竞赛 (1948)
+https://archive.org/download/PublicDefenderTheBigRace/PublicDefender-theBigRace_512kb.mp4
+
+#EXTINF:1550 tvg-logo="https://archive.org/services/img/FMM_The_Courtship" group-title="爆笑喜剧与国会图书馆典藏",求爱之旅 (1959)
+https://archive.org/download/FMM_The_Courtship/FMM_The_Courtship_512kb.mp4
+
+#EXTINF:1588 tvg-logo="https://archive.org/services/img/Man_against_Crime--Murder_in_the_Rough" group-title="悬疑推理与科幻惊悚",《人与犯罪：荒野谋杀案》 (1953)
+https://archive.org/download/Man_against_Crime--Murder_in_the_Rough/5-05_Murder_in_the_Rough.mp4
+
+#EXTINF:1491 tvg-logo="https://archive.org/services/img/I_Married_Joan_EP11_Wall_Safe" group-title="爆笑喜剧与国会图书馆典藏",EP 11壁挂式安全装置 (1948)
+https://archive.org/download/I_Married_Joan_EP11_Wall_Safe/I_Married_Joan_EP11_Wall_Safe_512kb.mp4
+
+#EXTINF:1546 tvg-logo="https://archive.org/services/img/Man_Against_Crime--Washington_Story" group-title="悬疑推理与科幻惊悚",《对抗犯罪的人：华盛顿故事》 (1953)
+https://archive.org/download/Man_Against_Crime--Washington_Story/4-36_Washington_Story.mp4
+
+#EXTINF:1501 tvg-logo="https://archive.org/services/img/Window_on_Main_St--The_Return" group-title="爆笑喜剧与国会图书馆典藏",《主街之窗：归来》 (1961)
+https://archive.org/download/Window_on_Main_St--The_Return/Window_on_Main_St--The_Return.mp4
+
+#EXTINF:1295 tvg-logo="https://archive.org/services/img/IvanhoeTheWeavers" group-title="爆笑喜剧与国会图书馆典藏",《伊万霍》——《织工》 (1958)
+https://archive.org/download/IvanhoeTheWeavers/Ivanhoe%203.mp4
+
+#EXTINF:1745 tvg-logo="https://archive.org/services/img/TheAdventuresOfOzzieHarriet_104" group-title="爆笑喜剧与国会图书馆典藏",《奥齐与哈丽雅特的冒险故事》 (1948)
+https://archive.org/download/TheAdventuresOfOzzieHarriet_104/037_THE_PLAYS_THE_THING.ia.mp4
+
+#EXTINF:1713 tvg-logo="https://archive.org/services/img/DDayAnniversary" group-title="爆笑喜剧与国会图书馆典藏",大局观：D日纪念日 (1969)
+https://archive.org/download/DDayAnniversary/The%20Big%20Picture%20762%20D-Day%20Anniversary%201969.mp4
+
+#EXTINF:1586 tvg-logo="https://archive.org/services/img/GOLDBERG_MISC_08" group-title="爆笑喜剧与国会图书馆典藏",《戈德伯格一家》杂项集第08集 (1955)
+https://archive.org/download/GOLDBERG_MISC_08/GOLDBERG_MISC_08_512kb.mp4
+
+#EXTINF:1525 tvg-logo="https://archive.org/services/img/Topper_Decorating" group-title="爆笑喜剧与国会图书馆典藏",顶部装饰：装饰设计 (1954)
+https://archive.org/download/Topper_Decorating/1-17_Decorating.mp4
+
+#EXTINF:1763 tvg-logo="https://archive.org/services/img/OZZIE_AND_HARRIET_ep_Road_Race" group-title="爆笑喜剧与国会图书馆典藏",公路赛 (1948)
+https://archive.org/download/OZZIE_AND_HARRIET_ep_Road_Race/OZZIE_AND_HARRIET_ep_Road_Race_512kb.mp4
+
+#EXTINF:1543 tvg-logo="https://archive.org/services/img/sheriffOfCochise-HusbandAndWife1957formatIpod" group-title="爆笑喜剧与国会图书馆典藏",《科奇斯警长》—— Husband 和 Wife（1957年）（格式：iPod） (1957)
+https://archive.org/download/sheriffOfCochise-HusbandAndWife1957formatIpod/HusbandandWife_512kb.mp4
+
+#EXTINF:1250 tvg-logo="https://archive.org/services/img/Ozzie-Harriet_The_Window_Pane" group-title="爆笑喜剧与国会图书馆典藏",《奥齐与哈丽雅特：窗玻璃》 (1953)
+https://archive.org/download/Ozzie-Harriet_The_Window_Pane/02-04_The_Window_Pane.mp4
+
+#EXTINF:1419 tvg-logo="https://archive.org/services/img/TheAdventuresOfOzzieHarriet_654" group-title="爆笑喜剧与国会图书馆典藏",《奥齐与哈丽雅特的冒险故事》 (1948)
+https://archive.org/download/TheAdventuresOfOzzieHarriet_654/007_david_the_babysitter.ia.mp4
+
+#EXTINF:1567 tvg-logo="https://archive.org/services/img/InvisibleMan-ManInDisguise1959" group-title="悬疑推理与科幻惊悚",《隐形人——伪装之人》1959年 (1948)
+https://archive.org/download/InvisibleMan-ManInDisguise1959/INVISIBLE_MAN_s2e9_ManInDisguise_512kb.mp4
+
+#EXTINF:1485 tvg-logo="https://archive.org/services/img/IvanhoeTheKidnapping" group-title="爆笑喜剧与国会图书馆典藏",《伊万霍——绑架案》 (1958)
+https://archive.org/download/IvanhoeTheKidnapping/Ivanhoe%206.mp4
+
+#EXTINF:1542 tvg-logo="https://archive.org/services/img/Bettty_Hutton_Show" group-title="爆笑喜剧与国会图书馆典藏",《贝蒂·赫顿秀》——西顿的故事 (1959)
+https://archive.org/download/Bettty_Hutton_Show/BettyHuttonShowSeatonStory.mp4
+
+#EXTINF:1625 tvg-logo="https://archive.org/services/img/EarlyTvTheEdWynnShow25March1950Episode27" group-title="爆笑喜剧与国会图书馆典藏",早期电视节目：《埃德·温恩秀》（1950年3月25日，第27集） (1948)
+https://archive.org/download/EarlyTvTheEdWynnShow25March1950Episode27/EdWynn1950Swanson_512kb.mp4
+
+#EXTINF:1576 tvg-logo="https://archive.org/services/img/GangbustersTheScissorsGang" group-title="悬疑推理与科幻惊悚",《帮派杀手：剪刀帮》 (1948)
+https://archive.org/download/GangbustersTheScissorsGang/Gangbusters-theScissorsGang_512kb.mp4
+
+#EXTINF:1569 tvg-logo="https://archive.org/services/img/FollowThatMan-RalphBellamy-4-32-Room505" group-title="爆笑喜剧与国会图书馆典藏",505室 (1948)
+https://archive.org/download/FollowThatMan-RalphBellamy-4-32-Room505/FollowThatMan-RalphBellamy-4-32-Room505_512kb.mp4
+
+#EXTINF:1348 tvg-logo="https://archive.org/services/img/S1E08-Life_Of_Riley-11_22_1949_-_Riley_Gillis_and_Vanderhopper_Inc" group-title="爆笑喜剧与国会图书馆典藏",S1E08《莱利的一生》-1949年11月22日——莱利·吉里斯与范德霍珀公司 (1948)
+https://archive.org/download/S1E08-Life_Of_Riley-11_22_1949_-_Riley_Gillis_and_Vanderhopper_Inc/S1E08-Life_Of_Riley-11_22_1949-Riley_Gillis_and_Vanderhopper_Inc_512kb.mp4
+
+#EXTINF:1765 tvg-logo="https://archive.org/services/img/You_Asked_For_It_4" group-title="爆笑喜剧与国会图书馆典藏",《你要求了它》第4集：杂项集数 (1951)
+https://archive.org/download/You_Asked_For_It_4/Asked_For_It_4.mp4
+
+#EXTINF:1714 tvg-logo="https://archive.org/services/img/MrWizard4" group-title="爆笑喜剧与国会图书馆典藏",经典教育电视节目：《巫师先生》——动物的腿和速度 (1948)
+https://archive.org/download/MrWizard4/MrWizardLegs_512kb.mp4
+
+#EXTINF:1320 tvg-logo="https://archive.org/services/img/LorettaYoung--TheMirror" group-title="爆笑喜剧与国会图书馆典藏",《洛雷塔·杨秀》：《镜子》 (1953)
+https://archive.org/download/LorettaYoung--TheMirror/LorettaYoung102_Mirror.mp4
+
+#EXTINF:1539 tvg-logo="https://archive.org/services/img/JUDGE_ROY_BEAN_Black_Jack" group-title="爆笑喜剧与国会图书馆典藏",“罗伊·比恩法官”黑杰克 (1956)
+https://archive.org/download/JUDGE_ROY_BEAN_Black_Jack/JUDGE_ROY_BEAN_Black_Jack_512kb.mp4
+
+#EXTINF:1534 tvg-logo="https://archive.org/services/img/FMM_The_Shooting_Gallery" group-title="爆笑喜剧与国会图书馆典藏",射击画廊 (1959)
+https://archive.org/download/FMM_The_Shooting_Gallery/FMM_The_Shooting_Gallery_512kb.mp4
+
+#EXTINF:1351 tvg-logo="https://archive.org/services/img/life_of_riley_-_2x10_-_rileys_burning_ambition" group-title="爆笑喜剧与国会图书馆典藏",瑞利炽热的抱负 (1948)
+https://archive.org/download/life_of_riley_-_2x10_-_rileys_burning_ambition/life_of_riley_-_2x10_-_rileys_burning_ambition_agk_512kb.mp4
+
+#EXTINF:1471 tvg-logo="https://archive.org/services/img/GeneralElectricTheaterItGivesMeGreatPleasure" group-title="爆笑喜剧与国会图书馆典藏",通用电气剧院：它让我感到无比愉悦 (1948)
+https://archive.org/download/GeneralElectricTheaterItGivesMeGreatPleasure/GeneralElecticTheater-itGivesMeGreatPleasure.mp4
+
+#EXTINF:1568 tvg-logo="https://archive.org/services/img/InvisibleMan-TheWhiteRabbit1959" group-title="悬疑推理与科幻惊悚",《隐形人——白兔》1959年 (1948)
+https://archive.org/download/InvisibleMan-TheWhiteRabbit1959/INVISIBLE_MAN_s2e8_TheWhiteRabbit_512kb.mp4
+
+#EXTINF:1516 tvg-logo="https://archive.org/services/img/I_Married_Joan_EP67_Joans_Haircut" group-title="爆笑喜剧与国会图书馆典藏",第67集：琼的理发之旅 (1948)
+https://archive.org/download/I_Married_Joan_EP67_Joans_Haircut/I_Married_Joan_EP67_Joans_Haircut_512kb.mp4
+
+#EXTINF:1346 tvg-logo="https://archive.org/services/img/S1E06-Life_Of_Riley-11_08_1949_-_Assistant_Manager" group-title="爆笑喜剧与国会图书馆典藏",S1E06《莱利的生活》-1949年8月11日 - 副经理 (1948)
+https://archive.org/download/S1E06-Life_Of_Riley-11_08_1949_-_Assistant_Manager/S1E06-Life_Of_Riley-11_08_1949-Assistant_Manager_512kb.mp4
+
+#EXTINF:1452 tvg-logo="https://archive.org/services/img/the-veil-episode-4-the-doctors" group-title="爆笑喜剧与国会图书馆典藏",《面纱》（1958年电视迷你剧） (1948)
+https://archive.org/download/the-veil-episode-4-the-doctors/The%20Veil%20-%20Episode%2011%20-%20Whatever%20Happened%20to%20Peggy.mp4
+
+#EXTINF:1251 tvg-logo="https://archive.org/services/img/Ozzie-Harriet--Davids_Pipe" group-title="爆笑喜剧与国会图书馆典藏",《奥齐与哈丽雅特：大卫的烟斗》 (1953)
+https://archive.org/download/Ozzie-Harriet--Davids_Pipe/02-03_Davids_Pipe.mp4
+
+#EXTINF:1479 tvg-logo="https://archive.org/services/img/Cisco_Kid_-_Phoney_Sheriff" group-title="爆笑喜剧与国会图书馆典藏",假警长 (1948)
+https://archive.org/download/Cisco_Kid_-_Phoney_Sheriff/Cisco_Kid_-_Phoney_Sheriff_512kb.mp4
+
+#EXTINF:1223 tvg-logo="https://archive.org/services/img/Ozzie-Harriet--Individuality" group-title="爆笑喜剧与国会图书馆典藏",《奥齐与哈丽特：个性》 (1955)
+https://archive.org/download/Ozzie-Harriet--Individuality/03-14_Individuality.mp4
+
+#EXTINF:2760 tvg-logo="https://archive.org/services/img/Outlaws--Quiet_Killer" group-title="悬疑推理与科幻惊悚",《法外之徒：沉默的杀手》 (1960)
+https://archive.org/download/Outlaws--Quiet_Killer/Outlaws_1-10_Quiet_Killer.mp4

@@ -395,7 +395,7 @@ function HomeContent() {
               <div className="space-y-5">
                 <div className="rounded-xl border border-line bg-chip/60 px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
                   <div className="text-xs text-muted leading-relaxed">
-                    软件内置免费库（7058+ 部无版权公版/开源大片）未包含商业版权片「
+                    软件内置免费库（7625+ 部无版权公版/开源大片）未包含商业版权片「
                     <span className="text-content font-medium">{urlQuery}</span>
                     」· 如需在本软件内直接搜索播放商业院线片，请点击右侧导入自用 TVBox 多仓 / 苹果 CMS 采集源；下方为你准备了点开即在本软件内直接播放的精选大片：
                   </div>

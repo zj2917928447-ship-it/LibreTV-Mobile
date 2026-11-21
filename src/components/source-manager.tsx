@@ -223,19 +223,19 @@ const VOD_FILTERS: { id: VodFilter; label: string }[] = [
 const OPEN_VOD_GALLERIES = [
   {
     id: 'open-all',
-    name: '内置双语开放影视总馆（7058+ 名片与 128 部连播剧集 · 100% 实测直连）',
+    name: '内置双语开放影视总馆（7625+ 名片与 140 部连播剧集 · 100% 实测直连）',
     hint: '覆盖全球六大开放片库与内置精选直连大片',
     path: '/api/open-media?short=1&zh=1',
   },
   {
     id: 'open-series',
-    name: '多集连播高清剧集专馆（128部 4K/1080p 连续剧与大师合集）',
-    hint: '恋爱与义务、1080p翼、希区柯克房客、波士顿布莱基、隐形奇侠',
+    name: '多集连播高清剧集专馆（140部 4K/1080p 连续剧与大师合集）',
+    hint: '我这一辈子、盘丝洞、超人国语版、M就是凶手、阿波罗16mm原片',
     path: '/api/open-media?short=1&zh=1&series=1',
   },
   {
     id: 'open-direct',
-    name: '国内毫秒直连秒播专馆（7058 部官方 1080p/公版直连片源）',
+    name: '国内毫秒直连秒播专馆（7625 部官方 1080p/公版直连片源）',
     hint: '零海外等待、国内网络 HTTP 200/206 秒起播',
     path: '/api/open-media?short=1&zh=1&direct=1',
   },

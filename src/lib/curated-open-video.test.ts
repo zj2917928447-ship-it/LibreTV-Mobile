@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(7058);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(7625);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(128);
+    expect(seriesCount).toBeGreaterThanOrEqual(140);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -109,6 +109,14 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('弗兰克卡普拉群氓1941').some((v) => v.slug === 'capra-wellman-golden-classics-meet-john-doe-algiers-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('波士顿布莱基侠盗神探').some((v) => v.slug === 'boston-blackie-gentleman-sleuth-chronicles-10ep')).toBe(true);
     expect(searchCuratedOpenVideos('隐形奇侠1958英伦科幻剧').some((v) => v.slug === 'invisible-man-1958-british-espionage-scifi-7ep')).toBe(true);
+    expect(searchCuratedOpenVideos('我这一辈子1950石挥').some((v) => v.slug === 'early-chinese-cinema-pantheon-this-life-three-women-waves-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('盘丝洞1927西游记默片').some((v) => v.slug === 'early-chinese-wuxia-silent-animation-pioneers-cave-silken-web-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('超人1941国语配音版').some((v) => v.slug === 'fleischer-superman-1941-chinese-dub-collection-9ep')).toBe(true);
+    expect(searchCuratedOpenVideos('M就是凶手1931高清修复').some((v) => v.slug === 'lang-hitchcock-kubrick-classic-thriller-comedy-pantheon-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('阿波罗11号登月16mm原片').some((v) => v.slug === 'nasa-apollo-7-to-17-16mm-onboard-lunar-films-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('我这一辈子').some((v) => v.slug === 'archive-this-life-of-mine')).toBe(true);
+    expect(searchCuratedOpenVideos('丽人行').some((v) => v.slug === 'archive-threegirls')).toBe(true);
+    expect(searchCuratedOpenVideos('红楼梦').some((v) => v.slug === 'archive-dreamred')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });
