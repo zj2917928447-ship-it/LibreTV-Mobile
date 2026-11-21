@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(4384);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(4720);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(74);
+    expect(seriesCount).toBeGreaterThanOrEqual(82);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -76,6 +76,10 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('孤军浴血记1919').some((v) => v.slug === 'loc-silent-epic-features-lost-battalion-buffalo-bill-7ep')).toBe(true);
     expect(searchCuratedOpenVideos('远大前程1946大卫里恩').some((v) => v.slug === 'world-noir-mystery-sherlock-great-expectations-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('罗曼太空望远镜2026发射').some((v) => v.slug === 'nasa-roman-space-telescope-2026-launch-4k-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('超人1941彩色动画全集').some((v) => v.slug === 'fleischer-superman-1941-technicolor-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('乞力马扎罗的雪1952派克').some((v) => v.slug === 'hollywood-oscar-hitchcock-masterpieces-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('巴斯特基顿将军号1926').some((v) => v.slug === 'keaton-chaplin-silent-comedy-pantheon-9ep')).toBe(true);
+    expect(searchCuratedOpenVideos('阿耳忒弥斯2026载人绕月发射').some((v) => v.slug === 'nasa-artemis-moon-ingenuity-mars-4k-8ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });

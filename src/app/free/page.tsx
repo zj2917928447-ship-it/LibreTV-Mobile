@@ -54,12 +54,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
+      { label: '1941彩色《超人》动画全集 (8集)', query: '超人1941彩色动画全集', tag: '宫崎骏致敬巅峰作' },
+      { label: '乞力马扎罗的雪与希区柯克 (8部)', query: '乞力马扎罗的雪1952派克', tag: '好莱坞大师长片连映' },
+      { label: '基顿《将军号》与卓别林 (9部)', query: '巴斯特基顿将军号1926', tag: '无替身喜剧封神榜' },
+      { label: '《大力水手》彩色剧场版 (10集)', query: '大力水手彩色剧场版全集', tag: '大战四十大盗/神灯' },
+      { label: '阿耳忒弥斯登月与火星首飞4K (8集)', query: '阿耳忒弥斯2026载人绕月发射', tag: '2026最新4K全集' },
       { label: '远大前程与福尔摩斯长片 (8部)', query: '远大前程1946大卫里恩', tag: '悬疑经典长片连映' },
-      { label: '黄金年代彩色冒险喜剧 (7部)', query: '约翰韦恩驯妻记', tag: '大鼻子情圣/小公主' },
-      { label: '罗曼望远镜2026发射 (8集)', query: '罗曼太空望远镜2026发射', tag: '2026最新4K全集' },
-      { label: '1917定格恐龙与疯狂猫 (10集)', query: '1917定格动画恐龙', tag: '金刚大师定格神作' },
-      { label: '国会图书馆公版长片典藏 (8部)', query: '国会图书馆直连电影全集', tag: 'LOC官方直连' },
-      { label: '大力水手战辛巴达等起源 (10集)', query: '大力水手大战辛巴达', tag: '影史百年直连' },
     ],
   },
   {
@@ -409,6 +409,34 @@ const DOMESTIC_FREE_PLATFORMS = [
     category: '国乐交响现场',
     note: '国内直连 · 高音质视听盛宴',
   },
+  {
+    name: '中国美术馆 · 典藏艺术视听美育馆',
+    description: '中国美术馆官方数字美育专栏，超高清呈现近现代书画雕塑大师真迹赏析、展览导览与艺术纪录短片。',
+    url: 'https://www.namoc.org/',
+    category: '国家级美术影像',
+    note: '国内直连 · 大师真迹超清赏析',
+  },
+  {
+    name: '央视财经 · 经济半小时与大国财经纪实库',
+    description: 'CCTV-2 财经频道官方点播专区，免费提供产业前沿调查、智造工程纪录长片与消费生活专题视频。',
+    url: 'https://tv.cctv.com/cctv2/',
+    category: '产业商业纪实',
+    note: '国内直连 · 深度纪实超清',
+  },
+  {
+    name: '央视社会与法 · 天网与传奇故事纪实剧场',
+    description: 'CCTV-12 社会与法频道官方点播库，免费连播《天网》《一线》《法律讲堂》真实大案推理纪实。',
+    url: 'https://tv.cctv.com/cctv12/',
+    category: '悬疑普法纪实',
+    note: '国内直连 · 真实探案全集连播',
+  },
+  {
+    name: '上海博物馆 · 江南国宝与特展数字影像馆',
+    description: '上海博物馆官方数字展演平台，超清解读江南青铜书画珍宝、古埃及文明特展与文物修复纪实。',
+    url: 'https://www.shanghaimuseum.net/',
+    category: '江南文物特展',
+    note: '国内直连 · 4K 博物馆导览',
+  },
 ];
 
 const OVERSEAS_FREE_PLATFORMS = [
@@ -741,7 +769,7 @@ export default function FreeResourcesPage() {
       if (!response.ok || data.code !== 1) throw new Error(data.msg || '免费资源搜索暂时不可用，请稍后重试。');
       setResults(data.list ?? []);
       if ((data.list ?? []).length === 0) {
-        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 46 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
+        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 50 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
       }
     } catch (cause) {
       setResults([]);
@@ -842,7 +870,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              4384+ 部 100% 实测直连大片与 74 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 46 大国内正版免费片库。
+              4720+ 部 100% 实测直连大片与 82 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 50 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -851,7 +879,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                7321台直播源 (.m3u)
+                8716台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -866,7 +894,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (7321+ 直连 / 108000+ 扩展)
+              免费电视直播 (8716+ 直连 / 118000+ 扩展)
             </Link>
             <button
               type="button"

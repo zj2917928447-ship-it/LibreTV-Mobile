@@ -1,16 +1,16 @@
 {
-  "name": "自由影视 · 开放影视与超清直播资源包（4384+ 名片与74部连播剧集 / 7321+ 直播）",
-  "version": 17,
+  "name": "自由影视 · 开放影视与超清直播资源包（4720+ 名片与82部连播剧集 / 8716+ 直播）",
+  "version": 18,
   "sources": [
     {
-      "name": "内置双语开放影视库（4384+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / 韦伯 / 哈勃 / ESO 1080p）",
+      "name": "内置双语开放影视库（4720+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / 韦伯 / 哈勃 / ESO 1080p）",
       "url": "https://libretv-mobile-zj2917928447.onrender.com/api/open-media?short=1&zh=1",
       "detail": "https://libretv-mobile-zj2917928447.onrender.com"
     }
   ],
   "liveSources": [
     {
-      "name": "内置双阶实测超清直播（7321 台卫视 / 电影 / 动漫 / 纪实 / 欧美）",
+      "name": "内置双阶实测超清直播（8716 台卫视 / 电影 / 动漫 / 纪实 / 欧美）",
       "url": "https://libretv-mobile-zj2917928447.onrender.com/open-live-channels.m3u"
     }
   ]
