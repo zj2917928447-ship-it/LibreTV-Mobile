@@ -223,19 +223,19 @@ const VOD_FILTERS: { id: VodFilter; label: string }[] = [
 const OPEN_VOD_GALLERIES = [
   {
     id: 'open-all',
-    name: '内置双语开放影视总馆（5472+ 名片与 100 部连播剧集 · 100% 实测直连）',
+    name: '内置双语开放影视总馆（5847+ 名片与 108 部连播剧集 · 100% 实测直连）',
     hint: '覆盖全球六大开放片库与内置精选直连大片',
     path: '/api/open-media?short=1&zh=1',
   },
   {
     id: 'open-series',
-    name: '多集连播高清剧集专馆（100部 4K/1080p 连续剧与大师合集）',
-    hint: '陌生人1080p、福尔摩斯四签名、1940青蜂侠、骄傲的将军、2024日全食',
+    name: '多集连播高清剧集专馆（108部 4K/1080p 连续剧与大师合集）',
+    hint: '狗舍谋杀案、浮华世界、佐罗12章全本、反诈重案组、门户号月球站',
     path: '/api/open-media?short=1&zh=1&series=1',
   },
   {
     id: 'open-direct',
-    name: '国内毫秒直连秒播专馆（5472 部官方 1080p/公版直连片源）',
+    name: '国内毫秒直连秒播专馆（5847 部官方 1080p/公版直连片源）',
     hint: '零海外等待、国内网络 HTTP 200/206 秒起播',
     path: '/api/open-media?short=1&zh=1&direct=1',
   },

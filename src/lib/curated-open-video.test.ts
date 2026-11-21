@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(5472);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(5847);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(100);
+    expect(seriesCount).toBeGreaterThanOrEqual(108);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -88,6 +88,11 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('奥逊威尔斯陌生人1946').some((v) => v.slug === 'orson-welles-fritz-lang-noir-pantheon-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('青蜂侠1940初代真人剧').some((v) => v.slug === 'green-hornet-1940-cliffhanger-serial-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('2024日全食NASA望远镜实拍').some((v) => v.slug === 'nasa-crew-dragon-2024-solar-eclipse-4k-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('姊妹花').some((v) => v.slug === 'archive-twinsisters')).toBe(true);
+    expect(searchCuratedOpenVideos('浮华世界1935首部彩色电影').some((v) => v.slug === 'hollywood-technicolor-drama-becky-sharp-our-town-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('狗舍谋杀案1933密室推理').some((v) => v.slug === 'locked-room-noir-he-walked-by-night-kennel-murder-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('反诈重案组1951探案剧').some((v) => v.slug === 'racket-squad-con-artist-detective-cases-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('门户号月球轨道空间站').some((v) => v.slug === 'nasa-lunar-gateway-viper-moon-rover-sls-8ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });

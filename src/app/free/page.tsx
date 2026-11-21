@@ -54,12 +54,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
+      { label: '《狗舍谋杀案》与夜行者黑色巅峰 (8部)', query: '狗舍谋杀案1933密室推理', tag: '本格密室推理神作' },
+      { label: '首部彩色《浮华世界》与我们的镇 (8部)', query: '浮华世界1935首部彩色电影', tag: '奥斯卡传世名作' },
+      { label: '佐罗战斗军团12章全本与红花侠 (8部)', query: '佐罗的战斗军团1939', tag: '蒙面剑侠传奇全集' },
       { label: '奥逊威尔斯《陌生人》1080p与血红街道 (8部)', query: '奥逊威尔斯陌生人1946', tag: '黑色电影封神榜' },
-      { label: '福尔摩斯《四签名》与神探黄先生 (7部)', query: '福尔摩斯四签名1932', tag: '东西神探长片连映' },
-      { label: '1940初代《青蜂侠与加藤》连续剧 (8章)', query: '青蜂侠1940初代真人剧', tag: '章回超英悬念剧' },
-      { label: '上美影《骄傲的将军》与冰雪女王 (8部)', query: '骄傲的将军1956上海美影厂', tag: '国漫瑰宝+长片动画' },
-      { label: '魂断巴黎与让·雷诺阿大师殿堂 (8部)', query: '魂断巴黎1954伊丽莎白泰勒', tag: '威尼斯金狮名作' },
-      { label: '2024日全食与载人龙飞船4K (8集)', query: '2024日全食NASA望远镜实拍', tag: '4K太空实况全集' },
+      { label: '真实骗局揭秘《反诈重案组》 (8集)', query: '反诈重案组1951探案剧', tag: '高智商反欺诈探案' },
+      { label: '门户号月球空间站与VIPER月球车 (8集)', query: '门户号月球轨道空间站', tag: 'NASA环月前哨全集' },
     ],
   },
   {
@@ -76,12 +76,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '华语与世界名作',
     items: [
+      { label: '姊妹花 (1934 胡蝶分饰两角)', query: '姊妹花', tag: '早期华语票房神话' },
       { label: '小城之春 (费穆)', query: '小城之春', tag: '华语百年榜首' },
       { label: '马路天使 (赵丹/周璇)', query: '马路天使', tag: '四季歌天涯歌女' },
       { label: '新女性 (蔡楚生/阮玲玉)', query: '新女性', tag: '1934华语巅峰' },
       { label: '一江春水向东流 (白杨)', query: '一江春水向东流', tag: '1947史诗巨片' },
       { label: '神女 (阮玲玉)', query: '神女1934', tag: '豆瓣9.0默片' },
-      { label: '大都会 (138分钟直连)', query: '大都会1927', tag: '科幻鼻祖直连' },
     ],
   },
 ];
@@ -521,6 +521,48 @@ const DOMESTIC_FREE_PLATFORMS = [
     category: '苍穹天文科普',
     note: '国内直连 · 球幕级宇宙视听',
   },
+  {
+    name: '中央戏剧学院 · 戏剧舞台经典与影视学术展演',
+    description: '中央戏剧学院官方艺术视听窗口，聚焦中外经典话剧展演、舞台美术创作纪实与表演大师讲堂。',
+    url: 'https://www.chntheatre.edu.cn/',
+    category: '殿堂话剧展演',
+    note: '国内直连 · 学院派舞台经典',
+  },
+  {
+    name: '中国交响乐团 · 殿堂交响与合唱音乐会视听馆',
+    description: '国家级交响乐团官方门户，展播贝多芬马勒交响名篇、《黄河大合唱》及中国原创管弦乐现场。',
+    url: 'http://www.cnso.com.cn/',
+    category: '国家级交响现场',
+    note: '国内直连 · 高保真视听实录',
+  },
+  {
+    name: '湖南省博物馆 · 马王堆汉代奇珍数字影像馆',
+    description: '湘博官方数字文化门户，超清解析马王堆辛追汉墓漆器帛画、素纱襌衣与湖湘千年文明纪录短片。',
+    url: 'https://www.hnmuseum.com/',
+    category: '汉代帛画国宝',
+    note: '国内直连 · 超清文物解密',
+  },
+  {
+    name: '台北故宫博物院 · 传世书画瓷玉高清数字展厅',
+    description: '公开数字典藏门户，超高清赏析《快雪时晴帖》《谿山行旅图》、翠玉白菜与历代宫廷珍玩导览视频。',
+    url: 'https://www.npm.gov.tw/',
+    category: '传世书画珍玩',
+    note: '超清馆藏导览 · 繁中界面',
+  },
+  {
+    name: '国家自然博物馆 · 远古恐龙与生命演化科普馆',
+    description: '国家自然博物馆官方科普影音库，生动呈现古生物恐龙化石复原、热带雨林动物与地球生命演化史。',
+    url: 'https://www.nnhm.org.cn/',
+    category: '古生物与自然',
+    note: '国内直连 · 亲子科普必看',
+  },
+  {
+    name: '中央音乐学院 · 民乐钢琴大师课与音乐会展播',
+    description: '中央音乐学院官方学术与展演平台，汇聚古琴琵琶二胡名家独奏、国际音乐节现场与名师公开课。',
+    url: 'https://www.ccom.edu.cn/',
+    category: '名家器乐现场',
+    note: '国内直连 · 殿堂音乐美育',
+  },
 ];
 
 const OVERSEAS_FREE_PLATFORMS = [
@@ -853,7 +895,7 @@ export default function FreeResourcesPage() {
       if (!response.ok || data.code !== 1) throw new Error(data.msg || '免费资源搜索暂时不可用，请稍后重试。');
       setResults(data.list ?? []);
       if ((data.list ?? []).length === 0) {
-        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 62 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
+        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 68 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
       }
     } catch (cause) {
       setResults([]);
@@ -954,7 +996,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              5472+ 部 100% 实测直连大片与 100 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 62 大国内正版免费片库。
+              5847+ 部 100% 实测直连大片与 108 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 68 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -963,7 +1005,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                8985台直播源 (.m3u)
+                9508台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -978,7 +1020,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (8985+ 直连 / 142000+ 扩展)
+              免费电视直播 (9508+ 直连 / 158000+ 扩展)
             </Link>
             <button
               type="button"
