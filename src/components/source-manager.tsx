@@ -223,19 +223,19 @@ const VOD_FILTERS: { id: VodFilter; label: string }[] = [
 const OPEN_VOD_GALLERIES = [
   {
     id: 'open-all',
-    name: '内置双语开放影视总馆（4720+ 名片与 82 部连播剧集 · 100% 实测直连）',
+    name: '内置双语开放影视总馆（5120+ 名片与 90 部连播剧集 · 100% 实测直连）',
     hint: '覆盖全球六大开放片库与内置精选直连大片',
     path: '/api/open-media?short=1&zh=1',
   },
   {
     id: 'open-series',
-    name: '多集连播高清剧集专馆（82部 4K/1080p 连续剧与大师合集）',
-    hint: '1941超人、乞力马扎罗的雪、基顿将军号、罗曼望远镜2026、阿耳忒弥斯登月',
+    name: '多集连播高清剧集专馆（90部 4K/1080p 连续剧与大师合集）',
+    hint: '骄傲的将军、小报妙冤家、007皇家赌场、1941超人、基顿将军号',
     path: '/api/open-media?short=1&zh=1&series=1',
   },
   {
     id: 'open-direct',
-    name: '国内毫秒直连秒播专馆（4720 部官方 1080p/公版直连片源）',
+    name: '国内毫秒直连秒播专馆（5120 部官方 1080p/公版直连片源）',
     hint: '零海外等待、国内网络 HTTP 200/206 秒起播',
     path: '/api/open-media?short=1&zh=1&direct=1',
   },

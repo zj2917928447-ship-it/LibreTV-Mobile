@@ -54,12 +54,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
+      { label: '上美影《骄傲的将军》与冰雪女王 (8部)', query: '骄傲的将军1956上海美影厂', tag: '国漫瑰宝+长片动画' },
+      { label: '小报妙冤家与卖花女喜剧殿堂 (8部)', query: '小报妙冤家女友礼拜五1940', tag: '加里格兰特神作' },
+      { label: '1954初代007皇家赌场与希区柯克 (8部)', query: '007皇家赌场1954初代邦德', tag: '谍战黑色大片连播' },
+      { label: '基顿新婚拼装屋与九重分身 (9部)', query: '巴斯特基顿新婚一周拼装屋', tag: '豆瓣9分机关喜剧' },
       { label: '1941彩色《超人》动画全集 (8集)', query: '超人1941彩色动画全集', tag: '宫崎骏致敬巅峰作' },
       { label: '乞力马扎罗的雪与希区柯克 (8部)', query: '乞力马扎罗的雪1952派克', tag: '好莱坞大师长片连映' },
-      { label: '基顿《将军号》与卓别林 (9部)', query: '巴斯特基顿将军号1926', tag: '无替身喜剧封神榜' },
-      { label: '《大力水手》彩色剧场版 (10集)', query: '大力水手彩色剧场版全集', tag: '大战四十大盗/神灯' },
-      { label: '阿耳忒弥斯登月与火星首飞4K (8集)', query: '阿耳忒弥斯2026载人绕月发射', tag: '2026最新4K全集' },
-      { label: '远大前程与福尔摩斯长片 (8部)', query: '远大前程1946大卫里恩', tag: '悬疑经典长片连映' },
     ],
   },
   {
@@ -437,6 +437,48 @@ const DOMESTIC_FREE_PLATFORMS = [
     category: '江南文物特展',
     note: '国内直连 · 4K 博物馆导览',
   },
+  {
+    name: '中国电影资料馆 · 艺术影院与胶片修复专题',
+    description: '国家级电影档案保存与修复中心官方门户，呈现早期华语电影4K数字修复成果、影史学术放映与经典导赏。',
+    url: 'https://www.cfa.org.cn/',
+    category: '4K修复影史',
+    note: '国内直连 · 国家级电影档案库',
+  },
+  {
+    name: '南京博物院 · 金陵历代珍宝数字视听馆',
+    description: '中国三大博物馆之一官方数字门户，超清展播六朝风华、明清皇家瓷玉书画与非遗苏绣昆曲纪录影像。',
+    url: 'https://www.njmuseum.com/',
+    category: '六朝文物纪实',
+    note: '国内直连 · 殿堂国宝视听',
+  },
+  {
+    name: '中国科学技术馆 · 科学实验与球幕科普影院',
+    description: '中国科技馆官方科普视听专栏，提供趣味物理化学实验秀、航天器原理动画与巨幕科学电影导览。',
+    url: 'https://cstm.org.cn/',
+    category: '趣味科学影院',
+    note: '国内直连 · 青少年科普精选',
+  },
+  {
+    name: '陕西历史博物馆 · 盛唐长安与丝路国宝影像馆',
+    description: '陕历博官方数字展厅，超清呈现何家村盛唐遗宝、秦汉青铜文明与丝绸之路千年壁画纪录短片。',
+    url: 'https://www.sxhm.com/',
+    category: '秦唐国宝超清',
+    note: '国内直连 · 盛唐美学影像',
+  },
+  {
+    name: '央视中文国际 · 国家记忆与远方的家全集库',
+    description: 'CCTV-4 官方高清栏目点播库，免费连播《国家记忆》历史大案解密、《远方的家》走遍中国山河与《传奇中国节》。',
+    url: 'https://tv.cctv.com/cctv4/',
+    category: '山河人文全集',
+    note: '国内直连 · 全中文超清连播',
+  },
+  {
+    name: '中国美术学院 · 国美美育公开课与影像展厅',
+    description: '中国美院官方学术与美育门户，展播东方山水画论、现代设计前沿、毕业动画短片展与艺术大师讲堂。',
+    url: 'https://www.caa.edu.cn/',
+    category: '艺术动画美育',
+    note: '国内直连 · 顶级美院展映',
+  },
 ];
 
 const OVERSEAS_FREE_PLATFORMS = [
@@ -769,7 +811,7 @@ export default function FreeResourcesPage() {
       if (!response.ok || data.code !== 1) throw new Error(data.msg || '免费资源搜索暂时不可用，请稍后重试。');
       setResults(data.list ?? []);
       if ((data.list ?? []).length === 0) {
-        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 50 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
+        setError('内置公版开放片库暂未收录该商业院线片（受版权保护的新片不在公共领域库中）。你可浏览下方精选海报墙立即观看，或前往下方 56 大国内正版免费专区查找，也可在右上角「设置 → 源管理」导入 TVBox 多仓/单仓订阅。');
       }
     } catch (cause) {
       setResults([]);
@@ -870,7 +912,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              4720+ 部 100% 实测直连大片与 82 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 50 大国内正版免费片库。
+              5120+ 部 100% 实测直连大片与 90 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 56 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -879,7 +921,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                8716台直播源 (.m3u)
+                8868台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -894,7 +936,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (8716+ 直连 / 118000+ 扩展)
+              免费电视直播 (8868+ 直连 / 130000+ 扩展)
             </Link>
             <button
               type="button"
