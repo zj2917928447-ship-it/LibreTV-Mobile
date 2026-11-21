@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(5120);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(5472);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(90);
+    expect(seriesCount).toBeGreaterThanOrEqual(100);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -84,6 +84,10 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('小报妙冤家女友礼拜五1940').some((v) => v.slug === 'golden-age-screwball-romance-his-girl-friday-pygmalion-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('巴斯特基顿新婚一周拼装屋').some((v) => v.slug === 'buster-keaton-ingenious-comedies-9ep')).toBe(true);
     expect(searchCuratedOpenVideos('007皇家赌场1954初代邦德').some((v) => v.slug === 'sherlock-007-noir-detective-pantheon-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('新女性').some((v) => v.slug === 'archive-newwomen')).toBe(true);
+    expect(searchCuratedOpenVideos('奥逊威尔斯陌生人1946').some((v) => v.slug === 'orson-welles-fritz-lang-noir-pantheon-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('青蜂侠1940初代真人剧').some((v) => v.slug === 'green-hornet-1940-cliffhanger-serial-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('2024日全食NASA望远镜实拍').some((v) => v.slug === 'nasa-crew-dragon-2024-solar-eclipse-4k-8ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });

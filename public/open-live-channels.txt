@@ -64,6 +64,8 @@ CGTN记录,https://english-livetx.cgtn.com/hls/yypdjlctzb_hd.m3u8
 1987年春晚,https://txmov2.a.kwimgs.com/bs3/video-hls/5195746663405928031_hlsb.m3u8
 1988年春晚,https://txmov2.a.kwimgs.com/bs3/video-hls/5216575810935394655_hlsb.m3u8
 1989年春晚,https://txmov2.a.kwimgs.com/bs3/video-hls/5194620763762726260_hlsb.m3u8
+CGTN西语,https://0472.org/hls/cgtnx.m3u8
+CGTN阿语,https://0472.org/hls/cgtna.m3u8
 香港电台 RTHK 31 综合台,https://rthktv31-live.akamaized.net/hls/live/2036818/RTHKTV31/master.m3u8
 
 CGTN与亚洲国际,#genre#
@@ -1624,6 +1626,8 @@ BabyFirst 少儿启蒙频道,https://cdn.fast.jwp.services/v1/channel/1_jB6940Ei
 动漫卡通 · 13 Kids,https://origin.dpsgo.com/ssai/event/LhHrVtyeQkKZ-Ye_xEU75g/master.m3u8
 动漫卡通 · NickToons 90s,https://i.mjh.nz/.r/10-nicktoons-90s.m3u8
 动漫卡通 · Junior,https://r.il.cdn-redge.media/livehls/oil/freetv/live/junior/live.livx/playlist.m3u8
+动漫卡通 · Bravo! Kids TV,https://streaming.radiohub.hr/RadioHub_WEB_streaming/BHWUC27pGZ/3.m3u8
+动漫番剧 · Super!,https://495c5a85d9074f29acffeaea9e0215eb.msvdn.net/super/super_main/super_main_hbbtv/playlist.m3u8
 少儿卡通 · Mult International,https://fs.uplink.kz/mult/mono.m3u8?token=onlinetv
 少儿卡通 · Watch it KID!,https://stream-us-east-1.getpublica.com/playlist.m3u8?network_id=2245
 少儿卡通 · Multilandia,https://fs.uplink.kz/multilandia/mono.m3u8?token=onlinetv
@@ -2401,6 +2405,7 @@ CGTN纪录,https://0472.org/hls/cgtnd.m3u8
 情感剧场 · BBC Drama,https://amg00793-amg00793c40-rakuten-es-5444.playouts.now.amagi.tv/playlist.m3u8
 音乐现场 · Stingray Classic Rock,https://lotus.stingray.com/manifest/ose-101ads-montreal/samsungtvplus/master.m3u8
 热播剧场 · CNBC-e,https://hnpsechtsc.turknet.ercdn.net/xpnvudnlsv/cnbc-e/cnbc-e.m3u8
+热播剧场 · 13T,https://origin.dpsgo.com/ssai/event/f4TrySe8SoiGF8Lu3EIq1g/master.m3u8
 环球剧场 · XHZHZ-TDT,https://5f2c1b0d880e5.streamlock.net/zacatecas/videozacatecas/playlist.m3u8
 环球剧场 · TV Migrante,https://s5.mexside.net:1936/tvmigrante/tvmigrante/playlist.m3u8
 环球剧场 · XHTTG-TDT,https://5ca9af4645e15.streamlock.net/chiapas/videochiapas/playlist.m3u8
@@ -3462,6 +3467,8 @@ CGTN纪录,https://0472.org/hls/cgtnd.m3u8
 欧美高清 · Reality,https://reality-rakuten-tv-uk.fast.rakuten.tv/v1/manifest/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6233/228208ef-d17f-4825-a278-eccf505de378/4.m3u8
 欧美高清 · Global News,https://live.corusdigitaldev.com/groupb/live/3062d0e3-ed4c-4f47-8482-95648250f4b8/live.isml/.m3u8
 欧美高清 · CBC News,https://dbrb49pjoymg4.cloudfront.net/v1/master/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_xumo-ams-aws/master.m3u8?ads.xumo_channelId=99991276
+欧美高清 · RT News,https://rt-glb.rttv.com/live/rtnews/playlist.m3u8
+欧美高清 · RT Français,https://rt-fra.rttv.com/live/rtfrance/playlist.m3u8
 欧美高清 · teltOwkanal,https://h056.video-stream-hosting.de/easycast8-live/_definst_/mp4:livestreamhd8/playlist.m3u8
 欧美高清 · Top Stories by Newsy,https://content.uplynk.com/channel/33c48f602cfd4474b957eb4ad999caf8.m3u8
 欧美高清 · SWR Fernsehen HD,https://dash4.antik.sk/live/test_swr_tizen/playlist.m3u8
@@ -6081,6 +6088,90 @@ CGTN纪录,https://0472.org/hls/cgtnd.m3u8
 欧美高清 · TV Panorama,https://public.live.rebit.tv/live/20750f0b-e12d-4915-a4c3-47c5db9ccbf6/main.m3u8
 欧美高清 · WDR Fernsehen Aachen,https://wdrlokalzeit.akamaized.net/hls/live/2018019-b/wdrlz_aachen/master.m3u8
 欧美高清 · Visir,https://live.visir.is/hls-live/visir.smil/playlist.m3u8
+欧美高清 · 13C,https://origin.dpsgo.com/ssai/event/GI-9cp_bT8KcerLpZwkuhw/master.m3u8
+财经科技 · Bloomberg TV Asia,https://bloomberg.com/media-manifest/streams/asia.m3u8
+欧美高清 · EBS 1TV,https://ebsonair.ebs.co.kr/ebs1familypc/familypc1m/playlist.m3u8
+欧美高清 · Manavision,https://play.once.net.ec/play/Ily2oYdd3E1fi9wK2zORoRovFU9P5xM0g3CNVK2MT0M/.m3u8
+欧美高清 · EBS 2TV,https://ebsonair.ebs.co.kr/ebs2familypc/familypc1m/playlist.m3u8
+欧美高清 · Alert TV,https://itv.streams.ovh/ALEERT/ALEERT/playlist.m3u8
+欧美高清 · Al Ghad TV,https://eazyvwqssi.erbvr.com/alghadtv/alghadtv.m3u8
+欧美高清 · Africa 24,https://africa24.vedge.infomaniak.com/livecast/ik:africa24/manifest.m3u8
+欧美高清 · ERT News HD,https://ert-ucdn.broadpeak-aas.com/bpk-tv/ERTNews/default/index.m3u8
+欧美高清 · L'altro Corriere TV,https://52ee6512fee4427889eba89957975fa0.msvdn.net/live/S24350460/BEj8ZmQiQ9UG/playlist.m3u8
+欧美高清 · DY 365,https://cdn.smartstream.video/smartstream-us/dy365/dy365/playlist.m3u8
+欧美高清 · NH,https://takeoff.jetstre.am/?account=nhnieuws&file=live&output=playlist.m3u8&protocol=https&service=wowza&type=live
+欧美高清 · NPY,https://copacogen.desdeparaguay.net/npy/npy_py_alta/playlist.m3u8?admin=tvaccion
+欧美高清 · ABC TV TAS,https://c.mjh.nz/abc-tas.m3u8
+欧美高清 · ABC KITV,https://fuel-streaming-prod01.fuelmedia.io/v1/sem/c4067ddc-0e67-4928-b7ec-624481f721a6.m3u8
+欧美高清 · Adesso TV,https://cdn.jmvstream.com/w/LVW-9715/LVW9715_12B26T62tm/playlist.m3u8
+欧美高清 · ABC TV ACT,https://c.mjh.nz/abc-act.m3u8
+欧美高清 · ABC TV NT,https://c.mjh.nz/abc-nt.m3u8
+欧美高清 · Canal TRV,https://stream.ontvmx.com/ontv/CNMLXR0Z6FPtGdjcI4/playlist.m3u8
+欧美高清 · Assen TV,https://takeoff.jetstre.am/?account=OmroepAssen&file=OmroepAssenTV/playlist.m3u8&output=playlist.m3u8&protocol=https&service=webdav&type=live
+欧美高清 · AT5,https://takeoff.jetstre.am/?account=atvijf&file=live&output=playlist.m3u8&protocol=https&service=wowza&type=live
+欧美高清 · Bergamo TV,https://db142859fd5541b09de25d6507f1f2d3.msvdn.net/live/S17501676/oIxAsgEEA46M/playlist_dvr.m3u8
+欧美高清 · Canal CHD,https://vs20.live.opencaster.com/canalchd2025_8d99626c/index.m3u8
+欧美高清 · Deejay TV,https://4c4b867c89244861ac216426883d1ad0.msvdn.net/live/S85984808/sMO0tz9Sr2Rk/playlist.m3u8
+欧美高清 · Canal Taronja Comarques Centrals,https://ingest1-video.streaming-pro.com/canaltaronja/central/playlist.m3u8
+欧美高清 · DTV Oss & Bernheze,https://rrr.sz.xlcdn.com/?account=dtvmaasland&file=dtv1&output=playlist.m3u8&protocol=https&service=wowza&type=live
+欧美高清 · DTV Maashorst,https://rrr.sz.xlcdn.com/?account=dtvmaasland&file=dtv3&output=playlist.m3u8&protocol=https&service=wowza&type=live
+欧美高清 · Da Nang TV 1,https://live.mediatech.vn/live/285b59a111d76974225a8e3004bfc31a509/chunklist.m3u8
+欧美高清 · Espansione TV,https://b53136fc0d724da78cac7754d601393d.msvdn.net/live/S13070333/lgUidxJCmpO3/playlist.m3u8
+欧美高清 · DTV Den Bosch,https://rrr.sz.xlcdn.com/?account=dtvmaasland&file=dtv2&output=playlist.m3u8&protocol=https&service=wowza&type=live
+欧美高清 · El Toro TV,https://streaming-1.eltorotv.com/lb0/eltorotv-streaming-web/index.m3u8
+欧美高清 · Ingushetia,https://ingushetia.mediacdn.ru/cdn/ingushetia/playlist.m3u8
+欧美高清 · La C TV,https://f5842579ff984c1c98d63b8d789673eb.msvdn.net/live/S47282891/JWjL3xqPf4bX/playlist.m3u8
+欧美高清 · Mindanow Network TV,https://cdn.vegasplus.us/vegas/mmn01/playlist.m3u8
+欧美高清 · NDR Fernsehen Schleswig Holstein,https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_sh/master.m3u8
+欧美高清 · NDR Fernsehen Mecklenburg Vorpommern,https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_mv/master.m3u8
+欧美高清 · NDR Fernsehen,https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_hh/master.m3u8
+欧美高清 · Radio Mir,https://stream1.dc.beltelecom.by/radiomir/studio.stream/playlist.m3u8
+欧美高清 · Soona TV,https://vs20.live.opencaster.com/soonatv_a1a564a9/index.m3u8
+欧美高清 · RTV38,https://845d8509d2cb4f249dd0b2ae5755b6c2.msvdn.net/rtv38/rtv38_live_main/mainabr/rtv38_live_main/main_576/chunks_dvr.m3u8
+欧美高清 · Tay Ninh TV,https://live-hq.evgcdn.net/live/2851dc2c9af68834814a89e61db0faee561/chunklist.m3u8
+欧美高清 · Solo TV,https://sproxy.solotv.cl/hls/live/fhd.m3u8
+欧美高清 · Tele 7,https://ingest2-video.streaming-pro.com/tele7_ABR/stream/playlist.m3u8
+欧美高清 · TV Panon,https://stream2.nmih.hu:4102/live.m3u8
+欧美高清 · Thai Nguyen TV,https://streaming.thainguyentv.vn/hls/livestream.m3u8
+欧美高清 · WDR Fernsehen Essen,https://wdrlokalzeit.akamaized.net/hls/live/2018027-b/wdrlz_essen/master.m3u8
+欧美高清 · WDR Fernsehen Bonn,https://wdrlokalzeit.akamaized.net/hls/live/2018021-b/wdrlz_bonn/master.m3u8
+欧美高清 · WDR Fernsehen Bielefeld,https://wdrlokalzeit.akamaized.net/hls/live/2018026-b/wdrlz_bielefeld/master.m3u8
+欧美高清 · WDR Fernsehen Munster,https://wdrlokalzeit.akamaized.net/hls/live/2018025-b/wdrlz_muensterland/master.m3u8
+欧美高清 · WDR Fernsehen Siegen,https://wdrlokalzeit.akamaized.net/hls/live/2018020-b/wdrlz_siegen/master.m3u8
+欧美高清 · WDR Fernsehen Dortmund,https://wdrlokalzeit.akamaized.net/hls/live/2018022-b/wdrlz_dortmund/master.m3u8
+欧美高清 · WDR Fernsehen,https://wdr-live.ard-mcdn.de/wdr/live/hls/de/master.m3u8
+欧美高清 · Faith UK,https://faithnow-hls.secdn.net/faithnow-c-channel/play/FaithUK.smil/playlist.m3u8
+格斗搏击 · Dhamma TV,https://b.webcache.maxindo.net.id/dhamma/dhamma.m3u8
+欧美高清 · Faith TV,https://faithnow-hls.secdn.net/faithnow-holland-channel/play/FaithTV.smil/playlist.m3u8
+欧美高清 · Faith Africa,https://faithnow-hls.secdn.net/faithnow-holland-channel/play/FaithAfrica.smil/playlist.m3u8
+欧美高清 · Isaac TV,https://livecdn.live247stream.com/isaac/tv/playlist.m3u8
+欧美高清 · DMI TV (576i),https://tvstreamcast.com/tawaftv.m3u8
+欧美高清 · MTA3 Al-Arabia,https://chlivemta1.akamaized.net/hls/live/2010556/mta3alarabia/playlist.m3u8
+欧美高清 · OCN TV,https://5d12bc59c4748.streamlock.net/redirect/ocnbroadcasting.com/ocnbroadcasting2?type=m3u8
+欧美高清 · TV2000,https://hls-live-tv2000.akamaized.net/hls/live/2028510/tv2000/master.m3u8
+欧美高清 · TLN Media Chicago,https://fuel-streaming-prod01.fuelmedia.io/v1/sem/cb165faa-41c9-42ad-83ee-ad5ca9fb927c.m3u8
+欧美高清 · TLN Media San Francisco,https://fuel-streaming-prod01.fuelmedia.io/v1/sem/b29d27bb-88af-42d1-937a-5bdf76b71c17.m3u8
+欧美高清 · One Edge,https://r.il.cdn-redge.media/livehls/oil/freetv/live/one_edge/live.livx/playlist.m3u8
+欧美高清 · Economy Channel,https://r.il.cdn-redge.media/livehls/oil/calcala-live/live/channel10/live.livx/playlist.m3u8
+欧美高清 · Boas Novas,https://cdn.jmvstream.com/w/LVW-9375/LVW9375_6i0wPBCHYc/playlist.m3u8
+欧美高清 · Bike Channel HD,https://018e1901ad234f04ae16388eda6778e5.msvdn.net/live/S94763187/reFXDHQfBndw/playlist.m3u8
+欧美高清 · Canal Alpha Neuchatel,https://canalalpha.vedge.infomaniak.com/livecast/ik:canalalpha/playlist.m3u8
+欧美高清 · Canal 50 Morteros,https://online.coopmorteros.coop/canal50/vivo.m3u8
+欧美高清 · ON Trending TV,https://freem3u.xyz/api/live/play.m3u8?vid=186
+欧美高清 · Generations TV,https://event.vedge.infomaniak.com/livecast/ik:generation-tv/manifest.m3u8
+自然动物 · Red Carpet TV International,https://fast-rakuten.okast.tv/fa2e8c4385712f9a9076eaf728c751de/channels/1a6ecfaa-40c6-41b8-8634-595c424f856e/21f67fd1-4d21-43ba-8ad8-3afac9982c25/master.m3u8
+欧美高清 · Quang Nam TV,https://freem3u.xyz/api/live/play.m3u8?vid=80
+欧美高清 · Imperial Television,https://live-evg5.tv360.bitel.com.pe/bitel/imperialSRT/playlist.m3u8
+欧美高清 · Radar Lampung TV,https://www.streaming.radartv.co.id/hls/test.m3u8
+欧美高清 · Rai 1 HD,https://r.eu.cdn-redge.media/livehls/oeu/mt/live/rai_uno/live.livx/playlist.m3u8
+欧美高清 · SRF info,https://r.eu.cdn-redge.media/livehls/oeu/mt/live/srf_info/live.livx/playlist.m3u8
+欧美高清 · San Vito Television,https://stream.lamegatv.com/hls/sanvitotelevision/index.m3u8
+欧美高清 · Tele 1,https://tele1-live.ercdn.net/tele1/tele1.m3u8
+欧美高清 · TVE Internacional Europe,https://r.eu.cdn-redge.media/livehls/oeu/mt/live/tve/live.livx/playlist.m3u8
+欧美高清 · Telecolor Lombardia,https://1aadf145546f475282c5b4e658c0ac4b.msvdn.net/live/324149/hlbAWtl/playlist.m3u8
+欧美高清 · Telefriuli,https://5757bf2aa08e42248fb9b9d620f5d900.msvdn.net/live/S11646715/pE3ax0lT0rBd/playlist.m3u8
+欧美高清 · Whakaata Maori,https://i.mjh.nz/.r/maori-tv.m3u8
+欧美高清 · VOTV,https://ingest2-video.streaming-pro.com/votv/streaming_web/playlist.m3u8
 欧洲高清 · Lombardia TV,https://5db313b643fd8.streamlock.net/lmbiatv/lmbiatv/playlist.m3u8
 欧洲高清 · Super Six,https://5db313b643fd8.streamlock.net/SUPERSIXLombardia/SUPERSIXLombardia/playlist.m3u8
 欧洲高清 · 1AlmereTV,https://d3472rjicrodic.cloudfront.net/nlpo/clr-nlpo/709d5260/index.m3u8
@@ -8295,6 +8386,10 @@ CGTN纪录,https://0472.org/hls/cgtnd.m3u8
 娱乐综艺 · Metro TV (Argentina),https://streamtv12.ddns.net:5443/LiveApp/streams/193945633734205616732920.m3u8
 娱乐综艺 · MRTV Entertainment,https://mrtvott.com/cache/MRTV-Ent-HD/master.m3u8
 娱乐综艺 · One Paschima,https://live.ekamraott.com/onepaschima/onepaschima/index.m3u8
+娱乐综艺 · 13 Realities,https://origin.dpsgo.com/ssai/event/g7_JOM0ORki9SR5RKHe-Kw/master.m3u8
+娱乐综艺 · ABC TV Plus,https://c.mjh.nz/abc-tv-plus.m3u8
+娱乐综艺 · ENT Channel,https://cdn.global.elektamedia.com/live/c7eds/ENT_Channel/SA_LIVE_hls_enc/master.m3u8
+娱乐综艺 · Lietuvos Rytas TV,https://live.lietuvosryto.tv/live/hls/eteris.m3u8
 合家欢台 · Dove Channel,https://linear-896.frequency.stream/dist/cineverse/896/hls/master/playlist.m3u8
 合家欢台 · Mixkurdy,https://avr.host247.net/live/Mix-kurdy/playlist.m3u8
 合家欢台 · Estrella Games,https://estrella-games-oando.amagi.tv/playlist.m3u8
@@ -8339,6 +8434,8 @@ CGTN纪录,https://0472.org/hls/cgtnd.m3u8
 苏州文化生活,https://live-auth.51kandianshi.com/szgd/csztv3.m3u8
 美食料理 · Foody,https://r.il.cdn-redge.media/livehls/oil/freetv/live/foody/live.livx/playlist.m3u8
 科幻影院 · Space Live powered by sen,https://linear-1224.frequency.stream/dist/lg-uk/1224/hls/master/playlist.m3u8
+美食料理 · Dens Food Channel,https://op-flashcon-digdayahd-1.dens.tv/h/h221/02.m3u8
+美食生活 · Luxembourg Global Radio TV,https://stream.globalradio.lu/lgr/index.m3u8
 环球慢直播 · Ohotnik i rybolov (576i),https://stream8.cinerama.uz/1413/tracks-v1a1/mono.m3u8
 环球慢直播 · CVR Health,https://mumbai-edge.smartplaytv.in/CVRHealth/index.m3u8
 环球慢直播 · Kappa TV,https://d1msejlow1t3l4.cloudfront.net/fta/kappatv/playlist.m3u8
@@ -8553,6 +8650,12 @@ CGTN纪录,https://0472.org/hls/cgtnd.m3u8
 体育赛事 · Trace Sports,https://lightning-tracesport-samsungau.amagi.tv/playlist1080p.m3u8
 体育赛事 · FUEL TV,https://amg01074-fueltv-fueltvemeaen-rakuten-b6j62.amagi.tv/hls/amagi_hls_data_rakutenAA-fueltvemeaen/CDN/master.m3u8
 体育赛事 · Sport1 (Germany),https://r.eu.cdn-redge.media/livehls/oeu/mt/live/sport1/live.livx/playlist.m3u8
+体育赛事 · Lazio Style Channel HD,https://distribution.sportitalialive.it/origin/laziostyle_abr/playlist.m3u8
+体育赛事 · 5Live,https://r.il.cdn-redge.media/livehls/oil/freetv/live/sport_5_live/live.livx/playlist.m3u8
+体育赛事 · 5Stars,https://r.il.cdn-redge.media/livehls/oil/freetv/live/sport_5_starz/live.livx/playlist.m3u8
+体育赛事 · 5Sport 4K,https://r.il.cdn-redge.media/livehls/oil/freetv/live/sport_5_4k_avc/live.livx/playlist.m3u8
+体育赛事 · 5Sport,https://r.il.cdn-redge.media/livehls/oil/freetv/live/sport_5/live.livx/playlist.m3u8
+体育赛事 · Voyo Sport 1 (1080i),https://vip-acasatv.online:25463/lrZuGxAuP3/6782859900/16677.m3u8
 汽车极限 · Discovery Turbo (Italy),https://streaming.aurora.enhanced.live/live/mpc/enl0eG1mLmVncmVzcy5mZDJ2eHI=/out/v1/IT_SIMULCAST/TURBO/CMAF/index.m3u8
 情感剧场 · 30A We Love Cars,https://30a-tv.com/feeds/vidaa/cars.m3u8
 汽车极限 · Drive (576i),https://stream8.cinerama.uz/1421/tracks-v1a1/mono.m3u8
@@ -8891,3 +8994,17 @@ CGTN纪录,https://0472.org/hls/cgtnd.m3u8
 音乐现场 · RTL 102.5 TV,https://dd782ed59e2a4e86aabf6fc508674b59.msvdn.net/live/S97044836/tbbP8T1ZRPBL/playlist_video.m3u8
 音乐现场 · TV Exitos,https://streaming.grupomediosdelnorte.com:19360/tvexitos/tvexitos.m3u8
 音乐现场 · MTV3,https://live-fi.tvkaista.net/mtv3/live.m3u8?src=freetv
+音乐现场 · JTBS Classic,https://jtbsclassic.dpdns.org/live.m3u8
+音乐现场 · DBM TV,https://dbmtv.vedge.infomaniak.com/livecast/dbmtv/playlist.m3u8
+音乐现场 · Fun Vision,https://funradiovisionhd.vedge.infomaniak.com/livecast/ik:funradiovisionhd/manifest.m3u8
+音乐现场 · Qwest TV,https://qwestjazz-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-qwestjazz-rakuten/CDN/master.m3u8
+音乐现场 · Power Hit Radio,https://cdnlb.tvplayhome.lt/live/eds/PWR_LTU_Live/GO3_LIVE_HLS/PWR_LTU_Live.m3u8
+音乐现场 · Radiofreccia,https://dd782ed59e2a4e86aabf6fc508674b59.msvdn.net/live/S3160845/0tuSetc8UFkF/playlist_video.m3u8
+音乐现场 · Radio Zeta,https://dd782ed59e2a4e86aabf6fc508674b59.msvdn.net/live/S9346184/XEx1LqlYbNic/playlist_video.m3u8
+音乐现场 · RTL 102.5 Napule,https://dd782ed59e2a4e86aabf6fc508674b59.msvdn.net/live/S27134503/0f9AhuwKlhnZ/playlist_video.m3u8
+音乐现场 · RTL 102.5 Disco,https://dd782ed59e2a4e86aabf6fc508674b59.msvdn.net/live/S51100361/0Fb4R3k82b5Z/playlist_video.m3u8
+音乐现场 · Qmusic,https://stream.qmusic.nl/qmusic/videohls.m3u8
+音乐现场 · YRF Music,https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8
+音乐现场 · ZB Music,https://server.zillarbarta.com/zbmusic/index.m3u8
+音乐现场 · Music IL,https://r.il.cdn-redge.media/livehls/oil/freetv/live/music_il/live.livx/playlist.m3u8
+音乐现场 · Topical Moon RD,https://sistemastr.tropicalmoonmedia.com/live/56BE17DB16EB76C9F2DDB8346F4DFA4E/30.m3u8
