@@ -56,10 +56,10 @@ if (-not $env:PASSWORD -and -not (Test-Path (Join-Path $projectRoot '.env')) -an
   Write-Host 'Local mode: no .env found, using default local password: libretv' -ForegroundColor Yellow
 }
 if (-not $env:DEFAULT_SOURCES) {
-  $env:DEFAULT_SOURCES = "[{`"name`":`"内置双语开放影视库（7625+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / 韦伯 / 哈勃 / ESO 1080p）`",`"url`":`"$localOrigin/api/open-media?short=1&zh=1`",`"detail`":`"$localOrigin`"}]"
+  $env:DEFAULT_SOURCES = "[{`"name`":`"内置双语开放影视库（8193+ 公版经典 / 国会图书馆直连 / 开源动画 / NASA / 韦伯 / 哈勃 / ESO 1080p）`",`"url`":`"$localOrigin/api/open-media?short=1&zh=1`",`"detail`":`"$localOrigin`"}]"
 }
 if (-not $env:DEFAULT_LIVE_SOURCES) {
-  $env:DEFAULT_LIVE_SOURCES = "[{`"name`":`"内置双阶实测超清直播（10831 台卫视 / 电影 / 动漫 / 纪实）`",`"url`":`"$localOrigin/open-live-channels.m3u`"}]"
+  $env:DEFAULT_LIVE_SOURCES = "[{`"name`":`"内置双阶实测超清直播（11543 台卫视 / 电影 / 动漫 / 纪实）`",`"url`":`"$localOrigin/open-live-channels.m3u`"}]"
 }
 Write-Host ('Starting 自由影视 LibreTV (' + $Mode + ') at ' + $localOrigin) -ForegroundColor Cyan
 if ($Mode -eq 'dev') {

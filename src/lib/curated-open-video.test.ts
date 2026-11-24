@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(7625);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(8193);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(140);
+    expect(seriesCount).toBeGreaterThanOrEqual(152);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -117,6 +117,12 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('我这一辈子').some((v) => v.slug === 'archive-this-life-of-mine')).toBe(true);
     expect(searchCuratedOpenVideos('丽人行').some((v) => v.slug === 'archive-threegirls')).toBe(true);
     expect(searchCuratedOpenVideos('红楼梦').some((v) => v.slug === 'archive-dreamred')).toBe(true);
+    expect(searchCuratedOpenVideos('幽灵潜行者1939全集').some((v) => v.slug === 'phantom-creeps-1939-bela-lugosi-complete-12ep')).toBe(true);
+    expect(searchCuratedOpenVideos('罗宾汉历险记1955英剧').some((v) => v.slug === 'robin-hood-1955-richard-greene-sherwood-vol1-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('超越一步1959超自然悬疑剧').some((v) => v.slug === 'one-step-beyond-1959-paranormal-anthology-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('玛莎艾弗斯的奇异爱情1946').some((v) => v.slug === 'karloff-mr-wong-dick-tracy-martha-ivers-noir-pantheon-9ep')).toBe(true);
+    expect(searchCuratedOpenVideos('乐一通公版经典动画合集').some((v) => v.slug === 'looney-tunes-merrie-melodies-pd-treasures-corny-concerto-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('友谊7号约翰格伦太空飞行').some((v) => v.slug === 'nasa-friendship7-skylab-apollo-soyuz-apollo-onboard-10ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });

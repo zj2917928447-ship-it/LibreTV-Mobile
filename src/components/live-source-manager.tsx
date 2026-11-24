@@ -149,7 +149,7 @@ export function LiveSourceManager() {
               className="btn-ghost btn-sm text-accent"
               onClick={() => setPacksOpen((v) => !v)}
             >
-              {packsOpen ? '收起频道库' : '精选频道库 (175000+)'}
+              {packsOpen ? '收起频道库' : '精选频道库 (180000+)'}
             </button>
             <button className="btn-primary btn-sm" onClick={() => setAdding(true)}>
               <Icon name="plus" className="w-3.5 h-3.5" />
@@ -163,7 +163,7 @@ export function LiveSourceManager() {
         <div className="mb-3 rounded-lg border border-line bg-chip/60 p-3 space-y-2">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <div className="text-xs font-semibold text-content">340 大公开直播频道分类包（一键添加 · 国内直连可用）</div>
+              <div className="text-xs font-semibold text-content">370 大公开直播频道分类包（一键添加 · 国内直连可用）</div>
               <div className="text-[11px] text-faint mt-0.5">同时兼容标准 M3U 与国内常见 TXT（#genre#）直播列表</div>
             </div>
             <button

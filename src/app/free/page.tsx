@@ -54,12 +54,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
+      { label: '贝拉·卢戈西科幻神作《幽灵潜行者》 (全12章)', query: '幽灵潜行者1939全集', tag: '巨型机器人与隐形腰带' },
+      { label: '英伦侠义传奇《罗宾汉历险记》高清版 (20集)', query: '罗宾汉历险记1955英剧', tag: '舍伍德森林神箭侠盗' },
+      { label: '黑色经典《玛莎·艾弗斯》与《迪克·特雷西》 (9部)', query: '玛莎艾弗斯的奇异爱情1946', tag: '斯坦威克与黄柳霜' },
       { label: '华语殿堂《我这一辈子》《丽人行》《浪淘沙》 (8部)', query: '我这一辈子1950石挥', tag: '早期华语镇馆典藏' },
-      { label: '国宝孤本《盘丝洞1927》《红侠》《皇帝梦》 (8部)', query: '盘丝洞1927西游记默片', tag: '神怪武侠与国漫先驱' },
       { label: '弗莱舍《超人》国语配音全集 (9集)', query: '超人1941国语配音版', tag: '全中文国语配音' },
-      { label: '名导悬疑《M就是凶手》与库布里克首作 (8部)', query: 'M就是凶手1931高清修复', tag: '大师720p修复馆' },
-      { label: 'NASA阿波罗7–17号登月16mm原片 (8部)', query: '阿波罗11号登月16mm原片', tag: '宇航员第一视角胶片' },
-      { label: '首届奥斯卡1080p《翼》与希区柯克《房客》 (8部)', query: '首届奥斯卡最佳影片翼1927', tag: '影史开山封神榜' },
+      { label: '《乐一通》公版动画瑰宝《乡村协奏曲》 (10集)', query: '乐一通公版经典动画合集', tag: '兔八哥与达菲鸭经典' },
     ],
   },
   {
@@ -689,6 +689,62 @@ const DOMESTIC_FREE_PLATFORMS = [
     category: '昆曲水磨雅韵',
     note: '国内直连 · 传统戏曲美育',
   },
+  {
+    name: '央视网 CCTV-9 · 纪录频道高清全片库',
+    description: '中央广播电视总台纪录频道官方片库，免费点播《航拍中国》《如果国宝会说话》《舌尖上的中国》等高分纪录大片。',
+    url: 'https://jishi.cctv.com/',
+    category: '央视高分纪实',
+    note: '国内直连 · 超清正版免会员',
+  },
+  {
+    name: '央视网 CCTV-10 · 科教探索与地理中国全片库',
+    description: '总台科教频道官方视听库，汇聚《探索·发现》《地理·中国》《自然传奇》《百家讲坛》全集免费点播。',
+    url: 'https://kejiao.cctv.com/',
+    category: '自然科学考古',
+    note: '国内直连 · 全集免费观看',
+  },
+  {
+    name: '央视网 · 九州大戏台全本名家戏曲库',
+    description: '总台戏曲频道官方片库，收录京剧、越剧、黄梅戏、豫剧、粤剧等全国各大剧种《空中剧院》全本名家大戏。',
+    url: 'https://xiqu.cctv.com/',
+    category: '名家全本大戏',
+    note: '国内直连 · 传统戏曲宝库',
+  },
+  {
+    name: '央视网 CCTV-3 · 综艺与经典文艺晚会全片库',
+    description: '总台综艺频道官方片库，免费回看历届大型文艺盛典、《国家宝藏》《经典咏流传》及喜剧语言类节目。',
+    url: 'https://ent.cctv.com/',
+    category: '文化综艺盛典',
+    note: '国内直连 · 合家欢高清',
+  },
+  {
+    name: '哔哩哔哩 · 免费正版纪录片专区',
+    description: 'B站筛选全部“免费观看”正版国内外自然、历史、美食与科技高分纪录片，支持高清弹幕与中文字幕。',
+    url: 'https://www.bilibili.com/documentary/index/#st=3&order=2&season_status=-1&style_id=-1&producer_id=-1&release_date=-1&Pay_type=0&sort=0&page=1',
+    category: '免费高分纪录片',
+    note: '国内直连 · 免大会员正片',
+  },
+  {
+    name: '哔哩哔哩 · 免费正版电视剧专区',
+    description: 'B站筛选全部“免费观看”国产经典口碑剧集、历史剧与海外佳作，无需开通大会员即可完整追剧。',
+    url: 'https://www.bilibili.com/tv/index/#st=5&order=2&area=-1&style_id=-1&release_date=-1&season_status=-1&Pay_type=0&sort=0&page=1',
+    category: '免费经典剧集',
+    note: '国内直连 · 全中文字幕',
+  },
+  {
+    name: '哔哩哔哩 · 免费国创动画专区',
+    description: 'B站筛选全部“免费”正版国产原创动画番剧与动画电影，国语配音超清流畅点播。',
+    url: 'https://www.bilibili.com/guochuang/index/#season_version=-1&is_finish=-1&copyright=-1&is_free=1&season_status=-1&year=-1&style_id=-1&order=2&st=4&sort=0&page=1',
+    category: '免费国创动画',
+    note: '国内直连 · 国语超清免VIP',
+  },
+  {
+    name: '哔哩哔哩 · 免费正版番剧专区',
+    description: 'B站筛选全部“免费观看”正版高分动画番剧，自带官方精校中文字幕与多清晰度切换。',
+    url: 'https://www.bilibili.com/anime/index/#season_version=-1&spoken_language_type=-1&area=-1&is_finish=-1&copyright=-1&season_status=1&year=-1&style_id=-1&order=3&st=1&sort=0&page=1',
+    category: '免费正版番剧',
+    note: '国内直连 · 官方精校中字',
+  },
 ];
 
 const OVERSEAS_FREE_PLATFORMS = [
@@ -1122,7 +1178,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              7625+ 部 100% 实测直连大片与 140 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 86 大国内正版免费片库。
+              8193+ 部 100% 实测直连大片与 152 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 94 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -1131,7 +1187,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                10831台直播源 (.m3u)
+                11543台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -1146,7 +1202,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (10831+ 直连 / 175000+ 扩展)
+              免费电视直播 (11543+ 直连 / 180000+ 扩展)
             </Link>
             <button
               type="button"
@@ -1601,7 +1657,7 @@ export default function FreeResourcesPage() {
 
         <section className="mb-8">
           <div className="mb-3">
-            <h2 className="text-lg font-semibold text-content">国内八十六大正版免费影视专区（全中文 · 免代理直达）</h2>
+            <h2 className="text-lg font-semibold text-content">国内九十四大正版免费影视专区（全中文 · 免代理直达）</h2>
             <p className="text-sm text-muted mt-1">
               精选国内无需订阅 VIP 会员即可观看的正版免费电影、电视剧与纪录片官方片库，全部自带中文配音或中文字幕。
             </p>
