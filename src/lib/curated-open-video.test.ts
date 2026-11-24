@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(8193);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(8739);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(152);
+    expect(seriesCount).toBeGreaterThanOrEqual(164);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -123,6 +123,11 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('玛莎艾弗斯的奇异爱情1946').some((v) => v.slug === 'karloff-mr-wong-dick-tracy-martha-ivers-noir-pantheon-9ep')).toBe(true);
     expect(searchCuratedOpenVideos('乐一通公版经典动画合集').some((v) => v.slug === 'looney-tunes-merrie-melodies-pd-treasures-corny-concerto-10ep')).toBe(true);
     expect(searchCuratedOpenVideos('友谊7号约翰格伦太空飞行').some((v) => v.slug === 'nasa-friendship7-skylab-apollo-soyuz-apollo-onboard-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('威利号汽船1928初代米老鼠1080p').some((v) => v.slug === 'steamboat-willie-1928-1080p-ub-iwerks-comicolor-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('三个火枪手1921蓝光1080p').some((v) => v.slug === 'three-musketeers-1921-1080p-john-wayne-1933-serial-12ep')).toBe(true);
+    expect(searchCuratedOpenVideos('杰克贝尼秀好莱坞巨星特辑').some((v) => v.slug === 'jack-benny-hollywood-superstars-comedy-vol1-10ep')).toBe(true);
+    expect(searchCuratedOpenVideos('哈罗德劳埃德猫爪1934').some((v) => v.slug === 'lloyd-cats-paw-milky-way-laurel-hardy-oxford-pantheon-8ep')).toBe(true);
+    expect(searchCuratedOpenVideos('NASA阿波罗官方彩色纪录片全集').some((v) => v.slug === 'nasa-apollo-10-to-17-jsc-official-mission-films-9ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });

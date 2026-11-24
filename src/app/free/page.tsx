@@ -54,12 +54,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
-      { label: '贝拉·卢戈西科幻神作《幽灵潜行者》 (全12章)', query: '幽灵潜行者1939全集', tag: '巨型机器人与隐形腰带' },
-      { label: '英伦侠义传奇《罗宾汉历险记》高清版 (20集)', query: '罗宾汉历险记1955英剧', tag: '舍伍德森林神箭侠盗' },
-      { label: '黑色经典《玛莎·艾弗斯》与《迪克·特雷西》 (9部)', query: '玛莎艾弗斯的奇异爱情1946', tag: '斯坦威克与黄柳霜' },
+      { label: '迪士尼《威利号汽船 1928》与伊沃克斯童话 (10集1080p)', query: '威利号汽船1928初代米老鼠1080p', tag: '初代米奇1080p修复' },
+      { label: '大仲马《三个火枪手》1080p蓝光与韦恩版 (12部)', query: '三个火枪手1921蓝光1080p', tag: '古典剑侠与大漠军团' },
+      { label: '艾美奖喜剧王《杰克·贝尼好莱坞巨星秀》 (10集)', query: '杰克贝尼秀好莱坞巨星特辑', tag: '露西尔鲍尔与加里库珀' },
       { label: '华语殿堂《我这一辈子》《丽人行》《浪淘沙》 (8部)', query: '我这一辈子1950石挥', tag: '早期华语镇馆典藏' },
       { label: '弗莱舍《超人》国语配音全集 (9集)', query: '超人1941国语配音版', tag: '全中文国语配音' },
-      { label: '《乐一通》公版动画瑰宝《乡村协奏曲》 (10集)', query: '乐一通公版经典动画合集', tag: '兔八哥与达菲鸭经典' },
+      { label: 'NASA 官方出品《阿波罗登月彩色纪录片》 (9部)', query: 'NASA阿波罗官方彩色纪录片全集', tag: '属于全人类官方片' },
     ],
   },
   {
@@ -745,6 +745,48 @@ const DOMESTIC_FREE_PLATFORMS = [
     category: '免费正版番剧',
     note: '国内直连 · 官方精校中字',
   },
+  {
+    name: '哔哩哔哩 · 免费正版综艺专区',
+    description: 'B站筛选全部“免费观看”口碑文化访谈、喜剧真人秀与音乐竞演正版综艺全集。',
+    url: 'https://www.bilibili.com/variety/index/#season_status=-1&style_id=-1&Pay_type=0&order=2&st=7&sort=0&page=1',
+    category: '免费口碑综艺',
+    note: '国内直连 · 免大会员畅看',
+  },
+  {
+    name: '央视网 CCTV-15 · 音乐厅与交响音乐会全片库',
+    description: '中央广播电视总台音乐频道官方片库，免费点播中外经典交响乐、民乐盛典与影视金曲音乐会。',
+    url: 'https://music.cctv.com/',
+    category: '交响民乐现场',
+    note: '国内直连 · 高保真视听',
+  },
+  {
+    name: '1905 电影网 · 免费动作武侠大片专场',
+    description: 'CCTV-6 电影频道官方动作与武侠免费片库，精选华语功夫巨制与经典动作大片完整正片。',
+    url: 'https://www.1905.com/vod/list/n_1_t_5/o3p1.html',
+    category: '动作武侠大片',
+    note: '国内直连 · 国语高清免VIP',
+  },
+  {
+    name: '1905 电影网 · 免费爆笑喜剧电影专场',
+    description: 'CCTV-6 电影频道官方喜剧免费片库，汇聚国产贺岁喜剧、经典港式无厘头与合家欢喜剧正片。',
+    url: 'https://www.1905.com/vod/list/n_1_t_2/o3p1.html',
+    category: '免费喜剧正片',
+    note: '国内直连 · 轻松解压合家欢',
+  },
+  {
+    name: '1905 电影网 · 免费悬疑推理电影专场',
+    description: 'CCTV-6 电影频道官方悬疑探案免费片库，收录高分烧脑推理、侦探破案与犯罪悬疑完整电影。',
+    url: 'https://www.1905.com/vod/list/n_1_t_12/o3p1.html',
+    category: '免费悬疑探案',
+    note: '国内直连 · 国语/中字正片',
+  },
+  {
+    name: '1905 电影网 · 免费科幻与动画电影专场',
+    description: 'CCTV-6 电影频道官方科幻奇幻免费片库，精选国内外硬核科幻冒险与奇幻视效大片免费点播。',
+    url: 'https://www.1905.com/vod/list/n_1_t_6/o3p1.html',
+    category: '免费科幻奇幻',
+    note: '国内直连 · 超清正片免会员',
+  },
 ];
 
 const OVERSEAS_FREE_PLATFORMS = [
@@ -1178,7 +1220,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              8193+ 部 100% 实测直连大片与 152 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 94 大国内正版免费片库。
+              8739+ 部 100% 实测直连大片与 164 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 100 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -1187,7 +1229,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                11543台直播源 (.m3u)
+                11570台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -1202,7 +1244,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (11543+ 直连 / 180000+ 扩展)
+              免费电视直播 (11570+ 直连 / 185000+ 扩展)
             </Link>
             <button
               type="button"
@@ -1657,7 +1699,7 @@ export default function FreeResourcesPage() {
 
         <section className="mb-8">
           <div className="mb-3">
-            <h2 className="text-lg font-semibold text-content">国内九十四大正版免费影视专区（全中文 · 免代理直达）</h2>
+            <h2 className="text-lg font-semibold text-content">国内百大正版免费影视专区（全中文 · 免代理直达）</h2>
             <p className="text-sm text-muted mt-1">
               精选国内无需订阅 VIP 会员即可观看的正版免费电影、电视剧与纪录片官方片库，全部自带中文配音或中文字幕。
             </p>

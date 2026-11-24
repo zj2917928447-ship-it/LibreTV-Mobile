@@ -7918,6 +7918,32 @@ RT Français（法语）,https://rt-fra.rttv.com/dvr/rtfrance/playlist_4500Kb.m3
 欧美高清 · BRIDGE Rap,https://bridgemedia-hls.cdnvideo.ru/hls/live/6affed9990affe00013a80b1/720p.m3u8
 欧美高清 · Verba,https://bridgemedia-hls.cdnvideo.ru/hls/live/6aff0d0f81d78600017e02c1/720p.m3u8
 欧美高清 · AbejalesTV,https://streamtv.intervenhosting.net:3228/live/abejalestvlive.m3u8
+欧美高清 · Show Plus TV,https://rtmp.showplus.tv/hls/myshow.m3u8
+欧美高清 · TV Cultura,https://v-us-01.wisestream.io/memfs/e8740862-7a1f-45f3-acb2-4f357e144059.m3u8
+欧美高清 · TV Litoral RN,https://5ad482a77183d.streamlock.net/tvnordesteegmail.com/tvnordesteegmail.com/playlist.m3u8
+欧美高清 · TV Maanaim,https://cpbr.appflux.com.br:2000/hls/maranatalive1/maranatalive1.m3u8
+欧美高清 · PalMundo FM,https://streampanelcp.palmundofm.cl/hls/palmundofm/visual/hd.m3u8
+欧美高清 · Super TV 55,https://ss2.tvrdomi.com:1936/supertv55/supertv55/playlist.m3u8
+欧美高清 · TV4 La Vall,https://valldeuxo.gestec-video.com/hls/lavall.m3u8
+欧美高清 · Ficom Channel,https://v3.siar.us/ficomchannel/live/playlist.m3u8
+欧美高清 · Radar Tasikmalaya TV,https://v2.siar.us/radartasikmalaya/live/playlist.m3u8
+欧美高清 · AKTV,https://akativi.siar.us/live/akativi.m3u8
+欧美高清 · DD Kashir,https://fta.ektv.in/live/248/master.m3u8
+欧美高清 · Mh 1 News,https://streams.tangotv.in/MHONENEWS/ORIGIN/index.m3u8
+欧美高清 · Q TV,https://tvsen6.aynaott.com/3PjZZahm/index.m3u8
+欧美高清 · BSTV,https://zkpywwqbybeg-hls-live.5centscdn.com/bstv/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8
+欧美高清 · Public First,https://samitaorigin.tangotv.in/PUBLICFIRST/SAMITAORIGIN/index.m3u8
+欧美高清 · Network 10,https://network10.livebox.co.in/network10outhls/live.m3u8
+欧美高清 · Wayanad Vision,https://online.wayanadvision.in/hls/wayanadvision.m3u8
+欧美高清 · Mahimai TV,https://ktismaservers.in:3161/live/mahimaitvlive.m3u8
+欧美高清 · Nijam TV,https://nijamtv.indiamatrix.in/nijamtv/nijamtv.m3u8
+欧美高清 · TV Jefimija,https://live.jefimija.eu/hls/stream.m3u8
+欧美高清 · Dodoma TV,https://goliveafrica.media:9998/live/625965017ed69/index.m3u8
+欧美高清 · BBC One,https://r.eu.cdn-redge.media/livehls/oeu/mt/live/bbc_one/live.livx/playlist.m3u8
+欧美高清 · BBC Four,https://r.eu.cdn-redge.media/livehls/oeu/mt/live/bbc_four/live.livx/playlist.m3u8
+欧美高清 · ESPN Latin America Mexico,https://lilac19.pontiscloud.com/live/gt/ESPN/index.m3u8
+欧美高清 · WSB-DT1,https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00327-coxmediagroup-wsbbreakingnews-ono/playlist.m3u8
+欧美高清 · SanjuaneraTV,https://live.obslivestream.com/sanjuanera/index.m3u8
 欧洲高清 · Lombardia TV,https://5db313b643fd8.streamlock.net/lmbiatv/lmbiatv/playlist.m3u8
 欧洲高清 · Super Six,https://5db313b643fd8.streamlock.net/SUPERSIXLombardia/SUPERSIXLombardia/playlist.m3u8
 欧洲高清 · 1AlmereTV,https://d3472rjicrodic.cloudfront.net/nlpo/clr-nlpo/709d5260/index.m3u8
@@ -10091,6 +10117,7 @@ RT Français（法语）,https://rt-fra.rttv.com/dvr/rtfrance/playlist_4500Kb.m3
 欧洲高清 · PCNELID - 14/12/2024,https://videos.impresa.pt/videos/hls/sicnot/2024/12/14/80eb93fb-bb46-4cf3-9b00-1be2a95930d2/video.m3u8
 欧洲高清 · PCNELID - 3/12/2022,https://videos.impresa.pt/videos/hls/sicnot/2022/12/02/84beeada-cb7c-45d9-9394-fdbf751ee3b1/programa-cujo-nome-2-dez-pgm.m3u8
 欧洲高清 · PCNELID - 25/6/2022,https://videos.impresa.pt/videos/hls/sicnot/2022/06/24/b6dcb3b2-d02f-46fe-9d16-66a7ef2868ce/gs2406-pgm_22hv00259908.m3u8
+欧洲高清 · inter TV,https://streamtv.intervenhosting.net:3439/hybrid/play.m3u8
 
 人文历史与科教,#genre#
 人文科教 · Gyandarshan HD,https://mumt05.tangotv.in/87NeALx2GYANDARSHAN/index.m3u8
