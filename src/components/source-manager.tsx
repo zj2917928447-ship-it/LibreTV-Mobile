@@ -223,19 +223,19 @@ const VOD_FILTERS: { id: VodFilter; label: string }[] = [
 const OPEN_VOD_GALLERIES = [
   {
     id: 'open-all',
-    name: '内置双语开放影视总馆（8739+ 名片与 164 部连播剧集 · 100% 实测直连）',
+    name: '内置双语开放影视总馆（9228+ 名片与 179 部连播剧集 · 100% 实测直连）',
     hint: '覆盖全球六大开放片库与内置精选直连大片',
     path: '/api/open-media?short=1&zh=1',
   },
   {
     id: 'open-series',
-    name: '多集连播高清剧集专馆（164部 4K/1080p 连续剧与大师合集）',
-    hint: '威利号汽船1928、三个火枪手1080p、杰克贝尼巨星秀、我这一辈子、超人国语版',
+    name: '多集连播高清剧集专馆（179部 4K/1080p 连续剧与大师合集）',
+    hint: '神女1934、飞机迷骷髅舞、大力水手1080p、西线无战事、小津晚春、福尔摩斯',
     path: '/api/open-media?short=1&zh=1&series=1',
   },
   {
     id: 'open-direct',
-    name: '国内毫秒直连秒播专馆（8739 部官方 1080p/公版直连片源）',
+    name: '国内毫秒直连秒播专馆（9228 部官方 1080p/公版直连片源）',
     hint: '零海外等待、国内网络 HTTP 200/206 秒起播',
     path: '/api/open-media?short=1&zh=1&direct=1',
   },

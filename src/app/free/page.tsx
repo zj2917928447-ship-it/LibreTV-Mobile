@@ -54,12 +54,12 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '多集连播剧集',
     items: [
-      { label: '迪士尼《威利号汽船 1928》与伊沃克斯童话 (10集1080p)', query: '威利号汽船1928初代米老鼠1080p', tag: '初代米奇1080p修复' },
-      { label: '大仲马《三个火枪手》1080p蓝光与韦恩版 (12部)', query: '三个火枪手1921蓝光1080p', tag: '古典剑侠与大漠军团' },
-      { label: '艾美奖喜剧王《杰克·贝尼好莱坞巨星秀》 (10集)', query: '杰克贝尼秀好莱坞巨星特辑', tag: '露西尔鲍尔与加里库珀' },
-      { label: '华语殿堂《我这一辈子》《丽人行》《浪淘沙》 (8部)', query: '我这一辈子1950石挥', tag: '早期华语镇馆典藏' },
+      { label: '迪士尼《飞机迷》《骷髅舞》与幸运兔公版全集 (12集)', query: '飞机迷1928米老鼠首秀', tag: '1927-1930新晋公版动画' },
+      { label: '1080p《大力水手三大长篇》与《贝蒂白雪公主》 (9集)', query: '大力水手大战辛巴达1080p', tag: '奥斯卡提名特艺彩色' },
+      { label: '奥斯卡《西线无战事》与1080p《地狱天使》 (7部)', query: '西线无战事1930奥斯卡原版', tag: '1930世界影史丰碑' },
+      { label: '小津《晚春》与沟口《残菊物语》《人情纸风船》 (7部)', query: '小津安二郎晚春1949原节子', tag: '东方电影美学巨匠' },
+      { label: '1916舞台孤本与巴里摩尔《福尔摩斯》全典藏 (11部)', query: '福尔摩斯1916威廉吉列特孤本', tag: '贝克街百年推理馆' },
       { label: '弗莱舍《超人》国语配音全集 (9集)', query: '超人1941国语配音版', tag: '全中文国语配音' },
-      { label: 'NASA 官方出品《阿波罗登月彩色纪录片》 (9部)', query: 'NASA阿波罗官方彩色纪录片全集', tag: '属于全人类官方片' },
     ],
   },
   {
@@ -76,10 +76,10 @@ const CURATED_CHINESE_PICKS: {
   {
     category: '华语与世界名作',
     items: [
+      { label: '神女 (1934 阮玲玉/吴永刚无声电影巅峰)', query: '神女1934阮玲玉', tag: '华语百年国宝' },
       { label: '我这一辈子 (1950 老舍原著/石挥神作)', query: '我这一辈子', tag: '华语百年经典' },
       { label: '丽人行 (1949 上官云珠/赵丹)', query: '丽人行', tag: '昆仑影业名作' },
       { label: '红楼梦 (1944 周璇/王丹凤)', query: '红楼梦', tag: '古典名著唱段版' },
-      { label: '都市风光 (1935 袁牧之/赵丹音乐喜剧)', query: '都市风光', tag: '华语音乐喜剧鼻祖' },
       { label: '小城之春 (费穆)', query: '小城之春', tag: '华语百年榜首' },
       { label: '马路天使 (赵丹/周璇)', query: '马路天使', tag: '四季歌天涯歌女' },
     ],
@@ -787,6 +787,48 @@ const DOMESTIC_FREE_PLATFORMS = [
     category: '免费科幻奇幻',
     note: '国内直连 · 超清正片免会员',
   },
+  {
+    name: '央视网 CCTV-1 · 综合旗舰精品大剧库',
+    description: '中央广播电视总台综合频道官方片库，免费点播年度口碑主旋律大剧、时代楷模纪实与大型文化节目。',
+    url: 'https://tv.cctv.com/cctv1/',
+    category: '总台旗舰大剧',
+    note: '国内直连 · 官方超清全集',
+  },
+  {
+    name: '央视网 CCTV-8 · 电视剧频道黄金档片库',
+    description: 'CCTV-8 电视剧频道官方免费剧场，汇聚年代传奇、都市家庭、悬疑刑侦与经典老剧全集连播。',
+    url: 'https://tv.cctv.com/cctv8/',
+    category: '黄金档电视剧',
+    note: '国内直连 · 免会员追剧',
+  },
+  {
+    name: '央视网 CCTV-3 · 综艺盛典与喜剧小品舞台',
+    description: 'CCTV-3 综艺频道官方视听库，免费回看历年王牌语言类小品相声、音乐盛典与文艺晚会超清现场。',
+    url: 'https://tv.cctv.com/cctv3/',
+    category: '国民综艺喜剧',
+    note: '国内直连 · 合家欢高清舞台',
+  },
+  {
+    name: '央视网 CCTV-4 · 中文国际全球华人纪实馆',
+    description: '聚焦《国家记忆》《走遍中国》《传奇中国节》等高分历史人文与地理探索全中文纪录大片。',
+    url: 'https://tv.cctv.com/cctv4asia/',
+    category: '国家记忆人文',
+    note: '国内直连 · 权威历史地理',
+  },
+  {
+    name: '央视网 CCTV-17 · 田园纪实与乡土美食视听库',
+    description: '中央广播电视总台农业农村频道官方专区，免费观看四季乡土风物、传统手工美食与生态田园纪实。',
+    url: 'https://tv.cctv.com/cctv17/',
+    category: '乡土风物美食',
+    note: '国内直连 · 治愈系烟火纪实',
+  },
+  {
+    name: '中国博物馆网 · 全国文博数字展厅与国宝影像',
+    description: '汇聚全国各大博物院珍贵馆藏文物导览、考古发掘微纪录片与中华文明历史艺术专题展播。',
+    url: 'https://www.chinamuseum.com/',
+    category: '全国文博影像',
+    note: '国内直连 · 公益文化典藏',
+  },
 ];
 
 const OVERSEAS_FREE_PLATFORMS = [
@@ -1220,7 +1262,7 @@ export default function FreeResourcesPage() {
           <div>
             <h1 className="text-2xl font-bold text-content">免费资源中心</h1>
             <p className="text-sm text-muted mt-1">
-              8739+ 部 100% 实测直连大片与 164 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 100 大国内正版免费片库。
+              9228+ 部 100% 实测直连大片与 179 部多集连播剧集即点即播、中英双向检索、一键汉化中文字幕，并聚合 106 大国内正版免费片库。
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-2 text-xs">
               <span className="text-faint">独立片单直下（兼容 PotPlayer / VLC / TVBox）：</span>
@@ -1229,7 +1271,7 @@ export default function FreeResourcesPage() {
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.m3u" download className="text-accent hover:underline">
-                11570台直播源 (.m3u)
+                11584台直播源 (.m3u)
               </a>
               <span className="text-line">·</span>
               <a href="/open-live-channels.txt" download className="text-accent hover:underline">
@@ -1244,7 +1286,7 @@ export default function FreeResourcesPage() {
           <div className="flex flex-wrap items-center gap-2">
             <Link href="/live" className="btn-ghost btn-sm text-accent">
               <Icon name="bolt" className="w-3.5 h-3.5" />
-              免费电视直播 (11570+ 直连 / 185000+ 扩展)
+              免费电视直播 (11584+ 直连 / 195000+ 扩展)
             </Link>
             <button
               type="button"
@@ -1699,7 +1741,7 @@ export default function FreeResourcesPage() {
 
         <section className="mb-8">
           <div className="mb-3">
-            <h2 className="text-lg font-semibold text-content">国内百大正版免费影视专区（全中文 · 免代理直达）</h2>
+            <h2 className="text-lg font-semibold text-content">国内百零六大正版免费影视专区（全中文 · 免代理直达）</h2>
             <p className="text-sm text-muted mt-1">
               精选国内无需订阅 VIP 会员即可观看的正版免费电影、电视剧与纪录片官方片库，全部自带中文配音或中文字幕。
             </p>

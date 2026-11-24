@@ -2835,6 +2835,7 @@ CGTN纪录,https://0472.org/hls/cgtnd.m3u8
 音乐现场 · Popular Science,https://epg.provider.plex.tv/library/parts/64305451fc3be5947773c339-656fb850cb7e8e6a9bc3f36e/?X-Plex-Token=ZzLs5nY27by-XUcqFVoh
 自然动物 · WildEarth,https://epg.provider.plex.tv/library/parts/64305451fc3be5947773c339-60d4edddb2fdec002c141135/?X-Plex-Token=ZzLs5nY27by-XUcqFVoh
 历史纪实 · True History,https://epg.provider.plex.tv/library/parts/64305451fc3be5947773c339-614398a08f30fa61e0da7c97/?X-Plex-Token=ZzLs5nY27by-XUcqFVoh
+RT Documentary（英语纪录）,https://rt-rtd.rttv.com/dvr/rtdoc/playlist_4500Kb.m3u8
 宇宙科学 · Wonder,https://lds-wonder-rakuten.amagi.tv/playlist.m3u8
 宇宙科学 · InWonder,https://amg00861-terninternation-inwonder-samsungau-1k63k.amagi.tv/playlist/amg00861-terninternation-inwonder-samsungau/playlist.m3u8
 宇宙科学 · MediBizTV,https://43wrzjnpqoxe-hls-live.wmncdn.net/marinebiztvlive/marinebiztvlive/playlist.m3u8
@@ -7944,6 +7945,18 @@ RT Français（法语）,https://rt-fra.rttv.com/dvr/rtfrance/playlist_4500Kb.m3
 欧美高清 · ESPN Latin America Mexico,https://lilac19.pontiscloud.com/live/gt/ESPN/index.m3u8
 欧美高清 · WSB-DT1,https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00327-coxmediagroup-wsbbreakingnews-ono/playlist.m3u8
 欧美高清 · SanjuaneraTV,https://live.obslivestream.com/sanjuanera/index.m3u8
+BBC Xumo 国际频道 HD,https://d3pxo1qcgzxtxs.cloudfront.net/10005/99951298/hls/playlist.m3u8?ads.xumo_channelId=99951298
+欧美高清 · RA Television,https://183.giatvcdn.com/ssh101/ssh101/ratvbol/playlist.m3u8
+欧美高清 · Mh 1 News,https://mumt04.tangotv.in/m18aqlK4MHONENEWS/index.m3u8
+欧美高清 · KTV Bangla,https://server.livelegitpro.in:9899/tribetv/tribetv/index.m3u8
+欧美高清 · Taaza TV,https://tvsen3.aynaott.com/yRMLky2j/index.m3u8
+欧美高清 · Acustik TV,https://s5.mexside.net:1936/clientetv/clientetv/playlist.m3u8
+环球实景 · City of Pompano Beach,https://cdn3.wowza.com/5/M0lyamVmM2JWcjhQ/pompano/G0765_005/playlist.m3u8
+欧美高清 · PSL TV,https://cdn3.wowza.com/5/UWpORHhLSEs5SkJs/psl/G0262_003/playlist.m3u8
+欧美高清 · QTV Gambia,https://player.qtv.gm/hls/live.stream.m3u8
+欧美高清 · SFGovTV,https://cdn3.wowza.com/5/ZFdxUW9BQWt2UWRL/sanfrancisco/G0051_048/playlist.m3u8
+欧美高清 · SCTV14,https://vtvgolive-sctvdrm.vtvdigital.vn/manifest/sctv14/master.m3u8
+欧美高清 · VBC News,https://live.skystream.in/live/vbcthdpza/index.m3u8
 欧洲高清 · Lombardia TV,https://5db313b643fd8.streamlock.net/lmbiatv/lmbiatv/playlist.m3u8
 欧洲高清 · Super Six,https://5db313b643fd8.streamlock.net/SUPERSIXLombardia/SUPERSIXLombardia/playlist.m3u8
 欧洲高清 · 1AlmereTV,https://d3472rjicrodic.cloudfront.net/nlpo/clr-nlpo/709d5260/index.m3u8
@@ -10823,6 +10836,7 @@ RT Français（法语）,https://rt-fra.rttv.com/dvr/rtfrance/playlist_4500Kb.m3
 娱乐综艺 · Alt Media TV,https://video.hostingcaaguazu.com:19360/altmedia/altmedia.m3u8
 娱乐综艺 · EmanTv,https://avr.host247.net/live/emantv/playlist.m3u8
 娱乐综艺 · N Vision,https://ipcloud.live/nvision/nvisionhd/index.m3u8
+娱乐综艺 · Maxima TV,https://maximatv.net/hls/stream.m3u8
 合家欢台 · Dove Channel,https://linear-896.frequency.stream/dist/cineverse/896/hls/master/playlist.m3u8
 合家欢台 · Mixkurdy,https://avr.host247.net/live/Mix-kurdy/playlist.m3u8
 合家欢台 · Estrella Games,https://estrella-games-oando.amagi.tv/playlist.m3u8

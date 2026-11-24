@@ -88,9 +88,9 @@ export function HomeInstantHub({ expanded = false }: { expanded?: boolean } = {}
         `/api/open-media?ac=browse&category=${encodeURIComponent(category)}&pg=1&limit=${fetchLimit}&compact=1`,
         { signal }
       );
-      if (!res.ok) return { list: [] as BrowseCardItem[], total: 8739 };
+      if (!res.ok) return { list: [] as BrowseCardItem[], total: 9228 };
       const data = (await res.json()) as { list?: BrowseCardItem[]; total?: number };
-      return { list: data.list ?? [], total: data.total ?? (data.list?.length || 8739) };
+      return { list: data.list ?? [], total: data.total ?? (data.list?.length || 9228) };
     },
     staleTime: 600_000,
   });
@@ -116,7 +116,7 @@ export function HomeInstantHub({ expanded = false }: { expanded?: boolean } = {}
         >
           <div className="min-w-0">
             <div className="text-sm font-semibold text-content">内置免费高清影院</div>
-            <div className="text-xs text-muted truncate mt-0.5">8739+ 部直连名片与164部连播剧集 · 点开即播</div>
+            <div className="text-xs text-muted truncate mt-0.5">9228+ 部直连名片与179部连播剧集 · 点开即播</div>
           </div>
           <span className="shrink-0 rounded-full bg-accent/15 p-2 text-accent">
             <Icon name="bolt" className="w-4 h-4" />
@@ -129,7 +129,7 @@ export function HomeInstantHub({ expanded = false }: { expanded?: boolean } = {}
         >
           <div className="min-w-0">
             <div className="text-sm font-semibold text-content">免费电视直播大厅</div>
-            <div className="text-xs text-muted truncate mt-0.5">内置 11570 台超清直连 · 400 包扩展 185000+ 频道</div>
+            <div className="text-xs text-muted truncate mt-0.5">内置 11584 台超清直连 · 430 包扩展 195000+ 频道</div>
           </div>
           <span className="shrink-0 rounded-full bg-accent/15 p-2 text-accent">
             <Icon name="link" className="w-4 h-4" />

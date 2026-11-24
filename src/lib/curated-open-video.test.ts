@@ -13,7 +13,7 @@ import { decodeOpenMediaId } from './open-media';
 
 describe('curated-open-video', () => {
   it('所有内置精选影片均具备中英文标题、分类与可解码 vod_id', () => {
-    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(8739);
+    expect(CURATED_OPEN_VIDEOS.length).toBeGreaterThanOrEqual(9228);
     const slugs = new Set<string>();
     let directCount = 0;
     let seriesCount = 0;
@@ -50,7 +50,7 @@ describe('curated-open-video', () => {
       }
     }
     expect(directCount).toBe(CURATED_OPEN_VIDEOS.length);
-    expect(seriesCount).toBeGreaterThanOrEqual(164);
+    expect(seriesCount).toBeGreaterThanOrEqual(179);
     expect(dualRouteCount).toBeGreaterThanOrEqual(10);
   });
 
@@ -128,6 +128,12 @@ describe('curated-open-video', () => {
     expect(searchCuratedOpenVideos('杰克贝尼秀好莱坞巨星特辑').some((v) => v.slug === 'jack-benny-hollywood-superstars-comedy-vol1-10ep')).toBe(true);
     expect(searchCuratedOpenVideos('哈罗德劳埃德猫爪1934').some((v) => v.slug === 'lloyd-cats-paw-milky-way-laurel-hardy-oxford-pantheon-8ep')).toBe(true);
     expect(searchCuratedOpenVideos('NASA阿波罗官方彩色纪录片全集').some((v) => v.slug === 'nasa-apollo-10-to-17-jsc-official-mission-films-9ep')).toBe(true);
+    expect(searchCuratedOpenVideos('神女1934阮玲玉').some((v) => v.slug === 'archive-thegoddess')).toBe(true);
+    expect(searchCuratedOpenVideos('飞机迷1928米老鼠首秀').some((v) => v.slug === 'disney-1927-1930-mickey-silly-symphony-oswald-pd-12ep')).toBe(true);
+    expect(searchCuratedOpenVideos('大力水手大战辛巴达1080p').some((v) => v.slug === 'fleischer-popeye-1080p-sindbad-aladdin-betty-boop-9ep')).toBe(true);
+    expect(searchCuratedOpenVideos('西线无战事1930奥斯卡原版').some((v) => v.slug === 'world-cinema-1930-oscar-landmarks-all-quiet-blue-angel-7ep')).toBe(true);
+    expect(searchCuratedOpenVideos('小津安二郎晚春1949原节子').some((v) => v.slug === 'ozu-mizoguchi-yamanaka-japanese-golden-age-pantheon-7ep')).toBe(true);
+    expect(searchCuratedOpenVideos('低语暗影1933贝拉卢戈西全集').some((v) => v.slug === 'bela-lugosi-whispering-shadow-1933-complete-12ep')).toBe(true);
     expect(findCuratedOpenVideoBySlug('night-of-the-living-dead-1968')?.directPlayUrl).toContain('https://');
   });
 });
